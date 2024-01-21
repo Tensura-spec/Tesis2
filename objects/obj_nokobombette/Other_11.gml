@@ -1,18 +1,9 @@
-/// @description Turn into a stunned bob-omb
+/// @description Turn into a stunned galoomba
 
-//Create stunned galoomba
-with (instance_create(x, y, obj_bobomb_held)) {
+with (instance_create_depth(x, y, -2, obj_nokobomb_down)) {
 
-    //Set the sprite
-    sprite_index = spr_nokobombette_down;
-    
-    //Set the death sprite
-    deathsprite = spr_nokobombette_down;
-
-    //Hereby scale
-    dir = other.xscale;
+	sprite_index = spr_nokobombette_down;
+	image_speed = 1;
+	dir = 1;
 }
-
-//Destroy
 instance_destroy();
-

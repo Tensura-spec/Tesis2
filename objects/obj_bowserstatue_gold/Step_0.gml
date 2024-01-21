@@ -4,13 +4,13 @@
 event_inherited();
 
 //Set up the facing direction if in ground and make it jump again
-if (gravity == 0) {
+if (yadd == 0) {
 
     //If the object jumped
     if (jumping == 2) {
     
         //Stop horizontal movement
-        hspeed = 0;
+        xspeed = 0;
     
         //End jump
         jumping = 0;
@@ -22,12 +22,21 @@ if (gravity == 0) {
 
 //Otherwise, end jump
 else {
-
-    xscale = 1*sign(hspeed);
-    if (jumping == 1) && (vspeed > 0) {
-    
-        jumping = 2;
-        image_index = 0;
-    }
+	
+	//End jumping sequence
+	if ((jumping == 1) && (yspeed > 0)) {
+	
+		//End jump
+		jumping = 2;
+		
+		//Set default frame
+		image_speed = 0;
+		image_index = 0;
+	}
+	
+	//Set facing direction
+	if (xspeed > 0)
+		xscale = 1;
+	else if (xspeed < 0)
+		xscale = -1;
 }
-

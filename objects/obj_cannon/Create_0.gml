@@ -1,21 +1,4 @@
-/// @description Airship Cannon
-
-/*
-**  This item uses creation code!
-**
-**  direct = Direction of the cannon balls
-**      0: Right
-**      45: Right-Up
-**      90: Up
-**      135: Up-Left
-**      180: Left
-**      225: Down-Left
-**      270: Down
-**      315: Down-Right
-*/
-
-//Default values:
-direct = 0;
+/// @description Cannon
 
 //Start shooting
 alarm[0] = 90;
@@ -25,10 +8,27 @@ u = 0;
 d = 0;
 l = 0;
 r = 0;
-event_user(0);
 
-//Make this object solid
-instance_create(x, y, obj_solid);
+//Check if there's ground below
+if (place_meeting(x, y+1, obj_semisolid))
+    d = 1;
+    
+//Check if there's a ceiling above
+if (place_meeting(x, y-1, obj_solid))
+    u = 1;
+    
+//If there's not ground or a ceiling, hang on wall
+if (d == 0)
+&& (u == 0) {
+    
+    //Check if there's a wall to the left
+    if (place_meeting(x-1, y, obj_solid))
+        l = 1;
+        
+    //Check if there's a wall to the right
+    if (place_meeting(x+1, y, obj_solid))
+        r = 1;
+}
 
-/* */
-/*  */
+//Create solid mask
+instance_create_layer(x, y, "Main", obj_solid);

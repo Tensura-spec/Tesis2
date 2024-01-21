@@ -1,52 +1,46 @@
 /// @description Clappin' Chuck logic
 
-if (hp == 3) {
+//Inherit the parent event
+event_inherited();
 
-    //Floor collision
-    event_user(4);
+#region LOGIC
     
-    //If clapping
-    if (clap == 1) {
+	//If clapping
+	if (clap == 1) {
 
-        //If moving down
-        if (vspeed > 0) {
+	    //If moving down
+	    if (yspeed > 0) {
         
-            //Play 'Pop' sound
-            audio_play_sound(snd_pop, 0, false);
+	        //Play 'Pop' sound
+	        audio_play_sound(snd_pop, 0, false);
             
-            //End clap
-            clap = 0;
+	        //End clap
+	        clap = 0;
             
-            //Set clapping frame
-            image_index = 1;
-        }        
-    }
+	        //Set clapping frame
+	        image_index = 2;
+	    }        
+	}
+   
+	//If not jumping
+	if (yadd == 0) {
     
-    //Gravity
-    if (gravity > 0) {
-    
-        //Make sure it gets low gravity when jumping
-        if (sprite_index == spr_clappinchuck_jump)
-            gravity = 0.15;
-    }
-    
-    //Otherwise, if not jumping
-    else if (gravity == 0) {
-    
-        //If the jumping frame is used
-        if (sprite_index == spr_clappinchuck_jump) {
+	    //If the jumping frame is used
+	    if (image_index != 0) {
         
-            //Set the regular sprite
-            sprite_index = spr_clappinchuck;
+	        //Set the regular sprite
+	        image_speed = 0;
+			image_index = 0;
             
-            //Jump again
-            alarm[0] = 15;
-        }
-    }
-    
-    //Face towards the player
-    event_user(8);
-}
+	        //Jump again
+	        alarm[0] = 15;
+	    }
+	}
+#endregion
+
+//If Mario does not exist or it's at the left
+if (!instance_exists(obj_mario))
+|| (obj_mario.x < x)
+    xscale = -1;
 else
-    event_inherited();
-
+    xscale = 1;    

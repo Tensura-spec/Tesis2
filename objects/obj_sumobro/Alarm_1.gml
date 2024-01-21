@@ -7,7 +7,7 @@ if (steps > 0) {
     steps--;
     
     //Stop horizontal speed
-    hspeed = 0;
+    xspeed = 0;
     move_snap(8, 16);
     
     //Repeat the process
@@ -23,10 +23,9 @@ else {
     image_index = 0;
     
     //Stop
-    hspeed = 0;
+    xspeed = 0;
     move_snap(8, 16);
     
     //Start stomp
     alarm[2] = 48;
 }
-

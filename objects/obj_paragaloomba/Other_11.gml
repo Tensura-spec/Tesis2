@@ -1,11 +1,7 @@
-/// @description Turn into a regular galoomba
+/// @description Turn into a stunned galoomba
 
-//Create a goomba
-with (instance_create(x, y, obj_galoomba)) {
+with (instance_create_depth(x, y, -2, obj_galoomba)) {
 
-    hspeed = other.hspeed;
+	xspeed = 0.5 * sign(other.xspeed);
 }
-
-//Destroy
 instance_destroy();
-

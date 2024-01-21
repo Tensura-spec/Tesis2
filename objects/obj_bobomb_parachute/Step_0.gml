@@ -1,13 +1,13 @@
-/// @description Parachute Bobomb logic
+/// @description Parachute Bob-omb logic
 
 //Inherit event
 event_inherited();
 
 //Begin landing sequence
-if (gravity == 0) {
+if (yadd == 0) {
 
     //Stop horizontal speed
-    hspeed = 0;
+    xspeed = 0;
 
     //Begin to lower the parachute
     if (ready == 0)
@@ -19,7 +19,7 @@ if (gravity == 0) {
         //Keep moving the parachute down
         para_y += 0.5;
         
-        //If the parachute is fully behind the paragaloomba, turn into a normal galoomba
+        //If the parachute is fully behind the parabobomb, turn into a normal cannon bobomb
         if (para_y > 16) {
                 
             //Hide it
@@ -28,9 +28,14 @@ if (gravity == 0) {
             //End parachute sequence
             ready = 2;               
             
-            //Turn into a galoomba
+            //Turn into a bobomb
             alarm[0] = 30;
         }
     }
 }
+else {
 
+	//Cap vertical speed
+	if (yspeed > 0.5)
+		yspeed = 0.5;
+}

@@ -1,8 +1,7 @@
-/// @description Return to start position
+/// @description Return to start
 
 //Set the vertical speed
-hspeed = 1;
+xspeed = 1;
 
 //Set the state
 ready = 3;
-

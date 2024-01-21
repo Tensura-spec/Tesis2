@@ -11,14 +11,14 @@ if (jumping == 1)
 if (ready == 0) {
     
     //Slow down
-    if (gravity == 0) then hspeed = max(0,abs(hspeed)-0.05)*sign(hspeed);
+    if (yadd == 0) then xspeed = max(0,abs(xspeed)-0.05)*sign(xspeed);
     
     //If the koopa is about to stop
-    if (hspeed < 0.05) 
-    && (hspeed > -0.05) {
+    if (xspeed < 0.05) 
+    && (xspeed > -0.05) {
         
         //Stop it
-        hspeed = 0;
+        xspeed = 0;
         
         //Allow movement
         ready = 1;
@@ -59,24 +59,27 @@ else if (ready > 0) {
                 y--;
                 
                 //Set the vertical speed
-                vspeed = -2.5;
+                yspeed = -2.5;
             }
             
             //Otherwise, turn around
             else if (shell.koopainside != 0)
-                hspeed = -hspeed;
+                xspeed = -xspeed;
         } 
         
         //Reset jump
         if (jumping == 1)
-        && (gravity == 0)
+        && (yadd == 0)
+		&& (!collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_shell, 0, 0))
             jumping = 0;              
     }
 }
 
-//Set facing direction
-if (hspeed > 0)
-    xscale = 1;
-else if (hspeed < 0)
-    xscale = -1;
+//Manage collision with solid
+turn_toward = (ready < 1) ? 0 : 1;
 
+//Set facing direction
+if (xspeed > 0)
+    xscale = 1;
+else if (xspeed < 0)
+    xscale = -1;

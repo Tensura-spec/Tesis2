@@ -1,7 +1,7 @@
-/// @description Draw spiketop
+/// @description Render me
 
-if (turn == 0)
-    draw_sprite_ext(spr_spiketop, image_index, round(x), round(y)+8, xscale, 1, direction, c_white, 1);
-else
-    draw_sprite_ext(spr_spiketop_turn, turn-1, round(x), round(y)+8, xscale, 1, direction, c_white, 1);
+//Obtain direction
+var direct = (speed = 0) ? save_dir : direction;
 
+//Render me
+draw_sprite_custom_origin(sprite_index, -1, screen_round(x), screen_round(y), 8, 8, xscale, 1, direct + turn, c_white, 1);

@@ -16,4 +16,3 @@ else if (sprite_index == spr_charginchuck_damage) {
     //Start whistling again
     alarm[0] = 90;
 }
-

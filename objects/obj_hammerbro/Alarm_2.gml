@@ -1,52 +1,29 @@
-/// @description Jump upwards / downwards
+/// @description Throw a hammer
 
-//If there's a row of blocks above and below the hammer bro.
-if (collision_rectangle(bbox_left, bbox_top-40, bbox_right, bbox_top-40, obj_blockparent, 0, 0))
-&& (collision_rectangle(bbox_left, bbox_bottom+8, bbox_right, bbox_bottom+8, obj_blockparent, 0, 0)) {
+//Play 'Hammer' sound
+audio_play_sound(snd_hammer, 0, false);
 
-    //Set the vertical speed
-    if (floor(random(50)) < 25) {
+//If the player does not exist or the player is at the left
+if (!instance_exists(obj_mario))
+|| (obj_mario.x < x) {
+
+    with (instance_create_depth(x+9, y-5, -2, obj_hammerbro_hammer)) {
     
-        vspeed = -6;
-        alarm[6] = 2;
-        alarm[7] = 16;
-    }
-    else {
-    
-        vspeed = -2.5;
-        alarm[6] = 2;
-        alarm[7] = 35;
+        xspeed = -1;
+        image_xscale = -1;
     }
 }
-
-//Otherwise, check where's the blocks and jump up or down.
 else {
 
-    //If the blocks are above
-    if (collision_rectangle(bbox_left, bbox_top-40, bbox_right, bbox_top-40, obj_blockparent, 0, 0)) {
+    with (instance_create_depth(x-9, y-5, -2, obj_hammerbro_hammer)) {
     
-        vspeed = -6;
-        alarm[6] = 2;
-        alarm[7] = 16;
-    }
-    
-    //Otherwise, if they are below
-    else if (collision_rectangle(bbox_left, bbox_bottom+8, bbox_right, bbox_bottom+8, obj_blockparent, 0, 0)) {
-    
-        vspeed = -2.5;
-        alarm[6] = 2;
-        alarm[7] = 35;
-    }
-    else
-        vspeed = -6;
+        xspeed = 1;
+        image_xscale = 1;
+    }    
 }
 
-//Boost jump
-y--;
+//Set throw pose
+sprite_index = spr_hammerbro;
 
-//Gravity
-gravity = 0.25;
-
-//Jump again
-alarm[2] = 168;
-
+//Throw another hammer.
+alarm[1] = 7+random(round(28));

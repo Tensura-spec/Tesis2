@@ -1,26 +1,23 @@
-/// @description Golden Bowser Statue
+/// @description Gold Bowser Statue
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
-vulnerable = 3;
+//How vulnerable is this enemy to various items?
+vulnerable = 99;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to Yoshi
-edible = 2;
+//How vulnerable is this enemy to Yoshi?
+edible = 3;
 
-//Death Sprite
-deathsprite = sprite_index;
-
-//Whether this enemy is jumping
+//Whether the object is jumping
 jumping = 0;
 
-//Animate
+//Do not animate
 image_speed = 0;
+image_index = 0;
 
-//Jump
-alarm[0] = 100;
-
+//Face towards Mario
+alarm[10] = 2;

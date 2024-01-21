@@ -1,29 +1,21 @@
 /// @description Galoomba logic
 
-//Collision with enemies
-event_user(2);
+//Inherit the parent event
+event_inherited();
 
-//Default wall collision
-event_user(3);
+//If this enemy came out from a bubble
+if (bubble == 1) {
 
-//Default floor / ceiling collision
-event_user(4);
-
-//If generated from a bubble
-if (hspeed == 0)
-&& (gravity == 0) {
-
-    //If the player does not exist or it's at the left
-    if (!instance_exists(obj_playerparent))
-    || (obj_playerparent.x < x)
-        hspeed = -0.5;
-    else
-        hspeed = 0.5;
+	//If there's no gravity
+	if (yadd == 0) {
+		
+		bubble = 0;
+		alarm[10] = 2;
+	}
 }
 
-//Set the scale
-if (hspeed > 0)
-    xscale = 1;
-else if (hspeed < 0)
-    xscale = -1;
-
+//Set the facing direction
+if (xspeed > 0)
+	xscale = 1;
+else if (xspeed < 0)
+	xscale = -1;

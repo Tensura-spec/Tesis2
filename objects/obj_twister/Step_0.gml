@@ -3,37 +3,25 @@
 //Inherit event from parent
 event_inherited();
 
-//Turn on ledges script
-event_user(6);
+//Push Mario upwards
+if (instance_exists(obj_mario)) {
 
-//Push the player upwards
-if (instance_exists(obj_playerparent)) {
-
-    //If the player is above this twister
-    if (collision_rectangle(x-16, bbox_top-80, x+16, bbox_top, obj_playerparent, 0, 0)) 
-    && (obj_playerparent.bbox_bottom < yprevious+5) {
+    //If Mario is above this twister
+    if (collision_rectangle(x-16, bbox_bottom-112, x+16, bbox_bottom, obj_mario, 0, 0)) {
     
-        //With the player
-        with (obj_playerparent) {
+        //With Mario
+        with (obj_mario) {
         
             //Force set 'Jump' state
-            state = statetype.jump;
-            
-            //Do not allow glide
-            canglide = 0;
+            state = playerstate.jump;
             
             //Do not allow jump
             jumping = 2;
             
             //Set vertical speed
-            vspeed -= 0.5;
-            if (vspeed < -4)            
-                vspeed = -4;     
+            yspeed -= 0.5;
+            if (yspeed < -4.5)            
+                yspeed = -4.5;     
         }
     }
-    
-    //Otherwise, allow cape glide
-    else
-        with (obj_playerparent) canglide = 1;
 }
-

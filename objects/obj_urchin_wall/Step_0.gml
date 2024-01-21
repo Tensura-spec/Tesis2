@@ -1,10 +1,11 @@
-/// @description Urchin Logic
+/// @description Spiketop logic
 
+//If moving clockwise
 if (speed > 0) {
 
     //Check if there's no floor on the way.
     if (place_meeting(x + lengthdir_x(speed + 1, direction - 90), y + lengthdir_y(speed + 1, direction - 90), obj_solid) == false) {
-    
+		
         //Rotate
         direction -= 90;
         
@@ -27,7 +28,7 @@ if (speed > 0) {
     }
 }
 
-//Assuming that the spiny is moving left and on the ground,
+//Assuming that the spiny is moving left and on the ground
 if (speed < 0) {
 
     //This checks *below* the spiny since you're double negating the direction... It's confusing but it works.
@@ -55,3 +56,9 @@ if (speed < 0) {
     }
 }
 
+//Obtain xspeed, yspeed values
+if (speed != 0) {
+	
+	xspeed = hspeed;
+	yspeed = vspeed;
+}

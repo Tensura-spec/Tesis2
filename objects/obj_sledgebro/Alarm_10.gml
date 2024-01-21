@@ -1,13 +1,12 @@
 /// @description Move towards the player
 
-//If the enemy is not moving
-if (hspeed == 0) {
+//If the NPC is not moving
+if (xspeed == 0) {
 
-    //If the player does not exist
-    if (!instance_exists(obj_playerparent))
-    || (obj_playerparent.x < x)
-        hspeed = -0.25;
-    else
-        hspeed = 0.25;
+	//If Mario does not exist or Mario is at the left
+	if (!instance_exists(obj_mario))
+	|| (obj_mario.x < x)
+		xspeed = (swimming == true) ? -0.2 : -0.4;
+	else
+		xspeed = (swimming == true) ? 0.2 : 0.4;
 }
-

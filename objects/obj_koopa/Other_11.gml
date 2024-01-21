@@ -1,16 +1,16 @@
-/// @description Turn into a shell
+/// @description Launch the koopa outside from his shell
 
 //Create shell
-instance_create(x, y, obj_shell);
+instance_create_depth(x, y, -2, obj_shell);
 
-//Create a naked koopa
-with (instance_create(x, y, obj_beachkoopa)) {
+//Create green beach koopa
+with (instance_create_depth(x, y, -2, obj_beachkoopa)) {
 
     //Set the sprite
     sprite_index = spr_beachkoopa;
     
     //Set the horizontal speed
-    hspeed = 3*sign(obj_playerparent.xscale);
+    xspeed = 3*sign(obj_mario.xscale);
     
     //Do not allow movement
     ready = 0;
@@ -18,4 +18,3 @@ with (instance_create(x, y, obj_beachkoopa)) {
 
 //Destroy
 instance_destroy();
-

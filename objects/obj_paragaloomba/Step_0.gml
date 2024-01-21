@@ -1,11 +1,10 @@
-/// @description Galoomba logic
+/// @description Para-galoomba logic
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
-//Set the scale
-if (hspeed > 0)
-    xscale = 1;
-else if (hspeed < 0)
-    xscale = -1;
-
+//Set the facing direction
+if (xspeed > 0)
+	xscale = 1;
+else if (xspeed < 0)
+	xscale = -1;

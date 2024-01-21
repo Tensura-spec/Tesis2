@@ -1,22 +1,15 @@
 /// @description Dig out a mud ball
 
-//If the chuck is at full health
-if (hp == 3) {
+//Set kicking frame
+image_speed = 1;
     
-    //Set kicking frame
-    image_speed = 0.2;
+//Do not show ball
+ready = 2;
     
-    //Do not show ball
-    ready = 2;
+//Generate a ball
+with (instance_create_depth(x+18*sign(xscale), y, -2, obj_mudball)) {
     
-    //Generate a ball
-    with (instance_create(x+18*sign(xscale), y, obj_mudball)) {
-    
-        hspeed = 0.5*sign(other.xscale);
-        y--;
-        vspeed = -3;
-    }
+    xspeed = 0.5*sign(other.xscale);
+	yspeed = -3;
+    y--;
 }
-else
-    event_inherited();
-

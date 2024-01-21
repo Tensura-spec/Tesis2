@@ -1,9 +1,11 @@
-/// @description Custom stomp event
+/// @description Custom Stomp script
 
-//Inherit event from parent...
-event_inherited();
+//Turn into a pancake
+with (instance_create_depth(x, y+1, -6, obj_stomped)) {
 
-//...but destroy the flame object if it exists
-if (flame != noone)
-    with (flame) instance_destroy();
-
+	sprite_index = spr_dinotorch_sq;
+	image_xscale = other.xscale;
+}
+	
+//Destroy
+instance_destroy();

@@ -1,19 +1,13 @@
-/// @description Prepare to jump
+/// @description Jump
 
-//If the sledge bro is on contact with the ground.
-if (gravity == 0) {
+//Set the vertical speed
+yspeed = -6;
 
-    //Stop horizontal speed and alarm
-    prevalm = alarm[0];
-    prevhsp = hspeed;
-    hspeed = 0;        
-    alarm[0] = -1;
-    
-    //Jump
-    alarm[2] = 30;
-}
+//Jump
+jumping = 1;
 
-//Otherwise, deny event.
-else
-    alarm[1] = 1;
+//Boost jump
+y--;
 
+//Repeat the process
+alarm[0] = 300;

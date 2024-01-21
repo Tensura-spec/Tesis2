@@ -43,4 +43,3 @@ else if (chomp.lunge) {
     if (chain[3].y > chomp.y+3*maxdist/10) 
         chain[3].y = chomp.y+3*maxdist/10;
 }
-

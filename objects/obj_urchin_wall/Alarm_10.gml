@@ -1,8 +1,10 @@
-/// @description Move towards the player
+/// @description Start moving
 
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.x < x)
-    hspeed = -0.5;
+//Check where Mario is and move in said direction
+if (!instance_exists(obj_mario)) || (obj_mario.x < x)
+    xscale = -1;
 else
-    hspeed = 0.5;
+    xscale = 1;
 
+//Set the speed
+speed = 0.5 * xscale;

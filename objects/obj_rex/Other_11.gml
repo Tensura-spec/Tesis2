@@ -1,27 +1,31 @@
-/// @description Damage rex or kill it
+/// @description Custom Stomp script
 
-//If it is at the normal state
-if (sprite_index == spr_rex) {
+//If this enemy has not been stomped yet
+if (ready == 0) {
 
-    //Set up the shrink pose
-    sprite_index = spr_rex_stomp;
-    
-    //Do not animate
-    image_speed = 0;
-    image_index = 0;
-    
-    //Double speed
-    prevhspeed = hspeed;
-    hspeed = 0;
-    
-    //Start moving again
-    alarm[1] = 8;
-
-    //Set dead pose
-    deathsprite = spr_rex2_dead;
+	//Set the sprite
+	sprite_index = spr_rex_b;
+	
+	//Double horizontal speed
+	xspeed = xspeed*2;
+	
+	//Set state
+	ready = 1;
+	
+	//Set the new mask
+	mask_index = spr_mask_npc_common_16x16;
 }
 
-//Otherwise, run default event
-else
-    event_inherited();
+//Otherwise if this enemy has been stomped once, turn into a pancake
+else if (ready == 1) {
+	
+	//Turn into a pancake
+	with (instance_create_depth(x, y+1, -6, obj_stomped)) {
 
+		sprite_index = spr_rex_sq;
+		image_xscale = other.xscale;
+	}
+	
+	//Destroy
+	instance_destroy();
+}

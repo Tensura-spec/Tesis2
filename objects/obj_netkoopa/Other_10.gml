@@ -1,8 +1,7 @@
 /// @description Custom death event
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
-//Set depth
+//Hereby the depth
 imdead.depth = depth;
-

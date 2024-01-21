@@ -3,12 +3,28 @@
 //Inherit event from chuck
 event_inherited();
 
-//Deny alarm 10
-alarm[10] = -1;
+//How vulnerable is this enemy to Mario?
+stomp = 4;
 
-//Prepare a ball
-alarm[0] = 60;
+//How edible is this enemy to Yoshi?
+edible = 2;
+
+//Does this enemy turn into a silver coin?
+turn_silver = 0;
+
+//NPC Health
+hp = 2;
+firehp = 4;
+
+//Do not animate
+image_speed = 0;
+image_index = 0;
 
 //Whether the chuck is about to kick
 ready = 0;
 
+//Prepare a ball
+alarm[0] = 60;
+
+//Deny alarm 10
+alarm[10] = -1;

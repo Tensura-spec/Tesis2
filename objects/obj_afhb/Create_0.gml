@@ -1,31 +1,36 @@
 /// @description Amazing Flying Hammer Bro
 
+//Inherit the parent event
+event_inherited();
+
 //Do not animate
 image_speed = 0;
 image_index = 0;
-alarm[0] = 7;
 
-//Angle
-angle = 0;
-
-//Whether any of the blocks was hit
-ready = 0;
-
-//Timer
-mytimer = 0;
-
-//Block offsets
-loffset = 0;
-roffset = 0;
-
-//Distance
-distance = 64;
+//Make the platform solid
+issolid = true;
 
 //Position
+angle = 0;
+mytimer = 0;
+distance = 64;
 myx = xstart+distance;
 myy = ystart;
 
-//Rider
-rider = instance_create(x, y, obj_afhb_rider);
-    with (rider) parent = other.id;
+//Block offsets
+block_offset_l = 0;
+block_offset_r = 0;
+block_ready = 0;
 
+//Check if moving
+moving = false;
+
+//Animate
+alarm[0] = 9;
+
+//Start moving
+alarm[10] = 2;
+
+//Create Amazing Flying Hammer Bro
+with (instance_create_depth(x, y, -2, obj_afhb_rider))
+	parent = other.id;

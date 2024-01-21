@@ -1,15 +1,15 @@
-/// @description Diggin' chuck logic
+/// @description Diggin' Chuck logic
 
-//If the chuck hp is full
-if (hp == 3) {
+//Inherit the parent event
+event_inherited();
 
-    //Default floor collision
-    event_user(4);
-    
-    //Update facing direction but only when not about to kick a football
-    if (ready == 0)
-        event_user(8);
+//Update facing direction when not digging
+if (ready == 0) {
+
+	//If Mario does not exist or it's at the left
+	if (!instance_exists(obj_mario))
+	|| (obj_mario.x < x)
+		xscale = -1;
+	else
+		xscale = 1;
 }
-else
-    event_inherited();
-

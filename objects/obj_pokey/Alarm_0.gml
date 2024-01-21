@@ -21,11 +21,12 @@ switch (offsetnext) {
     } break;
 }
 
+//Change offset again
+alarm[0] = 10;
+
 //Increment next offset
 offsetnext++;
 if (offsetnext == 4)
     offsetnext = 0;
     
-//Keep changing offset values
-alarm[0] = 10;
 

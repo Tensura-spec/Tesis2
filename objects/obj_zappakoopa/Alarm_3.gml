@@ -1,6 +1,9 @@
-/// @description Prepare the beam
+/// @description Unleash the laser
 
-//Create a beam with this object as parent
-with (instance_create(x+8*sign(xscale), y+8, obj_zappakoopa_beam)) 
-    parent = other.id;
+//Play 'Zappakoopa / Fire' sound
+audio_play_sound(snd_zappakoopa_fire, 0, false);
 
+//Create the item
+mylaser = instance_create_depth(x+8*sign(xscale), y+8, -2, obj_zappakoopa_laser);
+mylaser.parent = id;
+laser_ex = 1;

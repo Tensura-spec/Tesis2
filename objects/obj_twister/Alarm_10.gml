@@ -1,8 +1,7 @@
-/// @description Start moving and start generating bubbles
+/// @description Move towards Mario
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
 //Start generating bubbles
-alarm[1] = 4+round(random(8));
-
+alarm[0] = 4+round(random(8));

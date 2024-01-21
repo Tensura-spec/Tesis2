@@ -1,27 +1,26 @@
-/// @description Move up if the player is not nearby
+/// @description Start moving
 
-//If the player exists
-if (instance_exists(obj_playerparent)) {
+//If the piranha plant is inside the pipe
+if (ready == 0) {
+	
+	//If Mario does not exists, ignore this event
+	if (!instance_exists(obj_mario)) {
 
-    //If the player is nearby
-    if (obj_playerparent.x > x-32)
-    && (obj_playerparent.x < x+32) {
-    
-        alarm[0] = 1;
-        exit;
-    }
-    
-    //Move up
-    vspeed = -1;
-    
-    //Stop moving
-    alarm[1] = 32;
+		alarm[0] = 1;
+		exit;
+	}
+
+	//If Mario does exists and is nearby, ignore this event
+	else if ((obj_mario.x > bbox_left-32) && (obj_mario.x < bbox_right+32)) {
+
+		alarm[0] = 1;
+		exit;
+	}
+
+	//Come out from the pipe
+	ready = 1;
 }
-
-//Otherwise
-else {
-
-    alarm[0] = 1;
-    exit;
-}
-
+	
+//Otherwise, come in
+else if (ready == 2)
+	ready = 3;

@@ -1,4 +1,3 @@
-/// @description Start moving
+/// @description Charge
 
 charge = 1;
-

@@ -1,17 +1,30 @@
-/// @description Follow the player
+/// @description Turn towards Mario
 
-//If moving horizontally
-if (hspeed != 0) 
-&& (gravity == 0) {
+//If the Mecha Koopa is not on the air
+if (yadd > 0) {
 
-    //Start moving
-    if (!instance_exists(obj_playerparent))
-    || (obj_playerparent.x < x)
-        hspeed = -1;
-    else
-        hspeed = 1;
+	alarm[11] = 60;
+	exit;
 }
 
-//Change direction
-alarm[11] = 60;
+//Otherwise
+else {
 
+	//If Mario is at the left and the Wiggler is moving right
+	if ((obj_mario.x < x) && (xspeed > 0))  {
+    
+		xspeed = (swimming) ? -0.5 : -1;
+		alarm[11] = 60;
+	}
+    
+	//Otherwise, if Mario is at the right and the Wiggler is moving left
+	else if ((obj_mario.x > x) && (xspeed < 0)) {
+    
+		xspeed = (swimming) ? 0.5 : 1;
+		alarm[11] = 60;
+	}
+    
+	//Otherwise, repeat
+	else
+		alarm[11] = 60;
+}

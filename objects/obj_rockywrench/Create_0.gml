@@ -1,32 +1,28 @@
 /// @description Rocky Wrench
 
-//How vulnerable is this enemy to various items?
-vulnerable = 0;
+//Inherit the parent event
+event_inherited();
 
-//How vulnerable is this enemy to the player?
+//How vulnerable is this enemy to various items?
+vulnerable = 1;
+
+//How vulnerable is this enemy to Mario?
 stomp = 3;
 
-//How vulnerable is this enemy to yoshi?
-edible = 0;
+//How vulnerable is this enemy to Yoshi?
+edible = 2;
 
-//Facing direction
-xscale = 1;
+//Is this enemy heavy?
+isheavy = 2;
 
-//Start moving
-alarm[0] = 2;
+//Whether this enemy is moving
+ready = 0;
+
+//Depth
+depth = 150;
 
 //Do not animate
 image_speed = 0;
 
-//Death Sprite
-deathsprite = spr_rockywrench_dead;
-
-//Stomp Sprite
-stompsprite = spr_rockywrench_dead;
-
-//Create solid collision
-mytop = instance_create(x, bbox_top, obj_semisolid_moving);
-
-//Do not swim
-swimming = false;
-
+//Start moving
+alarm[0] = 2;

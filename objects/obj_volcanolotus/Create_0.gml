@@ -1,20 +1,13 @@
-/// @description Volcano Lotus
+/// @description Vulcano Lotus
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 1;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to Yoshi
-edible = 0;
-
-//Animate
-image_speed = 0.15;
-
-//Prepare to spit fireballs
+//Prepare fireball
 alarm[0] = 180;
-

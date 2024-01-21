@@ -1,22 +1,16 @@
-/// @description Stomp event
+/// @description Default stomp script
 
-with (instance_create(round(bbox_left+bbox_right)/2, round(bbox_top+bbox_bottom)/2, obj_enemy_stomped)) {
+//Create dead object
+imdead = instance_create_depth(x, y, -6, obj_enemy_stomped);
 
-    //Set the sprite
-    sprite_index = other.stompsprite;
-    
-    //Set the facing direction
-    image_xscale = other.xscale;
-}
+//Hereby sprite
+imdead.sprite_index = sprite_index;
 
-//Create poof of smoke
-with (instance_create(x, y, obj_smoke)) {
+//Hereby frame
+imdead.image_index = 2;
 
-    sprite_index = spr_lakitu_cloud_destroy;
-    image_speed = 0.1;
-    image_index = 0;
-}
+//Hereby facing direction
+imdead.image_xscale = xscale;
 
 //Destroy
 instance_destroy();
-

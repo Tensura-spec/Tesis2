@@ -1,7 +1,7 @@
 /// @description Move towards the player
 
 //If the spike can move
-if (_static == 0) {
+if (quiet == 0) {
 
     //Inherit event
     event_inherited();

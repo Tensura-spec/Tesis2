@@ -1,5 +1,4 @@
 /// @description Destroy movement object
 
-if (movement != noone)
+if (movement != -1)
     with (movement) instance_destroy();
-

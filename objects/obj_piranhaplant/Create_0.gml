@@ -3,21 +3,17 @@
 //Inherit event from parent
 event_inherited();
 
-//How vulnerable is this enemy to items
-vulnerable = 0;
-
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to Yoshi
-edible = 0;
+//Freeze object
+freeze_object = -2;
 
-//Depth
-depth = 10;
-
-//Animate
-image_speed = 0.15;
+//Manage movement
+ready = 0;
 
 //Start moving
-alarm[0] = 1;
+alarm[0] = 60;
 
+//Stay always behind pipes
+depth = 150;

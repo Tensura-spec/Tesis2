@@ -1,5 +1,4 @@
 /// @description Open eyes
 
-blink = 0;
+sprite_index = spr_hothead;
 alarm[0] = 60+round(random(120));
-

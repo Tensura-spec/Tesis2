@@ -1,15 +1,8 @@
-/// @description Start moving.
+/// @description Start moving
 
-//Detect the player and walk towards him.
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.y < y) {
-
+//Detect the player and fly towards him
+if (!instance_exists(obj_mario))
+|| (obj_mario.y < y)
     dir = -1;
-    xscale = -1;
-}
-else {
-
+else
     dir = 1;
-    xscale = 1;
-}
-

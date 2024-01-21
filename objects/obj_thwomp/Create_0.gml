@@ -1,26 +1,26 @@
 /// @description Thwomp
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 3;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to Yoshi
+//How vulnerable is this enemy to Yoshi?
 edible = 2;
-
-//Death Sprite
-deathsprite = sprite_index;
-
-//Animate
-image_speed = 0;
 
 //Whether the thwomp is falling
 ready = 0;
 
-//Whether the thwomp hit the player
-owo = 0;
+//Do not turn into silver coins
+turn_silver = 0;
 
+//No platform collision
+ignore_platforms = true;
+
+//Do not animate
+image_speed = 0;
+image_index = 0;

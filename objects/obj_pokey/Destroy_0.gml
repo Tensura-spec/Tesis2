@@ -1,11 +1,12 @@
 /// @description If this object is the head, kill the entire body
 
-if (image_index == 0) {
+if (image_index == 0) 
+&& (!instance_exists(obj_mario_clear)) {
 
     with (mebelow) {
     
         //Create dead body effect
-        with (instance_create(x, y, obj_pokey_dead)) {
+        with (instance_create_depth(x, y, -6, obj_pokey_dead)) {
         
             //Set up the sprite
             sprite_index = other.sprite_index;
@@ -18,4 +19,3 @@ if (image_index == 0) {
         instance_destroy();
     }
 }
-

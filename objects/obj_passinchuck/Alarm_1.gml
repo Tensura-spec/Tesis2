@@ -1,33 +1,26 @@
-/// @description Kick the generated ball
+/// @description Kick the ball
 
-//If the chuck is at full health
-if (hp == 3) {
-
-    //Play 'Kick' sound
-    audio_stop_play_sound(snd_kick, 0, false);
+//Play 'Kick' sound
+audio_play_sound(snd_kick, 0, false);
     
-    //Set kicking frame
-    image_speed = 0;
-    image_index = 1;
-    alarm[2] = 30;
+//Set kicking frame
+image_speed = 0;
+image_index = 1;
+alarm[2] = 30;
     
-    //Do not show ball
-    ready = 2;
+//Do not show ball
+ready = 2;
     
-    //Kick another one
-    alarm[0] = 90;
+//Kick another one
+alarm[0] = 90;
     
-    //Generate kick effect
-    with (instance_create(x+18*sign(xscale), y+8, obj_smoke)) sprite_index = spr_spinthump;
+//Generate kick effect
+with (instance_create_depth(x+18*sign(xscale), y+8, -4, obj_smoke)) sprite_index = spr_spinthump;
     
-    //Generate a ball
-    with (instance_create(x+18*sign(xscale), y, obj_football)) {
+//Generate a ball
+with (instance_create_depth(x+18*sign(xscale), y, -2, obj_passinchuck_football)) {
     
-        hspeed = 1.5*sign(other.xscale);
-        y--;
-        vspeed = -2;
-    }
+    xspeed = 1.5*sign(other.xscale);
+	yspeed = -2;
+    y--;
 }
-else
-    event_inherited();
-

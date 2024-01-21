@@ -7,10 +7,10 @@ sprite_index = spr_spike;
 with (myball) {
 
     //Set the vertical speed
-    vspeed = -2.5;
+    yspeed = -2.5;
     
     //Set the horizontal speed
-    hspeed = 1.75*sign(other.xscale);    
+    xspeed = 1.75*sign(other.xscale);    
     
     //Boost
     y--;
@@ -21,4 +21,3 @@ with (myball) {
 
 //Start moving
 alarm[10] = 15;
-

@@ -1,8 +1,7 @@
 /// @description Ceiling Spiny
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//Whether this enemy is on the ceiling
+//Whether this enemy is falling
 ready = 0;
-

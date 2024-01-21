@@ -1,25 +1,24 @@
-/// @description Move towards the player
+/// @description Move towards Mario
 
-//If not moving
-if (hspeed == 0) {
+//If the NPC is not moving
+if (xspeed == 0) {
 
-    //If the player does not exist or it's at the left.
-    if (!instance_exists(obj_playerparent))
-    || (obj_playerparent.x < x)
-        hspeed = -0.5;
-    else
-        hspeed = 0.5;
+	//If Mario does not exist or Mario is at the left
+	if (!instance_exists(obj_mario))
+	|| (obj_mario.x < x)
+		xspeed = (swimming == true) ? -0.25 : -0.5;
+	else
+		xspeed = (swimming == true) ? 0.25 : 0.5;
 }
 
 //Spit a projectile
-alarm[1] = 180;
+alarm[0] = 180;
 
-//Move towards the player
+//Turn towards Mario
 alarm[11] = 60;
 
-//Animate if it's not animating
-image_speed = 0.3;
+//Animate
+image_speed = 1;
 
-//Set the default sprite
+//Set the moving sprite
 sprite_index = spr_zappakoopa;
-

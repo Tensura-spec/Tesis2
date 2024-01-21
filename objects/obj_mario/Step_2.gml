@@ -1,885 +1,1194 @@
-/// @description Manage Mario's animation
+/// @description Mario's animation!
 
-//Check if Mario is on a slippery surface
-if (collision_rectangle(bbox_left, bbox_bottom-1, bbox_right, bbox_bottom, obj_iceparent, 1, 0))
-    inice = true;
-else
-    inice = false;
-    
-//If the player is stunned
-if (stun > 0) {
+//Do not animate if frozen
+if (freeze == true) { image_speed = 0; }
 
-    //Set up the spin sprite
-    sprite_index = player_spin();
-    
-    //Do not animate
-    image_speed = 0;
-    image_index = 1;
-    
-    //Stop crouch
-    crouch = false;
-    
-    //Set cape state
-    with (obj_cape) {
-    
-        //Set zero state
-        state = noone;
-        
-        //Set sprite
-        sprite_index = spr_cape_climb;
-        
-        //Set frame
-        image_speed = 0;
-        image_index = 1;
-    
-        //Set the depth first
-        depth = 10;                             
-    }
-    
-    //Set up the mask
-    if (global.powerup > cs_pow_small)
-        mask_index = spr_mask_player_big;
-    else
-        mask_index = spr_mask_player;
+//Reset up firing
+if (firing > 0)
+&& (state == playerstate.walk)
+    firing = 0;
+	
+//Ensure Mario has a cape
+if (global.powerup == cs_cape) {
+	
+	// Create cape
+	if (cape == noone) {
+		
+		cape = instance_create_depth(x, y, depth+1, obj_cape);
+		cape.image_xscale = xscale;
+		cape.owner = id;		
+	}
+} 
+
+//If the cape power-up is not equipped
+else if (cape != noone) {
+	
+	// Dispose of the object
+	instance_destroy(cape);
+	
+	// Set cape to noone
+	cape = noone;	
 }
 
-//Otherwise
-else {
-        
-    //If the player cleared a stage
-    if (cleared == 2) {
+//If Mario is crouched down
+if (crouch == true) {
+	
+	//Set the sprite
+    sprite_index = global.duck_sprite[global.powerup];
+
+    //If Mario has the leaf or tanooki powerups
+    if (global.powerup == cs_raccoon) 
+	|| (global.powerup == cs_tanooki)
+	|| (global.powerup == cs_fraccoon) 
+	|| (global.powerup == cs_iraccoon) {
     
-        //Set up the clear sprite
-        sprite_index = player_clear();
-        
+        //Do not animate unless the script permits it.
+        image_speed = 0;
+    
+        //Check if Mario is holding something first.
+        if (holding == 0)
+            image_index = 0+(wiggle/4);
+        else if (holding == 2)
+            image_index = 5+(wiggle/4);
+        else
+            image_index = 4;
+    }
+    else {
+    
         //Do not animate
         image_speed = 0;
-        image_index = 0;
         
-        //Set up the cape state
-        if (state == statetype.idle) {
+        //Set up the correct frame
+        if (holding = 0)
+            image_index = 0;
+        else {
         
-            with (obj_cape) {
-            
-                //Set cape position and state
-                state = capestate.cape_idle;
-                
-                //If Mario is not riding a Yoshi
-                if (global.mount == 0) {
-                
-                    yy = 1;
-                    depth = other.depth+1;
-                }
-                    
-                //Otherwise, if Mario is riding a yoshi
-                else {
-                
-                    yy = 3;
-                    if (other.depth == 10)
-                        depth = 10;
-                    else
-                        depth = -6;
-                }
-            }
-        }
-        else if (state == statetype.walk) {
-        
-            with (obj_cape) {
-            
-                state = capestate.cape_walk;
-                depth = other.depth+1;
-                yy = 1
-            }
-        }
-        else if (state == statetype.jump) {
-        
-            //With the cape
-            with (obj_cape) {
-            
-                //Set position
-                yy = 1;
-            
-                //If moving up
-                if (other.vspeed < 0) {
-                
-                    //Set state
-                    state = capestate.cape_jump_up;
-                    
-                    //Set depth
-                    if (global.mount == 1) {
-                    
-                        if (other.depth == 10)
-                            depth = 10;
-                        else
-                            depth = -6;
-                    }
-                    else
-                        depth = other.depth+1;
-                }
-                else {
-                
-                    state = capestate.cape_jump_down;
-                    depth = other.depth+1;
-                }
-            }
+            if (holding == 2)
+                image_index = 2;
+            else
+                image_index = 1;
         }
     }
     
-    //Otherwise
-    else {
+    //Set the mask
+    mask_index = spr_mask_mario;
     
-        //If Mario is crouched down
-        if (crouch == true) {
+    //Stop 'Skid' sound
+    if (audio_is_playing(snd_skid))
+        audio_stop_sound(snd_skid);
+}
+else {
+
+    //If Mario is not holding anything
+    if (holding == 0) {
+    
+        //If Mario is not sliding down a slope
+        if (!sliding) {
         
-            //Set up the crouch sprite
-            sprite_index = player_crouch();
+            //If Mario is not kicking/throwing something.
+            if (!kicking) {
             
-            //Do not animate
-            image_speed = 0;
-            
-            //If Mario is not holding anything
-            if (holding == 0)
-                image_index = 0;
-            
-            //Otherwise, if Mario is holding something
-            else {
-            
-                //You can set up multiple holding states if you want
-                if (holding == 1)
-                    image_index = 1;
-            }
-            
-            //Cancel turning
-            turnnow = 0;
-            
-            //Set up the mask
-            mask_index = spr_mask_player;
-        
-            //Set up the cape state
-            if (state == statetype.idle) {
-            
-                with (obj_cape) {
+                //If Mario is not doing anything
+                if (state == playerstate.idle) {
                 
-                    //Set cape position and state
-                    state = capestate.cape_idle;
-                    
-                    //If Mario is not riding a Yoshi
-                    if (global.mount == 0) {
-                    
-                        yy = 1;
-                        depth = other.depth+1;
-                    }
-                        
-                    //Otherwise, if Mario is riding a yoshi
-                    else {
-                    
-                        yy = 3;
-                        if (other.depth == 10)
-                            depth = 10;
-                        else
-                            depth = -6;
-                    }
-                }
-            }
-            else if (state == statetype.walk) {
-            
-                with (obj_cape) {
-                
-                    state = capestate.cape_walk;
-                    depth = other.depth+1;
-                    yy = 1
-                }
-            }
-            else if (state == statetype.jump) {
-            
-                //With the cape
-                with (obj_cape) {
-                
-                    //Set position
-                    yy = 1;
-                
-                    //If moving up
-                    if (other.vspeed < 0) {
-                    
-                        //Set state
-                        state = capestate.cape_jump_up;
-                        
-                        //Set depth
-                        if (global.mount == 1) {
-                        
-                            if (other.depth == 10)
-                                depth = 10;
-                            else
-                                depth = -6;
-                        }
-                        else
-                            depth = other.depth+1;
-                    }
-                    else {
-                    
-                        state = capestate.cape_jump_down;
-                        depth = other.depth+1;
-                    }
-                }
-            }
-        }
-        
-        //Otherwise, if Mario is not longer crouched down
-        else if (crouch == false) {
-        
-            //If Mario is not holding anything
-            if (holding == 0) 
-            || (holding == 99) {
-            
-                //If Mario is not sliding down a slope
-                if (sliding == false) {
-                
-                    //If Mario is not kicking anything
-                    if (kicking == false) {
-                    
-                        //If Mario is not moving
-                        if (state == statetype.idle) {
-                        
-                            //Set cape state
-                            with (obj_cape) {
-                            
-                                //Set cape position and state
-                                state = capestate.cape_idle;
-                                yy = 1;
-                                
-                                //If Mario is not riding a Yoshi
-                                if (global.mount == 0)
-                                    depth = other.depth+1;
-                                    
-                                //Otherwise, if Mario is riding a yoshi
-                                else {
-                                
-                                    //Set up depth
-                                    if (other.depth == 10)
-                                        depth = 10;
-                                    else
-                                        depth = -6;
-                                }
-                            }
-                        
-                            //If Mario is firing up a projectile
-                            if (firing > 0)
-                            && ((global.powerup == cs_pow_fire) || (global.powerup == cs_pow_ice)) {
-                            
-                                //Set the sprite
-                                sprite_index = player_shoot();
-                                
-                                //Do not animate
-                                image_speed = 0;
-                                image_index = 0;
-                                
-                                //Decrement firing
-                                firing--;
-                            }
-                            
-                            //Otherwise, if Mario is not firing up a projectile
-                            else {
-                            
-                                //Set the sprite
-                                sprite_index = player_idle();
-                                
-                                //Do not animate
-                                image_speed = 0;
-                                
-                                //But set the appropiate frame
-                                if (input_check(input.up))
-                                    image_index = 1;
-                                else
-                                    image_index = 0;
-                            }
-                        }
-                        
-                        //Otherwise, if Mario is walking
-                        else if (state == statetype.walk) {
-                        
-                            //Set cape state
-                            with (obj_cape) {
-                            
-                                state = capestate.cape_walk;
-                                depth = other.depth+1;
-                                yy = 0;
-                            }
-                        
-                            //Before setting the walk sprite, check if Mario is moving in the opposite direction
-                            if (((hspeed > 0.1) && (input_check(input.left)) && (xscale == -1)) || ((hspeed < -0.1) && (input_check(input.right)) && (xscale == 1)))
-                            && (swimming == false)
-                            && (!inice) {
-                            
-                                //Set the sprite
-                                sprite_index = player_skid();
-                                
-                                //Do not animate
-                                image_speed = 0;
-                                image_index = 0;             
-                            }
-                            
-                            //Otherwise
-                            else {
-                            
-                                prejump_scuttle = abs(hspeed) * 3;
-                                
-                                //Animate
-                                image_speed = (0.065*(inice*4))+abs(hspeed)/7.5;
-                                
-                                //Set up the sprite
-                                if (run == true)
-                                    sprite_index = player_run();
-                                else
-                                    sprite_index = player_walk();
-                            }
-                        }
-                        
-                        //Otherwise, if Mario is jumping
-                        else if (state == statetype.jump) {
-                        
-                            //If Mario is not swimming
-                            if (swimming == false) {
-                            
-                                //If Mario is doing a spinjump
-                                if (jumpstyle == true) {
-                                
-                                    //Set cape state
-                                    with (obj_cape) {
-                                    
-                                        //If moving up
-                                        if (other.vspeed < 0) {
-                                        
-                                            if (global.mount == 1)
-                                                state = capestate.cape_jump_up;
-                                            else
-                                                state = capestate.cape_spin_up;
-                                        }
-                                        else {
-                                        
-                                            if (global.mount == 1)
-                                                state = capestate.cape_jump_down;
-                                            else
-                                                state = capestate.cape_spin_down;
-                                        }
-                                    
-                                        //Set the depth first
-                                        if (image_index > 2.99) {
-                                        
-                                            if (other.depth == 10)
-                                                depth = 10;
-                                            else
-                                                depth = -6;
-                                        }
-                                        else
-                                            depth = other.depth+1;                                
-                                    }
-                                
-                                    //Set the sprite
-                                    sprite_index = player_spin();
-                                    
-                                    //Animate
-                                    image_speed = 0.5;
-                                }
-                                
-                                //Otherwise, if Mario is not doing a spinjump
-                                else if (jumpstyle == false) {
-                                
-                                    //With the cape
-                                    with (obj_cape) {
-                                            
-                                        //If moving up
-                                        if (other.vspeed < 0) {
-                                        
-                                            //Set position
-                                            yy = 1;
-                                        
-                                            //Set depth
-                                            if (global.mount == 1) {
-                                            
-                                                if (other.depth == 10)
-                                                    depth = 10;
-                                                else
-                                                    depth = -6;
-                                            }
-                                            else
-                                                depth = other.depth+1;
-                                            
-                                            //Set state
-                                            if (other.flying > 0)
-                                                state = capestate.cape_walk;
-                                            else
-                                                state = capestate.cape_jump_up;
-                                        }
-                                        else {
-                                        
-                                            //Set position
-                                            yy = -3;
-                                        
-                                            state = capestate.cape_jump_down;
-                                            depth = other.depth+1;
-                                        }                                    
-                                    }
-                                    
-                                    //If Mario is firing a projectile
-                                    if (firing > 0) {
-                                    
-                                        //Set the sprite
-                                        sprite_index = player_swim();
-                                        
-                                        //Do not animate
-                                        image_speed = 0;
-                                        
-                                        //Decrement firing
-                                        firing--;
-                                        
-                                        //Set up the frame
-                                        if (firing < 3)
-                                            image_index = 2;
-                                        else if (firing >= 3) && (firing < 6)
-                                            image_index = 1;
-                                        else if (firing >= 6) && (firing < 10)
-                                            image_index = 0;
-                                    }
-                                    
-                                    //Otherwise, if Mario is not firing a projectile
-                                    else {
-                                
-                                        //If Mario is running
-                                        if (run == true) {
-                                        
-                                            if (prejump_scuttle <= 0) {
-                                        
-                                                //Set the sprite
-                                                sprite_index = player_runjump();
-                                                
-                                                //Do not animate
-                                                image_speed = 0;
-                                                image_index = 0;
-                                                
-                                            } else {
-                                            
-                                                //Set the sprite
-                                                sprite_index = player_walk();
-                                            
-                                                //Set the image speed
-                                                if (abs(hspeed) / 8 > .1)
-                                                                                    
-                                                    image_speed = abs(hspeed) / 8;
-                                                                                        
-                                                else image_speed = .1;
-                                                    
-                                                //Subtract the scuttle
-                                                prejump_scuttle --;
-                                                
-                                                //Set the scuttle to 0
-                                                if (prejump_scuttle < 0)
-                                                
-                                                    prejump_scuttle = 0;
-                                                
-                                            }  
-                                        }
-                                        
-                                        //Otherwise, if Mario is not running
-                                        else if (run == false) {
-                                        
-                                            //If the player has depleated all of their scuttle...
-                                            if (prejump_scuttle <= 0) {
-                                        
-                                                //Set the sprite
-                                                sprite_index = player_jump();
-                                                
-                                                //Do not animate
-                                                image_speed = 0;
-                                                
-                                                //But set the appropiate frame
-                                                if (vspeed < 0)
-                                                    image_index = 0;
-                                                else
-                                                    image_index = 1;
-                                                
-                                            } else {
-                                            
-                                                //Set the sprite
-                                                sprite_index = player_walk();
-                                            
-                                                //Set the image speed
-                                                if (abs(hspeed) / 8 > .1)
-                                                                                    
-                                                    image_speed = abs(hspeed) / 8;
-                                                                                        
-                                                else image_speed = .1;
-                                                    
-                                                //Subtract the scuttle
-                                                prejump_scuttle --;
-                                                
-                                                //Set the scuttle to 0
-                                                if (prejump_scuttle < 0)
-                                                
-                                                    prejump_scuttle = 0;
-                                                
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            //Otherwise, if Mario is swimming
-                            else if (swimming == true) {
-                            
-                                //With the cape
-                                with (obj_cape) {
-                                
-                                    //Set depth
-                                    depth = other.depth+1;
-                                    yy = 0;
-                                
-                                    //If moving up
-                                    if (other.vspeed < 0)
-                                        state = capestate.cape_jump_up;
-                                    else
-                                        state = capestate.cape_jump_down;                                    
-                                }
-                                
-                                //Set the sprite
-                                sprite_index = player_swim();
-                                
-                                //If Mario is firing a projectile
-                                if (firing > 0) {
-                                    
-                                    //Do not animate
-                                    image_speed = 0;
-                                    
-                                    //Decrement firing
-                                    firing--;
-                                    
-                                    //Set up the frame
-                                    if (firing < 3)
-                                        image_index = 2;
-                                    else if (firing >= 3) && (firing < 6)
-                                        image_index = 1;
-                                    else if (firing >= 6) && (firing < 10)
-                                        image_index = 0;
-                                }
-                                
-                                //Otherwise
-                                else {
-                                    
-                                    //If moving up, animate
-                                    if (vspeed < 0)
-                                        image_speed = 0.15;
-                                        
-                                    //Otherwise, do not animate
-                                    else {
-                                    
-                                        image_speed = 0;
-                                        image_index = 0;
-                                    }
-                                }
-                            }
-                        }
-                        
-                        //Otherwise, if Mario is climbing
-                        else if (state == statetype.climb) {
-                        
-                            //Set the cape sprite
-                            with (obj_cape) {
-                            
-                                //Set depth
-                                depth = -6;
-                                yy = 0;
-                                
-                                //Set cape
-                                state = capestate.cape_climb;
-                            }
-                        
-                            //Set the sprite
-                            sprite_index = player_climb();
-                            
-                            //If moving
-                            if (speed > 0)
-                                image_speed = 0.15;
-                            
-                            //Otherwise, if not moving
-                            else {
-                            
-                                image_speed = 0;
-                                image_index = 0;
-                            }
-                        }
-                    }
-                    
-                    //Otherwise, if the player is kicking something
-                    else if (kicking == true) {
+                    //If Mario is firing something
+                    if (firing > 0) 
+                    && (sprite_index != global.somersault_sprite[global.powerup]) {
                     
                         //Set the sprite
-                        sprite_index = player_kick();
+                        sprite_index = global.attack_sprite[global.powerup];
+                        
+                        //Do not animate
+                        image_speed = 0;
+                        
+                        //Decrement fire
+                        firing--;
+						
+						//If the powerup is not the bubble one
+						if (global.powerup != cs_bubble) {
+                        
+	                        //...but set the appropiate frame
+	                        if (firing > 4)
+	                            image_index = 0;
+	                        else
+	                            image_index = 1;
+						}
+						
+						//Otherwise
+						else
+							image_index = 4;
+                    }
+                    else {
+                    
+                        //Set the sprite
+                        sprite_index = global.walk_sprite[global.powerup];
                         
                         //Do not animate
                         image_speed = 0;
                         image_index = 0;
+                    }
+                }
+                
+                //Otherwise, if Mario is walking
+                else if (state == playerstate.walk) {
+                
+                    //Check first the horizontal speed and facing direction of Mario.
+                    if ((((xspeed > 0.1) && (xscale == -1))
+                    || ((xspeed < -0.1) && (xscale == 1)))
+                    && (!swimming)
+					&& (!isslip)
+                    && (global.powerup != cs_frog)) {
+						
+						//If Mario is tiny
+						if (global.powerup == cs_tiny)
+						&& (!collision_point(x, bbox_bottom+1, obj_swim, 0, 0)) {
+							
+	                        //Set the skidding sprite
+	                        sprite_index = global.skid_sprite[global.powerup];
                         
-                        //Set up the cape state
-                        if (state == statetype.idle) {
+	                        //Do not animate
+	                        image_speed = 0;
+	                        image_index = 0;
                         
-                            with (obj_cape) {
-                            
-                                state = capestate.cape_idle;
-                                depth = other.depth+1;
-                                yy = 0;
-                            }
-                        }
-                        else if (state == statetype.walk) {
+	                        //Play 'Skid' sound
+	                        if (!audio_is_playing(snd_skid))
+	                            audio_play_sound(snd_skid, 0, true);							
+						}
+						else {
+
+	                        //Set the skidding sprite
+	                        sprite_index = global.skid_sprite[global.powerup];
                         
-                            with (obj_cape) {
-                            
-                                state = capestate.cape_walk;
-                                depth = other.depth+1;
-                                yy = 0;
-                            }
-                        }
-                        else if (state == statetype.jump) {
+	                        //Do not animate
+	                        image_speed = 0;
+	                        image_index = 0;
                         
-                            //With the cape
-                            with (obj_cape) {
+	                        //Play 'Skid' sound
+	                        if (!audio_is_playing(snd_skid))
+	                            audio_play_sound(snd_skid, 0, true);
+						}
+                    }
+                    
+                    //Set the animation speed
+                    else {
+                        
+                        //If Mario does not have the frog powerup
+                        if (global.powerup != cs_frog)
+                        && (global.powerup != cs_penguin) 
+							image_speed = 0.065+abs(xspeed) / ((global.powerup == cs_mega) ? 15 : 7.5);
                             
-                                //Set depth
-                                depth = other.depth+1;
-                                yy = 0;
+                        //Otherwise, if Mario does have the frog suit.
+                        else if (global.powerup == cs_frog) {
                             
-                                //If moving up
-                                if (other.vspeed < 0)
-                                    state = capestate.cape_jump_up;
+                            //If Mario is swimming
+                            if (swimming) {
+                            
+                                //If Mario is not holding anything.
+                                if (holding == 0) {
+                                
+                                    if (xspeed == 0)
+                                        image_speed = 0.1;
+                                    else
+                                        image_speed = 0.1+(0.1*input_check(input2.action_1));
+                                }
                                 else
-                                    state = capestate.cape_jump_down;
+                                    image_speed = isslip * 0.065+abs(xspeed)/7.5;
                             }
-                        }
-                    }
-                }
-                
-                //Otherwise, if the player is sliding down a slope
-                else if (sliding == true) {
-                
-                    //Set the sprite
-                    sprite_index = player_slide();
-                    
-                    //Do not animate
-                    image_speed = 0;
-                    image_index = 0;
                             
-                    //Set up the cape state
-                    if (state == statetype.idle) {
-                    
-                        with (obj_cape) {
-                        
-                            state = capestate.cape_idle;
-                            depth = other.depth+1;
-                            yy = 2;
+                            //Otherwise, if Mario is not swimming
+                            else {
+                            
+                                if (holding == 0)
+                                    image_speed = 0.1;
+                                else
+                                    image_speed = isslip * 0.065+abs(xspeed)/7.5;
+                            }                        
                         }
-                    }
-                    else if (state == statetype.walk) {
-                    
-                        with (obj_cape) {
                         
-                            state = capestate.cape_walk;
-                            depth = other.depth+1;
-                            yy = 2;
-                        }
-                    }
-                    else if (state == statetype.jump) {
-                    
-                        //With the cape
-                        with (obj_cape) {
-                        
-                            //Set depth
-                            depth = other.depth+1;
-                            yy = 2;
-                        
-                            //If moving up
-                            if (other.vspeed < 0)
-                                state = capestate.cape_jump_up;
+                        //Otherwise, if Mario does have the penguin suit.
+                        else if (global.powerup == cs_penguin) {
+                            
+                            //If Mario is swimming
+                            if (swimming) {
+                            
+                                //If Mario is not holding anything.
+                                if (holding == 0) {
+                                
+                                    if (xspeed == 0)
+                                        image_speed = 0.1;
+                                    else
+                                        image_speed = 0.1+(0.1*input_check(input2.action_1));
+                                }
+                                else
+                                    image_speed = isslip * 0.065+abs(xspeed)/7.5;
+                            }
+                            
+                            //Otherwise, if Mario is not swimming
                             else
-                                state = capestate.cape_jump_down;
+                                image_speed = 0.065+abs(xspeed)/7.5;                         
+                        }
+                    
+                        //If Mario is running
+                        if (run) {
+							
+							if (global.powerup != cs_bell)
+								sprite_index = global.run_sprite[global.powerup];
+							else
+								sprite_index = global.walk_sprite[global.powerup];
+						}
+                        else {
+                                             
+                            if ((global.powerup == cs_frog)
+                            || (global.powerup == cs_penguin))
+                            && (swimming) {
+								
+								if (state = playerstate.idle)
+									sprite_index = global.swim_sprite[global.powerup];
+								else
+									sprite_index = global.swim2_sprite[global.powerup];
+							}
+                            else
+                                sprite_index = global.walk_sprite[global.powerup];
                         }
                     }
                 }
-            }
-            
-            //Otherwise, if the player is holding something
-            else if (holding == 1) {
-            
-                //If Mario is turning around
-                if (turnnow == true) {
                 
-                    //Set the sprite
-                    sprite_index = player_spin();
-                    
-                    //Do not animate
-                    image_speed = 0;
-                    image_index = 1;
-                }
-            
-                //Otherwise, if Mario is not turning around
-                else {
+                //Otherwise, if Mario is jumping
+                else if (state == playerstate.jump) {
                 
-                    //If Mario is not moving
-                    if (state == statetype.idle) {
-                    
-                        //Set cape state
-                        with (obj_cape) {
-                        
-                            state = capestate.cape_idle;
-                            depth = other.depth+1;
-                            yy = 0;
-                        }
+                    //If Mario is shooting a projectile
+                    if (firing > 0) 
+                    && (sprite_index != global.somersault_sprite[global.powerup]) {
                     
                         //Set the sprite
-                        sprite_index = player_hold();
+                        sprite_index = global.attack_sprite[global.powerup];
                         
                         //Do not animate
                         image_speed = 0;
                         
-                        //But set the appropiate frame
-                        if (input_check(input.up))
-                            image_index = 1;
+                        //Decrement fire
+                        firing--;
+                        
+                        //...but set the appropiate frame
+                        if (firing > 4)
+                            image_index = 2;
                         else
-                            image_index = 0;
+                            image_index = 3;                    
                     }
-                    
-                    //Otherwise, if Mario is walking
-                    else if (state == statetype.walk) {
-                    
-                        //Set cape state
-                        with (obj_cape) {
+                
+                    //Otherwise, if Mario is not shooting a projectile.
+                    else {
                         
-                            state = capestate.cape_walk;
-                            depth = other.depth+1;
-                            yy = 0;
-                        }
-                    
-                        //Set the sprite
-                        sprite_index = player_hold2();
-                                    
-                        //Animate
-                        image_speed = (0.065*(inice*4))+abs(hspeed)/7.5;                       
-                    }
-                    
-                    //Otherwise, if Mario is jumping
-                    else if (state == statetype.jump) {
-                    
                         //If Mario is not swimming
-                        if (swimming == false) {
-                        
-                            //If Mario is doing a spinjump
-                            if (jumpstyle == true) {
-                                                                        
-                                //Set cape state
-                                with (obj_cape) {
-                                
-                                    //Set y position
-                                    yy = 0;
-                                
-                                    //If moving up
-                                    if (other.vspeed < 0)
-                                        state = capestate.cape_spin_up;
-                                    else
-                                        state = capestate.cape_spin_down;
-                                
-                                    //Set the depth first
-                                    if (image_index > 2.99) {
+                        if (!swimming) {
+							
+							//If the player is doing a groundpound
+							if (groundpound > 0) {
+								
+								//If the player is spinning
+								if (groundpound == 1) {
+									
+									//If the player does have the cape powerup
+									if (global.powerup == cs_cape) {
+										
+										switch (global.player) {
+											
+											//Mario
+											case (0): sprite_index = spr_mario_cape_somersault; break;
+											
+											//Luigi
+											case (1): sprite_index = spr_luigi_cape_somersault; break;
+										}
+									}
+									else
+										sprite_index = global.somersault_sprite[global.powerup];
+								}
+									
+								//Otherwise
+								else if (groundpound == 2) {
+									
+									//If Mario does not use the penguin suit
+									if (global.powerup != cs_shell)
+									&& (global.powerup != cs_penguin)
+										sprite_index = global.slide_sprite[global.powerup];
+										
+									//Otherwise
+									else {
+										
+										//If Mario does use the shell
+										if (global.powerup == cs_shell)
+											sprite_index = global.slide2_sprite[cs_shell];
+									
+										//If Mario does use the penguin suit
+										else if (global.powerup == cs_penguin)
+											sprite_index = global.slide2_sprite[cs_penguin];
+									}
+								}
+							}
+							
+							//Otherwise, if Mario is doing a twirl
+							else if (twirl == 1) {
+							
+								//Set the spinning sprite
+	                            sprite_index = global.spin_sprite[global.powerup];
                                     
-                                        if (other.depth == 10)
-                                            depth = 10;
-                                        else
-                                            depth = -6;
-                                    }
-                                    else
-                                        depth = other.depth+1;                                
-                                }
+	                            //Animate it
+	                            image_speed = 0.4;
+							}
+							
+							//Otherwise, if the player is doing the second jump
+							else if ((triplejump == 2) && (somersault == 0)) {
+								
+								//If Mario does have the football or cat powerup
+								if (global.powerup == cs_bell)
+								|| (global.powerup == cs_football) {
+								
+									//Set the sprite
+									sprite_index = global.jump_sprite[global.powerup];
+									
+									//Do not animate
+									image_speed = 0;
+									
+									//If moving up
+									if (yspeed < 0)
+										image_index = 0;
+									else
+										image_index = 1;
+								}
+								
+								//Otherwise
+								else {
+							
+									//Set the sprite
+									sprite_index = global.run_sprite[global.powerup];
+									image_speed = 0;
+									image_index = 1;
+								}
+							}
+							
+							//Otherwise
+							else {
+                        
+	                            //If Mario is doing a spinjump
+	                            if (jumpstyle > 0) {
                             
-                                //Set the sprite
-                                sprite_index = player_spin();
+	                                //If Mario does have the propeller suit
+	                                if (global.powerup == cs_propeller) {
                                 
-                                //Animate
-                                image_speed = 0.5;
-                            }
+	                                    //If moving up
+	                                    if (yspeed < 0) {
+                                    
+											//Animate it
+	                                        image_speed = 0.065+abs(yspeed)/7.5;
+										
+	                                        //Set the special spinning sprite
+	                                        sprite_index = global.spin3_sprite[global.powerup];
+	                                    }
+	                                    else {
+                                    
+	                                        //Set the spinning sprite
+											if ((input_check(input.down)) || (gamepad_axis_value(0, gp_axislv) > 0.5)) {
+											
+												image_speed = 1;
+												sprite_index = global.spin2_sprite[global.powerup];
+											}
+											else {
+											
+												image_speed = 0.2;
+												sprite_index = global.spin_sprite[global.powerup];
+											}
+	                                    }
+	                                }
+                                
+	                                //If Mario does not have the propeller or cat suit
+	                                else {
+                                
+	                                    //Set the spinning sprite
+	                                    sprite_index = global.spin_sprite[global.powerup];
+                                    
+	                                    //Animate it
+	                                    image_speed = 0.5;
+	                                }
+	                            }
                             
-                            //Otherwise, if Mario is not doing a spinjump
-                            else if (jumpstyle == false) {
+	                            //If Mario is not doing a spin jump
+	                            else {
                             
-                                //With the cape
-                                with (obj_cape) {
+	                                //If the player is doing a somersault
+	                                if (somersault) {
+									
+										//Do not animate
+	                                    image_speed = 0;
+	                                    image_index = 0;
                                 
-                                    //Set depth
-                                    depth = other.depth+1;
-                                    yy = 0;
+										//If the player does have the cape powerup
+										if (global.powerup == cs_cape) {
+										
+											switch (global.player) {
+											
+												//Mario
+												case (0): sprite_index = spr_mario_cape_somersault; break;
+											
+												//Luigi
+												case (1): sprite_index = spr_luigi_cape_somersault; break;
+											}
+										}
+										else
+											sprite_index = global.somersault_sprite[global.powerup];
+	                                }
+                             
+	                                else {
                                 
-                                    //Set state
-                                    if (other.vspeed < 0)
-                                        state = capestate.cape_jump_up;
-                                    else
-                                        state = capestate.cape_jump_down;
-                                }
-                            
-                                //Set the sprite
-                                sprite_index = player_hold2();
-                                
-                                //Do not animate
-                                image_speed = 0;
-                                image_index = 0;
+	                                    //If Mario does have the carrot powerup
+	                                    if (global.powerup == cs_carrot) {
+                                    
+	                                        //If Mario is wallclimbing
+	                                        if (wallkick == 1) {
+                                        
+	                                            //Set the sprite
+	                                            sprite_index = global.walljump_sprite[global.powerup];
+                                            
+	                                            //Do not animate
+	                                            image_speed = 0;
+	                                            image_index = 0;
+	                                        }
+                                        
+	                                        //Otherwise, if it's not
+	                                        else {
+												
+												//If Mario is moving up
+		                                        if (yspeed < 0)
+		                                            image_index = 0;
+		                                        else {
+                                            
+		                                            if (floatnow > 0)
+		                                                image_speed = 0.15;
+		                                            else {
+                                                
+		                                                if (run)
+		                                                    image_index = 0;
+		                                                else
+		                                                    image_index = 1;
+		                                            }
+		                                        }
+                                            
+		                                        //If Mario is running
+		                                        if (!run) 
+		                                            sprite_index = global.jump_sprite[global.powerup];
+		                                        else
+													sprite_index = global.runjump_sprite[global.powerup];
+	                                        }
+	                                    }
+                                    
+	                                    //Else, if Mario does have the bee powerup
+	                                    else if (global.powerup == cs_bee) {
+                                    
+	                                        //If Mario is wallclimbing
+	                                        if (wallkick == 1) {
+                                        
+	                                            //Set the sprite
+	                                            sprite_index = global.walljump_sprite[global.powerup];
+                                            
+	                                            //Do not animate
+	                                            image_speed = 0;
+	                                            image_index = 0;                                
+	                                        }
+	                                        else {
+                                        
+		                                        //If Mario is moving down
+		                                        if (yspeed > 0)
+		                                            image_index = 1;
+		                                        else {
+                                            
+		                                            if (floatnow > 0)
+		                                                image_speed = 0.15;
+		                                            else if (yspeed < -1.1)
+		                                                image_index = 0;
+		                                        }
+                                                                                
+		                                        //If Mario is running
+		                                        if (!run)
+		                                            sprite_index = global.jump_sprite[global.powerup];
+		                                        else
+		                                            sprite_index = global.runjump_sprite[global.powerup];
+											}
+	                                    }
+									
+										//Otherwise, if Mario is wearing the Squirrel suit
+										else if (global.powerup == cs_squirrel)
+										&& ((squirrelpropel == 1) || ((yspeed > 0) && (input_check(input2.action_0)))) {
+										
+											//Set the sprite
+											sprite_index = global.float_sprite[global.powerup];
+										
+											//If moving up
+											if (yspeed < 0)
+								                image_index = 0;
+											
+											//If not propelled up
+								            else if (squirrelpropel == 0)
+								                image_index = 1;
+										
+											//Otherwise, if propelled up
+								            else
+								                image_speed = 0.15;
+										}
+                                    
+	                                    //Otherwise, if Mario does not have any of the above powerups
+	                                    else {
+                                    
+	                                        //Do not animate
+	                                        image_speed = 0;
+                                        
+	                                        //If Mario does have the frog powerup
+	                                        if (global.powerup == cs_frog) {
+                                        
+	                                            //If Mario is wallclimbing
+	                                            if (wallkick == 1) {
+                                            
+	                                                //Set the sprite
+	                                                sprite_index = global.walljump_sprite[global.powerup];
+                                                
+	                                                //Do not animate
+	                                                image_speed = 0;
+	                                                image_index = 0;
+	                                            }
+                                            
+	                                            //Otherwise, if it's not wallclimbing
+	                                            else {
+                                    
+	                                                //Set the sprite
+	                                                sprite_index = global.walk_sprite[global.powerup];
+                                            
+	                                                //Set up the frame
+	                                                image_index = 2;
+	                                            }
+	                                        }
+                                        
+	                                        //Otherwise, if Mario does not have the frog powerup
+	                                        else {
+                                        
+	                                            //If Mario is wallclimbing
+	                                            if (wallkick == 1) {
+                                            
+	                                                //If Mario does have the Cat powerup
+	                                                if (global.powerup == cs_bell) {
+                                                
+	                                                    //Set the alt climbing sprite
+	                                                    sprite_index = global.climb2_sprite[global.powerup];
+                                                    
+	                                                    //Animate
+	                                                    if (yspeed < 0) 
+	                                                        image_speed = 0.15;
+	                                                    else {
+                                                    
+	                                                        image_speed = 0;
+	                                                        image_index = 0;
+	                                                    }
+	                                                }
+	                                                else {
+                                                
+	                                                    //Set the skid sprite
+	                                                    sprite_index = global.walljump_sprite[global.powerup];
+                                                    
+	                                                    //Do not animate
+	                                                    image_speed = 0;
+	                                                    image_index = 0;
+	                                                }
+	                                            }
+	                                            else {
+                                    
+	                                                //...but set the appropiate frame
+	                                                if (yspeed < 0) {
+                                                
+	                                                    if (global.powerup == cs_raccoon) 
+														|| (global.powerup == cs_tanooki)
+														|| (global.powerup == cs_fraccoon)
+														|| (global.powerup == cs_iraccoon)
+	                                                        image_index = 0+(wiggle/4);
+	                                                    else
+	                                                        image_index = 0;
+	                                                }
+	                                                else {
+                                                
+	                                                    //If Mario is running
+	                                                    if (run)
+	                                                        image_index = 0+(wiggle/4);
+	                                                    else
+	                                                        image_index = 1+(wiggle/4);
+	                                                }
+                                                
+	                                                //Set the appropiate sprite
+	                                                if (!run)
+	                                                && (global.pwing == 0) {
+													
+														//If Mario does have the Wind powerup
+														if (global.powerup == cs_wind) {
+															
+															if (wiggle > 0) {
+																
+																//Check what player is being used
+																switch (global.player) {
+																	
+																	//Mario
+																	case (0): sprite_index = spr_mario_wind_float; break;
+																	
+																	//Luigi
+																	case (1): sprite_index = spr_luigi_wind_float; break;
+																}
+															}
+															else
+																sprite_index = global.jump_sprite[global.powerup];
+														}
+														else
+															sprite_index = global.jump_sprite[global.powerup];
+													}
+	                                                else {
+													
+														//If Mario does not have the Cat powerup
+														if (global.powerup != cs_bell) {
+															
+															//If Mario does have the Wind powerup
+															if (global.powerup == cs_wind) {
+																
+																if (wiggle > 0) {
+																
+																	//Check what player is being used
+																	switch (global.player) {
+																	
+																		//Mario
+																		case (0): sprite_index = spr_mario_wind_float; break;
+																	
+																		//Luigi
+																		case (1): sprite_index = spr_luigi_wind_float; break;
+																	}
+																}
+																else
+																	sprite_index = global.runjump_sprite[global.powerup];
+															}
+															else
+																sprite_index = (global.powerup == cs_tiny) ? global.jump_sprite[global.powerup] : global.runjump_sprite[global.powerup];
+														}
+														else
+															sprite_index = global.jump_sprite[global.powerup];					
+													}
+	                                            }
+	                                        }
+	                                    }
+	                                }                 			
+								}
                             }
                         }
                         
-                        //Otherwise, if the player is swimming
-                        else if (swimming == true) {
+                        //Otherwise, if Mario is swimming
+                        else if (swimming) {
                         
-                            //With the cape
-                            with (obj_cape) {
+                            //If Mario does have either the frog or penguin powerups.
+                            if (global.powerup == cs_frog)
+                            || (global.powerup == cs_penguin) {
                             
-                                //Set depth
-                                depth = other.depth+1;
-                                yy = 0;
-                            
-                                //If moving up
-                                if (other.vspeed < 0)
-                                    state = capestate.cape_jump_up;
-                                else
-                                    state = capestate.cape_jump_down;
-                            }
-                        
-                            //Set the sprite
-                            sprite_index = player_swim2();
-                            
-                            //If moving up
-                            if ((vspeed < 0) && (dive == 0))
-                                image_speed = 0.15;
+                                //If Mario is swimming to the sides
+                                if (swimtype == 0) {
                                 
-                            //Otherwise, if moving down while holding
-                            else if ((vspeed > 0) && (dive == 1))
-                                image_speed = 0.15;
+                                    //If not moving horizontally
+                                    if (xspeed == 0) {
+										
+										sprite_index = global.swim_sprite[global.powerup];
+                                        image_speed = 0.1;
+									}
+                                    else {
+										
+										sprite_index = global.swim2_sprite[global.powerup];
+                                        image_speed = 0.1+(0.1*input_check(input2.action_1));
+									}
+                                }
+                                
+                                //Otherwise, if Mario is swimming upwards
+                                else if (swimtype == 1) {
+                                
+                                    //Set up the sprite
+                                    sprite_index = global.swim3_sprite[global.powerup];
+                                    
+                                    //Set the speed
+                                    if ((x != xprevious) || (y != yprevious))
+                                        image_speed = 0.1+(0.1*input_check(input2.action_1));
+                                    else
+                                        image_speed = 0;
+                                }
+                                
+                                //Otherwise, if Mario is swimming downwards
+                                else if (swimtype == 2) {
+                                
+                                    //Set up the sprite
+                                    sprite_index = global.swim4_sprite[global.powerup];
+                                    
+                                    //Set the speed
+                                    if ((x != xprevious) || (y != yprevious))
+                                        image_speed = 0.1+(0.1*input_check(input2.action_1));
+                                    else
+                                        image_speed = 0;
+                                }
+                            }
                             
-                            //Otherwise
+                            //Otherwise, if Mario does not have any of the above powerups
                             else {
                             
-                                //Do not animate
-                                image_speed = 0;
-                                image_index = 0;
+                                //Set up the sprite
+                                sprite_index = global.swim_sprite[global.powerup];
+                                
+                                //Set the speed
+                                if (yspeed < 0)
+                                    image_speed = 0.15;
+                                else {
+                                
+                                    image_speed = 0;
+                                    image_index = 0;
+                                }
                             }
                         }
                     }
                 }
+                
+                //Otherwise, if Mario is climbing
+                else if (state == playerstate.climb) {
+					
+					//If the climbing sprite is the SMB3 / SMW one
+					if (climbstyle == 0) {
+                
+	                    //Set up the sprite
+	                    sprite_index = global.climb_sprite[global.powerup];
+                    
+	                    //Set the speed
+	                    if ((xspeed != 0) || (yspeed < 0))
+	                        image_speed = 0.15;
+	                    else {
+                    
+	                        image_speed = 0;
+	                        image_index = 0;
+	                    }
+					}
+					
+					//Otherwise
+					else if (climbstyle == 1) {
+					
+	                    //Set up the sprite
+	                    sprite_index = global.goal_sprite[global.powerup];
+                    
+	                    //Set the speed
+	                    if (yspeed != 0)
+	                        image_speed = 0.15;
+	                    else
+	                        image_speed = 0;				
+					}
+                }
             }
             
-            //Set up the mask
-            if (global.powerup > cs_pow_small)
-                mask_index = spr_mask_player_big;
-            else
-                mask_index = spr_mask_player;
+            //Otherwise, if Mario is kicking or throwing something
+            else if (kicking > 0) {
+            
+                //Set up the sprite
+                sprite_index = global.kick_sprite[global.powerup];
+                
+                //Set the frame
+                image_speed = 0;
+                if ((kicking == 1) || (kicking == 3))
+                    image_index = 0;
+                else
+                    image_index = 1;
+            }
+        }
+        
+        //Otherwise, if Mario is sliding down a slope
+        else if (sliding) {
+        
+            //If Mario does have the shell powerup
+            if (global.powerup == cs_shell) {
+            
+                //If the sprite is not the sliding one
+                if (sprite_index != global.slide_sprite[global.powerup]) {
+                
+                    //Set up the sprite
+                    sprite_index = global.slide_sprite[global.powerup];
+                    
+                    //Set up the frame
+                    if (image_index != 0)
+                        image_index = 0;
+                }
+                
+                //Animate
+                image_speed = isslip * 0.065+abs(xspeed)/7.5;
+            }
+            else {
+                
+                //Set up the sprite
+                sprite_index = global.slide_sprite[global.powerup];
+                
+                //Do not animate
+                image_speed = 0;
+                image_index = 0;
+            }
         }
     }
+    
+    //Otherwise, if Mario is carrying something over his head
+    else if (holding == 1) {
+    
+		#region SPRITE
+		
+	        //Set up the sprite
+			if (global.powerup != cs_raccoon)
+			&& (global.powerup != cs_tanooki)
+			&& (global.powerup != cs_fraccoon)
+			&& (global.powerup != cs_iraccoon) {
+				
+				if ((global.powerup == cs_carrot) || (global.powerup == cs_bee)) {
+					
+					if (state == playerstate.jump)
+						sprite_index = global.carry_jump_sprite[global.powerup];
+					else
+						sprite_index = global.carry_sprite[global.powerup];
+				}
+				else
+					sprite_index = global.carry_sprite[global.powerup];
+			}
+			
+			//Otherwise
+			else {
+
+				if (state == playerstate.jump)
+					sprite_index = global.carry_jump_sprite[global.powerup];
+				else
+					sprite_index = global.carry_sprite[global.powerup];
+			}
+		
+		#endregion
+        
+        //If Mario is not walking
+        if (state == playerstate.idle) {
+        
+            //Do not animate
+            image_speed = 0;
+            image_index = 0;
+        }
+        
+        //Otherwise, if Mario is walking
+        else if (state == playerstate.walk) {
+        
+            //Set the animation speed
+            image_speed = isslip * 0.065+abs(xspeed)/7.5;
+        }
+        
+        //Otherwise, if Mario is jumping
+        else if (state == playerstate.jump) {
+        
+            //If Mario does have either the carrot or bee powerup.
+            if (global.powerup == cs_carrot) 
+            || (global.powerup == cs_bee) {
+            
+                //If Mario is floating
+                if (floatnow > 0)
+                    image_speed = 0.15;
+                else {
+                
+                    image_speed = 0;
+                    image_index = 0;
+                }
+            }
+            
+            //Otherwise, if Mario does have either the raccoon or tanooki powerup.
+            else if (global.powerup == cs_raccoon) 
+			|| (global.powerup == cs_tanooki) 
+			|| (global.powerup == cs_fraccoon) 
+			|| (global.powerup == cs_iraccoon) {
+            
+                image_speed = 0;
+                image_index = 0+(wiggle/4);
+            }
+            
+            //Otherwise, do not animate
+            else {
+            
+                image_speed = 0;
+                image_index = 1;
+            }
+        }
+    }
+    
+    //Otherwise, if Mario is holding something at his front
+    else if (holding == 2) {
+        
+        //If Mario is not walking
+        if (state == playerstate.idle) {
+        
+            //Do not animate
+            image_speed = 0;
+            image_index = 0;
+        }
+        
+        //Otherwise, if Mario is walking
+        else if (state == playerstate.walk) {
+        
+            //If Mario is not turning
+            if (!turning)
+                image_speed = isslip * 0.065+abs(xspeed)/7.5;
+                
+            //Otherwise, if Mario is turning
+            else {
+
+                image_speed = 0;
+                image_index = 0;
+            }
+        }
+        
+        //Otherwise, if Mario is jumping
+        else if (state == playerstate.jump) {
+        
+            //If the player is not turning
+            if (!turning) {
+            
+                //If Mario does have either the carrot or bee powerup.
+                if (global.powerup == cs_carrot) 
+                || (global.powerup == cs_bee) {
+                
+                    //If Mario is floating
+                    if (floatnow > 0)
+                        image_speed = 0.15;
+                    else {
+                    
+                        image_speed = 0;
+                        image_index = 0;
+                    }
+                }
+                
+                //Otherwise, if Mario does have either the raccoon or tanooki powerup.
+	            else if (global.powerup == cs_raccoon) 
+				|| (global.powerup == cs_tanooki) 
+				|| (global.powerup == cs_fraccoon) 
+				|| (global.powerup == cs_iraccoon) {
+                
+                    image_speed = 0;
+                    image_index = 0+(wiggle/4);
+                }
+                
+                //Otherwise, do not animate
+                else {
+                
+                    image_speed = 0;
+                    image_index = 1;
+                }
+            }
+            
+            //Otherwise, set turning pose
+            else {
+            
+                image_speed = 0;
+                image_index = 0;
+            }
+        }
+		
+		//Otherwise, if Mario is climbing
+		else if (state == playerstate.climb) {
+		
+			//Set up the sprite
+	        sprite_index = global.climb_sprite[global.powerup];
+                    
+	        //Set the speed
+	        if ((xspeed != 0) || (yspeed < 0))
+	            image_speed = 0.15;
+	        else {
+                    
+	            image_speed = 0;
+	            image_index = 0;
+	        }
+		}
+        
+        //Set the sprite
+        if (!turning) {
+			
+			if (state != playerstate.climb) {
+				
+				#region SPRITE
+		
+					//Set up the sprite
+					if (global.powerup != cs_raccoon)
+					&& (global.powerup != cs_tanooki)
+					&& (global.powerup != cs_fraccoon)
+					&& (global.powerup != cs_iraccoon) {
+				
+						if ((global.powerup == cs_carrot) || (global.powerup == cs_bee)) {
+					
+							if (state == playerstate.jump)
+								sprite_index = global.hold_jump_sprite[global.powerup];
+							else
+								sprite_index = global.hold_sprite[global.powerup];
+						}
+						else
+							sprite_index = global.hold_sprite[global.powerup];
+					}
+			
+					//Otherwise
+					else {
+
+						if (state == playerstate.jump)
+							sprite_index = global.hold_jump_sprite[global.powerup];
+						else
+							sprite_index = global.hold_sprite[global.powerup];
+					}
+		
+				#endregion
+			}
+			else
+				sprite_index = global.climb_sprite[global.powerup];
+		}
+        else
+            sprite_index = global.spin_sprite[global.powerup];
+    }
+    
+    //Otherwise, if Mario is holding a boomerang
+    else if (holding == 3) {
+    
+		#region SPRITE
+		
+	        //Set up the sprite
+			if (global.powerup != cs_raccoon)
+			&& (global.powerup != cs_tanooki)
+			&& (global.powerup != cs_fraccoon)
+			&& (global.powerup != cs_iraccoon) {
+				
+				if ((global.powerup == cs_carrot) || (global.powerup == cs_bee)) {
+					
+					if (state == playerstate.jump)
+						sprite_index = global.hold2_jump_sprite[global.powerup];
+					else
+						sprite_index = global.hold2_sprite[global.powerup];
+				}
+				else
+					sprite_index = global.hold2_sprite[global.powerup];
+			}
+			
+			//Otherwise
+			else {
+
+				if (state == playerstate.jump)
+					sprite_index = global.hold2_jump_sprite[global.powerup];
+				else
+					sprite_index = global.hold2_sprite[global.powerup];
+			}
+		
+		#endregion
+        
+        //If Mario is not walking
+        if (state == playerstate.idle) {
+        
+            //Do not animate
+            image_speed = 0;
+            image_index = 0;
+        }
+        
+        //Otherwise, if Mario is walking
+        else if (state == playerstate.walk) {
+        
+            //Set the animation speed
+            image_speed = isslip * 0.065+abs(xspeed)/7.5;
+        }
+        
+        //Otherwise, if Mario is jumping
+        else if (state == playerstate.jump) {
+        
+            //If Mario does have either the carrot or bee powerup.
+            if (global.powerup == cs_carrot) 
+            || (global.powerup == cs_bee) {
+            
+                //If Mario is floating
+                if (floatnow > 0)
+                    image_speed = 0.15;
+                else {
+                
+                    image_speed = 0;
+                    image_index = 0;
+                }
+            }
+            
+            //Otherwise, if Mario does have either the raccoon or tanooki powerup.
+            else if (global.powerup == cs_raccoon) 
+			|| (global.powerup == cs_tanooki) 
+			|| (global.powerup == cs_fraccoon) 
+			|| (global.powerup == cs_iraccoon) {
+            
+                image_speed = 0;
+                image_index = 0+(wiggle/4);
+            }
+            
+            //Otherwise, do not animate
+            else {
+            
+                image_speed = 0;
+                image_index = 1;
+            }
+        }
+    }
+    
+    //Set the tiny mask
+    if (global.powerup == cs_tiny)
+        mask_index = spr_mask_mario_tiny;
+		
+	//Otherwise, set up the small mask
+	else if (global.powerup == cs_small)
+		mask_index = spr_mask_mario;
+		
+	//Otherwise, set up the mega mask
+	else if (global.powerup == cs_mega)
+	&& (!instance_exists(obj_mario_transform))
+		mask_index = spr_mask_mario_mega;
+		
+    else {
+    
+        //If Mario does have the frog powerup.
+        if (global.powerup == cs_frog) {
+        
+            if (holding > 0)
+                mask_index = spr_mask_mario_big;
+            else
+                mask_index = spr_mask_mario;
+        }
+        
+        //Otherwise, if Mario does have the either the shell or penguin powerups.
+        else if (global.powerup == cs_shell) 
+        || (global.powerup == cs_penguin) {
+        
+            //If Mario is sliding down a slope
+            if (sliding) {
+				
+				if (global.powerup == cs_shell)
+					mask_index = spr_mask_mario_shell;
+				else
+					mask_index = spr_mask_mario;
+			}
+            else
+                mask_index = spr_mask_mario_big;
+        }
+        
+        //Otherwise, set the default mask
+        else
+            mask_index = spr_mask_mario_big;
+		
+    }
+    
+    //Stop the 'Skid' sound when not changing direction.
+    if (sprite_index != global.skid_sprite[global.powerup])
+    && (audio_is_playing(snd_skid))
+        audio_stop_sound(snd_skid);
 }
 
-//Force end firing animation if walking
-if (firing > 0)
-&& (state == statetype.walk)
-    firing = 0;
-
+//If you currently have a spinner
+if (spin != noone) {
+	
+	//Match sprites
+	sprite_index = spin.sprite_index;
+	
+	//Match image index
+	image_index = spin.image_index;
+	
+	//Inherit image speed (namely for cape speed)
+	image_speed = spin.image_speed;	
+}

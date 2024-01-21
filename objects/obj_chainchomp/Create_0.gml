@@ -11,7 +11,7 @@ cy = y+8;
 taunt = 0;
 
 //Create chomp
-chomp = instance_create(cx, cy, obj_chomp);
+chomp = instance_create_depth(cx, cy, -2, obj_chomp);
 with (chomp) {
 
     //Max. distance
@@ -30,9 +30,8 @@ with (chomp) {
 for (i=0; i<4; i++) {
 
     //Create chain
-    var b = instance_create(cx, cy+5, obj_chomp_chain);
+    var b = instance_create_depth(cx, cy+5, -1, obj_chomp_chain);
     
     //Assign the chain to a id
     chain[i] = b;
 }
-

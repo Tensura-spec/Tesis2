@@ -1,42 +1,54 @@
-/// @description The parent object for all enemies
+/// @description The parent object for all enemy NPCs
 
-//How vulnerable is this enemy to items
-//0: Normal
-//1: Immune to fireball
-//2: Immune to cape
-//3: Immune to both fireball and cape
-//99: Invincible
-//100: Invincible + Ignore projectiles
-vulnerable = 0;
-
-//How vulnerable is this enemy to the player
-//0: Normal
-//1: Hurt Player
-//2: Hurt Player + Yoshi Immunity
-//3: Solid on top
-//4: Stomp only
-//-1: Phase through Player
-stomp = 0;
-
-//How vulnerable is this enemy to Yoshi
-//0: Eatable
-//1: Eatable, create item
-//2: Not eatable
-//3: Not eatable, phase through tongue
-edible = 0;
-
-//Facing direction
-xscale = -1;
-
-//Turn around at other enemies & cause them to turn around
-enemyturn = true;
-
-//Death Sprite
-deathsprite = spr_goomba_dead;
-
-//Stomp sprite
-stompsprite = spr_goomba_sq;
-
-//Inherit event from parent
+//Inherit the parent event (Please refer to the flags on this event when creating a enemy too)
 event_inherited();
 
+//How vulnerable is this enemy to various items?
+//0:	Normal
+//1:	Immune to fireballs
+//2:	Immune to all projectiles
+//99:	Immune
+//100:	Immune + Ignore projectiles
+vulnerable = 0;
+
+//How vulnerable is this enemy to Mario?
+//0:	Normal
+//1:	Hurt Mario
+//2:	Hurt Mario + Immune to Mounts
+//3:	Subcon
+//4:	Stomp (Custom)
+//-1:	Phase through Mario
+stomp = 0;
+
+//How edible is this enemy to Yoshi?
+//0:	Edible
+//1:	Edible, but create a item
+//2:	Non-Edible
+edible = 0;
+
+//Does this enemy turn on ledges?
+//0:	No
+//1:	Yes
+turn_on_ledges = 0;
+
+//Does this enemy turn into a silver coin?
+//0:	No
+//1:	Yes
+turn_silver = 1;
+
+//NPC Health
+hp = 0;
+firehp = 0;
+
+//Shmup Enemy
+shmup_enemy = 0;
+shmup_value = 100;
+
+//Makes the NPCs invulnerable to projectiles after being hit by one
+invulnerable = 0;
+
+//Freeze sprite (Used mainly for enemies that require extra parts to be drawn)
+freeze_sprite = -1;
+
+//Freeze object (Used mainly for enemies that have many variants)
+freeze_object = -1;

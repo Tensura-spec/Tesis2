@@ -1,11 +1,10 @@
-/// @description Draw Galoomba
+/// @description Render me
 
-//Back Wing
-draw_sprite_ext(spr_galoomba_wing_back, wing_anim, round(x), round(y)+1+round(image_index), xscale, 1, 0, c_white, 1);
+//Draw front wing
+draw_sprite_ext(spr_galoomba_wing_back, anim, screen_round(x), screen_round(y) + 1 + floor(image_index), xscale, yscale, image_angle, image_blend, image_alpha);
 
-//Galoomba
-draw_sprite_ext(sprite_index, image_index, round(x), round(y)+1, xscale, 1, 0, c_white, 1);
+//Draw Galoomba
+draw_sprite_ext(sprite_index, image_index, screen_round(x), screen_round(y) + 1, xscale, yscale, image_angle, image_blend, image_alpha);
 
-//Front wing
-draw_sprite_ext(spr_galoomba_wing_front, wing_anim, round(x), round(y)+1+round(image_index), xscale, 1, 0, c_white, 1);
-
+//Draw back wing
+draw_sprite_ext(spr_galoomba_wing_front, anim, screen_round(x), screen_round(y) + 1 + floor(image_index), xscale, yscale, image_angle, image_blend, image_alpha);

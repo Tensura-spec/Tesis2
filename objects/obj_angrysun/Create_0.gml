@@ -1,37 +1,23 @@
 /// @description Angry Sun
 
-/*
-**  This item uses creation code!
-**
-**  xmin = Minimum x coordinate where this enemy will go nuts (Default: X)
-*/
-
-//Default values
-xmin = x;
+//Inherit the parent event
+event_inherited();
 
 //How vulnerable is this enemy to various items?
-vulnerable = 2;
+vulnerable = 100;
 
-//How vulnerable is this enemy to the player?
-stomp = 2;
+//How vulnerable is this enemy to Mario?
+stomp = -1;
 
-//How vulnerable is this enemy to yoshi?
+//How vulnerable is this enemy to Yoshi?
 edible = 2;
 
-//Facing direction
-xscale = 1;
-
-//Whether this object went nuts
+//Whether the sun went nuts
 ready = 0;
 
-//Movement object
-movement = noone;
+//Movement
+movement = -1;
 
-//Death sprite
-deathsprite = spr_angrysun;
-
-//Animate
+//Do not animate
 image_speed = 0;
-
-/* */
-/*  */
+image_index = 0;

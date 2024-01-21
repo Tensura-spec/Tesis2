@@ -7,10 +7,9 @@ if (prevswim == 0) {
     yy = y;
 }
 
-//Start moving
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.y < y)
-    vspeed = -0.5;
+//Move towards Mario
+if (!instance_exists(obj_mario))
+|| (obj_mario.y < y)
+    yspeed = -0.5;
 else
-    vspeed = 0.5;
-
+    yspeed = 0.5;

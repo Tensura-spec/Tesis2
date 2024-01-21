@@ -1,72 +1,22 @@
 /// @description Lakitu
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//Lakitu lure range
-lurerange = 32;
+//Do not turn into silver coins
+turn_silver = false;
 
-//Lakitu type
-type = 0;
-
-//How vulnerable is this enemy to items
-vulnerable = 0;
-
-//How vulnerable is this enemy to the player
-stomp = 0;
-
-//How vulnerable is this enemy to Yoshi
-edible = 2;
-
-//Death Sprite
-deathsprite = spr_lakitu_dead;
-
-//Stomp sprite
-stompsprite = spr_lakitu_dead;
-
-//Sprite
-sprite_index = spr_lakitu;
+//Cloud animation
+cloudanim = 0;
 
 //Animate
 image_speed = 0;
 
-//Make enemies turn?
-enemyturn = false;
+//Start throwing eggs
+alarm[0] = 150;
 
-//Fisher?
-fisher = false;
+//Leave a trail
+alarm[2] = 1;
 
-//Is Lakitu fishing
-fishing = false;
-
-//Create bait
-bait = instance_create(x, y, obj_lakitubait);
-
-//Bait X
-baitx = 20;
-
-//Bait Y
-baity = 13;
-
-//Bait Y length
-baitlength = 0;
-
-//Assign bait's creator
-with (bait) parent = other.id;
-
-//Handle cloud animation
-cloud_index = 0;
-
-//Set speed
-hspeed = 0;
-
-//Lakitu direction
-dir = 1;
-timer = 0;
-
-//Activated to follow?
-activated = false;
-
-//Can throw yet?
-canthrow = false;
-
+//Prepare to enter into view
+alarm[10] = 2;

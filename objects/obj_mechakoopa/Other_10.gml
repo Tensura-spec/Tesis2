@@ -2,10 +2,10 @@
 
 for (var i=0; i<5; i++) {
 
-    with (instance_create(x, y, obj_mechakoopa_debris)) {
+    with (instance_create_depth(x, y, -6, obj_mechakoopa_debris)) {
     
         hspeed = random_range(-1.5, 1.5);
-        vspeed = random_range(-3, -1);
+        vspeed = random_range(-4, -1);
         image_speed = 0;
         image_index = i;
     }
@@ -13,4 +13,3 @@ for (var i=0; i<5; i++) {
 
 //Destroy
 instance_destroy();
-

@@ -1,30 +1,23 @@
-/// @description Wall Urchin
+/// @description Urchin
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
 //How vulnerable is this enemy to various items?
-vulnerable = 1;
+vulnerable = 3;
 
-//How vulnerable is this enemy to the player?
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to yoshi?
+//How vulnerable is this enemy to Yoshi?
 edible = 2;
 
-//Facing direction
-xscale = 1;
-
-//Animate
-image_speed = 0.09;
-
-//Death Sprite
-deathsprite = spr_urchin_dead;
-
-//Mark as not swimming
-swimming = 1;
+//Pseudo speed variables
+save_sp = 0;
+save_dir = 0;
 
 //Blink
+face = 0;
 alarm[0] = 60;
 
 //Start moving
@@ -33,6 +26,5 @@ alarm[10] = 2;
 //This prevents a bug that causes it to not work if it starts on a certain wall.
 if (place_meeting(x, y+1, obj_solid))
     y++;
-if (!place_meeting(x-1, y, obj_solid))
+if (place_meeting(x-1, y, obj_solid) == false)
     direction = 180;
-

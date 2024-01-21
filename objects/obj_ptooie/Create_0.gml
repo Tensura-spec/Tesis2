@@ -1,22 +1,22 @@
 /// @description P-Tooie
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to various items?
+//How vulnerable is this NPC to various items?
 vulnerable = 0;
 
-//How vulnerable is this enemy to the player?
+//How vulnerable is this NPC to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to yoshi?
+//How edible is this NPC to Yoshi?
 edible = 0;
 
-//Facing direction
-xscale = 1;
+//Turn on ledges
+turn_on_ledges = true;
 
-//Animate
-image_speed = 0.125;
+//Freeze object
+freeze_object = -2;
 
 //Blow the ball
 alarm[0] = 2;
@@ -25,13 +25,12 @@ alarm[0] = 2;
 alarm[10] = 2;
 
 //Whether the object is blowing
-ready = false;
+ready = 0;
 
 //Distance between the ball and the ptooie
 dist = bbox_top+16;
 
 //Create the blown ball
-myball = instance_create(x, bbox_top-24, obj_ptooie_ball);
+myball = instance_create_depth(x, bbox_top-24, -2, obj_ptooie_ball);
 with (myball) 
     parent = other.id;
-

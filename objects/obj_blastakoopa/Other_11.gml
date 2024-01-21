@@ -1,13 +1,13 @@
 /// @description Turn into a stunned mecha koopa
 
 //Create stunned galoomba
-with (instance_create(x, y, obj_mechakoopa_held)) {
+with (instance_create_depth(x, y, -2, obj_mechakoopa_down)) {
 
     //Set the sprite
     sprite_index = spr_blastakoopa_sq;
-    
-    //Death sprite
-    deathsprite = spr_blastakoopa_dead;
+	
+	//Debris sprite
+	debris_sprite = spr_blastakoopa_debris;
     
     //Stun sprite
     stun1 = spr_blastakoopa_sq;
@@ -22,4 +22,3 @@ with (instance_create(x, y, obj_mechakoopa_held)) {
 
 //Destroy
 instance_destroy();
-

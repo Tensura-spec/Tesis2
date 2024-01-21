@@ -1,14 +1,10 @@
-/// @description Mecha koopa logic
+/// @description Mecha-Koopa logic
 
-//Default wall collision
-event_user(3);
+//Inherit the parent event
+event_inherited();
 
-//Default floor / ceiling collision
-event_user(4);
-
-//Set the scale
-if (hspeed > 0)
+//Set the facing direction
+if (xspeed > 0)
     xscale = 1;
-else if (hspeed < 0)
+else if (xspeed < 0)
     xscale = -1;
-

@@ -6,4 +6,3 @@ image_index = 0;
 
 //Make sure it appears again
 ready = 2;
-

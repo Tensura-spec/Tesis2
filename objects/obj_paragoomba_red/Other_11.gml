@@ -1,14 +1,7 @@
-/// @description Turn into a regular goomba
+/// @description Turn into a regular red goomba
 
-//Create a goomba
-with (instance_create(x, y, obj_goomba)) {
+with (instance_create_depth(x, y, -2, obj_goomba_red)) {
 
-    sprite_index = spr_goomba_red;
-    hspeed = other.hspeed;
-    deathsprite = spr_goomba_red_dead;
-    stompsprite = spr_goomba_red_sq;
+	xspeed = 0.5 * sign(other.xspeed);
 }
-
-//Destroy
 instance_destroy();
-

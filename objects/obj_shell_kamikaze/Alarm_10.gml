@@ -1,4 +1,1 @@
-/// @description Charge towards the player
-
-charge = 1;
-
+/// @description Unused on this object

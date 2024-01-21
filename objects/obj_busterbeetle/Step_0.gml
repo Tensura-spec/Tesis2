@@ -1,17 +1,17 @@
-/// @description Buster beetle logic
+/// @description Buster Beetle logic
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
 //If the brick does not exist
-if (mybrick == noone) {
+if (mybrick == -1) {
 
     //If there's a blue brick at the left
-    if ((xscale == -1) && (collision_rectangle(bbox_left-3, bbox_top, bbox_left, bbox_bottom-1, obj_brick_throw, 0, 0)))
-    || ((xscale == 1) && (collision_rectangle(bbox_right, bbox_top, bbox_right+3, bbox_bottom-1, obj_brick_throw, 0, 0))) {
+    if ((xscale == -1) && (collision_rectangle(bbox_left-3, bbox_top, bbox_left, bbox_bottom-1, obj_brick_blue, 0, 0)))
+    || ((xscale == 1) && (collision_rectangle(bbox_right, bbox_top, bbox_right+3, bbox_bottom-1, obj_brick_blue, 0, 0))) {
     
         //Create a brick
-        mybrick = instance_create(x+16*xscale, y+2, obj_busterpickup);
+        mybrick = instance_create_depth(x+16*xscale, y+2, -2, obj_busterbeetle_pickup);
         
         //With the created brick
         with (mybrick) {
@@ -27,16 +27,15 @@ if (mybrick == noone) {
         }
         
         //Stop horizontal speed
-        hspeed = 0;
+        xspeed = 0;
         
         //Set the holding sprite
         sprite_index = spr_busterbeetle_hold;        
     }
 }
 
-//Facing direction
-if (hspeed > 0)
+//Face towards direction
+if (xspeed > 0)
     xscale = 1;
-else if (hspeed < 0)
-    xscale = -1;
-
+else if (xspeed < 0)
+	xscale = -1;

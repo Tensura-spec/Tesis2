@@ -1,8 +1,8 @@
-/// @description Set up next throw
+/// @description Set default frame and prepare another egg
 
-//Reset sprite
+//Set default frame
+image_speed = 0;
 image_index = 0;
 
-//Set next throw timer
-alarm[0] = irandom_range(50, 300);
-
+//Repeat
+alarm[0] = 150;

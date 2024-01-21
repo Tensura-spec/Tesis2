@@ -30,7 +30,7 @@
 follow_which_mario();
 
 //If the room is not the 'Mushroom House' one
-if (room != rm_bonus) {
+if (true) {
 	
 	//If the camera is not following an object
 	if (follow != noone) {

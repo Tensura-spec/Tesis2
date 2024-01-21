@@ -1,12 +1,7 @@
-/// @description Move towards the player
+/// @description Move towards the player and start flying
 
-//Go up
-alarm[1] = 2;
+//Inherit the parent event
+event_inherited();
 
-//If the player does not exist or it is at the left   
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.x < x)
-    hspeed = -0.5;
-else
-    hspeed = 0.5;
-
+//Start flying
+alarm[0] = 2;

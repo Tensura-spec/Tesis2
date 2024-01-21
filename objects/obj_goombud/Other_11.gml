@@ -1,15 +1,8 @@
 /// @description Turn into a stunned goombud
 
-//Create stunned galoomba
-with (instance_create(x, y, obj_galoomba_held)) {
+with (instance_create_depth(x, y, -2, obj_galoomba_down)) {
 
-    //Hereby sprite
-    sprite_index = spr_goombud_down;
-
-    //Hereby scale
-    dir = other.xscale;
+	sprite_index = spr_goombud_down;
+	dir = 1 * sign(other.xspeed);
 }
-
-//Destroy
 instance_destroy();
-

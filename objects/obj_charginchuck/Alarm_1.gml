@@ -1,12 +1,12 @@
 /// @description Stop moving
 
-if (gravity == 0) {
+if (yadd == 0) {
     
     //Stop animation
     sprite_index = spr_charginchuck;
     
     //Stop horizontal speed
-    hspeed = 0;
+    xspeed = 0;
     
     //Reset lookout
     lookout = -1;
@@ -16,4 +16,3 @@ if (gravity == 0) {
 }
 else
     alarm[1] = 1;
-

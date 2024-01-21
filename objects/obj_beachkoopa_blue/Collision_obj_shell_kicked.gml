@@ -1,9 +1,8 @@
 /// @description Collision with kicked shells
 
 //Deny getting killed
-if (collision_rectangle(x+(boxl*sign(xscale)), bbox_top+boxt, x+(boxr*sign(xscale)), bbox_bottom+boxb, other, 0, 0))
+if (collision_rectangle(x + 8 * sign(xscale), bbox_top, x + 8 * sign(xscale), bbox_bottom, other, 0, 0))
     exit;
 
 //Inherit event
-event_inherited();
-
+with (other) event_inherited();

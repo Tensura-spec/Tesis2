@@ -1,28 +1,36 @@
-/// @description Yellow Koopa logic
+/// @description Yellow Parakoopa logic
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//Check for a moving shell
-var mshell = collision_rectangle(x+(16*sign(xscale)), bbox_top, x+(24*sign(xscale)), bbox_bottom-4, obj_shell_kicked, 0, 0);
-
-//If there's a shell in position and said shell is moving on the opposite direction
-if (mshell) 
-&& (mshell.hspeed != hspeed) {
-
-    //Set the vertical speed
-    if (swimming == 0)
-        vspeed = -4;
-    else
-        vspeed = -2;
+//Keep following the player
+if (yadd == 0) && (jumping == 0) {
         
-    //Boost jump
-    y--;
+    //Check for a kicked shell
+    var mshell = collision_rectangle(x+(16*sign(xscale)), bbox_top, x+(24*sign(xscale)), bbox_bottom-4, obj_shell_kicked, 0, 0);
+            
+    //If there's a shell in position and said shell does not have a koopa inside.
+    if (mshell) 
+    && (mshell.xspeed != xspeed) {
+		
+		//Set sprite
+		sprite_index = spr_parakoopa_yellow_jump;
+            
+        //Set the vertical speed
+		yspeed = (swimming) ? -2 : -4;
+		
+		//Jump
+		jumping = 1;
+                    
+        //Boost jump
+        y--;
+    }
 }
 
-//If jumping
-if (vspeed < 0)
-    anim += 0.3;
-else
-    anim = 0;
-
+//Otherwise, reset jump
+else if ((jumping == 1) && (yadd == 0)) {
+	
+	jumping = 0;
+	if (sprite_index != spr_parakoopa_yellow)
+		sprite_index = spr_parakoopa_yellow;
+}

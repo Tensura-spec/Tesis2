@@ -1,10 +1,10 @@
-/// @description Paragoomba logic
+/// @description Red Paragoomba logic
 
-//Inherit event from parent
-event_inherited();
+//Inherit event
+event_perform_object(obj_physicsparent, ev_step, ev_step_normal);
 
 //Jump when in the ground
-if (gravity == 0) {
+if (yadd == 0) {
 
     //If the paragoomba didn't jumped enough
     if (jumping > 0)
@@ -14,10 +14,8 @@ if (gravity == 0) {
         jumping++;
         
         //Set the vertical speed
-        if (swimming == false)
-            vspeed = -2;
-        else
-            vspeed = -1;
+		yspeed = (swimming) ? -0.75 : -1.5;
+		y--;
     }
     
     //Otherwise, if the goomba is about to do a big jump
@@ -27,10 +25,8 @@ if (gravity == 0) {
         jumping = 5;
         
         //Set the vertical speed
-        if (swimming == false)
-            vspeed = -4;
-        else
-            vspeed = -2;
+		yspeed = (swimming) ? -2 : -4;
+		y--;
     }
     
     //Otherwise
@@ -44,14 +40,13 @@ if (gravity == 0) {
     }
 }
 
-//Wing animation
-if (jumping == 0)
-    wing_anim = 0;
-else {
+//Animate the wings
+if (jumping > 0) {
 
-    if (jumping == 5)
-        wing_anim += 0.3;
+    if (jumping > 4)
+        anim += 0.3;
     else
-        wing_anim += 0.15;
+        anim += 0.15;
 }
-
+else
+    anim = 0;

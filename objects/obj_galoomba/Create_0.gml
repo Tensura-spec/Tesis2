@@ -1,23 +1,13 @@
 /// @description Galoomba
 
-//Inherit event from parent
+//Inherit event
 event_inherited();
 
-//How vulnerable is this enemy to items
-vulnerable = 0;
-
-//How vulnerable is this enemy to the player
-stomp = 0;
-
-//How vulnerable is this enemy to Yoshi
+//How edible is this NPC to Yoshi?
 edible = 1;
 
-//Death Sprite
-deathsprite = spr_galoomba_dead;
+//Did this enemy came out from a bubble?
+bubble = false;
 
-//Animate
-image_speed = 0.15;
-
-//Start moving
+//Move towards Mario
 alarm[10] = 2;
-

@@ -1,29 +1,13 @@
 /// @description Buster Beetle
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this NPC to various items?
 vulnerable = 1;
 
-//How vulnerable is this enemy to the player
-stomp = 0;
-
-//How vulnerable is this enemy to Yoshi
-edible = 0;
-
-//Death Sprite
-deathsprite = spr_busterbeetle_dead;
-
-//Stomp Sprite
-stompsprite = spr_busterbeetle_dead;
-
-//Brick variable
-mybrick = noone;
-
-//Animate
-image_speed = 0.15;
+//Is this enemy holding a brick
+mybrick = -1;
 
 //Start moving
 alarm[10] = 2;
-

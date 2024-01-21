@@ -1,8 +1,7 @@
-/// @description Face towards the player
+/// @description Face towards Mario
 
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.x < x)
+if (!instance_exists(obj_mario))
+|| (obj_mario.x < x)
     xscale = -1;
 else
     xscale = 1;
-

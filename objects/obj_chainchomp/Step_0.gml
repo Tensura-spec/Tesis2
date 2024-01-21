@@ -30,4 +30,3 @@ if (instance_exists(chomp)) {
     if (taunt)    
         event_user(1);
 }
-

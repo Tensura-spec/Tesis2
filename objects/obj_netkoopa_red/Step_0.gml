@@ -1,19 +1,26 @@
 /// @description Net koopa logic
 
+//Manage pseudo movement variables
+if (freeze == false) {
+
+	x += xspeed;
+	y += yspeed;
+}
+
 //If the koopa is not turning and climbs off the net
 if (turnaround = 0) {
 
     ///If moving down
-    if (vspeed > 0) 
-    && (!place_meeting(x, y+15, obj_climb_net)) {
+    if (yspeed > 0) 
+    && (!collision_line(bbox_left, bbox_bottom, bbox_right, bbox_bottom, obj_climb, 0, 0)) {
     
-        vspeed = -vspeed;
+        yspeed = -yspeed;
         if (ready != 2)
             ready = 2;
     }
     
     //Otherwise
-    else if (!place_meeting(x, y, obj_climb_net)) {
+    else if (!collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_climb, 0, 0)) {
     
         //Turn sprite
         sprite_index = spr_netkoopa_red_turn;
@@ -25,7 +32,8 @@ if (turnaround = 0) {
         image_speed = 0;
     
         //Stop
-        speed = 0;
+		xspeed = 0;
+        yspeed = 0;
     
         //Finish turning
         alarm[0] = 10;
@@ -39,16 +47,10 @@ if (turnaround = 0) {
 }
 
 //Wall collision
-event_user(3);
-
-//Set default death sprite
-deathsprite = sprite_index;
-
-//Set default stomp sprite
-stompsprite = sprite_index;
+ai_npc_wall(0);
 
 //If moving up and there's a ceiling in place
-if (vspeed < 0) {
+if (yspeed < 0) {
 
     if (collision_rectangle(bbox_left, bbox_top-1, bbox_right, bbox_top, obj_solid, 0, 0))
     || (collision_rectangle(bbox_left, bbox_top-1, bbox_right, bbox_top, obj_slopeparent_ceiling, 1, 0)) {
@@ -58,12 +60,11 @@ if (vspeed < 0) {
             y++;
             
         //Reverse vertical movement
-        vspeed = -vspeed;
+        yspeed = -yspeed;
     }
 }
 
 //Otherwise,  if moving down and there's a semisolid in place
-else if (vspeed > 0)  
+else if (yspeed > 0)  
 && (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom, obj_semisolid, 0, 0))
-    vspeed = -vspeed;
-
+    yspeed = -yspeed;

@@ -1,8 +1,8 @@
-/// @description Go up
+/// @description Wave up and down while flying
 
-//Start flying.
-flying = 1;
+if (flying > 0)
+&& (flying < 3) {
 
-//Set the horizontal speed.
-hspeed = hspeed*2;
-
+    yspeed = -yspeed;
+    alarm[1] = 24;
+}

@@ -1,17 +1,48 @@
 /// @description Shoot a cannonball
 
-//If the player does not exist
-if (!instance_exists(obj_playerparent)) {
+//If Mario does not exist
+if (!instance_exists(obj_mario))
+|| ((instance_exists(obj_mario)) && (instance_exists(obj_mario_transform)))
+|| (obj_levelcontrol.gswitch_on == true) {
 
     alarm[0] = 1;
     exit;
 }
 
-//Play 'Explosion' sound
-audio_stop_play_sound(snd_explosion, 0, false);
+//Play 'Thud' sound
+audio_play_sound(snd_thud, 0, false);
 
 //Create cannon ball
-with (instance_create(x+lengthdir_x(12, direct), y+lengthdir_y(12, direct), obj_cannon_ball)) motion_set(other.direct,1.5);
+with (instance_create_depth(x+lengthdir_x(8, direct),y+lengthdir_y(8, direct), -2, obj_bulletbill)) {
+
+	//Set the sprite
+	sprite_index = spr_cannonball;
+    
+	//Motion
+	#region
+	
+		if (other.direct == 45) {
+		
+			xspeed = 1.5;
+			yspeed = -1.5;
+		}
+		else if (other.direct == 135) {
+		
+			xspeed = -1.5;
+			yspeed = -1.5;
+		}
+		else if (other.direct = 225) {
+		
+			xspeed = -1.5;
+			yspeed = 1.5;
+		}
+		else if (other.direct == 315) {
+			
+			xspeed = 1.5;
+			yspeed = 1.5;
+		}
+	#endregion
+}
 
 //Repeat after 3 seconds
 alarm[0] = 180;

@@ -1,4 +1,13 @@
-/// @description Draw Bouncin' Chuck
+/// @description Render NPC
 
-draw_sprite_ext(sprite_index, image_index, round(x)+offset, round(y)+1, xscale, 1, 0, c_white, 1);
+//Set fog if invulnerable
+if ((invulnerable == true) && (alarm[11] % 2 == 0)) {
+	
+	gpu_set_fog(true, c_yellow, 0, 1);
+}
 
+//Draw NPC
+draw_sprite_ext(sprite_index, image_index, screen_round(x) + offset, screen_round(y + 1), xscale, yscale, image_angle, image_blend, image_alpha);
+
+//Disable fog
+gpu_set_fog(false, c_white, 0, 1);

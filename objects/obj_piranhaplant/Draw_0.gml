@@ -1,4 +1,3 @@
-/// @description Draw piranha plant
+/// @description Render me
 
-draw_sprite_ext(sprite_index, image_index, round(x), y, xscale, 1, 0, c_white, 1);
-
+draw_sprite_ext(sprite_index, -1, screen_round(x), screen_round(y), 1, 1, 0, c_white, 1);

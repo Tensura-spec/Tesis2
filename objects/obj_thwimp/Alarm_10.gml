@@ -1,8 +1,7 @@
-/// @description Set jumping direction
+/// @description Set the jumping direction
 
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.x < x)
-    ready = 1;
+if (!instance_exists(obj_mario))
+|| (obj_mario.x < x)
+	dir = -1;
 else
-    ready = 0;
-
+	dir = 1;

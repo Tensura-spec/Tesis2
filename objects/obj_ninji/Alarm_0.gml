@@ -1,4 +1,4 @@
-/// @description Start jumping
+/// @description Jump
 
 //If the ninji is not jumping
 if (jumping == 0) {
@@ -13,31 +13,26 @@ if (jumping == 0) {
         //Low jump
         default: {
         
-            //If swimming
-            if (swimming == 1)
-                vspeed = -1.75;
-            else
-                vspeed = -3.5;
+			//Set vert
+			yspeed = (swimming) ? -1.75 : -3.5;
         } break;
         
         //Medium jump
         case (2): {
         
-            //If swimming
-            if (swimming == 1)
-                vspeed = -2.25;
-            else
-                vspeed = -4.5;                    
+			//Set vertical speed
+			yspeed = (swimming) ? -2.25 : -4.5;                
         } break;
         
         //High jump
         case (3): {
         
-            //If swimming
-            if (swimming == 1)
-                vspeed = -2.75;
-            else
-                vspeed = -5.5;                    
+			//Set vertical speed
+			yspeed = (swimming) ? -2.75 : -5.25;
+			
+			//If the Ninji can throw kunais
+			if (kunai == true)
+				toss = 1;
         } break;
     }
     
@@ -52,4 +47,3 @@ if (jumping == 0) {
     if (jump > 3)
         jump = 0;
 }
-

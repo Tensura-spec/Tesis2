@@ -1,16 +1,16 @@
-/// @description Draw torpedo box and glove
+/// @description Render me
 
-//If the glove is showing up
 if (gy > 0) {
 
-    //If the glove is holding a torpedo, draw it
+    //Draw torpedo
     if (ready == 1) {
     
-        draw_sprite_ext(spr_torpedoted, 0, round(x)+16, round(y)+16+gy, gx, 1, 0, c_white, 1);
+        draw_sprite_ext(spr_torpedoted, 0, screen_round(x)+16, screen_round(y)+16+gy, gx, 1, 0, c_white, 1);
     }
-    draw_sprite_ext(sprite_index, 1+gi, round(x), round(y)+gy, 1, 1, 0, c_white, 1);
+	
+	//Draw glove
+    draw_sprite_ext(sprite_index, 1+gi, screen_round(x), screen_round(y)+gy, 1, 1, 0, c_white, 1);
 }
 
-//Draw the box
-draw_sprite(sprite_index, 0, round(x), round(y));
-
+//Draw box
+draw_sprite(sprite_index, 0, screen_round(x), screen_round(y));

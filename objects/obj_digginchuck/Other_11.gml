@@ -1,13 +1,26 @@
-/// @description Default stomp event
+/// @description Custom stomp 
 
-//Inherit event
-event_inherited();
+//If there's 2 hits or less
+if (firehp < 2) {
+	
+	//Get 2000 points
+	with (instance_create_depth(round(bbox_left + bbox_right) / 2, y, -6, obj_score)) value = 2000;
+			
+	//Stomp the enemy
+    event_inherited();
+}
+	
+//Otherwise
+else {
 
-//Do not show ball
-ready = 0;
+	//Create a new chuck
+	with (instance_create_depth(x, y, depth, obj_charginchuck)) {
 
-//Deny all alarms
-alarm[0] = -1;
-alarm[1] = -1;
-alarm[2] = -1;
+		event_user(1);
+		hp = 1;
+		firehp = other.firehp-2;
+	}
 
+	//Destroy
+	instance_destroy();
+}

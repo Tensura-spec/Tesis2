@@ -1,12 +1,7 @@
-/// @description Turn into a stunned bob-omb
+/// @description Turn into a stunned bobomb
 
-//Create stunned galoomba
-with (instance_create(x, y, obj_bobomb_held)) {
+with (instance_create_depth(x, y, -2, obj_bobomb_down)) {
 
-    //Hereby scale
-    dir = other.xscale;
+	dir = 1 * sign(other.xspeed);
 }
-
-//Destroy
 instance_destroy();
-

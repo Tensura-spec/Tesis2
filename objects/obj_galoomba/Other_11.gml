@@ -1,12 +1,7 @@
 /// @description Turn into a stunned galoomba
 
-//Create stunned galoomba
-with (instance_create(x, y, obj_galoomba_held)) {
+with (instance_create_depth(x, y, -2, obj_galoomba_down)) {
 
-    //Hereby scale
-    dir = other.xscale;
+	dir = 1 * sign(other.xspeed);
 }
-
-//Destroy
 instance_destroy();
-

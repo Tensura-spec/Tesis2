@@ -1,27 +1,28 @@
-/// @description Net koopa logic
+/// @description Blue Net Koopa logic
+
+//Manage pseudo movement variables
+if (freeze == false) {
+
+	x += xspeed;
+	y += yspeed;
+}
 
 //If there's not a climbing spot
-if ((hspeed < 0) && (!position_meeting(bbox_left-1, y, obj_climb)))
-|| ((hspeed > 0) && (!position_meeting(bbox_right+1, y, obj_climb)))
-|| ((vspeed < 0) && (!position_meeting(x, bbox_top-1, obj_climb)))
-|| ((vspeed > 0) && (!position_meeting(x, bbox_bottom+1, obj_climb))) {
+if ((xspeed < 0) && (!position_meeting(bbox_left-1, y, obj_climb)))
+|| ((xspeed > 0) && (!position_meeting(bbox_right+1, y, obj_climb)))
+|| ((yspeed < 0) && (!position_meeting(x, bbox_top-1, obj_climb)))
+|| ((yspeed > 0) && (!position_meeting(x, bbox_bottom+1, obj_climb))) {
 
     //Reverse horizontal or vertical direction
-    hspeed = -hspeed;
-    vspeed = -vspeed;
+    xspeed = -xspeed;
+    yspeed = -yspeed;
 }
 
 //Wall collision
-event_user(3);
-
-//Set default death sprite
-deathsprite = sprite_index;
-
-//Set default stomp sprite
-stompsprite = sprite_index;
+ai_npc_wall(0);
 
 //If moving up and there's a ceiling in place
-if (vspeed < 0) {
+if (yspeed < 0) {
 
     if (collision_rectangle(bbox_left, bbox_top-1, bbox_right, bbox_top, obj_solid, 0, 0))
     || (collision_rectangle(bbox_left, bbox_top-1, bbox_right, bbox_top, obj_slopeparent_ceiling, 1, 0)) {
@@ -31,12 +32,11 @@ if (vspeed < 0) {
             y++;
             
         //Reverse vertical movement
-        vspeed = -vspeed;
+        yspeed = -yspeed;
     }
 }
 
 //Otherwise,  if moving down and there's a semisolid in place
-else if (vspeed > 0)  
+else if (yspeed > 0)  
 && (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom, obj_semisolid, 0, 0))
-    vspeed = -vspeed;
-
+    yspeed = -yspeed;

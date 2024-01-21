@@ -1,10 +1,11 @@
-/// @description Unleash the laser
+/// @description Close the mouth and resume movement
 
-//Play 'Zappakoopa / Fire' sound
-audio_stop_play_sound(snd_zappakoopa_fire, 0, false);
+//Animate backwards
+if (image_index > 0) {
 
-//Create the item
-mylaser = instance_create(x+8*sign(xscale), y+8, obj_zappakoopa_laser);
-mylaser.parent = id;
-laser_ex = 1;
-
+    //Change frame and repeat if needed
+    image_index--;
+    alarm[4] = 4;
+}
+else
+    alarm[10] = 2;

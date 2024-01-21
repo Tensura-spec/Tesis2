@@ -1,54 +1,41 @@
-/// @description Manage offset
+/// @description Split into three
 
-if ((hp == 3) && (split == 0)) {
-
-    //Play 'Beam' sound
-    audio_stop_play_sound(snd_beam, 0, false);
+//Play 'Magic' sound
+audio_play_sound(snd_magic, 0, false);
     
-    //Split done
-    split = 1;
+//Create main chuck
+instance_create_depth(x, y, -2, obj_charginchuck);
     
-    //Begin move
-    alarm[10] = 60;
+//Create two chucks
+with (instance_create_depth(x, y, -2, obj_charginchuck)) {
     
-    //Create two chucks
-    with (instance_create(x, y, obj_charginchuck)) {
+    //Set the jumping sprite
+    sprite_index = spr_charginchuck_jump;
     
-        //Set the jumping sprite
-        sprite_index = spr_charginchuck_jump;
-    
-        //Set the horizontal speed
-        hspeed = -1;
+    //Set the horizontal speed
+    xspeed = -1;
         
-        //Boost jump
-        y--;
+    //Boost jump
+    y--;
         
-        //Set the vertical speed
-        if (other.swimming)
-            vspeed = -2;
-        else
-            vspeed = -4;
-    }
-    with (instance_create(x, y, obj_charginchuck)) {
-
-        //Set the jumping sprite
-        sprite_index = spr_charginchuck_jump;    
-       
-        //Set the horizontal speed
-        hspeed = 1;
-        
-        //Boost jump
-        y--;
-        
-        //Set the vertical speed
-        if (other.swimming)
-            vspeed = -2;
-        else
-            vspeed = -4;
-    }
+    //Set the vertical speed
+	yspeed = (other.swimming) ? -1 : -4;
 }
 
-//Otherwise, inherit default event
-else
-    event_inherited();
+with (instance_create_depth(x, y, -2, obj_charginchuck)) {
 
+    //Set the jumping sprite
+    sprite_index = spr_charginchuck_jump;    
+       
+    //Set the horizontal speed
+    xspeed = 1;
+        
+    //Boost jump
+    y--;
+        
+    //Set the vertical speed
+	yspeed = (other.swimming) ? -1 : -4;
+}
+
+//Destroy
+instance_destroy();

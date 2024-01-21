@@ -16,10 +16,7 @@
     "name": "Super Koopas",
     "path": "folders/Objects/Enemies/Land/Koopas/Green/Super Koopas.yy",
   },
-  "parentObjectId": {
-    "name": "obj_enemyparent",
-    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

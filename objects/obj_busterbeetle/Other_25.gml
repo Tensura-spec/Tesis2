@@ -4,8 +4,7 @@
 sprite_index = spr_busterbeetle;
 
 //Forget brick
-mybrick = noone;
+mybrick = -1;
 
 //Set the horizontal speed
-hspeed = 1*sign(xscale);
-
+xspeed = 1*sign(xscale);

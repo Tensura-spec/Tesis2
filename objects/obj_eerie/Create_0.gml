@@ -1,27 +1,19 @@
 /// @description Eerie
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 3;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to Yoshi
-edible = 2;
-
-//Death Sprite
-deathsprite = sprite_index;
-
-//Stomp sprite
-stompsprite = sprite_index;
-
-//Animate
-image_speed = 0.125;
+//How vulnerable is this enemy to Yoshi?
+edible = 3;
 
 //Activated yet?
-activated = false;
-hspeed = 0;
+active = false;
 
+//Handles waving motion
+time = 0;

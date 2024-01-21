@@ -1,14 +1,24 @@
-/// @description Jump
+/// @description Set the throwing frame
 
-//Set the vertical speed
-vspeed = -6;
+//If the sledge bro is not jumping.
+if (yspeed == 0) {
 
-//Jump
-jump = 1;
+    //If the sledge bro is on the ground.
+    if (collision_rectangle(bbox_left, bbox_bottom+1, bbox_right, bbox_bottom+1, obj_semisolid, 0, 0)) 
+	|| (collision_rectangle(bbox_left, bbox_bottom+1, bbox_right, bbox_bottom+1, obj_slopeparent, 1, 0)) {
+    
+        //Throw a hammer
+        alarm[3] = 30;
+        
+        //Replace sprite
+        sprite_index = spr_sledgebro_throw;
+    }
+    
+    //Otherwise, deny event
+    else    
+        alarm[2] = 1;
+}
 
-//Boost jump
-y--;
-
-//Repeat the process
-alarm[1] = 300;
-
+//Otherwise, deny event
+else
+    alarm[2] = 1;

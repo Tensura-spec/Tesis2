@@ -16,10 +16,8 @@ gi = 0;
 alarm[0] = 100;
 
 //Make this object solid
-mysolid = instance_create(x, y, obj_solid);
-with (mysolid) {
+with (instance_create_layer(x, y, "Main", obj_solid)) {
 
-    image_xscale = 2;
-    image_yscale = 2;
+	image_xscale = 2;
+	image_yscale = 2;
 }
-

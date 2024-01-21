@@ -1,38 +1,19 @@
-/// @description Fire Bro.
+/// @description Fire Bro
 
 //Inherit event from parent
 event_inherited();
 
-//How vulnerable is this enemy to various items?
-vulnerable = 0;
+//Freeze sprite (Used mainly for enemies that require extra parts to be drawn)
+freeze_sprite = spr_firebro;
 
-//How vulnerable is this enemy to the player?
-stomp = 0;
+//Previous horizontal speed
+prevxspeed = 0;
 
-//Whether the fire bro is about to throw a fireball
-_throw = 0;
+//Jump
+alarm[0] = 152;
 
-//Previous hspeed
-prevhsp = 0;
+//Set the spit pose
+alarm[1] = 60;
 
-//Previous alarm
-prevalm = 0;
-
-//Death Sprite
-deathsprite = sprite_index;
-
-//Stomp Sprite
-stompsprite = sprite_index;
-
-//Animate
-image_speed = 0.15;
-
-//Reverse horizontal speed.
-alarm[1] = 32;
-
-//Jump upwards / downwards.
-alarm[2] = 152;
-
-//Set the throwing pose.
-alarm[3] = 17;
-
+//Move
+alarm[10] = 2;

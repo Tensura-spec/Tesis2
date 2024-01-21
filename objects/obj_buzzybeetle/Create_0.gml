@@ -1,23 +1,13 @@
 /// @description Buzzy Beetle
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 1;
 
-//How vulnerable is this enemy to the player
-stomp = 0;
-
-//How vulnerable is this enemy to Yoshi
+//How edible is this enemy to Yoshi?
 edible = 0;
 
-//Death Sprite
-deathsprite = spr_buzzybeetle_dead;
-
-//Animate
-image_speed = 0.15;
-
-//Start moving
+//Move towards Mario
 alarm[10] = 2;
-

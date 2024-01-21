@@ -1,5 +1,8 @@
-/// @description Reset bullet id
+/// @description Missile Bill Blaster logic
 
+//Inherit the parent event
+event_inherited();
+
+//Lose memory of the missile bill
 if (!instance_exists(mybullet))
-    mybullet = noone;
-
+	mybullet = -1;

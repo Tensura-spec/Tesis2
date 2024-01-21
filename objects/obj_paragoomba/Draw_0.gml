@@ -1,8 +1,4 @@
-/// @description Draw Para Goomba
+/// @description Render me
 
-//Wings
-draw_sprite_ext(spr_goomba_wings, wing_anim, round(x), round(y)+1, 1, 1, 0, c_white, 1);
-
-//Goomba
-draw_sprite_ext(sprite_index, image_index, round(x), round(y), xscale, 1, 0, c_white, 1);
-
+draw_sprite_ext(spr_goomba_wings, anim, screen_round(x), screen_round(y + 1), xscale, yscale, image_angle, image_blend, image_alpha);
+draw_sprite_ext(sprite_index, image_index, screen_round(x), screen_round(y + 1), xscale, yscale, image_angle, image_blend, image_alpha);

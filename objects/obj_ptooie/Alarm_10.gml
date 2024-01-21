@@ -3,9 +3,8 @@
 //Inherit event
 event_inherited();
 
-//Generate bubbles
+//Generate bubble
 alarm[1] = 2;
 
 //Change direction
 alarm[11] = 60;
-

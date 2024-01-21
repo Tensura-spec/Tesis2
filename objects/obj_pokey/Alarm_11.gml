@@ -1,16 +1,15 @@
-/// @description Follow the player
+/// @description Move towards Mario
 
-//If moving horizontally
-if (hspeed != 0) {
+//If not moving
+if (xspeed != 0) {
 
-    //Start moving
-    if (!instance_exists(obj_playerparent))
-    || (obj_playerparent.x < x)
-        hspeed = -0.2;
+    //If Mario does not exist or it's at the left.
+    if (!instance_exists(obj_mario))
+    || (obj_mario.x < x)
+        xspeed = -0.2;
     else
-        hspeed = 0.2;
+        xspeed = 0.2;
 }
 
-//Change direction
+//Move towards Mario
 alarm[11] = 60;
-

@@ -1,62 +1,62 @@
 /// @description Wiggler
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
 //How vulnerable is this enemy to various items?
-vulnerable = 3;
+vulnerable = 2;
 
-//How vulnerable is this enemy to the player?
+//How vulnerable is this enemy to Mario?
 stomp = 4;
 
-//How vulnerable is this enemy to yoshi?
+//How vulnerable is this enemy to Yoshi?
 edible = 2;
 
-//Facing direction
-xscale = 1;
+//Turn on ledges?
+turn_on_ledges = 1;
 
-//Whether the object is swimming
-swimming = false;
+//Turn into silver coins?
+turn_silver = 0;
 
-//Animate
-image_speed = 0.125;
-
-//Start moving
-alarm[10] = 2;
-
-//State
-state = 0;
+//Not angry
+state = 0
 
 //Colour
 color = 0;
 
-///Wiggler's body
+//Variable to ensure segments stay connected to the head on all times
+bodyadd = 0;
 
-//Body parts count
-seg = 5;
+//Start moving
+alarm[10] = 2;
 
-//Create anatomy
-for (var b = 1; b < seg; b++) {
+#region CREATE BODY PARTS
 
-    mybody[b] = instance_create(xstart, ystart, obj_wiggler_body);
-    mybody[b].image_speed = 0.125;
-    mybody[b].image_index = b;
-    mybody[b].depth = 0+b;
-    mybody[b].parent = id;
-    if (b = 1)
-        mybody[b].prevsegment = other.id; //Snap to the head.
-    else
-        mybody[b].prevsegment = mybody[b]-1 //Snap to other consecutive parts. 
-}
+	//Body parts count
+	seg = 5;
 
-//Make body structure
-closeness = 16;
-amount_previous = 85;
+	//Create anatomy
+	for (var b = 1; b < seg; b++) {
 
-//Make body coodirnate queue
-for (i=1; i<amount_previous; i++;) {
+	    mybody[b] = instance_create_depth(xstart, ystart, depth, obj_wiggler_body);
+	    mybody[b].image_speed = 1;
+	    mybody[b].image_index = b;
+	    mybody[b].depth = b;
+	    mybody[b].parent = id;
+	    if (b = 1)
+	        mybody[b].prevsegment = other.id; //Snap to the head.
+	    else
+			mybody[b].prevsegment = mybody[b-1] //Snap to other consecutive parts.
+	}
 
-    oldx[i] = x;
-    oldy[i] = y;
-}
+	//Make body structure
+	closeness = 16;
+	amount_previous = 85;
 
+	//Make body coordinate queue
+	for (i=1; i<=amount_previous; i++;) {
+
+	    oldx[i] = x;
+	    oldy[i] = y;
+	}
+#endregion

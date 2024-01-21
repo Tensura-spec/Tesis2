@@ -1,20 +1,16 @@
-/// @description Default enemy stomp script
+/// @description Default stomp script
 
-//Set up the sprite
-sprite_index = stompsprite;
+//Create dead object
+imdead = instance_create_depth(x, y, -6, obj_enemy_stomped);
 
-//Do not animate
-image_speed = 0;
-image_index = 0;
+//Hereby sprite
+imdead.sprite_index = sprite_index;
 
-//Make intangible
-vulnerable = 100;
-stomp = -1;
-edible = 3;
+//Hereby frame
+imdead.image_index = image_index;
 
-//Stop it
-hspeed = 0;
+//Hereby facing direction
+imdead.image_xscale = xscale;
 
-//Destroy after a while
-alarm[0] = 20;
-
+//Destroy
+instance_destroy();

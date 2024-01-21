@@ -12,4 +12,3 @@ if (!instance_exists(mebelow)) {
             next = noone;
     }
 }
-

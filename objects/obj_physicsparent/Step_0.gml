@@ -1,88 +1,143 @@
-/// @description Physics logic
+/// @description Logic for NPCs
 
-//Item trap checks
-t = collision_line(bbox_left, bbox_top, bbox_right, bbox_top, obj_solid, 1, 0);
-b = collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom+1, obj_semisolid, 1, 0);
-l = collision_rectangle(bbox_left-1, bbox_top, bbox_left, bbox_bottom, obj_solid, 1, 0);
-r = collision_rectangle(bbox_right, bbox_top, bbox_right+1, bbox_bottom, obj_solid, 1, 0);
-
-//Default wall collision
-event_user(3);
-
-//Default floor collision
-event_user(4);
-
-//Default conveyor collision
-event_user(5);
-
-//Check for lava
-var lava = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_lava, 1, 0);
-
-//If there's lava
-if (lava) {
-
-    //Play 'Burn' sound
-    audio_stop_play_sound(snd_burn, 0, false);
-
-    //Create smoke
-    with (instance_create((bbox_left+bbox_right)/2, (bbox_top+bbox_bottom)/2, obj_smoke)) sprite_index = spr_smoke_16;
-    
-    //Create splash effect
-    with (instance_create((bbox_left+bbox_right)/2, (bbox_top+bbox_bottom)/2-8, obj_smoke)) {
-    
-        //Set the animation speed
-        image_speed = 0.3
-        
-        //Set the sprite
-        if (lava.sprite_index == spr_lava_choco)
-            sprite_index = spr_splash_choco;
-        else if (lava.sprite_index == spr_lava_poison)
-            sprite_index = spr_splash_poison;
-        else
-            sprite_index = spr_splash_lava;       
-    }
-    
-    //Destroy
-    instance_destroy();
+//Handle psuedo movement
+if (freeze == false) {
+	
+	x += xspeed;
+	y += yspeed;
+	yspeed += yadd;
 }
 
-//Check for water
-var water = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0);
+//NPC Wall & Ceiling
+ai_npc_wall(turn_toward);
+ai_npc_ceiling(turn_toward_ceiling);
 
-//If there's water
-if (water)
-&& (swimming == false) {
+//Handle position when in-ground
+if (yspeed >= 0) {
 
-    //Make the object swim
-    swimming = true;
-    
-    //Stop vertical movement
-    if (vspeed > 0) {
-        
-        vspeed = 0;
-        with (instance_create(round(bbox_left+bbox_right)/2, water.y-16, obj_smoke)) {
-         
-            sprite_index = spr_splash;
-            image_speed = 0.3;
-        }
-    }
+	//Check for a conveyor
+	var conveyor = collision_rectangle(bbox_left, bbox_bottom+1, bbox_right, bbox_bottom+2, obj_conveyorparent, 0, 0);
+		
+	//If there's a conveyor
+	if (conveyor)
+	&& (conveyor.image_speed != 0) {
+		
+		//If the conveyor is moving and there's not solid on the way
+		if ((conveyor.image_speed < 0) && (!collision_rectangle(bbox_left, bbox_top+4, bbox_left, bbox_bottom-1, obj_solid, 0, 0)))
+		|| ((conveyor.image_speed > 0) && (!collision_rectangle(bbox_right, bbox_top+4, bbox_right, bbox_bottom-1, obj_solid, 0, 0)))
+			x += conveyor.image_speed;
+	}
+	
+	//Vspeed capacity
+	yspeed = min(4 - (swimming * 2), yspeed);
+	
+	//Check for any nearby ground collision
+	var semisolid = collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom+yspeed, obj_semisolid, 0, 0);
+	
+	//If there's ground below and Mario is not moving upwards
+	if (semisolid)
+	&& (bbox_bottom < semisolid.yprevious + 5)
+		y = semisolid.bbox_top - floor(sprite_height-(sprite_get_yoffset(sprite_index)));
+}
+
+//Slope Collision
+slope_collision();
+
+//Check if there's a semisolid
+if ((collision_rectangle(bbox_left, bbox_bottom+1, bbox_right, bbox_bottom+1, obj_semisolid, 0, 0)) 
+&& (!collision_rectangle(bbox_left, bbox_bottom-4, bbox_right, bbox_bottom-4, obj_semisolid, 0, 0)))
+|| (collision_rectangle(bbox_left, bbox_bottom+1, bbox_right, bbox_bottom+1, obj_slopeparent, 1, 0)) {
+	
+	//If moving down
+	if (yspeed > 0) {
+	
+		//If this object cannot bounce
+		if (bounces == -1) {
+			
+			yadd = 0;
+		    yspeed = 0;
+		}
+		
+		//Otherwise, if it can bounce
+		else if (bounces != -1) {
+
+			bounces--;
+			if (bounces == 0) {
+			
+				yadd = 0;
+				yspeed = 0;
+			}
+			else {
+				
+				yspeed = -yspeed/2;
+				y--;
+			}
+		}
+	}
 }
 
 //Otherwise
-else if (!water)
-&& (swimming == true) {
-
-    //Stop swimming
-    swimming = false;
+else {
+	
+	//Set up gravity
+	yadd = (swimming) ? 0.03125 : 0.25;
+	
+	//If the item can bounce, reset amount of bounces
+	if (bounces > -1) {
+		
+		if (bounces == 0)
+		&& (bounces_max > 0)
+			bounces = bounces_max;
+	}
+}
+	
+//Check for a nearby swimming surface
+var water = collision_rectangle(bbox_left, y-1, bbox_right, y, obj_swim, 1, 0);
     
-    //Create a splash effect
-    if (vspeed < 0) {
+//If the NPC is not swimming and makes contact with a water surface
+if ((noswim == false) && (!swimming) && (water)) {
         
-        with (instance_create(round(bbox_left+bbox_right)/2, y-16, obj_smoke)) {
-         
-            sprite_index = spr_splash;
-            image_speed = 0.3;
-        }
-    }
+    //Make the NPC swim.
+    swimming = true;
+	
+    //Stop most horizontal movement
+    xspeed = xspeed/2;
+                
+    //Stop vertical movement
+    if (yspeed > 0)
+        yspeed = 0;
 }
 
+//Otherwise, if there's no contact with water
+else if ((swimming) && (!water)) {
+
+	//Make the NPC not swim
+	swimming = false;
+	
+	//Double horizontal speed
+	xspeed = xspeed*2;
+}
+
+//Check for a nearby lava object
+var lava = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom+7, obj_lava, 1, 0);
+
+//If the NPC makes contact with lava
+if (lava) {
+	
+	//If this object is not a baburu shoe
+	if (sprite_index != spr_shoe_baburu) {
+	
+		//Play 'Burn' sound
+		audio_play_sound(snd_burn, 0, false);
+		
+		//Go *poof*
+		instance_create_depth(round(bbox_left + bbox_right) / 2, round(bbox_top + bbox_bottom) / 2, -6, obj_smoke);
+		with (instance_create_depth(round(bbox_left + bbox_right) / 2, round(bbox_top + bbox_bottom) / 2, -6, obj_smoke)) {
+			
+			sprite_index = spr_splash_lava;
+		}
+		
+		//Destroy
+		instance_destroy();
+	}	
+}

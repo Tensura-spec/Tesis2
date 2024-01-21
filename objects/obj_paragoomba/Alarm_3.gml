@@ -1,9 +1,10 @@
-/// @description Spawn microgoombas
+/// @description End flight
 
-if ((flying > 1) && (flying < 3)) {
+//End flight
+flying = 3;
 
-    alarm[3] = 48;
-    with (instance_create(x, y+8, obj_microgoomba))    
-        hspeed = 0.5*sign(other.hspeed);
-}
-
+//Set the horizontal speed
+if (xspeed > 0)
+    xspeed = 0.5;
+else if (xspeed < 0)
+    xspeed = -0.5;

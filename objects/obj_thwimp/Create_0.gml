@@ -1,32 +1,29 @@
 /// @description Thwimp
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 3;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to Yoshi
+//How vulnerable is this enemy to Yoshi?
 edible = 2;
 
-//Whether the thwimp is moving
-ready = 0;
+//Do not turn into silver coins
+turn_silver = 0;
 
-//Whether the thwimp is jumping
+//No swimming
+noswim = true;
+
+//Jumping direction
+dir = 1;
+
+//Whether the Thwimp is jumping
 jumping = 0;
-
-//Death Sprite
-deathsprite = spr_thwimp;
-
-//Image Speed
-image_speed = 0;
-
-//Jump
 alarm[0] = 100;
 
-//Set jumping direction
+//Set the jumping direction
 alarm[10] = 2;
-

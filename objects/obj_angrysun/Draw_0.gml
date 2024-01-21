@@ -1,7 +1,6 @@
-/// @description Draw Angry Sun
+/// @description Render me
 
 if (ready == 0)
-    draw_sprite_ext(sprite_index,-1,round(__view_get( e__VW.XView, 0 ))+32,round(__view_get( e__VW.YView, 0 ))+48,1,1,0,c_white,1);
+    draw_sprite_ext(sprite_index, -1, screen_round(camera_get_view_x(view_camera[0]))+64, screen_round(camera_get_view_y(view_camera[0]))+48, 1, 1, 0, c_white, 1);
 else
-    draw_sprite_ext(sprite_index,-1,round(__view_get( e__VW.XView, 0 ))+obj_angrysun_movement.x,round(__view_get( e__VW.YView, 0 ))+obj_angrysun_movement.y,1,1,0,c_white,1);
-
+    draw_sprite_ext(sprite_index, -1, screen_round(camera_get_view_x(view_camera[0]))+obj_angrysun_movement.x, screen_round(camera_get_view_y(view_camera[0]))+obj_angrysun_movement.y, 1, 1, 0, c_white, 1);

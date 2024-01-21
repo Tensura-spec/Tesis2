@@ -1,23 +1,10 @@
-/// @description Cannon Bob-Omb
+/// @description Cannon Bob-omb
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 1;
 
-//How vulnerable is this enemy to the player
-stomp = 0;
-
-//How vulnerable is this enemy to Yoshi
-edible = 1;
-
-//Death Sprite
-deathsprite = spr_bobomb_cannon_dead;
-
-//Animate
-image_speed = 0.15;
-
-//Start moving
-alarm[10] = 2;
-
+//Pal
+pal = 0;

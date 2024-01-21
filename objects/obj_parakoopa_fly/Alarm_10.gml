@@ -1,12 +1,11 @@
-/// @description Start moving
+/// @description Move towards Mario
 
 //Set the vertical speed
-vspeed = 0.5;
+yspeed = 0.5;
 
 //Set the horizontal movement
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.x < x)
-    hspeed = -0.5;
+if (!instance_exists(obj_mario))
+|| (obj_mario.x < x)
+    xspeed = -0.5;
 else
-    hspeed = 0.5;
-
+    xspeed = 0.5;

@@ -1,47 +1,56 @@
 /// @description Shoot a cannonball
 
-//If the player does not exist
-if (!instance_exists(obj_playerparent)) {
+//If Mario does not exist
+if (!instance_exists(obj_mario))
+|| ((instance_exists(obj_mario)) && (instance_exists(obj_mario_transform)))
+|| (obj_levelcontrol.gswitch_on == true) {
 
     alarm[0] = 1;
     exit;
 }
 
-//Play 'Explosion' sound
-audio_stop_play_sound(snd_explosion, 0, false);
+//Play 'Thud' sound
+audio_play_sound(snd_thud, 0, false);
 
-//Direction
+//Check in what direction is the cannon pointing
 switch (direct) {
+	
+	//Left
+	case (-1): {
+		
+		//Create smoke effect
+		instance_create_depth(x, y, -6, obj_smoke);
 
-    //Right
-    default: {
-    
-        //Smoke
-        with (instance_create(x+16, y, obj_smoke)) sprite_index = spr_smoke_16;
-        
-        //Create bomb
-        with (instance_create(x+16, y-8, obj_bobomb_cannon)) {
-        
-            vspeed = -3.5;
-            hspeed = 1;
-        }
-    } break;
-    
-    //Left
-    case (-1): {
-    
-        //Smoke
-        with (instance_create(x, y, obj_smoke)) sprite_index = spr_smoke_16;
-        
-        //Create bomb
-        with (instance_create(x, y-8, obj_bobomb_cannon)) {
-        
-            vspeed = -3.5;
-            hspeed = -1;
-        }            
-    } break;
+		//Create cannon ball
+		with (instance_create_depth(x, y, -2, obj_bobomb_cannon)) {
+
+			//Set horizontal speed
+			xspeed = -1;
+			
+			//Set vertical speed
+			yspeed = -3.5;
+			y--;
+		}
+	} break;
+	
+	//Default (Right)
+	default: {
+		
+		//Create smoke effect
+		instance_create_depth(x+16, y, -6, obj_smoke);
+	
+		//Create cannon ball
+		with (instance_create_depth(x+16, y, -2, obj_bobomb_cannon)) {
+
+			//Set horizontal speed
+			xspeed = 1;
+			
+			//Set vertical speed
+			yspeed = -3.5;
+			y--;
+		}
+	} break;
 }
 
 //Repeat after 3 seconds
 alarm[0] = 180;
-

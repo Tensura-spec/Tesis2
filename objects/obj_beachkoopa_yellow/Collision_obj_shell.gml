@@ -2,24 +2,25 @@
 
 //If the shell is being held, inherit default event
 if (other.held == 1)
-    event_inherited();
+|| (other.yadd != 0)
+    with (other) event_inherited();
     
 //Otherwise
 else {
     
     //If the koopa is jumping inside
-    if (jumping == 1)
-    && (ready == 2) {
-        
-        //With the shell
-        with (other) {
-        
-            instance_create(x, y, obj_shell_kamikaze);
-            instance_destroy();
-        }
-        
-        //Destroy this object
-        instance_destroy();
+	if (ready == 2)
+	&& (yadd == 0)
+    && (jumping == 1) {
+    
+		//With the shell
+		with (other) {
+		
+			instance_create_depth(x, y, -2, obj_shell_kamikaze);
+			instance_destroy();
+		}
+		
+		//Destroy this koopa
+		instance_destroy();
     }
 }
-

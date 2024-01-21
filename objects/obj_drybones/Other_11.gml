@@ -1,35 +1,61 @@
-/// @description Crumble it
+/// @description Custom stomp script
 
 //Play 'Crumble' sound
 audio_play_sound(snd_crumble, 0, false);
 
-//Get points based on combo
-if (obj_playerparent.hitcombo <= 6) //If the player did 6 or less consecutive stomps
-    with (instance_create((bbox_left+bbox_right)/2-8,y,obj_score)) event_user(2+obj_playerparent.hitcombo);
-else {
-        
-    //If the combo is odd
-    if (obj_playerparent.hitcombo % 2 == 1)
-        with (instance_create((bbox_left+bbox_right)/2-8,y,obj_score)) event_user(9);
-    
-    //Otherwise, if the combo is even
-    else if (obj_playerparent.hitcombo % 2 == 0)
-        with (instance_create((bbox_left+bbox_right)/2-8,y,obj_score)) event_user(10);        
-}
-    
+#region COMBO
+					
+	//200
+	if (obj_mario.hitcombo == 0) 
+		with (instance_create_depth(round(bbox_left + bbox_right) / 2, y, -6, obj_score))
+			value = 200;
+						
+	//400
+	else if (obj_mario.hitcombo == 1)
+		with (instance_create_depth(round(bbox_left + bbox_right) / 2, y, -6, obj_score))
+			value = 400;
+				        
+	//800
+	else if (obj_mario.hitcombo == 2)
+		with (instance_create_depth(round(bbox_left + bbox_right) / 2, y, -6, obj_score))
+			value = 800;
+				        
+	//1000
+	else if (obj_mario.hitcombo == 3)
+		with (instance_create_depth(round(bbox_left + bbox_right) / 2, y, -6, obj_score))
+			value = 1000;
+				        
+	//2000
+	else if (obj_mario.hitcombo == 4)
+		with (instance_create_depth(round(bbox_left + bbox_right) / 2, y, -6, obj_score))
+			value = 2000;
+				        
+	//4000
+	else if (obj_mario.hitcombo == 5)
+		with (instance_create_depth(round(bbox_left + bbox_right) / 2, y, -6, obj_score))
+			value = 4000;
+				        
+	//8000
+	else if (obj_mario.hitcombo == 6)
+		with (instance_create_depth(round(bbox_left + bbox_right) / 2, y, -6, obj_score))
+			value = 8000;
+				        
+	//1-UP
+	else if (obj_mario.hitcombo > 6)
+		with (instance_create_depth(round(bbox_left + bbox_right) / 2, y, -6, obj_score))
+			value = -1;
+#endregion
+                    
 //Increment combo
-obj_playerparent.hitcombo++;
+obj_mario.hitcombo++;
 
 //Turn into a pile of bones
-with (instance_create(x,y,obj_crumblebones)) {
+with (instance_create_depth(x, y, depth, obj_drybones_crumble)) {
 
     sprite_index = spr_drybones_crumble;
-    deathsprite = spr_drybones;
+	bone = other.bone;
     xscale = other.xscale;
-    type = 0;
-    
 }
 
 //Destroy
 instance_destroy();
-

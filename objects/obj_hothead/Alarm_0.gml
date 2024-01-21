@@ -1,5 +1,4 @@
 /// @description Blink
 
-blink = 1;
+sprite_index = spr_hothead_blink;
 alarm[1] = 30;
-

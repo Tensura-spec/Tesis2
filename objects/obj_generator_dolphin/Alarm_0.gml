@@ -1,26 +1,31 @@
-/// @description Generate flying cheep-cheeps
+/// @description Generate a dolphin in the given direction
 
-//If the player exists
-if (instance_exists(obj_playerparent)) {
+//If Mario does exist
+if (instance_exists(obj_mario)) {
 
-    //If the player is inside the spawn area, proceed
-    if (obj_levelcontrol.gswitchon == false)
-    && (point_in_rectangle(obj_playerparent.x, obj_playerparent.y, xmin, 0, xmax, room_height)) {
+    //If Mario is on the set coordinates
+    if (obj_mario.x > xmin) 
+    && (obj_mario.x < xmax) 
+	&& (!instance_exists(obj_mario_transform)) {
     
         //If the generator generated less than 5 dolphins
         if (spawn < 5) {
     
-            //Repeat the process.
+            //Repeat the process
             alarm[0] = 30;
             
             //Increment spawn
             spawn++;
+			
+			//Do not generate if there's 5 dolphins on screen
+			if (instance_number(obj_generatordolphin) < 5) {
             
-            //Generate a spiked cheep-cheep.
-            if (dir == 1)
-                with (instance_create(__view_get( e__VW.XView, 0 )-16, __view_get( e__VW.YView, 0 )+random_range(32,184), obj_dolphin_gen)) hspeed = 1.5;
-            else
-                with (instance_create(__view_get( e__VW.XView, 0 )+__view_get( e__VW.WView, 0 )+16, __view_get( e__VW.YView, 0 )+random_range(32,184), obj_dolphin_gen)) hspeed = -1.5;
+	            //Generate a dolphin
+				if (dir == 1)
+					instance_create_depth(camera_get_view_x(view_camera[0]) - 16, camera_get_view_y(view_camera[0]) + random_range(32, global.gh-32), -2, obj_generatordolphin);
+				else
+					instance_create_depth(camera_get_view_x(view_camera[0]) + global.gw + 16, camera_get_view_y(view_camera[0]) + random_range(32, global.gh-32), -2, obj_generatordolphin);
+			}
         }
         else {
         
@@ -32,20 +37,11 @@ if (instance_exists(obj_playerparent)) {
         }
     }
     
-    //Otherwise, hold it
-    else {
-    
-        //Hold event
+    //Otherwise, stop.
+    else
         alarm[0] = 1;
-        exit;
-    }
 }
 
-//Otherwise, hold
-else {
-
-    //Hold event
+//Otherwise, stop.
+else
     alarm[0] = 1;
-    exit;
-}
-

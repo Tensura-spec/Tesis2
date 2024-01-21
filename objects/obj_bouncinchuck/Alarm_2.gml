@@ -1,10 +1,10 @@
 /// @description Jump towards the player
 
 //Play 'Trampoline' sound
-audio_stop_play_sound(snd_trampoline, 0, false);
+audio_play_sound(snd_trampoline, 0, false);
 
 //Set vertical speed
-vspeed = -6;
+yspeed = -6;
 
 //Boost jump
 y--;
@@ -19,9 +19,8 @@ jumping = 2;
 image_index = 2;
 
 //If the player does not exist or it's at the left
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.x < x)
-    hspeed = -2.1;
+if (!instance_exists(obj_mario))
+|| (obj_mario.x < x)
+    xspeed = -2.1;
 else
-    hspeed = 2.1;
-
+    xspeed = 2.1;

@@ -1,89 +1,108 @@
-/// @description Boo "Buddy" logic
+/// @description Boo logic
 
-//Remember state
-movenowprev = movenow;
+//Manage pseudo movement variables
+if (freeze == false) {
 
-//If the player does exist and it's not looking at him.
-if (movenow == 1)
-&& (instance_exists(obj_playerparent)) {
-
-    //If the player is at the right
-    if (obj_playerparent.x > x+8) {
-    
-        hspeed += 0.03;
-        xscale = 1;
-    }
-    
-    //Otherwise, if the player is at the left
-    else if (obj_playerparent.x < x-8) {
-    
-        hspeed -= 0.03;
-        xscale = -1;
-    }
-    
-    //If the player is below
-    if (obj_playerparent.y > y+8)
-        vspeed += 0.03;
-    
-    //Otherwise, if it's above
-    else if (obj_playerparent.y < y+8)
-        vspeed -= 0.03;
+	x += xspeed;
+	y += yspeed;
 }
 
-//Otherwise, stop moving
-else {
-    
-    //Slow down till it stops
-    speed = max(0,abs(speed)-0.03)*sign(speed);
-    if (speed < 0.03)
-        speed = 0;
-}
+#region LOGIC
 
-//Check if the player is not looking at the boo
-if (instance_exists(obj_playerparent)) {
+	//If Mario does exist and it's not looking at him.
+	if (instance_exists(obj_mario))
+	&& (movenow = 1) {
 
-    //If the player is not spinjumping
-    if (obj_playerparent.jumpstyle != 1) {
+	    //If Mario is at the right
+	    if (obj_mario.x > x+8) {
     
-        //If the player is at the right of the boo
-        if (obj_playerparent.x > x+4) {
-        
-            //If the player is looking at the right, move
-            if (obj_playerparent.xscale == 1)
-                movenow = 1;
-            else
-                movenow = 0;
-        }
-        
-        //Otherwise if the player is at the left of the boo
-        else if (obj_playerparent.x < x-4) {
-        
-            //If the player is looking at the left, move
-            if (obj_playerparent.xscale == -1)
-                movenow = 1;
-            else
-                movenow = 0;
-        }
-        
-        //Otherwise, do not move
-        else
-            movenow = 0;
-    }
+			//Set facing direction
+			xscale = 1;
+			
+			//Build speed
+			xspeed += 0.0324;
+			if (xspeed > 0.75)
+				xspeed = 0.75;
+	    }
     
-    //Otherwise, stop
-    else    
-        movenow = 0;
-}
+	    //Otherwise, if Mario is at the left
+	    else if (obj_mario.x < x-8) {
+			
+			//Set facing direction
+			xscale = -1;
+			
+			//Build speed
+			xspeed += -0.0324;
+			if (xspeed < -0.75)
+				xspeed = -0.75;
+	    }
+    
+	    //If Mario is below
+	    if (obj_mario.y > y+8) {
+			
+	        yspeed += 0.0324;
+			if (yspeed > 0.75)
+				yspeed = 0.75;
+		}
+    
+	    //Otherwise, if it's above
+	    else if (obj_mario.y < y+8) {
+			
+	        yspeed -= 0.0324;
+			if (yspeed < -0.75)
+				yspeed = -0.75;
+		}
+	}
 
-//Otherwise, do not move
-else
-movenow = 0;
+	//Otherwise, stop moving
+	else {
+		
+		//Slow horizontally
+		xspeed = max(0, abs(xspeed)-0.0324)*sign(xspeed);
+		if (abs(xspeed) < 0.0324)
+			xspeed = 0;
+			
+		//Slow horizontally
+		yspeed = max(0, abs(yspeed)-0.0324)*sign(yspeed);
+		if (abs(yspeed) < 0.0324)
+			yspeed = 0;	
+	}
 
-//Cap speed
-if (speed > 0.6) then speed = 0.6;
+	//Remember state
+	movenowprev = movenow;
+
+	//Check if Mario is not looking at the boo
+	if (instance_exists(obj_mario)) {
+
+	    //If Mario is not spinjumping
+	    if (obj_mario.jumpstyle != 1) {
     
+	        //If Mario is at the right of the boo
+	        if (obj_mario.x > x+8)
+				movenow = (obj_mario.xscale == 1) ? 1 : 0;
+        
+	        //Otherwise if Mario is at the left of the boo
+	        else if (obj_mario.x < x-8)
+				movenow = (obj_mario.xscale == -1) ? 1 : 0;
+        
+	        //Otherwise, do not move
+	        else
+	            movenow = 0;
+	    }
+    
+	    //Otherwise, stop
+	    else
+	        movenow = 0;
+	}
+
+	//Otherwise, do not move
+	else	
+	    movenow = 0;
+	
+#endregion
+
 //Play 'Boo' sound if it was not moving
 if (movenow == 1)
 && (movenowprev == 0)
-    audio_stop_play_sound(snd_boo, 0, false);
-
+&& (outside_view() == false)
+    audio_play_sound(snd_boo, 0, false);

@@ -1,7 +1,5 @@
-/// @description Special turn at enemies script
+/// @description Special turn at enemies
 
-//If not stunned
 if (ready < 2)
 exit;
-    event_inherited();
-
+	event_inherited();

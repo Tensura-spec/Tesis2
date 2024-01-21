@@ -1,16 +1,18 @@
 /// @description Confused Chuck logic
 
-//If the chuck health is maxed out
-if (hp == 3) {
+//Inherit the parent event
+event_inherited();
 
-    //If jumping
+#region LOGIC
+
+	//If jumping
     if (jumping > 0) {
     
         //If moving up
-        if ((jumping == 1) && (vspeed > 0)) {
+        if ((jumping == 1) && (yspeed > 0)) {
         
             //Throw a ball on the same direction
-            with (instance_create(x+8*sign(xscale), y, obj_baseball)) hspeed = 1.5*sign(other.xscale);
+            with (instance_create_depth(x+8*sign(xscale), y, -4, obj_baseball)) hspeed = 1.5*sign(other.xscale);
             
             //Set the default pose
             image_speed = 0;
@@ -21,7 +23,7 @@ if (hp == 3) {
         }
         
         //If on ground
-        else if ((jumping == 2) && (gravity == 0)) {
+        else if ((jumping == 2) && (yadd == 0)) {
         
             //Set the default sprite
             sprite_index = spr_confusedchuck;
@@ -46,14 +48,15 @@ if (hp == 3) {
             }
         }
     }
+#endregion
 
-    //Default floor collision
-    event_user(4);
-    
-    //Face towards the player
-    if (throwing == 0)
-        event_user(8);
+//If not throwing
+if (throwing == 0) {
+
+	//If Mario does not exist or it's at the left
+	if (!instance_exists(obj_mario))
+	|| (obj_mario.x < x)
+	    xscale = -1;
+	else
+	    xscale = 1; 
 }
-else
-    event_inherited();
-

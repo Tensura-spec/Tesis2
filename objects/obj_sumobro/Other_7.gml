@@ -3,15 +3,15 @@
 //If the sprite is the stomping one
 if (sprite_index == spr_sumobro_stomp) {
 
-    //Play 'Thud' sound
-    audio_play_sound(snd_thud, 0, false);
+	//Play 'Thud' sound
+	audio_play_sound(snd_thud, 0, false);
+    
+	//Shake the screen
+	shake_camera(6, ceil(audio_sound_length(snd_thud) * room_speed), true); 
     
     //End animation
     image_speed = 0;
     image_index = 0;    
-    
-    //Shake screen
-    init_shake(25);   
 
     //Start moving
     alarm[0] = 120;
@@ -23,6 +23,5 @@ if (sprite_index == spr_sumobro_stomp) {
     steps = 1;
     
     //Create lightning
-    instance_create(x-8, y+32, obj_sumobro_lightning);
+    instance_create_depth(x-8, y+32, -2, obj_sumobro_lightning);
 }
-

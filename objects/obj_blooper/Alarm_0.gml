@@ -1,4 +1,3 @@
-/// @description Allow blooper to swim up again.
+/// @description Allow swim
 
 ready = 0;
-

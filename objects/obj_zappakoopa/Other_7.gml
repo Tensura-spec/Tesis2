@@ -3,7 +3,6 @@
 if (sprite_index == spr_zappakoopa_charge) {
 
     image_speed = 0;
-    image_index = 7;
-    alarm[3] = 2;
+    image_index = 5;
+    alarm[2] = 2;
 }
-

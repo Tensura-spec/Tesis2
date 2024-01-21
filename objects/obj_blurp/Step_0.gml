@@ -1,14 +1,17 @@
-/// @description Blurp logic
+/// @description Green Cheep Cheep logic
 
-//Update facing direction
-if (hspeed > 0)
-    xscale = 1;
-else if (hspeed < 0) 
-    xscale = -1;
+//Manage pseudo movement variables
+if (freeze == false) {
 
-//Wave
-if (y > ystart)
-    vspeed -= 0.0125;
-else if (y < ystart)
-    vspeed += 0.0125;
+	x += xspeed;
+	y += yspeed;
+}
 
+//Wave motion
+yspeed += (y > ystart) ? -0.0125 : 0.0125;
+
+//Facing direction
+if (xspeed > 0)
+	xscale = 1;
+else if (xspeed < 0)
+	xscale = -1;

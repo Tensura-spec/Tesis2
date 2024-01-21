@@ -15,10 +15,7 @@
     "name": "Desert",
     "path": "folders/Objects/Special/Do Not Use!/Enemies/Forest/Desert.yy",
   },
-  "parentObjectId": {
-    "name": "obj_enemyparent",
-    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

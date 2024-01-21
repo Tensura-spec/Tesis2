@@ -1,26 +1,48 @@
 /// @description Podoboo
 
-//How vulnerable is this enemy to items
+//Inherit the parent event
+event_inherited();
+
+//How vulnerable is this enemy to various items?
 vulnerable = 3;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to Yoshi
+//How vulnerable is this enemy to Yoshi?
 edible = 2;
 
-//Whether the podoboo is jumping
+//Do not turn into silver coins
+turn_silver = 0;
+
+//Whether the Lava Bubble is jumping
 ready = 0;
 
-//Do not swim
-swimming = false;
+//Gravity
+yadd = 0.2;
 
-//Animate
-image_speed = 0.3;
+//Set depth
+depth = 150;
 
-//Set the gravity.
-gravity = 0.2;
-
-//Create cinder effect when moving up
+//Leave trail when moving up
 alarm[3] = 1;
 
+//Shake
+offset = 0;
+offsetdir = 1; //Set this to 1 if you want a shaking Podoboo
+alarm[4] = 1;
+
+//If this is a lava podoboo
+if (sprite_index == spr_podoboo) {
+
+	//Create a light
+	if (instance_exists(obj_lightcontrol)) {
+
+		with (instance_create_layer(0, 0, "Main", obj_light_npc)) {
+		
+			parent = other.id;
+			radius = 16;
+			new_radius = 16;
+		}
+	}
+}

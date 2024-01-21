@@ -1,24 +1,31 @@
-/// @description Set the throwing frame
+/// @description Throw a hammer
 
-//If the sledge bro is not jumping.
-if (vspeed == 0) {
+//Play 'Hammer' sound
+audio_play_sound(snd_hammer, 0, false);
 
-    //If the sledge bro is on the ground.
-    if (collision_rectangle(bbox_left, bbox_bottom+1, bbox_right, bbox_bottom+1, obj_semisolid, 1, 1)) {
+//If Mario does not exist or is at the left
+if (!instance_exists(obj_mario))
+|| (obj_mario.x < x) {
+
+    with (instance_create_depth(x+15, y-22, -2, obj_hammerbro_hammer)) {
     
-        //Throw a hammer
-        alarm[4] = 30;
-        
-        //Replace sprite
-        sprite_index = spr_sledgebro_throw;
+		sprite_index = spr_sledgebro_hammer;
+        xspeed = -1;
+        image_xscale = -1;
     }
+}
+else {
+
+    with (instance_create_depth(x-15, y-22, -2, obj_hammerbro_hammer)) {
     
-    //Otherwise, deny event
-    else    
-        alarm[3] = 1;
+		sprite_index = spr_sledgebro_hammer;
+        xspeed = 1;
+        image_xscale = 1;
+    }    
 }
 
-//Otherwise, deny event
-else
-    alarm[3] = 1;
+//Replace sprite
+sprite_index = spr_sledgebro;
 
+//Set the throwing pose
+alarm[2] = 60;

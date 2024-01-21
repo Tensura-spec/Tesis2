@@ -1,13 +1,7 @@
-/// @description Hammer Bro.
+/// @description Hammer Bro
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
-
-//How vulnerable is this enemy to various items?
-vulnerable = 0;
-
-//How vulnerable is this enemy to the player?
-stomp = 0;
 
 //Whether can go through solid
 throughsolid = 0;
@@ -15,27 +9,20 @@ throughsolid = 0;
 //Number of hammers to throw
 hammers = 1+random(round(3));
 
-//Whether the hammer bro is throwing a hammer
-_throw = 0;
+//Freeze sprite (Used mainly for enemies that require extra parts to be drawn)
+freeze_sprite = spr_hammerbro;
 
-//Death Sprite
-deathsprite = sprite_index;
+//Save alarms
+for (i=0; i<12; i++) {
+	
+	save_alm[i] = -1;
+}
 
-//Stomp Sprite
-stompsprite = sprite_index;
+//Jump upwards / downwards
+alarm[0] = 4;
 
-//Animate
-image_speed = 0.15;
-
-//Reverse horizontal speed.
-alarm[1] = 32;
-
-//Jump upwards / downwards.
-alarm[2] = 4;
-
-//Set the throwing pose.
-alarm[3] = 7;
+//Set the throwing pose
+alarm[1] = 7;
 
 //Move
 alarm[10] = 2;
-

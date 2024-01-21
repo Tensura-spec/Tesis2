@@ -1,41 +1,36 @@
 /// @description Chargin' Chuck
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to various items?
-vulnerable = 0;
+//Turn towards walls?
+turn_toward = -1;
 
-//How vulnerable is this enemy to the player?
+//How vulnerable is this enemy to Mario?
 stomp = 4;
 
-//How vulnerable is this enemy to yoshi?
+//How edible is this enemy to Yoshi?
+//0:	Edible
+//1:	Edible, but create a item
+//2:	Non-Edible
 edible = 2;
 
-//Facing direction
-xscale = 1;
+//Does this enemy turn into a silver coin?
+turn_silver = 0;
 
-//Hitpoints
-hp = 3;
+//NPC Health
+hp = 2;
+firehp = 4;
 
-//Fire Hits
-firehp = 5;
-
-//Lookout
+//Whether this enemy is lookin' for Mario
 lookout = -1;
 
-//Death Sprite
-deathsprite = sprite_index;
-
-//Stomp sprite
-stompsprite = sprite_index;
-
-//Animate
+//Do not animate
 image_speed = 0;
+image_index = 0;
 
-//Make noise when charging
+//Make noises when chargin
 alarm[0] = 6;
 
 //Start moving
 alarm[10] = 60;
-

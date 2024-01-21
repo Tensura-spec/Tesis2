@@ -1,11 +1,10 @@
-/// @description Get inside shell
+/// @description Set up next frame
 
 //Set the sprite
 sprite_index = spr_bonybeetle_hide;
 
-//Make player get hurt on stomp
+//Set hurt on stomp grade
 stomp = 2;
 
 //Set next frame
-alarm[2] = 8;
-
+alarm[2] = 7;

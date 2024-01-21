@@ -4,5 +4,4 @@
 image_index = 0;
 
 //Start moving
-alarm[4] = 8;
-
+alarm[4] = 7;

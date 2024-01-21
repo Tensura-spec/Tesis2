@@ -1,29 +1,14 @@
 /// @description Jump
 
-//Jump either left or right
-switch (ready) {
-
-    //Left
-    case (0): {
-    
-        hspeed = 1.05;
-        ready = 1;
-    } break;
-    
-    //Right
-    case (1): {
-    
-        hspeed = -1.05;
-        ready = 0;
-    } break;
-}
+//Set the horizontal speed
+xspeed = 1.05 * sign(dir);
 
 //Boost jump
+yspeed = -6;
 y--;
 
 //Jump
 jumping = 1;
 
-//Sets the vertical speed.
-vspeed = -6;
-
+//Reverse direction
+dir = -dir;

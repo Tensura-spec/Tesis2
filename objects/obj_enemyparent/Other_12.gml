@@ -1,40 +1,21 @@
-/// @description Turn at enemies script
+/// @description Enemy turn script
 
 //Collision with regular enemies
 var overlap = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom-4, obj_enemyparent, 0, 1);
-if (overlap) 
+
+//If there's an enemy and this one is not invulnerable
+if (overlap)
 && (overlap.vulnerable < 99) {
 
-    //Make sure the variable is defined
-    if (enemyturn == true) {
-
-        //Go right if the object is further to the right or in the same spot and a higher id.
-        if ((bbox_left+bbox_right)*0.5 > (overlap.bbox_left+overlap.bbox_right)*0.5)
-        || (((bbox_left+bbox_right)*0.5 = (overlap.bbox_left+overlap.bbox_right)*0.5) && (id > overlap.id))
-            hspeed = abs(hspeed);
-        
-        //Otherwise, go left.
-        else
-            hspeed = -abs(hspeed);            
-    }    
+    //Go right if the object is further to the right or in the same spot and a higher id.
+    if ((bbox_left + bbox_right) * 0.5 > (overlap.bbox_left + overlap.bbox_right) * 0.5)
+    || (((bbox_left + bbox_right) * 0.5 = (overlap.bbox_left + overlap.bbox_right) * 0.5) && (id > overlap.id)) {
+    
+        //Keep going right.
+        xspeed = abs(xspeed);
+    }
+    
+    //Otherwise, go left.
+    else
+        xspeed = -abs(xspeed);
 }
-
-//Collision with holdable enemies
-var overlap2 = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom-4, obj_holdparent_enemy, 0, 1);
-if (overlap2)
-&& (overlap2.vulnerable < 99) {
-
-    //Make sure the variable is defined
-    if (enemyturn == true) {
-
-        //Go right if the object is further to the right or in the same spot and a higher id.
-        if ((bbox_left+bbox_right)*0.5 > (overlap2.bbox_left+overlap2.bbox_right)*0.5)
-        || (((bbox_left+bbox_right)*0.5 = (overlap2.bbox_left+overlap2.bbox_right)*0.5) && (id > overlap2.id))
-            hspeed = abs(hspeed);
-        
-        //Otherwise, go left.
-        else
-            hspeed = -abs(hspeed);                
-    }    
-}
-

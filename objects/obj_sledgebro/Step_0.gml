@@ -1,49 +1,55 @@
-/// @description Hammer Bro logic
+/// @description Sledge Bro logic
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
+	
+#region Face towards Mario
 
-//Manage swimming state
-event_user(8);
+	if (!instance_exists(obj_mario))
+	|| (obj_mario.x < x)
+		xscale = -1;
+	else
+		xscale = 1;
+	
+#endregion
 
-//Make the ground shake after jumping
-if (jump == 1)
-&& (gravity == 0) {
+#region Stun Mario
 
-    //Play 'Explosion' sound
-    audio_stop_play_sound(snd_destroy, 0, false);
-    
-    //Shake screen
-    init_shake(25);        
-    
-    //Reset count
-    jump = 0;
-    
-    //Set horizontal speed.
-    hspeed = prevhsp;
-    alarm[0] = prevalm;
-    
-    //Stun the player if possible
-    if (instance_exists(obj_playerparent)) {
-    
-        //If the player is not on the ground
-        if (obj_playerparent.state != statetype.jump)
-            with (obj_playerparent) stun = 60;
-    }
-    
-    //Create smoke effects
-    with (instance_create(bbox_left, bbox_bottom, obj_smoke)) sprite_index = spr_smoke_16;
-    with (instance_create(bbox_right, bbox_bottom, obj_smoke)) sprite_index = spr_smoke_16;
-}
+	//Make the ground shake after jumping
+	if (yadd == 0)
+	&& (jumping == 1) {
 
-//Update death/stomp sprite
-deathsprite = sprite_index;
-stompsprite = sprite_index;
+	    //Play 'Thud' sound
+	    audio_play_sound(snd_thud, 0, false);
+    
+		//Shake the screen
+		shake_camera(6, ceil(audio_sound_length(snd_thud) * room_speed), true);    
+    
+	    //Reset count
+	    jumping = 0;
+    
+	    //Set horizontal speed.
+	    xspeed = prevxspeed;
+    
+	    //Stun the player if possible
+	    if (instance_exists(obj_mario)) {
+    
+	        //If the player is not on the ground
+	        if (obj_mario.state != playerstate.jump)
+	            with (obj_mario) stuntime = 60;
+	    }
+    
+		//Create smoke effect
+		with (instance_create_depth(x, y, -6, obj_smoke)) sprite_index = spr_supersmash;
+		with (instance_create_depth(x, y, -6, obj_smoke)) {
+	
+			sprite_index = spr_supersmash;
+			image_xscale = -1;
+		}
+	}
+#endregion
 
-//Set up the facing direction.
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.x < x)
-    xscale = -1;
-else
-    xscale = 1;
-
+//Turn around
+if ((xspeed > 0) && (x > xstart+16))
+|| ((xspeed < 0) && (x < xstart-16))
+	xspeed = -xspeed;

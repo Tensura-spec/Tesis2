@@ -1,14 +1,11 @@
-/// @description Draw Shell
+/// @description Render me
 
-//Set the shader
-if (isflashing > 0) {
+//Set palette
+pal_swap_set(spr_palette_shell_kamikaze, pal);
 
-    pal_swap_set(spr_palette_brick_blue, isflashing);
-}
+//Draw NPC
+draw_sprite_ext(sprite_index, image_index, screen_round(x), screen_round(y + 1), xscale, yscale, image_angle, image_blend, image_alpha);
+draw_sprite_custom_origin(spr_shell_eyes_spin, image_index, screen_round(x), screen_round(y) + 1, sprite_width / 2, sprite_height / 2, xscale, yscale, 0, c_white, 1);
 
-//Draw it
-draw_sprite_ext(sprite_index, image_index, round(x), round(y)+1, 1, 1, 0, c_white, 1);
-
-//Reset shader
+//Reset palette
 pal_swap_reset();
-

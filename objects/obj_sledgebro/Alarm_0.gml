@@ -1,8 +1,16 @@
-/// @description Turn around
+/// @description Prepare to jump
 
-//Reverse horizontal speed
-hspeed = -hspeed;
+//If the sledge bro is on contact with the ground.
+if (yadd == 0) {
 
-//Repeat the process
-alarm[0] = 60;
+    //Stop horizontal speed
+    prevxspeed = xspeed;
+    xspeed = 0;        
+    
+    //Jump
+    alarm[1] = 30;
+}
 
+//Otherwise, deny event.
+else
+    alarm[0] = 1;

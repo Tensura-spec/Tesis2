@@ -1,11 +1,7 @@
 /// @description Turn into a regular koopa
 
-//Create a goomba
-with (instance_create(x, y, obj_koopa)) {
+with (instance_create_depth(x, y, -2, obj_koopa)) {
 
-    hspeed = 0.5*other.xscale;
+	xspeed = 0.5 * sign(other.xspeed);
 }
-
-//Destroy
 instance_destroy();
-

@@ -1,16 +1,19 @@
-/// @description Come out from the hole
+/// @description Start moving
 
-//If the player does not exist, deny this event
-if (!instance_exists(obj_playerparent))
-    alarm[0] = 1;
-    
-//Otherwise, move up
-else {
+//If the rocky wrench is not outside
+if (ready == 0) {
+	
+	//If Mario does not exists, ignore this event
+	if (!instance_exists(obj_mario)) {
 
-    //Set the vertical speed
-    vspeed = -0.5;
-    
-    //Stop
-    alarm[1] = 32;
+		alarm[0] = 1;
+		exit;
+	}
+
+	//Come out
+	ready = 1;
 }
-
+	
+//Otherwise, come in
+else if (ready == 2)
+	ready = 3;

@@ -1,66 +1,74 @@
 /// @description Bouncin' Chuck logic
 
 //Push value
-xx = abs(hspeed);
+xx = abs(xspeed);
 
-//If the chuck has not been hurt before
-if (hp == 3) {
+#region
+
+	//Inherit the parent event
+	event_inherited();
     
-    //Floor collision
-    event_user(4);
+	//If there's no gravity
+	if (yadd == 0) {
     
-    //Face towards the player
-    event_user(8);
-    
-    //If there's no gravity
-    if (gravity == 0) {
-    
-        //If the chuck is jumping
-        if (jumping == 0) {
+	    //If the chuck is jumping
+	    if (jumping == 0) {
         
-            //If the player does exist
-            if (instance_exists(obj_playerparent)) 
-            && (obj_playerparent.x > bbox_left-64)
-            && (obj_playerparent.x < bbox_right+64) {
+	        //If Mario does exist and it's nearby this enemy
+	        if (instance_exists(obj_mario)) 
+	        && (obj_mario.x > bbox_left-64)
+	        && (obj_mario.x < bbox_right+64) {
             
-                //Set charge frame
-                image_index = 1;
+	            //Set charge frame
+	            image_index = 1;
     
-                //Begin jump
-                jumping = 1;
+	            //Begin jump
+	            jumping = 1;
                 
-                //Begin shake
-                alarm[1] = 1;
+	            //Begin shake
+	            alarm[1] = 1;
                 
-                //Perform jump in player's direction
-                alarm[2] = 60;
-            }
-        }
+	            //Perform jump in player's direction
+	            alarm[2] = 60;
+	        }
+	    }
         
-        //Otherwise, if the chuck is jumping
-        else if (jumping == 2) {
+	    //Otherwise, if the chuck is jumping
+	    else if (jumping == 2) {
         
-            //Set jumping state
-            jumping = 3;
+	        //Set jumping state
+	        jumping = 3;
         
-            //Stop horizontal speed
-            hspeed = 0;
+	        //Stop horizontal speed
+	        xspeed = 0;
             
-            //Allow jumping
-            alarm[0] = 30;
+	        //Allow jumping
+	        alarm[0] = 30;
         
-            //Set up default sprite
-            if (image_index != 0)
-                image_index = 0;
-        }
-    }
+	        //Set up default sprite
+	        if (image_index != 0)
+	            image_index = 0;
+	    }
+	}
     
-    //Move away from walls
-    if ((hspeed < 0) && (collision_rectangle(bbox_left+hspeed, bbox_top+4, bbox_left+hspeed, bbox_bottom-1, obj_solid, 0, 0)))
-        x += xx;
-    if ((hspeed > 0) && (collision_rectangle(bbox_right+hspeed, bbox_top+4, bbox_right+hspeed, bbox_bottom-1, obj_solid, 0, 0)))
-        x -= xx;
+	//Move away from walls
+	if ((xspeed < 0) && (collision_rectangle(bbox_left+xspeed, bbox_top+4, bbox_left+xspeed, bbox_bottom-1, obj_solid, 0, 0)))
+	    x += xx;
+	if ((xspeed > 0) && (collision_rectangle(bbox_right+xspeed, bbox_top+4, bbox_right+xspeed, bbox_bottom-1, obj_solid, 0, 0)))
+	    x -= xx;	
+#endregion
+
+//If not moving
+if (xspeed == 0) {
+
+    //If Mario does not exist or it's at the left
+    if (!instance_exists(obj_mario))
+    || (obj_mario.x < x)
+        xscale = -1;
+    else
+        xscale = 1;    
 }
-else
-event_inherited();
 
+//Otherwise if moving, face towards direction
+else
+    xscale = 1*sign(xspeed);

@@ -1,39 +1,28 @@
-/// @description Hammer Bro.
+/// @description Sledge Bro
 
 //Inherit event from parent
 event_inherited();
 
-//How vulnerable is this enemy to various items?
-vulnerable = 0;
-
-//How vulnerable is this enemy to the player?
-stomp = 0;
-
-//Death Sprite
-deathsprite = sprite_index;
-
-//Stomp Sprite
-stompsprite = sprite_index;
-
-//Animate
-image_speed = 0.1;
-
 //Check if jump
-jump = 0;
+jumping = 0;
 
 //Remember prev.hspeed
-prevhsp = 0;
-prevalm = 0;
+prevxspeed = 0;
 
-//Turn around
-alarm[0] = 32;
+//Freeze sprite (Used mainly for enemies that require extra parts to be drawn)
+freeze_sprite = spr_sledgebro;
+
+//Save alarms
+for (i=0; i<12; i++) {
+	
+	save_alm[i] = -1;
+}
 
 //Jump
-alarm[1] = 302;
+alarm[0] = 302;
 
 //Set the throwing frame.
-alarm[3] = 62;
+alarm[2] = 62;
 
 //Start moving
 alarm[10] = 2;
-

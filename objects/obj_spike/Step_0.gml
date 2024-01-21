@@ -1,16 +1,23 @@
 /// @description Spike logic
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
 //If the spike does not move
-if (_static == 1) {
+if (quiet == 1) {
 
-    //If the player does not exist or is at the left
-    if (!instance_exists(obj_playerparent))
-    || (obj_playerparent.x < x)
+    //If Mario does not exist or is at the left
+    if (!instance_exists(obj_mario))
+    || (obj_mario.x < x)
         xscale = -1;
     else
         xscale = 1;
 }
+else {
 
+	//Face towards direction
+	if (xspeed > 0)
+		xscale = 1;
+	else if (xspeed < 0)
+		xscale = -1;
+}

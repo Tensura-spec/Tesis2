@@ -1,11 +1,7 @@
 /// @description Turn into a regular goomba
 
-//Create a goomba
-with (instance_create(x, y, obj_goomba)) {
+with (instance_create_depth(x, y, -2, obj_goomba)) {
 
-    hspeed = other.hspeed;
+	xspeed = 0.5 * sign(other.xspeed);
 }
-
-//Destroy
 instance_destroy();
-

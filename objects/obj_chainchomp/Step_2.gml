@@ -7,4 +7,3 @@ if (!instance_exists(chomp)) {
     with (chain[2]) instance_destroy();
     with (chain[3]) instance_destroy();
 }
-

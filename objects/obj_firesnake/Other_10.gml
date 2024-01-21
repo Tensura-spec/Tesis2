@@ -1,11 +1,34 @@
-/// @description Destroy Fire Snake
+/// @description Fire snake kill
 
-//Create puff of smoke
-with (instance_create(x, y+8, obj_smoke)) {
+//Create dead object.
+imdead = instance_create_depth(x, y, -6, obj_enemy_dead);
 
-    sprite_index = spr_smoke_16;
+//Set the sprite
+imdead.sprite_index = sprite_index;
+
+//Set the facing direction
+imdead.image_xscale = xscale;
+
+//Set a waving movement
+imdead.hspeed = 0.5;
+imdead.alarm[1] = 4;
+
+//Set the vertical speed
+imdead.vspeed = -6;
+
+//Dead followers.
+multidead = instance_create_depth(x, y, -6, obj_enemy_dead_multi);
+with (multidead) {
+
+    //Set the sprite
+    sprite_index = spr_firesnake_body;
+
+    //Set the enemy parts.
+    count = 4;
+    
+    //Set the xscale
+    image_xscale = other.xscale;
 }
 
 //Destroy
 instance_destroy();
-

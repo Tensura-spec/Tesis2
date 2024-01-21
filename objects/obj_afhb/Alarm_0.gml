@@ -1,8 +1,4 @@
-/// @description Change wing frame
+/// @description Animate object
 
-//Repeat the process
-alarm[0] = 7
-
-//Change image
 image_index = !image_index;
-
+alarm[0] = 9;

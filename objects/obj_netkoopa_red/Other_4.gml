@@ -2,9 +2,8 @@
 
 switch (ready) {
 
-    case (0): vspeed = 1; break;
-    case (1): hspeed = 1; break;
-    case (2): vspeed = -1; break;
-    case (3): hspeed = -1; break;
+    case (0): yspeed = 1; break;
+    case (1): xspeed = 1; break;
+    case (2): yspeed = -1; break;
+    case (3): xspeed = -1; break;
 }
-

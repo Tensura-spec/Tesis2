@@ -1,90 +1,108 @@
 /// @description Cheep Cheep logic
 
-//Inherit event
-event_inherited();
+//Manage pseudo movement variables
+if (freeze == false) {
 
-//If not flopping
-if (swimming == 1) {
+	x += xspeed;
+	y += yspeed;
+	yspeed += yadd;
+}
 
-    //If the turning endpoint has not been set
-    if (prevswim == 0) {
-    
-        hspeed = 0.5*sign(xscale);
-        prevswim = 1;
-        xx = x;
-    }
+#region LOGIC
 
-    //Set the sprite
-    sprite_index = spr_cheepcheep;
+	//If Mario does exist and the cheep has not jumped yet.
+	if (instance_exists(obj_mario)) 
+	&& (jumping == 0) {
+
+	    //If the cheep has not jumped and Mario is nearby.
+	    if (obj_mario.x > x-32) 
+	    && (obj_mario.x < x+32) {
     
-    //Animate
-    image_speed = 0.125;
-    
-    //Do not apply gravity
-    vspeed = 0;
-    gravity = 0;
-    
-    //If the cheep cheep is moving to the right.
-    if (hspeed > 0) {
-    
-        //Set the facing direction
-        xscale = 1;
+	        //Make it jump
+	        jumping = 1;
         
-        //Change direction
-        if (x > xx+32)
-            hspeed = -hspeed;
-    }
+	        //Set the vertical speed
+	        yspeed = -4;
+	        yadd = 0.2;
+        
+	        //Set the horizontal speed.
+	        xspeed = 1.25*sign(xscale);
+	    }
+	}
+
+	//Otherwise, look for a nearest water surface and allow the cheep to jump.
+	else {
+
+	    //Find a nearby body of water
+	    water = collision_rectangle(bbox_left,bbox_top,bbox_right,bbox_bottom,obj_swim,0,0);
     
-    //Otherwise, if the cheep cheep is moving to the left.
-    else if (hspeed < 0) {
+	    //If there's a body of water
+	    if (water) {
     
-        //Set the facing direction.
-        xscale = -1;
+	        //If the cheep has jumped out of the water.
+	        if (jumping == 1) {
+        
+	            //If the cheep makes contact with water.
+	            if ((y > water.y-4) && (yspeed > 0)) {
             
-        //Change direction.
-        if (x < xx-32)    
-            hspeed = -hspeed;
-    }
+	                //Snap to position.
+	                y = water.y-4;
+                
+	                //Stop vertical speed
+	                yspeed = 0;
+	                yadd = 0;
+                
+	                //Disallow jumping
+	                jumping = 2;
+                
+	                //Allow jumping
+	                alarm[0] = 24;
+                
+	                //Cap horizontal speed
+	                xspeed = 2.5*sign(xscale);
+	            }
+	        }
+	    }
+	}
+
+	//Chase Mario
+	if (jumping == 0) {
+
+	    //If Mario does not exists or it's at the left
+	    if (!instance_exists(obj_mario))
+	    || (obj_mario.x < x) {
+    
+	        xspeed -= 0.1;
+	        if (xspeed < -2.5)
+	            xspeed = -2.5;    
+	    }
+    
+	    //Otherwise, go to the right
+	    else if (obj_mario.x > x) {
+    
+	        xspeed += 0.1;
+	        if (xspeed > 2.5)
+	            xspeed = 2.5;
+	    }
+	}
+	
+	//Make sure it does not exit the view boundaries
+    if (x < camera_get_view_x(view_camera[0]) - 32)
+        x = camera_get_view_x(view_camera[0]) - 32;
+    else if (x > camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) + 32)
+        x = camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) + 32;
+	
+#endregion
+
+//Cap vertical speed
+if (yspeed > 4) {
+
+	yspeed = 4;
+	yadd = 0;
 }
 
-//Otherwise, if flopping
-else if (swimming == 0) {
-
-    //Reset turning endpoint
-    prevswim = 0;
-
-    //Set the flopping sprite
-    sprite_index = spr_cheepcheep_flop;
-    
-    //Do not animate
-    image_speed = 0;
-    
-    //If no gravity
-    if (gravity == 0) {
-    
-        //Change frame
-        image_index = !image_index;
-    
-        //Choose flop
-        flopdir = choose(1, -1);
-        
-        //Set horizontal speed
-        hspeed = 1*sign(flopdir);
-        
-        //Create splash effect
-        with (instance_create(x, y+8, obj_smoke)) {
-        
-            sprite_index = spr_smoke_16;
-            image_speed = 0.15;
-            image_index = 2;
-            gravity = 0.25;
-        }
-        
-        //Set the vertical speed
-        vspeed = -2;
-    }
-    
-    //Set facing direction
-    xscale = flopdir;    
-}
-
+//Facing direction
+if (xspeed > 0)
+    xscale = 1;
+else if (xspeed < 0)
+    xscale = -1;

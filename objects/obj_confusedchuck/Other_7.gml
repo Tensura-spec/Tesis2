@@ -1,9 +1,9 @@
-/// @description Perform actions based on animation
+/// @description Throw a ball if not jumping
 
 if (sprite_index == spr_confusedchuck) {
 
     //Throw a ball on the same direction
-    with (instance_create(x+8*sign(xscale), y, obj_baseball)) hspeed = 1.5*sign(other.xscale);
+    with (instance_create_depth(x+8*sign(xscale), y, -4, obj_baseball)) hspeed = 1.5*sign(other.xscale);
     
     //Set the default pose
     image_speed = 0;
@@ -24,8 +24,3 @@ if (sprite_index == spr_confusedchuck) {
         alarm[0] = 60;
     }
 }
-
-//Otherwise
-else
-    event_inherited();
-

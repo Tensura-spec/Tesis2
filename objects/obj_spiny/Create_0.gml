@@ -1,23 +1,13 @@
 /// @description Spiny
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
-vulnerable = 0;
-
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to Yoshi
+//How edible is this enemy to Yoshi?
 edible = 0;
 
-//Death Sprite
-deathsprite = spr_spiny_dead;
-
-//Animate
-image_speed = 0.15;
-
-//Start moving
+//Move towards Mario
 alarm[10] = 2;
-

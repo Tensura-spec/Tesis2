@@ -1,27 +1,19 @@
 /// @description Mega Mole
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 1;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 3;
 
-//How vulnerable is this enemy to Yoshi
-edible = 2;
+//Is this enemy heavy?
+isheavy = 2;
 
-//Death Sprite
-deathsprite = sprite_index;
-
-//Animate
-image_speed = 0.2;
+//A collision object for the player to ride
+mytop.image_xscale = 2;
 
 //Start moving
 alarm[10] = 2;
-
-//Make it semisolid on top
-mytop = instance_create(x, bbox_top, obj_semisolid_moving);
-mytop.image_xscale = 2;
-

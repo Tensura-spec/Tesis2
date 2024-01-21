@@ -16,4 +16,3 @@ else if (sprite_index == spr_charginchuck_damage) {
     //Charge at the player again
     alarm[10] = 60;
 }
-

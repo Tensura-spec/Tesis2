@@ -1,18 +1,18 @@
-/// @description Sleeping Galoomba logic
+/// @description Red Galoomba Logic
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
 //If the galoomba is sleeping
 if (charge == 0) 
 && (global.whistle == 0) {
 
-    //If the player does exist
-    if (instance_exists(obj_playerparent)) {
+    //If Mario does exist
+    if (instance_exists(obj_mario)) {
     
-        //If the player is nearby
-        if (obj_playerparent.x > x-32)
-        && (obj_playerparent.x < x+32) {
+        //If Mario is nearby
+        if (obj_mario.x > x-32)
+        && (obj_mario.x < x+32) {
         
             //Play 'Chuck Whistle' sound
             audio_play_sound(snd_chuck_whistle, 0, false);
@@ -20,61 +20,57 @@ if (charge == 0)
             //Set the chasing sprite
             sprite_index = spr_galoomba_red;
             
-            //Set animation speed
-            image_speed = 0.2;
-            
             //Start chasing
             charge = 1;
             
             //Set vertical speed
-            vspeed = -3;
+            yspeed = -3;
         }
     }
 }
 else {
 
-    //Previous hspeed
-    prevhspeed = hspeed;
+    //Previous xspeed
+    prevxspeed = xspeed;
     
     //If the direction changed, speed up
-    if (hspeed != prevhspeed) {
+    if (xspeed != prevxspeed) {
     
-        hspeed = sign(hspeed)*1.5;
-        if (gravity == 0) {
+        xspeed = sign(xspeed)*2;
+        if (yadd == 0) {
         
-            vspeed = -1.5;
+            yspeed = -1.5;
             y--;
         }
     }
         
-    //Keep charging at the player
+    //Keep charging at Mario
     if (charge == 1) {
     
-        //If there's no gravity
-        if (gravity == 0) {
+        //If there's no yadd
+        if (yadd == 0) {
             
-            //Follow the player
-            if (!instance_exists(obj_playerparent))
-            || (obj_playerparent.x < x) {
+            //Follow Mario
+            if (!instance_exists(obj_mario))
+            || (obj_mario.x < x) {
             
-                hspeed -= 0.0324;
-                if (hspeed < -1.5)
-                    hspeed = -1.5;
+                xspeed -= 0.05;
+                if (xspeed < -1.5)
+                    xspeed = -1.5;
             }
             else {
             
-                hspeed += 0.0324;
-                if (hspeed > 1.5)
-                    hspeed = 1.5;
+                xspeed += 0.05;
+                if (xspeed > 1.5)
+                    xspeed = 1.5;
             }
         }
     }
 }
 
-//Face towards the player
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.x < x)
+//Face towards Mario
+if (!instance_exists(obj_mario))
+|| (obj_mario.x < x)
     xscale = -1;
 else
     xscale = 1;
-

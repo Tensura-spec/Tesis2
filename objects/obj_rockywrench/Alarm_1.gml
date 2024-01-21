@@ -1,12 +1,21 @@
-/// @description Stop it
+/// @description Throw a wrench
 
-//Stop vertical movement
-vspeed = 0;
-y = ystart-16;
+//Animate
+image_speed = 1;
 
-//Set frame
-image_index = 1;
-
-//Throw a wrench
-alarm[2] = 45;
-
+//Wrench
+with (instance_create_depth(x, y+8, -2, obj_plantfire2)) {
+	
+	//Set the sprite
+	sprite_index = spr_rockywrench_wrench;
+	
+	//Set vertical speed
+    yspeed = -1;
+	
+	//Set horizontal speed
+    if (!instance_exists(obj_mario))
+    || (obj_mario.x < x)
+        xspeed = -1.5;
+    else
+        xspeed = 1.5;
+}

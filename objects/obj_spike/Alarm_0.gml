@@ -1,10 +1,11 @@
 /// @description Pick a ball
 
-//If the player does not exist or is nearby
-if (!instance_exists(obj_playerparent))
-|| (gravity > 0)
+//If Mario does not exist or is nearby
+if (!instance_exists(obj_mario))
+|| (yadd > 0)
+|| (freeze == true)
 || (myball != noone)
-|| ((obj_playerparent.x > x-32) && (obj_playerparent.x < x+32)) {
+|| ((obj_mario.x > x-32) && (obj_mario.x < x+32)) {
 
     alarm[0] = 1;
     exit;
@@ -14,9 +15,8 @@ if (!instance_exists(obj_playerparent))
 sprite_index = spr_spike_throw;
 
 //Animate
-image_speed = 0.1;
+image_speed = 1;
 image_index = 0;
 
 //Stop
-hspeed = 0;
-
+xspeed = 0;

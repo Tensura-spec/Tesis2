@@ -1,8 +1,7 @@
-/// @description Move towards the player
+/// @description Move towards Mario
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
-//Start shell hiding process
+//Hide
 alarm[0] = 180;
-

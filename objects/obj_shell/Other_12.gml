@@ -2,68 +2,94 @@
 
 //Shatter if inside a solid
 if (place_meeting(x, y, obj_solid)) {
+
+    //Play 'Bump' sound
+    audio_play_sound(snd_bump, 0, false);
     
     //Play 'Kick' sound
-    audio_stop_play_sound(snd_kick, 0, false);
-    
-    //Create thump
-    instance_create(x, y+8, obj_spinthump);
+    audio_play_sound(snd_kick, 0, false);
     
     //Get 100 points
-    with (instance_create((bbox_left+bbox_right)/2-8, y, obj_score)) event_user(1);
+    with (instance_create_depth(x, y, -6, obj_score)) value = 100;
+	
+	//Force end kicking on Mario
+	if (instance_exists(obj_mario)) {
+		
+		if (obj_mario.kicking > 0)
+			obj_mario.kicking = 0;
+	}
     
-    //Kill
+    //Kill the enemy
+	killer_id = -1;
     event_user(0);
 }
 
 //Otherwise
 else {
 
-    //If 'Up' is pressed, throw it upwards
-    if (input_check(input.up)) {
+	//If 'Up' is pressed, throw it upwards
+	if ((input_check(input.up)) || (gamepad_axis_value(0, gp_axislv) < -0.5)) {
+
+	    //Play 'Kick' sound
+	    audio_play_sound(snd_kick, 0, false);
     
-        //Play 'Kick' sound
-        audio_stop_play_sound(snd_kick, 0, false);
+	    //Create thump
+	    with (instance_create_depth(x, y+8, -6, obj_smoke)) sprite_index = spr_spinthump;
+    
+	    //If the item is not overlapping a solid
+	    if (!collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_solid, 1, 0)) {
+    
+	        //Set the horizontal speed
+	        xspeed = obj_mario.xspeed/1.5;
         
+	        //Boost kick
+	        y--;
+			
+			//Thrown up?
+			thrown_up = true;
+        
+	        //Set vertical speed based if it is underwater or not
+			yspeed = (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0)) ? -3.5 : -7;
+	    }
+    
+	    //Otherwise, get embed
+	    else
+	        inwall = true;
+	}
+
+	//Otherwise if 'Down' is pressed, leave it on the ground
+	else if ((input_check(input.down)) || (gamepad_axis_value(0, gp_axislv) > 0.5)) {
+    
+	    //Check if the object is stuck on a solid and move it
+	    if (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_solid, 1, 0)) {
+    
+	        //Move it to a safe position
+	        inwall = true;
+        
+	        //Stop it
+	        xspeed = 0;
+	    }
+    
+	    //Set the horizontal speed
+	    xspeed = 0.5*sign(obj_mario.xscale);
+	}
+
+	//Otherwise, if neither 'Up' or 'Down' is pressed
+	else {
+
+		//Play 'Kick' sound.
+        audio_play_sound(snd_kick, 0, false);
+    
         //Create thump
-        instance_create(x, y+8, obj_spinthump);
-        
-        //Set the horizontal speed
-        hspeed = obj_playerparent.hspeed/1.5;
-        
-        //Boost kick
-        y--;
-        
-        //If the item is not in a water surface
-        if (!collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0))
-            vspeed = -7;
-        else
-            vspeed = -3.5;
-    }
-    
-    //Otherwise if 'Down' is pressed, leave it on the ground
-    else if (input_check(input.down)) {
-        
-        //Set the horizontal speed
-        hspeed = 0.5*sign(obj_playerparent.xscale);
-    }
-    
-    //Otherwise, if neither 'Up' or 'Down' is pressed
-    else {
-    
-        //Play 'Kick' sound.
-        audio_stop_play_sound(snd_kick, 0, false);
-    
-        //Create thump
-        instance_create(x, y+8, obj_spinthump);
+	    with (instance_create_depth(x, y+8, -6, obj_smoke)) sprite_index = spr_spinthump;
         
         //If the player is at the left of the block
-        if (obj_playerparent.x < x) {
+        if (obj_mario.x < x) {
         
-            with (instance_create(x, y, obj_shell_kicked)) {
+            with (instance_create_depth(x, y, -2, obj_shell_kicked)) {
             
                 //Set the horizontal speed
-                hspeed = (2.7+(abs(obj_playerparent.hspeed)/4));
+                xspeed = (2.7+(abs(obj_mario.xspeed)/4));
                 
                 //Hereby old shell variables
                 sprite_index = other.sprite_index;
@@ -77,12 +103,12 @@ else {
         }
             
         //Otherwise, if the player is at the right of the block
-        else if (obj_playerparent.x > x) {
+        else if (obj_mario.x > x) {
         
-            with (instance_create(x, y, obj_shell_kicked)) {
+            with (instance_create_depth(x, y, -2, obj_shell_kicked)) {
             
                 //Set the horizontal speed
-                hspeed = -(2.7+(abs(obj_playerparent.hspeed)/4));
+                xspeed = -(2.7+(abs(obj_mario.xspeed)/4));
                 
                 //Hereby old shell variables
                 sprite_index = other.sprite_index;
@@ -96,12 +122,12 @@ else {
         }
             
         //Otherwise, if the player is turning
-        else if (obj_playerparent.turnnow == 1) {
+        else if (obj_mario.turning == 1) {
                    
-            with (instance_create(x, y, obj_shell_kicked)) {
+            with (instance_create_depth(x, y, -2, obj_shell_kicked)) {
             
                 //Set the horizontal speed
-                hspeed = (2.7+(abs(obj_playerparent.hspeed)/4));
+                xspeed = (2.7+(abs(obj_mario.xspeed)/4));
                 
                 //Hereby old shell variables
                 sprite_index = other.sprite_index;
@@ -116,19 +142,13 @@ else {
         
         //Destroy
         instance_destroy();                        
-    }
-    
-    //Reset alarms
+	}
+	
+	//Reset alarms
     offset = 0;
     alarm[0] = 312;
     alarm[1] = 432;
-    
-    //If the object is underwater, begin swim
-    if (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0))
-        swimming = true;
-    
-    //Otherwise, do not swim
-    else
-        swimming = false;    
-} 
 
+	//If the object is underwater, begin swim
+	swimming = (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0)) ? true : false;
+}

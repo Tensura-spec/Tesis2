@@ -1,6 +1,5 @@
-/// @description Turn into a galoomba
+/// @description Turn into a Galoomba
 
-instance_create(x, y, obj_galoomba);
+instance_create_depth(x, y, -2, obj_galoomba);
 instance_destroy();
 exit;
-

@@ -14,10 +14,7 @@
     "name": "Underwater",
     "path": "folders/Objects/Enemies/Underwater.yy",
   },
-  "parentObjectId": {
-    "name": "obj_enemyparent",
-    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

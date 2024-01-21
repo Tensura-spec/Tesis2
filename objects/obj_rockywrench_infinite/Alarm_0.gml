@@ -4,5 +4,4 @@
 ready = 0;
 
 //Rocky wrench
-gen = instance_create(x, y, obj_rockywrench);
-
+gen = instance_create_depth(x, y, depth, obj_rockywrench);

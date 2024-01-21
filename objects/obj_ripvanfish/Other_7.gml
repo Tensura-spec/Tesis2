@@ -2,11 +2,9 @@
 
 if (sprite_index == spr_ripvanfish) {
 
-    with (instance_create(x,y,obj_smoke)) {
+    with (instance_create_depth(x, y, -6, obj_smoke)) {
     
         sprite_index = spr_snore;
-        image_speed = 0.05;
         path_start(pth_bubble, 0.5, path_action_continue, 0);
     }
 }
-

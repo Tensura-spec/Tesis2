@@ -1,8 +1,10 @@
-/// @description Goombud logic (Basically the same as a galoomba, but these turn on ledges.)
+/// @description Goombud logic
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
-//Turn on ledges
-event_user(6);
-
+//Set the facing direction
+if (xspeed > 0)
+	xscale = 1;
+else if (xspeed < 0)
+	xscale = -1;

@@ -1,16 +1,7 @@
-/// @description Move towards the player
+/// @description Move towards Mario
 
-//If not moving
-if (hspeed == 0) {
+//Inherit the parent event
+event_inherited();
 
-    //If the player does not exist or it's at the left.
-    if (!instance_exists(obj_playerparent))
-    || (obj_playerparent.x < x)
-        hspeed = -0.5;
-    else
-        hspeed = 0.5;
-}
-
-//Move towards the player
+//Turn towards Mario
 alarm[11] = 60;
-

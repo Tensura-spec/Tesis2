@@ -1,23 +1,25 @@
-/// @description Turn into a silver coin if the Gray P-Switch is active
+/// @description Turn enemies into silver coins
 
-if (obj_levelcontrol.gswitchon == 1) {
+//If the Silver P-Switch is active and the enemy is inside the view and can turn into a silver coin
+if (obj_levelcontrol.gswitch_on == true) 
+&& (turn_silver == true)
+&& (outside_view() == false) {
 
-    //Turn into a coin
-    with (instance_create(round(bbox_left+bbox_right)/2, round(bbox_top+bbox_bottom)/2-8, obj_coin_silver)) {
+	//Turn into a silver coin
+    with (instance_create_depth(round(bbox_left + bbox_right)/2, round(bbox_top + bbox_bottom)/2-8, -4, obj_coinnpc_silver)) {
 
         //Jump a bit
-        vspeed = -4;
+        yspeed = -4;
         y--;
         
-        //Move in the opposite way the player is
-        if (!instance_exists(obj_playerparent))
-        || (obj_playerparent.x < x)
-            hspeed = 0.5;
+        //Move in the opposite way Mario is
+        if (!instance_exists(obj_mario))
+        || (obj_mario.x < x)
+            xspeed = 0.5;
         else
-            hspeed = -0.5;                    
+            xspeed = -0.5;                    
     }
     
     //Destroy
     instance_destroy();    
 }
-

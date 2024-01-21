@@ -4,11 +4,10 @@
 alarm[0] = 6;
 
 //If the chuck is on lookout mode
-if (lookout == 1) 
-&& (gravity == 0) {
+if (yadd == 0)
+&& (lookout == 1) {
     
     //If chargin, play 'Bump' sound
     if (sprite_index == spr_charginchuck_walk)
-        audio_stop_play_sound(snd_bump, 0, false);
+        audio_play_sound(snd_bump, 0, false);
 }
-

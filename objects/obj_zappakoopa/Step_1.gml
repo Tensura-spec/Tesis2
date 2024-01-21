@@ -1,10 +1,13 @@
 /// @description Laser 
 
-if (!instance_exists(mylaser))
-&& (laser_ex == 1)
-{
-    alarm[5] = 30;
-    laser_ex = 0;
-    mylaser = noone;
-}
+//If the laser does not exist
+if (laser_ex == 1)
+&& (!instance_exists(mylaser)) {
 
+	//Close the mouth
+	alarm[4] = 30;
+	
+	//Lose memory of the laser
+	laser_ex = 0;
+	mylaser = noone;
+}

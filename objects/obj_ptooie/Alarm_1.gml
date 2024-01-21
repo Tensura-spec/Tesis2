@@ -7,7 +7,6 @@ alarm[1] = 4;
 if (sprite_index == spr_ptooie_blow) {
     
     //Create effect
-    with (instance_create(x, bbox_top-4, obj_ptooie_bubble))
+    with (instance_create_depth(x, bbox_top-4, 0, obj_ptooie_bubble))
         parent = other.id;
 }
-

@@ -1,6 +1,5 @@
-/// @description Turn into a cannon bobomb
+/// @description Turn into a Cannon Bob-omb
 
-instance_create(x, y, obj_bobomb_cannon);
+instance_create_depth(x, y, -2, obj_bobomb_cannon);
 instance_destroy();
 exit;
-

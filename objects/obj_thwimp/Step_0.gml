@@ -1,13 +1,13 @@
 /// @description Thwimp logic
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
 //Animate
-if (gravity > 0) {
+if (yadd > 0) {
 
     //If jumping and moving down, wait until floor is reached
-    if (vspeed > 0)
+    if (yspeed > 0)
     && (jumping == 1)
         jumping = 2;
 }
@@ -19,7 +19,7 @@ else {
         audio_play_sound(snd_bump, 0, false);
     
         //Stop horizontal speed
-        hspeed = 0;
+        xspeed = 0;
         
         //End jump
         jumping = 0;
@@ -28,5 +28,3 @@ else {
         alarm[0] = 100;
     }
 }
-
-

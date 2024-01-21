@@ -1,15 +1,21 @@
-/// @description Ceiling buzzy beetle logic
+/// @description Ceiling Buzzy Beetle
 
 //If the buzzy is in the ceiling
 if (ready == 0) {
+	
+	//Manage pseudo movement variables
+	if (freeze == false) {
+	
+		x += xspeed;
+	}
 
-    //If the player does exist
-    if (instance_exists(obj_playerparent)) {
+    //If Mario does exist
+    if (instance_exists(obj_mario)) {
     
         //If the player is nearby
-        if (obj_playerparent.x > x-32)
-        && (obj_playerparent.x < x+32) 
-        && (obj_playerparent.y > y) {
+        if (obj_mario.x > x-32)
+        && (obj_mario.x < x+32) 
+        && (obj_mario.y > y) {
         
             //Set the sprite
             sprite_index = spr_shell_buzzy;
@@ -19,51 +25,57 @@ if (ready == 0) {
             image_index = 0;
         
             //Stop horizontal speed
-            hspeed = 0;
+            xspeed = 0;
             
             //Drop
             ready = 1;
         }
     }
+	
+	//Turn at enemies
+	event_user(2);
+	
+	//Turn at walls script
+	event_user(5);
     
     //Make sure if does not wall off ceilings
-    if ((hspeed < 0) && (!position_meeting(bbox_left, y-4, obj_solid)))
-    || ((hspeed > 0) && (!position_meeting(bbox_right, y-4, obj_solid)))
-        hspeed = -hspeed;
+    if ((xspeed < 0) && (!position_meeting(bbox_left, y-4, obj_solid)))
+    || ((xspeed > 0) && (!position_meeting(bbox_right, y-4, obj_solid)))
+        xspeed = -xspeed;
 }
 
 //Otherwise, if the buzzy beetle is falling
 else {
-
-    //Floor collision
-    event_user(4);
+	
+	//Inherit the parent event
+    event_inherited();
     
     //Check if in ground and move towards the player as a shell
-    if (gravity == 0) {
+    if (yadd == 0) {
     
         //Create a shell
-        with (instance_create(x,y,obj_shell_kicked)) {
+        with (instance_create_depth(x, y, -2, obj_shell_kicked)) {
         
             //Set the sprite of the shell
             sprite_index = spr_shell_buzzy;
             
             //Make sure it wakes up
             koopainside = -1;
+			
+			//Make sure it's flipped
+			flip = 1;
             
-            //Flip
-            flip = 1;
+            //Move towards Mario
+            if (!instance_exists(obj_mario))
+            || (obj_mario.x < x) {
             
-            //Move towards the player
-            if (!instance_exists(obj_playerparent))
-            || (obj_playerparent.x < x) {
-            
-                prevhspeed = -2.7;
-                hspeed = -2.7;
+                prevxspeed = -2.7;
+                xspeed = -2.7;
             }
             else {
             
-                prevhspeed = 2.7;
-                hspeed = 2.7;
+                prevxspeed = 2.7;
+                xspeed = 2.7;
             }            
         }
         
@@ -72,15 +84,8 @@ else {
     }
 }
 
-//Turn at enemies script
-event_user(2);
-
-//Wall collision
-event_user(3);
-
 //Set the facing direction
-if (hspeed > 0)
+if (xspeed > 0)
     xscale = 1;
-else if (hspeed < 0)
+else if (xspeed < 0)
     xscale = -1;
-

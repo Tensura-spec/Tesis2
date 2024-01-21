@@ -1,4 +1,4 @@
-/// @description Move towards the player
+/// @description Move towards Mario
 
 //If the koopa can move
 if (ready > 0) {
@@ -13,13 +13,7 @@ if (ready > 0) {
         sprite_index = spr_beachkoopa_walk;
         
         //Boost jump
+		yspeed = (swimming) ? -0.625 : -2.5;
         y--;
-        
-        //If underwater
-        if (!swimming)
-            vspeed = -2.5;
-        else
-            vspeed = -0.625;
     }
 }
-

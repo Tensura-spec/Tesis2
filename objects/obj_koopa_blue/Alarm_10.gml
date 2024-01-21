@@ -1,12 +1,12 @@
-/// @description Start moving
+/// @description Move towards the player
 
-//Check where the mouse is and move in that direction
-if (!instance_exists(obj_playerparent))
-|| (obj_playerparent.x < x)
-    xscale = -1;
-else
-    xscale = 1;
+//If the NPC is not moving
+if (xspeed == 0) {
 
-//Set the speed
-hspeed = xscale;
-
+	//If Mario does not exist or Mario is at the left
+	if (!instance_exists(obj_mario))
+	|| (obj_mario.x < x)
+		xspeed = (swimming == true) ? -0.4 : -0.8;
+	else
+		xspeed = (swimming == true) ? 0.4 : 0.8;
+}

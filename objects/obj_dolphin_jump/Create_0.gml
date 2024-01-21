@@ -1,23 +1,22 @@
-/// @description Jumping Dolphin
+/// @description Dolphin (Straight)
 
-//How vulnerable is this enemy to various items?
+//Inherit the parent event
+event_inherited();
+
+//How vulnerable is this NPC to various items?
 vulnerable = 100;
 
-//How vulnerable is this enemy to the player?
+//How vulnerable is this NPC to Mario?
 stomp = 3;
 
-//How vulnerable is this enemy to yoshi?
+//How vulnerable is this NPC to Yoshi?
 edible = 2;
-
-//Facing direction
-xscale = 1;
 
 //Is this enemy heavy?
 isheavy = 2;
 
-//Gravity
-gravity = 0.1;
+//No swimming
+noswim = 1;
 
-//Animate
-image_speed = 0.25;
-
+//Set up semisolid mask
+mytop.mask_index = sprite_index;

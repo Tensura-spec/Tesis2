@@ -1,12 +1,9 @@
-/// @description Generate a new lakitu and destroy bait if killed
+/// @description Generate a new lakitu
 
-//Destroy bait if it exists
-if (instance_exists(bait)) {
+//Generate a new lakitu with the same coordinates
+with (instance_create_layer(0, ystart, "Main", obj_enemy_respawn)) {
 
-    with (bait) instance_destroy();
-}
-
-//Generate a new lakitu
-with (instance_create(0, ystart, obj_enemy_tick)) 
     sprite_index = spr_lakitu;
-
+    xmin = other.xmin;
+    xmax = other.xmax;
+}

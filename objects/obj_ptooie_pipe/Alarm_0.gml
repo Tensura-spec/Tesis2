@@ -15,4 +15,3 @@ if (instance_exists(myball)) {
     else
         ready = true;
 }
-

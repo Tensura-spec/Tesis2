@@ -1,12 +1,7 @@
 /// @description Turn into a stunned mecha koopa
 
-//Create stunned galoomba
-with (instance_create(x, y, obj_mechakoopa_held)) {
+with (instance_create_depth(x, y, -2, obj_mechakoopa_down)) {
 
-    //Hereby scale
-    dir = other.xscale;
+	dir = 1 * sign(other.xspeed);
 }
-
-//Destroy
 instance_destroy();
-

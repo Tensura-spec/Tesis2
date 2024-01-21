@@ -1,26 +1,16 @@
-/// @description Turn into a holdable bomb and detonate at the instance
+/// @description Blink
 
-//Create stunned bobomb
-with (instance_create(x, y, obj_bobomb_held)) {
+//Do not animate
+image_speed = 0;
+image_index = 0;
 
-    //Set the sprite
-    sprite_index = spr_bobomb_cannon;
-    
-    //Set the death sprite
-    deathsprite = other.deathsprite;
-    
-    //Do not animate
-    image_speed = 0;
-    image_index = 0;
-    
-    //Detonate at the instant
-    alarm[0] = 30;
-    alarm[1] = 150;
+//Stop horizontal movement
+xspeed = 0;
 
-    //Hereby scale
-    dir = other.xscale;
-}
+//Repeat
+alarm[0] = 2;
 
-//Destroy
-instance_destroy();
-
+//Increment palette
+pal++;
+if (pal > 2)
+	pal = 0;

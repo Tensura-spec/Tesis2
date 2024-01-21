@@ -6,9 +6,9 @@ var exits_amount = EXITS_AMOUNT;
 var pstar_amount = STARS_AMOUNT;
 
 //Calculate percentage
-got = (global.cleared_levels + ds_map_size(global.powerstars) + global.starcoins + (global.palace_y + global.palace_g + global.palace_r + global.palace_b));
-total = exits_amount + pstar_amount + (level_amount * 3) + (1 + 1 + 1 + 1);
-global.gameclear = floor(got/total*100);
+//got = (global.cleared_levels + ds_map_size(global.powerstars) + global.starcoins + (global.palace_y + global.palace_g + global.palace_r + global.palace_b));
+//total = exits_amount + pstar_amount + (level_amount * 3) + (1 + 1 + 1 + 1);
+//global.gameclear = floor(got/total*100);
 
 //Update shaders
 update_shockwave();
@@ -45,38 +45,10 @@ depth = -1000;
 #region
 
 	//If the level controller exists, set pitch to default.
-	if (instance_exists(obj_mapcontrol))
+	
 		pitch = 1;
 		
-	else {
-		
-		//If Mario has died or the level has been cleared, set to default.
-		if ((instance_exists(obj_mario_dead)) || (global.clear > 0))
-			pitch = 1;
-			
-		//Otherwise
-		else {
-		
-			//If the timer is greater than 0 and lower than 100
-			if (global.timer > 0)
-			&& (global.timer < 101) {
-				
-				if (!instance_exists(obj_mario_balloon))
-					pitch = 1.33;
-				else
-					pitch = 1.13;
-			}
-				
-			//Otherwise
-			else {
-				
-				if (!instance_exists(obj_mario_balloon))
-					pitch = 1;
-				else
-					pitch = 0.8;
-			}
-		}
-	}
+	
 	
 	#region PAUSE / RESUME
 

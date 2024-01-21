@@ -3,20 +3,24 @@
 //If the angry sun is waiting...
 if (ready == 0) {
 
-    //If the player does exist
-    if (instance_exists(obj_playerparent)) {
+    //If Mario does exist
+    if (instance_exists(obj_mario)) {
     
-        //If the player reached the point where the sun will attack
-        if (obj_playerparent.x > xmin) {
+        //If Mario reached the point where the sun will attack
+        if (obj_mario.x > xmin) {
         
             //Animate
-            image_speed = 0.2;
+            image_speed = 1;
             
             //Went nut
             ready = 1;
+			
+			//Set vulnerabilities
+			vulnerable = 2;
+			stomp = 2;
             
             //Create movement object
-            movement = instance_create(0, 0, obj_angrysun_movement);
+            movement = instance_create_layer(0, 0, "Main", obj_angrysun_movement);
         }
     }
 }
@@ -27,16 +31,7 @@ else {
     //If the movement object exists
     if (instance_exists(movement)) {
     
-        //Move towards it
-        x = round(__view_get( e__VW.XView, 0 ))+movement.x;
-        y = round(__view_get( e__VW.YView, 0 ))+movement.y;
-        
-        //Set up the sprite
-        if (movement.ready == 3)
-        || (movement.ready == 4)
-            sprite_index = spr_angrysun_swoop;
-        else
-            sprite_index = spr_angrysun;
+        x = round(camera_get_view_x(view_camera[0]))+movement.x;
+        y = round(camera_get_view_y(view_camera[0]))+movement.y;
     }
 }
-

@@ -1,38 +1,25 @@
-/// @description Boomerang Bro.
+/// @description Boomerang Bro
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to various items?
-vulnerable = 0;
+//Freeze sprite (Used mainly for enemies that require extra parts to be drawn)
+freeze_sprite = spr_boomerangbro;
 
-//How vulnerable is this enemy to the player?
-stomp = 0;
+//Save alarms
+for (i=0; i<12; i++) {
+	
+	save_alm[i] = -1;
+}
 
-//Whether the boomerang bro is throwing a hammer
-_throw = 0;
+//How many boomerangs did this enemy threw?
+throws = 0;
 
-//Reduces delay between boomerang throw
-throw2 = 0;
+//Jump upwards / downwards
+alarm[0] = 4;
 
-//Death Sprite
-deathsprite = sprite_index;
-
-//Stomp Sprite
-stompsprite = sprite_index;
-
-//Animate
-image_speed = 0.15;
-
-//Reverse horizontal speed.
-alarm[1] = 32;
-
-//Jump upwards / downwards.
-alarm[2] = 4;
-
-//Set the throwing pose.
-alarm[3] = 17;
+//Prepare a boomerang to throw
+alarm[1] = 7;
 
 //Move
 alarm[10] = 2;
-

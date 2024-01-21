@@ -1,14 +1,7 @@
-/// @description Stop and open the mouth
+/// @description Animate
 
-//If there's no gravity
-if (gravity == 0) {
-    
-    sprite_index = spr_zappakoopa_charge;
-    image_speed = 0;
-    image_index = 0;
-    hspeed = 0;
-    alarm[2] = 30;
-}
-else
-    alarm[1] = 1;
+//Animate
+image_speed = 1;
 
+//Play 'Zappakoopa / Prepare' sound
+audio_play_sound(snd_zappakoopa_prepare, 0, false);

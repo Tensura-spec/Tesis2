@@ -1,4 +1,4 @@
-/// @description Draw cannon
+/// @description Render cannon
 
 //Cannon
 draw_sprite_ext(sprite_index, direct/45, x, y, 1, 1, 0, c_white, 1);
@@ -12,4 +12,3 @@ else if (r == 1)
     draw_sprite(sprite_index, 10, x, y);
 else if (l == 1)
     draw_sprite(sprite_index, 11, x, y);
-

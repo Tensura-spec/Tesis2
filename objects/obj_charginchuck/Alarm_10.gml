@@ -1,8 +1,9 @@
 /// @description Start moving
 
-//If the player does not exist
-if (gravity > 0)
-|| (!instance_exists(obj_playerparent)) {
+//If Mario does not exist
+if (yadd > 0)
+|| (freeze == true)
+|| (!instance_exists(obj_mario)) {
 
     alarm[10] = 1;
     exit;
@@ -17,11 +18,11 @@ friction = 0;
 //Play sound
 alarm[0] = 6;
     
-//If the player is above
-if (obj_playerparent.bbox_bottom < y-16) {
+//If Mario is above
+if (obj_mario.bbox_bottom < y-16) {
 
     //Animate
-    image_speed = 0.25;
+    image_speed = 0.5;
     
     //Do not lookout
     lookout = 0;
@@ -29,26 +30,25 @@ if (obj_playerparent.bbox_bottom < y-16) {
     //Stop moving
     alarm[1] = 120;
     
-    //Move towards the player
-    if (obj_playerparent.x < x)
-        hspeed = -1;
+    //Move towards Mario
+    if (obj_mario.x < x)
+        xspeed = (swimming) ? -0.5 : -1;
     else
-        hspeed = 1;
+        xspeed = (swimming) ? 0.5 : 1;
 }
 
 //Otherwise
 else {
         
     //Animate
-    image_speed = 0.5;
+    image_speed = 1;
     
-    //Lookout for player
+    //Lookout for Mario
     lookout = 1;
     
-    //Move towards the player
-    if (obj_playerparent.x < x)
-        hspeed = -1.75;
+    //Move towards Mario
+    if (obj_mario.x < x)
+        xspeed = (swimming) ? -0.875 : -1.75;
     else
-        hspeed = 1.75;
+        xspeed = (swimming) ? 0.875 : 1.75;
 }
-

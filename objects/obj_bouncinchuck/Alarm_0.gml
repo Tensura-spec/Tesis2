@@ -1,16 +1,16 @@
 /// @description Allow jump or jump when the player is not nearby
 
 //If the chuck hp is full
-if (hp == 3) {
+if (hp == 2) {
 
     //If the chuck is not jumping
     if (jumping == 0) {
     
         //If there's no gravity
-        if (gravity == 0) {
+        if (yadd == 0) {
         
             //Set vertical speed
-            vspeed = -2;
+            yspeed = -2;
             
             //Boost jump
             y--;
@@ -27,4 +27,3 @@ if (hp == 3) {
 }
 else
     event_inherited();
-

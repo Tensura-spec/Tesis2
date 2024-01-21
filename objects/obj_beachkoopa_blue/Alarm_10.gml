@@ -1,28 +1,32 @@
-/// @description Move towards the player
+/// @description Move towards Mario
 
-//Deny, if stomped or sliding
-if (sprite_index == stompsprite) then exit;
-if (slide) then exit;
+//If the koopa is not sliding
+if (slide == true)
+exit;
+
+//If the koopa is frozen in place
+if (freeze == true) {
+
+	alarm[10] = 1;
+	exit;
+}
 
 //If the koopa can move
 if (ready > 0) {
 
-    //Check where the mouse is and move in that direction
-    if (!instance_exists(obj_playerparent))
-    || (obj_playerparent.x < x)
-        xscale = -1;
-    else
-        xscale = 1;
-    
-    //Set the speed
-    hspeed = xscale;
-    depth = -2;
-    
-    //Animate 
-    image_speed = 0.15;
-
     //Set walking sprite
-    if (sprite_index != spr_beachkoopa_blue_walk)
-        sprite_index = spr_beachkoopa_blue_walk;
+    sprite_index = spr_beachkoopa_blue_walk;
+	
+	//Animate
+	image_speed = 1;
+	
+	//Set ready state
+	ready = 2;
+	
+	//If Mario does not exist or Mario is at the left
+	if (!instance_exists(obj_mario))
+	|| (obj_mario.x < x)
+		xspeed = (swimming == true) ? -0.4 : -0.8;
+	else
+		xspeed = (swimming == true) ? 0.4 : 0.8;		
 }
-

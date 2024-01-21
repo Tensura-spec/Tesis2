@@ -1,4 +1,4 @@
-/// @description Play 'Stomp' sound
+/// @description Custom stomp script
 
-audio_stop_play_sound(snd_stomp, 0, false);
-
+//Play 'Stomp' sound
+audio_play_sound(snd_stomp, 0, false);
