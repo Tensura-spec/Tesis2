@@ -34,10 +34,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"right","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"True","varType":3,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_reznor_platform_fg",
-    "path": "sprites/spr_reznor_platform_fg/spr_reznor_platform_fg.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": {
     "name": "spr_square",
     "path": "sprites/spr_square/spr_square.yy",

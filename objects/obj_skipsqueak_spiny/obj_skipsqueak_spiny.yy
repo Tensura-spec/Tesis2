@@ -30,13 +30,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_skipsqueak_spiny",
-    "path": "sprites/spr_skipsqueak_spiny/spr_skipsqueak_spiny.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

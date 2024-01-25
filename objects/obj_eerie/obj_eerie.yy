@@ -13,7 +13,10 @@
     "name": "Ghost",
     "path": "folders/Objects/Enemies/Ghost.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_enemyparent",
+    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -31,10 +34,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"wave","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"0","varType":3,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_eerie",
-    "path": "sprites/spr_eerie/spr_eerie.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

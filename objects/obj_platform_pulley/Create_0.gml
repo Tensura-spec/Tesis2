@@ -1,15 +1,7 @@
-/// @description A balance platform, not suitable for plumbers over 80 kg.
+/// @description Balance Platform
 
-/*
-//  This item uses creation code.
-//
-//  limit = 'Y' position where both platforms will fall.
-//  distance = Distance from the middle of the platform to the middle of the right platform
-*/
-
-//Do not animate
-image_speed = 0;
-image_index = 0;
+//Inherit event from parent
+event_inherited();
 
 //Prevent the object from falling too fast.
 vspeedmax = 1;
@@ -28,12 +20,3 @@ alarm[0] = 2;
 
 //Create the rope
 alarm[1] = 3;
-
-//Set the default limit of both platforms.
-limit = ystart-64;
-
-//Set the default distance between both platforms.
-distance = 128;
-
-/* */
-/*  */

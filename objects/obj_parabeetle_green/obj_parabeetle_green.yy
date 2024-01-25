@@ -30,10 +30,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_parabeetle_green",
-    "path": "sprites/spr_parabeetle_green/spr_parabeetle_green.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

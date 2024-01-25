@@ -32,10 +32,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_blaster",
-    "path": "sprites/spr_blaster/spr_blaster.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

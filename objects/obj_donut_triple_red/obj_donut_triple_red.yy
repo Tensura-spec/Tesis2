@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_donut_triple_red",
-    "path": "sprites/spr_donut_triple_red/spr_donut_triple_red.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

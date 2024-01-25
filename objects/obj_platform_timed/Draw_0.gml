@@ -1,9 +1,8 @@
-/// @description Draw the platform
+/// @description Render me
 
-//Draw platform
-draw_sprite_ext(sprite_index, image_index, round(x), round(y), 1, 1, 0, c_white, 1);
+//Draw
+draw_self();
 
 //Draw timer
 if (time > 0)
-    draw_sprite_ext(spr_platform_timed_number, time, round(x)+12, round(y)+4, 1, 1, 0, c_white, 1);
-
+	draw_sprite(spr_platform_timed_number, time, screen_round(x) + 16, screen_round(y) + 4);

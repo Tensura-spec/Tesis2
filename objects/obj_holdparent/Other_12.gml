@@ -1,28 +1,25 @@
 /// @description Default throw / kick event
 
 //If 'Up' is pressed, throw it upwards
-if (input_check(input.up)) {
+if ((input_check(input.up)) || (gamepad_axis_value(0, gp_axislv) < -0.5)) {
 
     //Play 'Kick' sound
-    audio_stop_play_sound(snd_kick, 0, false);
+    audio_play_sound(snd_kick, 0, false);
     
     //Create thump
-    instance_create(x, y+8, obj_spinthump);
+    with (instance_create_depth(x, y+8, -6, obj_smoke)) sprite_index = spr_spinthump;
     
     //If the item is not overlapping a solid
     if (!collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_solid, 1, 0)) {
     
         //Set the horizontal speed
-        hspeed = obj_playerparent.hspeed/1.5;
+        xspeed = obj_mario.xspeed/1.5;
         
         //Boost kick
         y--;
         
-        //If the item is not in a water surface
-        if (!collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0))
-            vspeed = -7;
-        else
-            vspeed = -3.5;
+        //Set vertical speed based if it is underwater or not
+		yspeed = (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0)) ? -3.5 : -7;
     }
     
     //Otherwise, get embed
@@ -31,7 +28,7 @@ if (input_check(input.up)) {
 }
 
 //Otherwise if 'Down' is pressed, leave it on the ground
-else if (input_check(input.down)) {
+else if ((input_check(input.down)) || (gamepad_axis_value(0, gp_axislv) > 0.5)) {
     
     //Check if the object is stuck on a solid and move it
     if (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_solid, 1, 0)) {
@@ -40,11 +37,11 @@ else if (input_check(input.down)) {
         inwall = true;
         
         //Stop it
-        hspeed = 0;
+        xspeed = 0;
     }
     
     //Set the horizontal speed
-    hspeed = 0.5*sign(obj_playerparent.xscale);
+    xspeed = 0.5*sign(obj_mario.xscale);
 }
 
 //Otherwise, if neither 'Up' or 'Down' is pressed
@@ -54,42 +51,33 @@ else {
     if (!collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom,obj_solid, 0, 0)) {
         
         //If the player has horizontal speed
-        if (obj_playerparent.hspeed != 0) {
+        if (obj_mario.xspeed != 0) {
         
             //Play 'Kick' sound.
-            audio_stop_play_sound(snd_kick, 0, false);
+            audio_play_sound(snd_kick, 0, false);
     
             //Create thump
-            instance_create(x, y+8, obj_spinthump);
+            with (instance_create_depth(x, y+8, -6, obj_smoke)) sprite_index = spr_spinthump;
             
-            //If the item is underwater
-            if (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0))
-                vspeed = -1;
-            else
-                vspeed = -2;
+            //Set vertical speed based if it is underwater or not
+			yspeed = (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0)) ? -1 : -2;
             
             //If the object is not on contact with a slope
             if (!collision_rectangle(x-2, bbox_bottom-4, x-2, bbox_bottom, obj_slopeparent, 1, 0))
-                hspeed = (obj_playerparent.hspeed+1*obj_playerparent.xscale)/1.5;
+                xspeed = (obj_mario.xspeed+1*obj_mario.xscale)/1.5;
                 
             //Otherwise, do not apply horizontal speed
             else
-                hspeed = 0.5*sign(obj_playerparent.xscale);
+                xspeed = 0.5*sign(obj_mario.xscale);
         }
         
         //Otherwise, leave it on the ground
         else
-            hspeed = 0.5*obj_playerparent.xscale;
+            xspeed = 0.5*obj_mario.xscale;
     }
     else
         inwall = true;
 }
 
 //If the object is underwater, begin swim
-if (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0))
-    swimming = true;
-
-//Otherwise, do not swim
-else
-    swimming = false;     
-
+swimming = (collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_top, obj_swim, 0, 0)) ? true : false;

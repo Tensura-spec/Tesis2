@@ -1,19 +1,13 @@
-/// @description An enemy that has been stomped
+/// @description An enemy that has been killed by stomping
 
 //Do not animate
 image_speed = 0;
-image_index = 0;
 
-//Set gravity
-gravity = 0.2;
+//Angle
+angle = 0;
 
-//Is swimming
+//Check if swimming
 swimming = 0;
 
-//If underwater
-if (place_meeting(x, y, obj_swim)) {
-
-    swimming = 1;
-    gravity = 0.1;
-}
-
+//Check the sprite
+alarm[0] = 1;

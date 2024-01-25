@@ -34,10 +34,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"y_max","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"80","varType":4,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_mushroom_lift_up",
-    "path": "sprites/spr_mushroom_lift_up/spr_mushroom_lift_up.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

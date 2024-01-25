@@ -1,7 +1,7 @@
-/// @description A PTooie ball
+/// @description P-Tooie ball
 
-//Animate it
-image_speed = 0.3;
+//Vertical speed
+yspeed = 0;
 
 //Is the ball blown?
 blown = false;
@@ -11,4 +11,3 @@ angle = 0;
 
 //Does the ball have a parent?
 parent = -1;
-

@@ -33,5 +33,5 @@
     "path": "sprites/spr_eventmarker/spr_eventmarker.yy",
   },
   "spriteMaskId": null,
-  "visible": true,
+  "visible": false,
 }

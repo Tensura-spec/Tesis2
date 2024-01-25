@@ -1,36 +1,41 @@
 /// @description Torpedo Ted logic
 
-//If moving right...
-if (xscale > 0) {
+//Manage pseudo movement variables
+if (freeze == false) {
 
-    //Increment speed
-    hspeed += 0.025;
-    
-    //Cap horizontal speed
-    if (hspeed > 3)
-        hspeed = 3;
+	x += xspeed;
+	y += yspeed;
 }
 
-//Otherwise, if moving left...
-else {
+#region LOGIC
 
-    //Increment speed
-    hspeed -= 0.025;
+	//If moving right...
+	if (xscale > 0) {
+
+	    //Increment speed
+	    xspeed += 0.025;
     
-    //Cap horizontal speed
-    if (hspeed < -2)
-        hspeed = -2;
-}
+	    //Cap horizontal speed
+	    if (xspeed > 3)
+	        xspeed = 3;
+	}
 
-//Slow down vertical speed
-if (vspeed > 0)
-    vspeed -= 0.0125;
+	//Otherwise, if moving left...
+	else {
+
+	    //Increment speed
+	    xspeed -= 0.025;
     
-//Otherwise, destroy if outside the view
-else if (vspeed == 0) {
+	    //Cap horizontal speed
+	    if (xspeed < -2)
+	        xspeed = -2;
+	}
 
-    if (x < __view_get( e__VW.XView, view_current )-16)
-    || (x > __view_get( e__VW.XView, view_current )+__view_get( e__VW.WView, view_current )+16)
-        instance_destroy();
-}
+	//Slow down vertical speed
+	if (yspeed > 0)
+	    yspeed -= 0.0125;
+#endregion
 
+//Destroy if outside the view
+if (outside_view() == true)
+	instance_destroy();

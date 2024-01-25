@@ -1,8 +1,8 @@
-/// @description Spinnin' nuclear waffle
+/// @description Rotodisc (Actual waffle)
 
 //Animate
 image_speed = 0;
-palette = 0;
+pal = 0;
 
 //Leave a trail
 alarm[0] = 2;
@@ -13,22 +13,13 @@ alarm[1] = 2;
 //Angle
 angle = 0;
 
-//Light
-light = noone;
-
-//Create spotlight
+//Create a light
 if (instance_exists(obj_lightcontrol)) {
 
-    //Create a light
-    light = instance_create(x, y, obj_light_npc);
-    
-    //With the light
-    with (light) {
-    
-        target = other.id;
-        radius = 24;
-        yoffset = 0;
-        image_blend = make_colour_rgb(248, 144, 32);
-    }
+	with (instance_create_layer(x + 8, x + 8, "Main", obj_light_npc)) {
+		
+		parent = other.id;
+		radius = 8;
+		new_radius = 8;
+	}
 }
-

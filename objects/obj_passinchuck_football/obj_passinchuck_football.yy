@@ -12,7 +12,10 @@
     "name": "Chucks",
     "path": "folders/Objects/Special/Do Not Use!/Enemies/Land/Chucks.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_enemyparent",
+    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -28,13 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_passinchuck_football",
-    "path": "sprites/spr_passinchuck_football/spr_passinchuck_football.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

@@ -38,9 +38,6 @@
     "name": "spr_firesnake_body",
     "path": "sprites/spr_firesnake_body/spr_firesnake_body.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

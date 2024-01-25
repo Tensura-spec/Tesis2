@@ -1,362 +1,477 @@
-/// @description Yoshi Logic
+/// @description Manage Yoshi Actions
 
-//If Yoshi is not being ridden, perform event from parent.
-if (state == yoshistate.idle)
-|| (state == yoshistate.runaway) {
+#region YOSHI LOGIC
 
-    //Inherit event from parent
-    event_inherited();
-    crouch_position = -1;
+	//If Mario does exist.
+	if (instance_exists(obj_mario)) {
+		
+		//Update flashing
+		isflashing = obj_mario.isflashing;
+		
+		//Force dismount yoshi if you have tiny powerup
+		if (global.powerup == cs_tiny) {
+			
+			event_user(1);
+			exit;
+		}
+
+	    //Snap into Mario
+	    x = obj_mario.x;
+	    y = obj_mario.y;
     
-    //Set up the depth
-    if (depth != -2)
-        depth = -2;
-}
-
-//Otherwise
-else if (state == yoshistate.ridden) {
-
-    if (crouch_position == -1) {
+	    //Force Mario to be invisible
+	    obj_mario.visible = 0;
     
-        crouch_position = 15;
+	    //Force Mario to hold something
+	    obj_mario.holding = 4;
+		
+		//Force depth to be equal as Mario's depth
+		depth = obj_mario.depth+1;
         
-    } else if (crouch_position > 0) {
+	    //If Yoshi is not licking and control is pressed.
+	    if (input_check_pressed(input2.action_1))
+	    && (licking == 0)
+	    && (obj_mario.enable_control == true) 
+		&& (obj_mario.enable_gravity == true) {
     
-        crouch_position --;
+	        //If the mouth is empty, start licking.
+	        if (mouthholder == noone) {
         
-    }
-
-    //Stop swimming
-    swimming = false;
-
-    //If the player does exist
-    if (instance_exists(obj_playerparent)) {
-    
-        //Snap into the player
-        x = obj_playerparent.x;
-        y = obj_playerparent.y+1;
-        
-        //Force player invisibility
-        obj_playerparent.visible = 0;
-        
-        //Force player holding state
-        obj_playerparent.holding = 99;
-        
-        //If Yoshi does not have anything on the mount and 'Action 2' is pressed
-        if (input_check_pressed(input.action1))
-        && (licking == 0)
-        && (obj_playerparent.gravity_enable == true)
-        && (obj_playerparent.control_enable == true) {
-        
-            //If the mouth is empty
-            if (mouthholder == noone) {
+	            //Play 'Lick' sound
+	            audio_play_sound(snd_yoshi_tongue, 0, false);
             
-                //Play 'Lick' sound
-                audio_stop_play_sound(snd_lick, 0, false);
-                
-                //Start licking
-                licking = 1;
-                alarm[0] = 5;
-                
-                //Animation
-                anim = 0;
-                m_anim = 3;
-                
-                //Lock tongue in position
-                if ((input_check(input.up)) || (jumping > 0)) {
-                
-                    //If the player is not crouched down
-                    if (obj_playerparent.crouch == false)
-                        locked = 1;
-                    else
-                        locked = 2;
-                }
-                else
-                    locked = 2;
-            }
+	            //Start licking
+	            licking = 1;
+	            alarm[0] = 5;
             
-            //Otherwise, spit out the item
-            else
-                event_user(0);
-        }
-        
-        //Set the depth
-        depth = obj_playerparent.depth;
-        
-        //Manage yoshi state
-        if (mouthholder) 
-            event_user(2);
-        
-        //Set mask to big
-        obj_playerparent.mask_index = spr_mask_player_big;
-        
-        //Check if the player is jumping and make yoshi set up his jump pose if so.
-        if (obj_playerparent.state == statetype.jump)
-            jumping = 1;
-        else
-            jumping = 0;
-    }
-    
-    //Otherwise, if the player is warping through a pipe.
-    else if (instance_exists(obj_player_warp)) {
-    
-        //Snap into the player
-        x = obj_player_warp.x;
-        y = obj_player_warp.y;
-        
-        //Force the player to be invisible
-        obj_player_warp.visible = false;
-        
-        //Depth
-        depth = 11;
-    }
-    
-    //Otherwise, if the player is warping through a door.
-    else if (instance_exists(obj_player_door)) {
-    
-        //Snap into the player
-        x = obj_player_door.x;
-        y = obj_player_door.y;
-        
-        //Force the player to be invisible
-        obj_player_door.visible = false;
-        
-        //Depth
-        depth = -5;
-    }
-    
-    //Otherwise, if the player is warping through a door.
-    else if (instance_exists(obj_player_clear)) {
-    
-        //Snap into the player
-        x = obj_player_clear.x;
-        y = obj_player_clear.y;
-        
-        //Force the player to be invisible
-        obj_player_clear.visible = false;
-        
-        //Depth
-        depth = -5;
-        
-        //Animate the cape
-        if (obj_player_clear.hspeed == 0)
-            anim2 = 0;
-        else
-            anim2 += 0.065+abs(obj_player_clear.hspeed)/7.5;   
-    }
-}
-
-//Force end flying sound if not holding anything on the mouth
-if (audio_is_playing(snd_fly))
-&& (flying == 1)
-&& (mouthholder == noone)
-    audio_stop_sound(snd_fly);
-
-///Yoshi Animation
-
-//If Yoshi is idle
-if (state == yoshistate.idle) {
-
-    //Set the sprite
-    sprite_index = spr_yoshi_idle;
-
-    //Do not animate
-    image_speed = 0;    
-    
-    //Set up the sprite
-    if (mouthholder != noone)
-        image_index = 2;
-}
-
-//Otherwise, if Yoshi is running away
-else if (state == yoshistate.runaway) {
-
-    //Animate
-    image_speed = 0.3;
-
-    //If Yoshi's mouth is full
-    if (mouthholder != noone)
-        sprite_index = spr_yoshi_fullmouth;
-    else
-        sprite_index = spr_yoshi_scared;
-}
-
-//Otherwise
-else {
-
-    //If the player does exist
-    if (instance_exists(obj_playerparent)) {
-    
-        //If Yoshi is licking something
-        if (licking == true) {
-        
-            //If the 'Up' key is being held or Yoshi is jumping.
-            if (locked == 1) {
+	            //Animation
+	            anim = 0;
             
-                //Set the sprite
-                sprite_index = spr_yoshi_lick;
-                
-                //Do not animate
-                image_speed = 0;
-                
-                //Set the frame
-                if (obj_playerparent.vspeed != 0) {
-                
-                    if (obj_playerparent.vspeed < 0)
-                        image_index = 1;
-                    else if (obj_playerparent.vspeed > 0)
-                        image_index = 2;
-                }
-                else
-                    image_index = 0;
-            }
+	            //Lock the tounge in position
+	            if (((input_check(input.up)) || (gamepad_axis_value(0, gp_axislv) < -0.5)) || (jumping > 0)) {
             
-            //Otherwise
-            else {
-            
-                //Set the sprite
-                sprite_index = spr_yoshi_lick_alt;
-                
-                //Do not animate
-                image_speed = 0;
-                image_index = anim;
-            }
-        }
+	                //If Mario is not crouched down
+	                if (!obj_mario.crouch)
+	                    locked = 1;
+	                else
+	                    locked = 2;
+	            }
+	            else
+	                locked = 2;
+	        }
         
-        //Otherwise, if Yoshi is not licking
-        else if (licking == false) {
+	        //Otherwise, spit out the item.
+	        else
+	            event_user(0);
+	    }
+		
+		//
+    
+	    //Make Yoshi flutter if moving down and if Mario does not have either the raccoon or tanooki powerup
+	    if (flying == 0)
+		&& (obj_mario.crouch == false)
+	    && (obj_mario.swimming == false) 
+	    && (global.powerup != cs_raccoon)
+	    && (global.powerup != cs_tanooki) 
+		&& (global.powerup != cs_fraccoon) 
+		&& (global.powerup != cs_iraccoon) {
+    
+	        //If Yoshi can flutter and it is moving down
+			if (input_check_pressed(input2.action_0))
+	        && (flutter == 0)
+			&& (obj_mario.yspeed > 1.5)
+			&& (obj_mario.jumping == 2) {
         
-            //If the player is crouched down or it is sliding down a slope
-            if (obj_playerparent.crouch == true)
-            || (obj_playerparent.sliding == true)
-            || (crouch_position > 0) {
+	            //Play 'Hover' sound
+	            audio_play_sound(snd_yoshi_hover, 0, false);
+         
+	            //Allow fluttering   
+	            flutter = 1;
+	        }
             
-                //If Yoshi is holding something on his mouth
-                if (mouthholder != noone) {
+	        //If Yoshi is fluttering
+	        else if (flutter = 1)  {
+				
+				//If 'Action 0' is pressed
+				if (input_check(input2.action_0)) {
+				
+		            //Increment flutter time
+		            fluttertime += 2;
+            
+		            //If flutter time is lower than 120
+		            if (fluttertime < 120) {
+            
+		                //Make Mario ascend
+		                with (obj_mario) {
                 
-                    //Set the sprite
-                    sprite_index = spr_yoshi_idle;
+		                    //Disable gravity
+		                    yadd = 0;
+                
+		                    //Increment vertical movement
+		                    if (yspeed > 0)
+		                        yspeed -= 0.15;
+		                    else {
                     
-                    //Do not animate
-                    image_speed = 0;
-                    image_index = 2;
-                }
-                
-                //Otherwise
-                else if (mouthholder == noone) {
-                
-                    //Set the sprite
-                    sprite_index = spr_yoshi_idle;
-                    
-                    //Do not animate
-                    image_speed = 0;
-                    image_index = 0;
-                }
-            }
+		                        yspeed -= 0.05;
+		                        if (yspeed < -1.5)
+		                            yspeed = -1.5;
+		                    }
+		                }
+		            }
+		            else {
             
-            //Otherwise
-            else {
+		                //Stop 'Hover' sound
+		                audio_stop_sound(snd_yoshi_hover);
             
-                //If the player is idle
-                if (obj_playerparent.state == statetype.idle) {
+		                //End flutter
+		                flutter = 2;
+                
+		                //Allow flutter after a while
+		                alarm[4] = 7;
+		            }
+				}
+				
+				//Otherwise, force end flutter
+				else if (obj_mario.yspeed < -1.6) 
+				|| (input_check_released(input2.action_0)) {
+				           
+		            //Stop 'Hover' sound
+		            audio_stop_sound(snd_yoshi_hover);
+            
+		            //End flutter
+		            flutter = 2;
+                
+		            //Allow flutter after a while
+		            alarm[4] = 7;					
+				}
+	        }
+	    }
+    
+	    //Force end flutter if not jumping
+	    if (flutter == 1)
+	    && (obj_mario.state != playerstate.jump) {
+            
+	        //Stop 'Hover' sound
+	        audio_stop_sound(snd_yoshi_hover);
+            
+	        //End flutter
+	        flutter = 2;
+        
+	        //Allow flutter after a while
+	        alarm[4] = 7;
+	    }
+    
+	    //Manage Yoshi state
+	    event_user(3);
+    
+	    //Mask
+	    obj_mario.mask_index = spr_mask_mario_big;
+    
+	    //Check if Mario is jumping and make yoshi set up his jump pose if so.
+	    if ((obj_mario.state == playerstate.jump) || (obj_mario.statedelay > 0))    
+	        jumping = 1;
+        
+	    //Otherwise, if Mario is not jumping
+	    else {
+    
+	        //Stop 'Hover' sound
+	        audio_stop_sound(snd_yoshi_hover);
+        
+	        //End jumping
+	        jumping = 0;
+        
+	        //Allow fluttering        
+	        flutter = 0;
+	        if (fluttertime > 0)
+	            fluttertime = 0;
+	    }
+		
+		//Check for a berry
+		var _berry = instance_position(x + 10*sign(image_xscale), y - 6, obj_berry);
+		
+		// Bite berry if yoshi's mouth is not full
+		if (_berry != noone)
+		&& (licking == 0)
+		&& (mouthholder == noone) {
+			
+			//Play eating sound
+			audio_play_sound(snd_yoshi_eat, 0, false);
+			
+			//Open mouth then prep to close mouth
+			licking = true;
+			alarm[1] = 5;
+			
+			//Remember eaten berry
+			berry = _berry.sprite_index;
+
+			//Destroy berry
+			instance_destroy(_berry);
+		}
+	}
+
+	//Otherwise, if Mario does not exist.
+	else {
+
+	    //If Mario has cleared a level, do not hold anything on the mouth and stop sounds from playing
+	    if (instance_exists(obj_mario_clear)) {
+    
+			//If there's something inside Yoshi's mouth
+	        if (mouthholder != noone) {
+        
+	            mouthholder = noone;
+	            mouthsprite = noone;
+	        }
+			
+			//Stop 'Flying' sound
+			audio_stop_sound(snd_yoshi_fly);
+
+			//Stop 'Flutter' sound
+			audio_stop_sound(snd_yoshi_hover);
+
+			//Destroy Yoshi's tongue if it exists
+			with (obj_yoshi_tongue) {
+				
+				instance_destroy();
+			}
+	    }
+
+	    //Find a suitable player
+	    follow_which_mario();
+    
+	    //If said player object exists, follow him
+	    if (instance_exists(follow)) {
+    
+	        //Snap onto this object
+	        x = follow.x;
+	        y = follow.y;
+        
+	        //Set the same depth as the other object
+	        depth = follow.depth;
+	    }
+	}
+
+	//Stop 'Flutter' sound if yoshi is not fluttering
+	if (flutter != 1)
+	&& (audio_is_playing(snd_yoshi_hover))
+	    audio_stop_sound(snd_yoshi_hover);
+		
+#endregion
+
+#region YOSHI ANIMATION
+
+	//If Mario does exist.
+	if (instance_exists(obj_mario)) {
+
+	    //If yoshi is licking.
+	    if (licking) {
+    
+	        //If the 'Up' key is being held or Yoshi is jumping.
+	        if (locked == 1) {
+        
+	            //If yoshi is fluttering
+	            if (flutter == 1) {
+            
+	                //Set the sprite
+	                sprite_index = spr_yoshi_lick_flutter;                         
+                
+	                //Animate
+	                image_speed = 0.3;                    
+	            }
+            
+	            //Otherwise
+	            else {
+            
+	                //Set the sprite
+	                sprite_index = spr_yoshi_swallow;
+                
+	                //Do not animate
+	                image_speed = 0;
+                
+	                //Set the frame
+	                if (obj_mario.yspeed != 0) {
+                
+	                    if (obj_mario.yspeed < 0)
+	                        image_index = 1;
+	                    else if (obj_mario.yspeed > 0)
+	                        image_index = 2;
+	                }
+	                else
+	                    image_index = 0;
+	            }
+	        }
+            
+	        //Otherwise, if Mario is not moving vertically
+	        else {
+            
+	            //Set the sprite
+	            sprite_index = spr_yoshi_lick;
+            
+	            //Do not animate
+	            image_speed = 0;
+            
+	            //Set the frame
+	            image_index = anim;
+	        }
+	    }
+    
+	    //Otherwise, if Yoshi is not licking.
+	    else if (!licking) {
+    
+	        //If Mario is crouched down or it's sliding down a slope.
+	        if (obj_mario.crouch) 
+	        || (obj_mario.sliding) {
+        
+	            //If Yoshi is holding something on his mouth.
+	            if (mouthholder != noone) {
+            
+	                //Set the sprite
+	                sprite_index = spr_yoshi_fm_wait;
+        
+	                //Do not animate
+	                image_speed = 0;
+	                image_index = 2;
+	            }
+            
+	            //Otherwise, if Yoshi is not holding anything on his mouth.
+	            else if (mouthholder == noone) {
+            
+	                //Set the sprite
+	                sprite_index = spr_yoshi_wait;
+                
+	                //Do not animate
+	                image_speed = 0;
+	                image_index = 0;
+	            }
+	        }
+        
+	        //Otherwise, if Mario is not crouched down.
+	        else {
+    
+	            //If Mario is idle.
+	            if (obj_mario.state == playerstate.idle) {
+            
+	                //If Yoshi is holding something on his mouth.
+	                if (mouthholder != noone) {
+                
+	                    //Set the sprite
+	                    sprite_index = spr_yoshi_fm;
                     
-                    //If Yoshi is holding something on his mouth
-                    if (mouthholder != noone) {
+	                    //Do not animate
+	                    image_speed = 0;
+	                    image_index = 0;
+	                }
+                
+	                //Otherwise, if Yoshi is not holding anything on his mouth.
+	                else if (mouthholder == noone) {
+                
+	                    //Set the sprite
+	                    sprite_index = spr_yoshi;
                     
-                        //Set the sprite
-                        sprite_index = spr_yoshi_fullmouth;
+	                    //Do not animate
+	                    image_speed = 0;
+	                    image_index = 0;                
+	                }
+	            }
+            
+	            //Otherwise, if Mario is moving.
+	            else if (obj_mario.state == playerstate.walk) {
+            
+	                //If Yoshi is holding something on his mouth.
+	                if (mouthholder != noone) {
+                
+	                    //Set the sprite
+	                    sprite_index = spr_yoshi_fm;
+                    
+	                    //Animate
+	                    image_speed = (obj_mario.isslip) ? 0.130+abs(obj_mario.xspeed)/7.5 : 0.065+abs(obj_mario.xspeed)/7.5;
+	                }
+                
+	                //Otherwise, if Yoshi is not holding anything on his mouth.
+	                else if (mouthholder == noone) {
+                
+	                    //Set the sprite
+	                    sprite_index = spr_yoshi;
+                    
+	                    //Animate
+	                    image_speed = (obj_mario.isslip) ? 0.130+abs(obj_mario.xspeed)/7.5 : 0.065+abs(obj_mario.xspeed)/7.5;                 
+	                }
+	            }
+            
+	            //Otherwise, if Mario is moving upwards.
+	            else if (obj_mario.state == playerstate.jump) {
+            
+	                //If Yoshi is holding something on his mouth.
+	                if (mouthholder != noone) {
+                
+	                    //If Yoshi is fluttering
+	                    if (flutter == 1) {
+                    
+	                        //Set the sprite
+	                        sprite_index = spr_yoshi_fm_flutter;
                         
-                        //Do not animate
-                        image_speed = 0;
-                        image_index = 0;
-                    }
-                    
-                    //Otherwise, if Yoshi is not holding anything on his mouth
-                    else if (mouthholder == noone) {
-                    
-                        //Set the sprite
-                        sprite_index = spr_yoshi;
-                        
-                        //Do not animate
-                        image_speed = 0;
-                        image_index = 0;
-                    }
-                }
+	                        //Animate
+	                        image_speed = 0.3;
+	                    }
+	                    else {
                 
-                //Otherwise, if the player is walking
-                else if (obj_playerparent.state == statetype.walk) {
+	                        //Set the sprite
+	                        sprite_index = spr_yoshi_fm_jump;
+                        
+	                        //Do not animate
+	                        image_speed = 0;
+                        
+	                        //Set the frame
+	                        if (obj_mario.yspeed < 0)
+	                            image_index = 0;
+	                        else
+	                            image_index = 1;
+	                    }
+	                }
                 
-                    //If Yoshi is holding something on his mouth
-                    if (mouthholder != noone) {
-                    
-                        //Set the sprite
-                        sprite_index = spr_yoshi_fullmouth;
-                        
-                        //Set the animation speed
-                        image_speed = (0.065*(obj_playerparent.inice*4))+abs(obj_playerparent.hspeed)/7.5;
-                    }
-                    
-                    //Otherwise, if Yoshi is not holding anything on his mouth
-                    else if (mouthholder == noone) {
-                                    
-                        //Set the sprite
-                        sprite_index = spr_yoshi;
-                    
-                        //Set the animation speed
-                        image_speed = (0.065*(obj_playerparent.inice*4))+abs(obj_playerparent.hspeed)/7.5;
-                    }
-                }
+	                //Otherwise, if Yoshi is not holding anything on his mouth.
+	                else if (mouthholder == noone) {
                 
-                //Otherwise, if the player is jumping
-                else if (obj_playerparent.state == statetype.jump) {
-                
-                    //If Yoshi is holding something on his mouth
-                    if (mouthholder != noone) {
+	                    //If Yoshi is fluttering
+	                    if (flutter == 1) {
                     
-                        //Set the sprite
-                        sprite_index = spr_yoshi_fullmouth_jump;
+	                        //Set the sprite
+	                        sprite_index = spr_yoshi_flutter;                         
                         
-                        //Do not animate
-                        image_speed = 0;
-                        
-                        //Set the frame
-                        if (obj_playerparent.vspeed < 0)
-                            image_index = 0;
-                        else
-                            image_index = 1;
-                    }
+	                        //Animate
+	                        image_speed = 0.3;                                      
+	                    }
                     
-                    //Otherwise, if Yoshi is not holding anything on his mouth
-                    else if (mouthholder == noone) {
+	                    else {
                     
-                        //Set the sprite
-                        sprite_index = spr_yoshi_jump;
+	                        //Set the sprite
+	                        sprite_index = spr_yoshi_jump;
                         
-                        //Do not animate
-                        image_speed = 0;
+	                        //Do not animate
+	                        image_speed = 0;
                         
-                        //Set the frame
-                        if (obj_playerparent.vspeed < 0)
-                            image_index = 0;
-                        else
-                            image_index = 1;                                            
-                    }
-                }
-            }
-        }
-    }
-    
-    //Otherwise, if the player is warping through a pipe
-    else if (instance_exists(obj_player_warp)) {
-    
+	                        //Set the frame
+	                        if (obj_mario.yspeed < 0)
+	                            image_index = 0;
+	                        else
+	                            image_index = 1;   
+	                    }                                 
+	                }
+	            }
+	        }
+	    }
+	}
+	
+	//Otherwise, if Mario is warping through a pipe
+	else if (instance_exists(obj_mario_warp)) {
+	   
         //If the player is not moving vertically
-        if (obj_player_warp.vspeed == 0) {
+        if (obj_mario_warp.vspeed == 0) {
     
             //If Yoshi is holding something on his mouth.
             if (mouthholder != noone) {
             
                 //Set the sprite
-                sprite_index = spr_yoshi_fullmouth;
+                sprite_index = spr_yoshi_fm_wait;
                 
                 //Animate
                 image_speed = 0.2;
@@ -366,14 +481,11 @@ else {
             else if (mouthholder == noone) {
             
                 //Set the sprite
-                sprite_index = spr_yoshi;
+                sprite_index = spr_yoshi_wait;
                 
                 //Animate
                 image_speed = 0.2;               
             }
-            
-            //Set the depth
-            depth = 10;
         }
         else {
         
@@ -381,11 +493,11 @@ else {
             if (mouthholder != noone) {
             
                 //Set the sprite
-                sprite_index = spr_yoshi_fullmouth_warp;
+                sprite_index = spr_yoshi_warp;
                 
                 //Do not animate
                 image_speed = 0;
-                image_index = 0;
+                image_index = 1;
             }
             
             //Otherwise, if Yoshi is not holding anything on his mouth.
@@ -398,89 +510,119 @@ else {
                 image_speed = 0;
                 image_index = 0;
             }
-        }
-    }
+        }		
+	}
+#endregion
+
+//If Mario does exist
+if (instance_exists(obj_mario)) {
     
-    //Otherwise, if the player has cleared the level
-    else if (instance_exists(obj_player_clear)) {
+    //If Yoshi is extending it's tongue
+    if (licking) {
     
-        //If the player is not moving vertically
-        if (obj_player_clear.vspeed == 0) {
-    
-            //If Yoshi is holding something on his mouth.
-            if (mouthholder != noone) {
+        //If Mario has either the raccoon or tanooki powerup
+        if (global.powerup == cs_raccoon) || (global.powerup == cs_tanooki) {
+        
+            //If Yoshi is jumping
+            if (jumping == 0) {
             
-                //Set the sprite
-                sprite_index = spr_yoshi_fullmouth;
-                
-                //Animate
-                if (obj_player_clear.hspeed == 0) {
-                
-                    image_speed = 0;
-                    image_index = 0;
-                }
+                //If Yoshi is crouching to lick something
+                if (sprite_index == spr_yoshi_lick)
+                    f = 4+obj_mario.wiggle/4;
                 else
-                    image_speed = 0.065+abs(obj_player_clear.hspeed)/7.5;
+                    f = 0+obj_mario.wiggle/4;
             }
             
-            //Otherwise, if Yoshi is not holding anything on his mouth.
-            else if (mouthholder == noone) {
+            //Otherwise
+            else {
             
-                //Set the sprite
-                sprite_index = spr_yoshi;
-                
-                //Animate
-                if (obj_player_clear.hspeed == 0) {
-                
-                    image_speed = 0;
-                    image_index = 0;
-                }
+                if (locked == 2)
+                    f = 4+obj_mario.wiggle/4;
                 else
-                    image_speed = 0.065+abs(obj_player_clear.hspeed)/7.5;             
+                    f = 0+obj_mario.wiggle/4;
             }
         }
+        
+        //Otherwise, if Mario does not have any of the above powerups.
         else {
         
-            //If Yoshi is holding something on his mouth.
-            if (mouthholder != noone) {
-            
-                //Set the sprite
-                sprite_index = spr_yoshi_fullmouth_jump;
+            //If Yoshi is not jumping
+            if (jumping == 0) {
                 
-                //Do not animate
-                image_speed = 0;
-                if (vspeed < 0)
-                    image_index = 0;
+                //If Yoshi is crouching to lick something
+                if (sprite_index == spr_yoshi_lick)
+                    f = 1;
                 else
-                    image_index = 1;
+                    f = 0;
             }
             
-            //Otherwise, if Yoshi is not holding anything on his mouth.
-            else if (mouthholder == noone) {
+            //Otherwise
+            else {
             
-                //Set the sprite
-                sprite_index = spr_yoshi_jump;
-                
-                //Do not animate
-                image_speed = 0;
-                if (vspeed < 0)
-                    image_index = 0;
+                if (locked == 2)
+                    f = 1;
                 else
-                    image_index = 1;
+                    f = 0;
             }
-        }            
+        }
     }
     
-    //Set up the y position for Mario
-    if (sprite_index == spr_yoshi)
-    || (sprite_index == spr_yoshi_fullmouth) {
+    //Otherwise, if Yoshi is not extending it's tongue
+    else {
     
-        if (image_index > 0.99)
-            m_ypos = 1;
-        else
-            m_ypos = 0;
+        //If Mario has either the raccoon or tanooki powerup.
+        if (global.powerup == cs_raccoon) || (global.powerup == cs_tanooki) {
+        
+            //If Mario is crouched down or sliding down a slope
+            if (obj_mario.crouch) || (obj_mario.sliding)
+                f = 4+obj_mario.wiggle/4;
+            
+            //Otherwise...
+            else            
+                f = 0+obj_mario.wiggle/4;
+        }
+    
+        else {
+        
+            //If Mario is crouched down or sliding down a slope
+            if (obj_mario.crouch) || (obj_mario.sliding) 
+                f = 1;
+    
+            //Otherwise, set the default frame
+            else          
+                f = 0;
+        }
     }
-    else
-        m_ypos = 0;
+    
+    //Set the facing direction
+    image_xscale = obj_mario.xscale;
 }
 
+//If Mario exists
+if (instance_exists(obj_mario)) {
+
+	//Set up the y position for Mario
+	if (sprite_index == spr_yoshi)
+	|| (sprite_index == spr_yoshi_fm) {
+
+	    if (image_index > 0.99)
+	        myy = 1;
+	    else
+	        myy = 0;
+	}
+	else
+	    myy = 0;
+}
+else if (instance_exists(obj_mario_clear)) {
+
+	//If Mario is moving horizontally
+	if (obj_mario_clear.xspeed > 0) {
+		
+		if (obj_mario_clear.anim > 0.99)
+			myy = 1;
+		else
+			myy = 0;
+	}
+	else
+		myy = 0;
+}

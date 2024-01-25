@@ -13,15 +13,13 @@ mom = -1;
 //Set the distance from the center.
 length = 0;
 
-//Set up orange light
+//Create a light
 if (instance_exists(obj_lightcontrol)) {
-    
-    with (instance_create(0, 0, obj_light_npc)) {
-    
-        target = other.id;
-        radius = 16;
-        yoffset = 0;
-        image_blend = make_colour_rgb(248, 144, 32);
-    }
-}
 
+	with (instance_create_layer(0, 0, "Main", obj_light_npc)) {
+		
+		parent = other.id;
+		radius = 8;
+		new_radius = 8;
+	}
+}

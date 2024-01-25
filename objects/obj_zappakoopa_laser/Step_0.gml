@@ -15,7 +15,7 @@ if (beam == 0) {
         
         //If there's a solid on the way
         if (((collision_point(x, y, obj_solid, 0, 0)) || (collision_point(x, y, obj_slopeparent, 1, 0))) 
-        || (x > __view_get( e__VW.XView, view_current )+__view_get( e__VW.WView, view_current )+16)) {
+        || (x > camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) + 16)) {
         
             move_snap(4, 1);
             beam = 1;
@@ -23,8 +23,8 @@ if (beam == 0) {
         }
         else {
         
-            x += 4;
-            length += 4;
+            x += 8;
+            length += 8;
         }
     }
     
@@ -33,7 +33,7 @@ if (beam == 0) {
         
         //If there's a solid on the way
         if (((collision_point(x, y, obj_solid, 0, 0)) || (collision_point(x, y, obj_slopeparent, 1, 0))) 
-        || (x < __view_get( e__VW.XView, view_current )-16)) {
+        || (x < camera_get_view_x(view_camera[0])-16)) {
         
             move_snap(4, 1);
             beam = 1;
@@ -41,14 +41,13 @@ if (beam == 0) {
         }
         else {
         
-            x -= 4;
-            length -= 4;
+            x -= 8;
+            length -= 8;
         }
     }
 }
 
-//Check for the player and hurt him
-player = collision_rectangle(xstart, y-4, xstart+length, y+4, obj_playerparent, 0, 0)
+//Check for Mario and hurt him
+player = collision_rectangle(xstart, y-4, xstart+length, y+4, obj_mario, 0, 0)
 if (player)
     with (player) event_user(0);
-

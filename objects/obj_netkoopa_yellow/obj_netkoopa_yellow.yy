@@ -32,10 +32,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_netkoopa_yellow",
-    "path": "sprites/spr_netkoopa_yellow/spr_netkoopa_yellow.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

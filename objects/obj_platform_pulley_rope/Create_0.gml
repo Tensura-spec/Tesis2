@@ -1,6 +1,5 @@
-/// @description The rope needed to hang the pulley platforms
+/// @description Balance Platform Rope
 
 scale = 0;
 ready = 0;
 platform = noone;
-

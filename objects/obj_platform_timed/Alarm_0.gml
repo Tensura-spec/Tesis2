@@ -1,11 +1,31 @@
-/// @description Perform platform actions
+/// @description Decrement timer
 
-//Decrement time
-time--;
+if (ready == 1) {
 
-//Make the platform fall if the timer hits 0
-if (time == 0)
-    gravity = 0.15;
-else
-    alarm[0] = 60;
-
+	//Decrement time
+	if (time > 1) {
+		
+		//Play 'Carrot' sound
+		audio_play_sound(snd_carrotplat, 0, false);
+		
+		//Decrement time
+		time--;
+		
+		//Repeat
+		alarm[0] = 60;
+	}
+	
+	//Otherwise, if the timer is 1
+	else if (time == 1) {
+		
+		//Play 'Carrot Fall' sound
+		audio_play_sound(snd_carrotplat_fall, 0, false);
+	
+		//End timer
+		time = 0;
+		
+		//Set gravity
+		ready = 2;
+		gravity = 0.1;
+	}
+}

@@ -1,17 +1,24 @@
-/// @description Item Block
+/// @description Standard Question Mark Block
 
-//Item held on block
-sprout = itemtype.coin;
-
-//Timer
-timer = 0;
-
-//Coins collected
-coins = 0;
-
-//Inherit event from parent object
-event_inherited();
+//Whether this block has been bumped from above
+bottom = false;
 
 //Shard sprite
-shardsprite = spr_shard_flip;
+shard_sprite = spr_shard;
 
+//Whether this block can be hit
+ready = 0;
+
+//Question Mark position
+xx = xstart;
+
+//Set up depth
+depth = layer_get_depth("Main");
+
+//Make it solid
+mysolid = instance_create_layer(x, y, "Main", obj_solid);
+with (mysolid) {
+
+	image_xscale = other.sprite_width/16;
+	image_yscale = other.sprite_height/16;
+}

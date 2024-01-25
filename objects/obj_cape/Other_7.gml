@@ -1,4 +1,4 @@
-/// @description End animation
+/// @description End cape animations
 
 //If the cape is moving up
 if (sprite_index == spr_cape_up) {
@@ -34,4 +34,3 @@ else if (sprite_index == spr_cape_down) {
     image_speed = 0;
     image_index = 0;
 }
-

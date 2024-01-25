@@ -10,4 +10,3 @@ with (lrb) hspeed = -0.5;
 //Expand rightmost blocks
 with (rlb) hspeed = 0.5;
 with (rrb) hspeed = 1;
-

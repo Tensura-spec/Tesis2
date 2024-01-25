@@ -1,10 +1,16 @@
-/// @description Pulley platform logic
+/// @description Balance Platform logic
 
-//If the player is on this moving platform
-if ((collision_rectangle(bbox_left, bbox_top-5, bbox_right, bbox_top+4, obj_playerparent, 0, 0))
-&& (obj_playerparent.bbox_bottom < yprevious+5)
-&& (obj_playerparent.state != statetype.jump)) {
-    
+//Inherit event from parent
+event_inherited();
+
+//Check for the player
+var mario = collision_rectangle(bbox_left, bbox_top-5, bbox_right, bbox_top+4, obj_mario, 0, 0);
+
+//If the player exists
+if (mario)
+&& (mario.state != playerstate.jump)
+&& (mario.bbox_bottom < yprevious+5) {
+	
     //If the platform is still being held with the rope.
     if (ready = 0) {
             
@@ -14,15 +20,10 @@ if ((collision_rectangle(bbox_left, bbox_top-5, bbox_right, bbox_top+4, obj_play
         //Set the vertical speed for the other platform.
         with (parent) vspeed -= 0.1
     }
-    
-    //Check for a moving platform
-    var check = collision_rectangle(obj_playerparent.bbox_left, obj_playerparent.bbox_bottom-1, obj_playerparent.bbox_right, obj_playerparent.bbox_bottom+1, obj_semisolid, 0, 1);
-    if (check)
-        exit;                
-
-    //Snap the player above the platform
-    obj_playerparent.y = ceil(bbox_top-16);
 }
+
+//Depth
+depth = -2;
 
 //Slowdown both platforms
 event_user(0);
@@ -33,13 +34,13 @@ event_user(1);
 //Create new platforms when falling and outside the view.
 if (ready == 1) {
 
-    gravity = 0.05;
-    if ((y > __view_get( e__VW.YView, 0 )+232) && (parent.y > __view_get( e__VW.YView, 0 )+232)) {
+    gravity = 0.15;    
+    if (y > camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) + 32) 
+	&& (parent.y > camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) + 32) {
     
         ready = 2; 
-        alarm[2] = 180;
+        alarm[2] = 1;
     }
 }
 else
     gravity = 0;
-

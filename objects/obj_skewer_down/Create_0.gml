@@ -1,6 +1,8 @@
 /// @description Downward Skewer
 
-//Create the trunk
-with (instance_create(x, y+48, obj_skewertrunk_down))
-    parent = other.id;
+//Set depth
+depth = 9;
 
+//Create trunk
+with (instance_create_depth(x, y+48, 10, obj_skewer_trunk_down))
+	parent = other.id;

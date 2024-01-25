@@ -38,9 +38,6 @@
     "name": "spr_bombguy",
     "path": "sprites/spr_bombguy/spr_bombguy.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

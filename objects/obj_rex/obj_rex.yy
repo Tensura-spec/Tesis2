@@ -36,9 +36,6 @@
     "name": "spr_rex",
     "path": "sprites/spr_rex/spr_rex.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x32",
-    "path": "sprites/spr_mask_npc_common_16x32/spr_mask_npc_common_16x32.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

@@ -35,10 +35,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_lavalotus_ball",
-    "path": "sprites/spr_lavalotus_ball/spr_lavalotus_ball.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

@@ -1,21 +1,20 @@
 /// @description Set scale and horizontal speed
 
 //If not moving up/down
-if (vspeed == 0) {
+if (yspeed == 0) {
 
-    if (hspeed > 0)
-        hspeed = 3;
-    else if (hspeed < 0)
-        hspeed = -3;
+    if (xspeed > 0)
+        xspeed = 3;
+    else if (xspeed < 0)
+        xspeed = -3;
 }
 else {
 
-    if (hspeed > 0)
-        hspeed = 2.5;
-    else if (hspeed < 0)
-        hspeed = -2.5;
+    if (xspeed > 0)
+        xspeed = 2.5;
+    else if (xspeed < 0)
+        xspeed = -2.5;
 }
 
 //Scale
-image_xscale = 1;
-
+xscale = 1*sign(xspeed);

@@ -8,4 +8,3 @@ if (held) {
     //Remember the sprite of the object.
     global.carriedsprite = sprite_index;
 }
-

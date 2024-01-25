@@ -1,20 +1,29 @@
-/// @description Shows how many stars the player obtained on the goal
+/// @description You got points!
 
-//Frame to show
-frame = 0;
+//Score font
+font = font_add_sprite_ext(spr_score, "0123456789", 0, -1);
+font_big = font_add_sprite_ext(spr_score_big, "0123456789", 0, -1);
 
-//Colour
-colour = c_white;
+//Gold (Turns flag into gold)
+gold = 0;
 
-//Show for 2 seconds
-alarm[0] = 120;
+//Depth
+depth = -6;
 
-//Replace the colour
-alarm[1] = 4;
+//Default value
+value = 10;
 
-//Fonts
-font0 = font_add_sprite_ext(spr_hud_clear_stars0, "0123456789", 0, 8);
-font1 = font_add_sprite_ext(spr_hud_clear_stars1, "0123456789", 0, 8);
-font2 = font_add_sprite_ext(spr_hud_clear_stars2, "0123456789", 0, 8);
-font3 = font_add_sprite_ext(spr_hud_clear_stars3, "0123456789", 0, 8);
+//Scale
+scale = 0;
 
+//Alpha
+alpha = 0;
+
+//Set vertical speed
+vspeed = -1.5;
+
+//Give the amount of score
+alarm[0] = 2;
+
+//Create spark effects
+alarm[1] = 1;

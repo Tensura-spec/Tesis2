@@ -1,4 +1,0 @@
-/// @description Ignore collision
-
-exit;
-

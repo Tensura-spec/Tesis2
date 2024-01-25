@@ -1,60 +1,47 @@
-/// @description Bullet logic
+/// @description Blasta Koopa bullet logic
 
-//If the bullet can follow mario
-if (homing) {
+//Last direction
+lastdir = direction;
 
-    //If the player does exist
-    if (instance_exists(obj_playerparent)) {
-    
-        //If the player is at the right
-        if (obj_playerparent.x > x) {
-        
-            hspeed += 0.025;
-            if (hspeed > 1)
-                hspeed = 1;
-        }
-        
-        //Otherwise, if the player is at the left
-        else if (obj_playerparent.x < x) {
-        
-            hspeed += -0.025;
-            if (hspeed < -1)
-                hspeed = -1;
-        }
-    
-        //If the player is below
-        if (obj_playerparent.y > y) {
-        
-            vspeed += 0.025;
-            if (vspeed > 1)
-                vspeed = 1;
-        }
-        
-        //Otherwise, if the player is above
-        else if (obj_playerparent.y < y) {
-        
-            vspeed += -0.025;
-            if (vspeed < -1)
-                vspeed = -1;
-        }
-    
-        /*
-        //Declare a new variable that hold the direction between your own position and the position of obj_playerparent
-        var new_dir = point_direction(x, y, obj_playerparent.x, obj_playerparent.y);
-        
-        //Declare diff, diff is the difference in angle between where this object is going.
-        var diff = angle_difference(direction, new_dir);
-        
-        //Turn it
-        direction -= min(1 * sign(diff), abs(diff));
-        lastdir = direction;
-        */
-    }
+//If not frozen
+if (freeze == false) {
+	
+	//If the bullet is homing
+	if (homing == true) {
+
+		//Declare a new variable that hold the direction between your own position and the position of obj_mario
+		if (instance_exists(obj_mario)) {
+			
+			//Followe either Mario or the camera
+			new_dir = (instance_exists(obj_mario_transform)) ? point_direction(x, y, obj_levelcontrol.x, obj_levelcontrol.y) : point_direction(x, y, obj_mario.x, obj_mario.y);
+			
+			//Declare diff, diff is the difference in angle between where this object is going.
+			diff = angle_difference(direction, new_dir);
+		}
+		else {
+		
+			//Follow the camera
+			new_dir = point_direction(x, y, obj_levelcontrol.x, obj_levelcontrol.y);
+			
+			//Declare diff, diff is the difference in angle between where this object is going.
+			diff = angle_difference(direction, new_dir);
+		}
+	}
+	
+	//Turn it
+	direction -= min(2 * sign(diff), abs(diff));
 }
 
-//Destroy when outside view
-if (outside_view(16))
-    instance_destroy();
+#region SCALE
 
-/* */
-/*  */
+	if (hspeed > 0)
+		yy = 1;
+	else if (hspeed < 0)
+		yy = -1;
+#endregion
+
+//Destroy if outside the view
+if (x < camera_get_view_x(view_camera[0]) - 16)
+|| (x > camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) + 16)
+|| (y > camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) + 16)
+    instance_destroy();

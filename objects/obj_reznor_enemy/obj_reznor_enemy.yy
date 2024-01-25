@@ -36,10 +36,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_reznor",
-    "path": "sprites/spr_reznor/spr_reznor.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

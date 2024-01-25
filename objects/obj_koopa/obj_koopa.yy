@@ -38,9 +38,6 @@
     "name": "spr_koopa",
     "path": "sprites/spr_koopa/spr_koopa.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

@@ -1,9 +1,9 @@
 /// @description Create a new platform
 
-if (xstart < __view_get( e__VW.XView, view_current ) - sprite_width)
-|| (xstart > __view_get( e__VW.XView, view_current ) + __view_get( e__VW.WView, view_current ))
-|| (ystart < __view_get( e__VW.YView, view_current ) - sprite_height)
-|| (ystart > __view_get( e__VW.YView, view_current ) + __view_get( e__VW.HView, view_current )) {
+if (xstart < camera_get_view_x(view_camera[0]) - sprite_width)
+|| (xstart > camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]))
+|| (ystart < camera_get_view_y(view_camera[0]) - sprite_height)
+|| (ystart > camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])) {
 
     //Return to start position
     x = xstart;
@@ -18,4 +18,3 @@ if (xstart < __view_get( e__VW.XView, view_current ) - sprite_width)
 }
 else
     alarm[1] = 1;
-

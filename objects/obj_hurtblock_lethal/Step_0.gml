@@ -1,16 +1,17 @@
-/// @description Check for the player and hurt him
+/// @description Insta-kill Mario
 
-var player = collision_rectangle(bbox_left-1, bbox_top-1, bbox_right+1, bbox_bottom+1, obj_playerparent, 0, 0);
+//Check for Mario
+var mario = collision_rectangle(bbox_left - 1, bbox_top -1, bbox_right + 1, bbox_bottom + 1, obj_mario, 0, 0);
 
-//If the player is in position, kill him at the instant
-if (player) 
-&& (!instance_exists(obj_invincibility)) {
+//If Mario is on this platform
+if (mario) {
+	
+	//If Mario is not invulnerable
+	if (mario.invulnerable == false) {
 
-    with (player) {
-    
-        instance_create(x, y, obj_player_dead);
-        instance_destroy();
-        exit;
-    }
+		//Kill Mario instantly
+		instance_create_depth(mario.x, mario.y, -5, obj_mario_dead);
+		with (mario) instance_destroy();
+		exit;
+	}
 }
-

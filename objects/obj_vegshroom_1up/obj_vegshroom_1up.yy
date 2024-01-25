@@ -13,10 +13,7 @@
     "name": "Collectibles",
     "path": "folders/Objects/Items/Subcon/Collectibles.yy",
   },
-  "parentObjectId": {
-    "name": "obj_solid",
-    "path": "objects/obj_solid/obj_solid.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

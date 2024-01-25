@@ -1,23 +1,25 @@
-/// @description Banzai Bill
+/// @description Bullet Bill
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 3;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 0;
 
-//How vulnerable is this enemy to Yoshi
-edible = 2;
+//How vulnerable is this enemy to Yoshi?
+edible = 0;
 
-//Death Sprite
-deathsprite = spr_banzaibill_dead;
+//Do not swim
+noswim = 1;
 
-//Stomp sprite
-stompsprite = spr_banzaibill_dead;
+//Ignore platforms
+ignore_platforms = true;
 
-//Animate
+//Freeze object
+freeze_object = -2;
+
+//Do not animate
 image_speed = 0;
-

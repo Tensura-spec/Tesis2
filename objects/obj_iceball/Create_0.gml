@@ -1,38 +1,33 @@
-/// @description Iceball
+/// @description A snowball shot by Mario
 
 //Inherit event from parent
-event_perform_object(obj_physicsparent, ev_create, 0);
+event_inherited();
 
-//Play 'Iceball' sound
-audio_stop_play_sound(snd_iceball, 0, false);
+//Set vertical speed
+yspeed = 0.5;
 
-//Stop 'Fireball' sound
-audio_stop_sound(snd_fireball);
+//No bounces
+bounces = -1;
 
-//Animate
-image_speed = 0.2;
+//Do not swim
+noswim = true;
 
-//Set the vertical speed
-vspeed = 0.5;
+//Do not turn toward walls
+turn_toward = false;
 
 //Leave a trail
-alarm[0] = 8;
+alarm[0] = 1;
 
-//Destroy after a while
+//Destroy after a bit
 alarm[1] = 120;
 
-//Create light if required
+//Create a light
 if (instance_exists(obj_lightcontrol)) {
 
-    mylight = instance_create(0, 0, obj_light_npc);
-    with (mylight) {
-    
-        target = other.id;
-        radius = 16;
-        yoffset = 0;
-        image_blend = c_white;
-    }
+	with (instance_create_layer(0, 0, "Main", obj_light_npc)) {
+		
+		parent = other.id;
+		radius = 8;
+		new_radius = 8;
+	}
 }
-else
-    mylight = noone;
-

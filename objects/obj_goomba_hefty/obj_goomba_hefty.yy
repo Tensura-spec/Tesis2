@@ -31,13 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_goomba_hefty",
-    "path": "sprites/spr_goomba_hefty/spr_goomba_hefty.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_32x32",
-    "path": "sprites/spr_mask_npc_common_32x32/spr_mask_npc_common_32x32.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

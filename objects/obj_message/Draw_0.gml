@@ -1,66 +1,23 @@
-/// @description Display the message box
+/// @description Draw the text and the message box
 
-//Draw the screenshot if it exists
-if (background_exists(back)) {
-
-    //Disable alpha blending
-    draw_enable_alphablend(0);
-    
-    //Draw screenshot
-    draw_background(back, __view_get( e__VW.XView, 0 ), __view_get( e__VW.YView, 0 ));
-    
-    //Enable alpha blending
-    draw_enable_alphablend(1);
-}
+//Draw the screenshot.
+freeze_render();
 
 //Draw the message box
-draw_sprite_ext(spr_message, obj_controller.hud_type, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2, __view_get( e__VW.YView, 0 ) + 78, scale, scale, 0, c_white, 1);
-
-//Set up the font
-if (obj_controller.hud_type == 2)
-    draw_set_font(global.fontmsg_alt);
-else
-    draw_set_font(global.fontmsg);
-
-//Set up the colour
-draw_set_colour(c_white);
-
-//If the text should be displayed
-if (scale == 1) {
-
-    //Draw the text
-    draw_text_colour_shadowed(__view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 ) / 2 - 72, __view_get( e__VW.YView, 0 ) + 46, string(message), c_black, c_white, 1, 1, 1, 1);
-    
-    //If this is a switch palace message, draw blocks
-    switch (inisection) {
-    
-        //Yellow Switch Palace
-        case ("MSG_SWY"): {
-        
-            draw_sprite(spr_area_y, 1, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2 - 41, __view_get( e__VW.YView, 0 ) + 78);
-            draw_sprite(spr_area_y, 0, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2 + 24, __view_get( e__VW.YView, 0 ) + 78);
-        } break;
-        
-        //Yellow Switch Palace
-        case ("MSG_SWG"): {
-        
-            draw_sprite(spr_area_g, 1, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2 - 41, __view_get( e__VW.YView, 0 ) + 78);
-            draw_sprite(spr_area_g, 0, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2 + 24, __view_get( e__VW.YView, 0 ) + 78);
-        } break;
-        
-        //Yellow Switch Palace
-        case ("MSG_SWR"): {
-        
-            draw_sprite(spr_area_r, 1, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2 - 41, __view_get( e__VW.YView, 0 ) + 78);
-            draw_sprite(spr_area_r, 0, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2 + 24, __view_get( e__VW.YView, 0 ) + 78);
-        } break;
-        
-        //Yellow Switch Palace
-        case ("MSG_SWB"): {
-        
-            draw_sprite(spr_area_b, 1, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2 - 41, __view_get( e__VW.YView, 0 ) + 78);
-            draw_sprite(spr_area_b, 0, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2 + 24, __view_get( e__VW.YView, 0 ) + 78);
-        } break;
-    }    
+if (scale > 0.1) {
+	
+	draw_sprite_ext(spr_gui_global_message, 0, camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) / 2, camera_get_view_y(view_camera[0]) + 68, scale, scale, 0, c_white, 1);
 }
 
+//If the text is being displayed
+if (showing == 1) {
+
+    //Increment the number of letters that should be displayed
+    if (a <= string_length(text)) a++;
+	
+	//Set the font
+	draw_set_font(global.gui_font);
+	
+	//Draw the text
+	draw_text_shadowed(camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) / 2 - 96, camera_get_view_y(view_camera[0]) + 40, string_copy(text, 1, a), c_black, c_white, 1, 1, 0.5, 1);
+}

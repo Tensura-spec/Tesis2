@@ -1,8 +1,10 @@
-/// @description A balance platform, not suitable for plumbers over 80 kg.
+/// @description Right Balance Platform
 
-//Do not animate
-image_speed = 0;
-image_index = 0;
+//Makes the object fully solid
+issolid = false;
+
+//Makes the object not carry Mario or NPCs horizontally
+no_horiz = false;
 
 //Prevent the object from falling too fast.
 vspeedmax = 1;
@@ -19,3 +21,12 @@ rope = noone;
 //Create the rope
 alarm[1] = 3;
 
+//Freeze variables
+save_ims = 0;
+save_hsp = 0;
+save_vsp = 0;
+save_grav = 0;
+for (var i=0; i<12; i++) {
+
+	save_alm[i] = -1;
+}

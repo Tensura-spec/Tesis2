@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_walrus",
-    "path": "sprites/spr_walrus/spr_walrus.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

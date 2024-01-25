@@ -13,10 +13,7 @@
     "name": "Items",
     "path": "folders/Objects/Special/Do Not Use!/Items.yy",
   },
-  "parentObjectId": {
-    "name": "obj_climb_side",
-    "path": "objects/obj_climb_side/obj_climb_side.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

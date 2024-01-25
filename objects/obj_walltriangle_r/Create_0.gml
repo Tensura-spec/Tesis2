@@ -1,4 +1,3 @@
-/// @description Right Wall Triangle
+/// @description Create slope collision
 
-instance_create(x, y, obj_slope_steep_r);
-
+instance_create_layer(x, y, "Main", obj_slope_steep_r);

@@ -9,10 +9,7 @@
     "name": "SMB3",
     "path": "folders/Objects/Special/Do Not Use!/Items/Platforms/SMB3.yy",
   },
-  "parentObjectId": {
-    "name": "obj_semisolid",
-    "path": "objects/obj_semisolid/obj_semisolid.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

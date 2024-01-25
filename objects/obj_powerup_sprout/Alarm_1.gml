@@ -1,4 +1,3 @@
 /// @description Allow block exit
 
-ready = 1;
-
+readytogo = 1;

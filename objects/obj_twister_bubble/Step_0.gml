@@ -29,4 +29,3 @@ if (instance_exists(parent))
 //Destroy
 if (y < parent.y-96)
     instance_destroy();
-

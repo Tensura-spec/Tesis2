@@ -1,32 +1,27 @@
-/// @description Football
+/// @description SMB3 / SMW Holdable Item parent
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
-vulnerable = 0;
-
-//How vulnerable is this enemy to the player
-stomp = 0;
-
-//How vulnerable is this enemy to Yoshi
-edible = 1;
-
-//Jumps
-jumping = 0;
-
-//Death Sprite
-deathsprite = sprite_index;
-
-//Stomp sprite
-stompsprite = sprite_index;
-
-//Do not turn around on enemies
-enemyturn = false;
-
-//Animate
+//Do not animate
 image_speed = 0;
+image_index = 0;
 
-//Start moving
-alarm[10] = -1;
+//Direction of item
+dir = 1;
+
+//Is the item held?
+held = 0;
+
+//Is the item embed in a wall
+inwall = 0;
+
+//Follower
+follow = noone;
+
+//Whether this item has been kicked
+kicked = false;
+
+//Do not slowdown when kicked (Applies only to blue bricks)
+ready = 0;
 

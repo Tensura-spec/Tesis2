@@ -1,11 +1,10 @@
-/// @description Yoshi came out from a egg.
+/// @description Yoshi is hatching outta the egg
+
+//Play 'Yoshi' sound
+audio_play_sound(snd_yoshi, 0, false);
 
 //Default colour
 colour = 0;
 
-//Play 'Yoshi' sound
-audio_stop_play_sound(snd_yoshi, 0, false);
-
-//Animate
-image_speed = 0.15;
-
+//Depth
+depth = -2;

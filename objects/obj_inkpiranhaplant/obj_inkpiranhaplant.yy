@@ -33,10 +33,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_inkpiranhaplant",
-    "path": "sprites/spr_inkpiranhaplant/spr_inkpiranhaplant.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

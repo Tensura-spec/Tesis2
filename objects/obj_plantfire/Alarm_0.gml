@@ -1,4 +1,5 @@
-/// @description Change depth
+/// @description Obtain motion
 
-depth = -1;
-
+xspeed = hspeed;
+yspeed = vspeed;
+speed = 0;

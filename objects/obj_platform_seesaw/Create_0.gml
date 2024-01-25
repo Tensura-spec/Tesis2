@@ -1,14 +1,26 @@
-/// @description Seesaw platform
+/// @description Seesaw Platform
 
-//Angle of the slope
-degree = image_angle;
+//Parent
+parent = noone;
 
-//Elevation
-extra = 20;
-
-//Angle 
-image_angle = 0;
-
-//Speed of angle
+//Slide increment
 add = 0;
 
+//Do not animate
+image_speed = 0;
+image_index = 0;
+
+//Depth
+depth = -2;
+
+//Angle
+angle = 0;
+
+//Angle speed
+angle_speed = 0;
+
+//Extra
+extra = 20;
+
+//Radius
+radius = 0;

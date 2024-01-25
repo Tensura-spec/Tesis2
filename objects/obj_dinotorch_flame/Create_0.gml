@@ -3,9 +3,8 @@
 //Does the object have a parent
 parent = -1;
 
-//Play 'Flames' sound
-audio_stop_play_sound(snd_flames, 0, false);
+//Play 'Dinotorch' sound
+audio_play_sound(snd_dinotorch, 0, false);
 
 //Animate
-image_speed = 0.3;
-
+image_speed = 1;

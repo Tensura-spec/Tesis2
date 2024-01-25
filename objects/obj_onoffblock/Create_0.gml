@@ -1,20 +1,13 @@
-/// @description On / Off Block
+/// @description On/Off Block (Do not use Timed On/Off Blocks with these blocks)
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//Animate slower
-image_speed = 0.05;
+//Do not animate
+image_speed = 0;
 
-//Turn into a off block if deactivated
-if (global.onoff_block == 1) {
-
-    sprite_index = spr_onoffblock_off;
-}
-
-//Create a light if the controller exists
-light = instance_create(x+8, y+16, obj_light_static);
-
-//Grade
-grade = 1;
-
+//Change frame if this is on or off
+if (global.on_off_block == 0)
+	image_index = 0;
+else
+	image_index = 1;

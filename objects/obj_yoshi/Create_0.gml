@@ -1,50 +1,41 @@
-/// @description Yoshi, Yoshi! (Does anyone have a yoshi-english dictionary?)
+/// @description Yoshi
 
-//Inherit event from parent
-event_inherited();
-
-//Yoshi State
-enum yoshistate {
-
-    idle,
-    ridden,
-    runaway
-}
-state = yoshistate.idle;
-stateprev = 0;
-
-//Yoshi Colour
+//Default colour
 colour = 0;
 if (global.mountcolour != 0) {
 
     colour = global.mountcolour;
-    global.mountcolour = 0;
 }
 
-//Is yoshi licking?
+//On yoshi
+global.mount = 1;
+
+//Is Yoshi licking?
 licking = 0;
 
-//Whether Yoshi's tounge is locked.
-locked = 0;
+//Is Yoshi's tongue locked in position
+locked = false;
 
-//What's in Yoshi's mouth?
+//Facing direction
+xscale = 1;
+
+//What's inside Yoshi's mouth?
 mouthholder = noone;
 
-//Sprite of the item in Yoshi's mouth
+//Sprite of the item inside Yoshi's mouth
 mouthsprite = noone;
+
+//Shard of the item inside Yoshi's mouth (Applies only to bricks)
+mouthshard = noone;
 
 //Whether Yoshi has ate a powerup
 powerup = noone;
 
-//Crouch for a moment upon mount
-crouch_position = -1;
-
-//Ammo
-ammo = 0;
+//Whether Yoshi has ate a berry
+berry = noone;
 
 //Animation
 anim = 0;
-anim2 = 0;
 
 //Is Yoshi jumping?
 jumping = 0;
@@ -53,29 +44,25 @@ jumping = 0;
 flying = 0;
 
 //Flying animation
-flyanim = 1;
+flyanim = 0;
 
-//Flying time
-flytime = 0;
+//Flutter
+flutter = 0;
 
-//Can yoshi be ridden again
-rideme = 1;
+//Flutter limit
+fluttertime = 0;
 
-//Turning Animation
-turning = 0;
-
-//Scale
-xscale = 1;
-
-//Set the animation
-alarm[5] = 60;
-alarm[6] = 76;
-
-//Player variables
+//Player's current frame
 f = 0;
-m = player_ride();
-m_vis = 1;
-m_ypos = 0;
+
+//Player's y position
+myy = 0;
+
+//Player's previous state
+stateprev = 0;
+
+//Flashing variable
+isflashing = 0;
 
 //If an item was carried from the previous room.
 if (global.carrieditem != noone) {
@@ -86,9 +73,5 @@ if (global.carrieditem != noone) {
     
     //Remember the sprite and reset it.
     mouthsprite = global.carriedsprite;
-    global.carritedsprite = noone;
+    global.carriedsprite = noone;
 }
-
-//Update palette
-pal_sprite = spr_palette_yoshi;
-

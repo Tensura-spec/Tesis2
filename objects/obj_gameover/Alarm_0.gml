@@ -1,21 +1,14 @@
-/// @description Restart the game
+/// @description Return to the title screen
 
-//Stop all playing sounds
+//Stop playing all sounds
 audio_stop_all();
-
-//Initialize globals
-init_globals();
-
-//With the controller
-with (obj_controller) {
-
-    //Play 'Coin' sound
-    audio_stop_play_sound(snd_coin, 0, false);
-    
-    //Go to next screen
-    alarm[4] = 200;
+	
+//Go to the title screen
+if (instance_number(obj_fade_in) == 0) {
+	
+	with (instance_create_depth(camera_get_view_x(view_camera[0]), camera_get_view_y(view_camera[0]), -99, obj_fade_in))
+		target = rm_initialize;
 }
-
-//Go to the initial screen
-room_goto(rm_init);
-
+	
+//Game is being restarted
+global.restart = true;

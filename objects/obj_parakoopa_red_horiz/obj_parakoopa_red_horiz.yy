@@ -37,9 +37,6 @@
     "name": "spr_parakoopa_red",
     "path": "sprites/spr_parakoopa_red/spr_parakoopa_red.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

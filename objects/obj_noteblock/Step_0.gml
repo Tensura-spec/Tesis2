@@ -1,47 +1,72 @@
-/// @description Note block bumping
+/// @description Make Mario bounce depending of it's position
 
-//If the block can be bumped
-if (!ready) {
+//If Mario does exist
+if (instance_exists(obj_mario)) {
 
-    //If the player bumps from above
-    if (collision_rectangle(bbox_left, bbox_top-1, bbox_right, bbox_top,obj_playerparent,0,0)) {
-        
-        //This block is hit
-        ready = 1;
+	//If this block can make Mario bounce on all sides
+	if (global.noteblock_all_sides == true) {
+		
+		//Make sure that Mario is overlapping the block
+		if (obj_mario.bbox_top < bbox_bottom) {
 
-        //Move down
-        vspeed = 2.25;
-        alarm[0] = 4;
-
-        //Make the player bounce
-        with (obj_playerparent) {
-        
-            //Play 'Trampoline' sound
-            audio_stop_play_sound(snd_trampoline, 0, false);
-
-            //Set the vertical speed
-            vspeed = -note_boost;
-            
-            //Boost jump
-            y--;
-            
-            //Switch to jump state
-            state = statetype.jump;
-            
-            //Check if the 'Jump' key is pressed and allow variable jumping
-            if (input_check(input.action0))
-            || (input_check(input.action2))
-                jumping = 1;
-            else
-                jumping = 2;
-        }
-        
-        //Create notes
-        with (instance_create(bbox_left, bbox_top, obj_note)) motion_set(135,1);
-        with (instance_create(bbox_right, bbox_top, obj_note)) motion_set(45,1);
-        
-        //Make an item appear downwards
-        event_user(1);
-    }
+			//If Mario is at the left side of the block
+			if (collision_rectangle(bbox_left-2, bbox_top, bbox_left, bbox_bottom, obj_mario, 0, 0)) {
+		
+				//Play 'Bump' sound
+				audio_play_sound(snd_bump, 0, false);
+	
+				//Bounce Mario to the left
+				obj_mario.xspeed = -2;
+		
+				//Block movement
+				hspeed = 2;
+				ready = 1;
+				alarm[0] = 4;
+			}
+	
+			//Otherwise, if Mario is at the right side of the block
+			else if (collision_rectangle(bbox_right, bbox_top, bbox_right+2, bbox_bottom, obj_mario, 0, 0)) {
+			
+				//Play 'Bump' sound
+				audio_play_sound(snd_bump, 0, false);
+	
+				//Bounce Mario to the left
+				obj_mario.xspeed = 2;
+		
+				//Block movement
+				hspeed = -2;
+				ready = 1;
+				alarm[0] = 4;
+			}
+		}
+	}
+	
+	//If Mario is above this block
+	if (obj_mario.yspeed == 0)
+	&& (collision_rectangle(bbox_left, bbox_top-3, bbox_right, bbox_top, obj_mario, 0, 0)) {
+		
+		//Sprout out an item if there's any
+		if (sprout > cs_coin) {
+			
+			event_user(1);
+		}
+		
+		//Move block
+		ready = 1;
+		vspeed = 2;
+		alarm[0] = 4;
+		
+		//Make Mario jump
+		with (obj_mario) {
+			
+			event_user(1);
+			state = playerstate.jump;
+		}
+	
+		//Check if the 'Jump' key is pressed
+		if (input_check(input2.action_0))
+			audio_play_sound(snd_trampoline, 0, false);
+		else
+			audio_play_sound(snd_bump, 0, false);
+	}
 }
-

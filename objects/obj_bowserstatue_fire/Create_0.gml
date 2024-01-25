@@ -1,20 +1,30 @@
 /// @description Bowser Statue fire
 
-//Animate
-image_speed = 0.2;
+//Inherit event
+event_inherited();
 
-//Create light if required
+//Ignore moving platforms
+ignore_platforms = true;
+
+//How vulnerable is this enemy to various items?
+vulnerable = 99;
+
+//How vulnerable is this enemy to Mario?
+stomp = -1;
+
+//How vulnerable is this enemy to Yoshi?
+edible = 3;
+
+//Obtain motion
+alarm[0] = 1;
+
+//Create a light
 if (instance_exists(obj_lightcontrol)) {
 
-    mylight = instance_create(0, 0, obj_light_npc);
-    with (mylight) {
-    
-        target = other.id;
-        radius = 16;
-        yoffset = 0;
-        image_blend = make_colour_rgb(248, 144, 32);
-    }
+	with (instance_create_layer(0, 0, "Main", obj_light_npc)) {
+		
+		parent = other.id;
+		radius = 8;
+		new_radius = 8;
+	}
 }
-else
-    mylight = noone;
-

@@ -38,10 +38,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_blastakoopa",
-    "path": "sprites/spr_blastakoopa/spr_blastakoopa.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

@@ -36,10 +36,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"ice","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"0","varType":3,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_venusfiretrap",
-    "path": "sprites/spr_venusfiretrap/spr_venusfiretrap.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

@@ -2,7 +2,7 @@
 
 //Do not animate
 image_speed = 0;
-image_index = 1;
+image_index = 0;
 
 //Parent
 parent = noone;
@@ -15,5 +15,4 @@ inc = 0;
 
 //Fly
 rise = 0;
-a = choose(1,1.5);
-
+a = choose(1, 1.5);

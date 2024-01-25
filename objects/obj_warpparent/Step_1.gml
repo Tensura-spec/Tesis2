@@ -1,60 +1,49 @@
-/// @description Decide up which room to warp to
+/// @description Decide to which room should the pipe take to.
 
 //Set up which value will be used
 switch (mode) {
 
     //Coins
-    case (0): 
-        check = coins; 
-        break;
+    case (0): {
+		
+		if (variable_instance_exists(id, "coins")) {
+			
+			check = coins;
+		}
+	} break;
     
     //Time
     case (1): 
-        check = global.time; 
+        check = global.timer; 
         break;
     
     //A-Coins
     case (2): 
-        check = ds_map_size(global.dcoins); 
+        check = ds_map_size(global.acecoins); 
         break;
 }
 
-//Range A-B
-if (check < target_b) && (check < target_c) {
+//If the value to check is in range A-B
+if (check < target_b)
+&& (check < target_c) {
 
-    //Obtain destination
-    destination_real = destination[0];
-    
-    //Obtain exit direction
-    exit_dir_real = exit_dir[0];
-    
-    //Obtain exit id
-    exit_id_real = exit_id[0];
+	destination_real	= destination[0];
+	exit_id_real		= exit_id[0];
+	exit_dir_real		= exit_dir[0];
 }
 
-//Range B-C
+//Otherwise, if the value to check is in range B-C
 else if (check < target_c) {
 
-    //Obtain destination
-    destination_real = destination[1];
-    
-    //Obtain exit direction
-    exit_dir_real = exit_dir[1];
-    
-    //Obtain exit id
-    exit_id_real = exit_id[1];
+	destination_real	= destination[1];
+	exit_id_real		= exit_id[1];
+	exit_dir_real		= exit_dir[1];
 }
 
-//Range C+
+//Otherwise, if the value to check is in range C
 else {
 
-    //Obtain destination
-    destination_real = destination[2];
-    
-    //Obtain exit direction
-    exit_dir_real = exit_dir[2];
-    
-    //Obtain exit id
-    exit_id_real = exit_id[2];
+	destination_real	= destination[2];
+	exit_id_real		= exit_id[2];
+	exit_dir_real		= exit_dir[2];
 }
-

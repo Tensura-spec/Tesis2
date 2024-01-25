@@ -1,25 +1,8 @@
-/// @description Check for the player and hurt him
+/// @description Hurt Mario
 
-//If the player is riding yoshi
-if (global.mount == 0) {
+//Check for Mario
+var mario = collision_rectangle(bbox_left - 1, bbox_top - 2, bbox_right + 1, bbox_bottom + 2, obj_mario, 0, 0);
 
-    //Check for the player
-    var player = collision_rectangle(bbox_left-1, bbox_top-1, bbox_right+1, bbox_bottom+1, obj_playerparent, 0, 0);
-
-    //If the player exists
-    if (player)
-        with (player) event_user(0);
-}
-
-//Otherwise
-else {
-
-    //Check for the player
-    var player = collision_rectangle(bbox_left-1, bbox_top, bbox_right+1, bbox_bottom+1, obj_playerparent, 0, 0);
-
-    //If the player exists
-    if (player)
-    && (player.y > bbox_top-11)
-        with (player) event_user(0);    
-}
-
+//If Mario is on this platform
+if (mario)
+	with (mario) event_user(0);

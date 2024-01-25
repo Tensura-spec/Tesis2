@@ -16,10 +16,7 @@
     "name": "Items",
     "path": "folders/Objects/Items.yy",
   },
-  "parentObjectId": {
-    "name": "obj_swim",
-    "path": "objects/obj_swim/obj_swim.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -35,10 +32,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_waterbubble",
-    "path": "sprites/spr_waterbubble/spr_waterbubble.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

@@ -1,11 +1,10 @@
-/// @description Shell thump effect
-
-//Animate
-image_speed = 0.2;
+/// @description Shell bump effect
 
 //Star position
 star = 0;
 
-//Show thump?
-ready = 0;
+//Main effect alpha
+alpha = 1;
 
+//Bump
+bump = false;

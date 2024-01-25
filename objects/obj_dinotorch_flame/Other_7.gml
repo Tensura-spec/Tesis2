@@ -1,12 +1,12 @@
 /// @description Change sprite
 
 //If blowing fire
-if (image_speed == 0.3)
-&& (sprite_index == spr_dinotorch_flame)
-    sprite_index = spr_dinotorch_flame_full;
+if (image_speed == 1)
+&& (sprite_index == spr_dinotorch_flame_st)
+    sprite_index = spr_dinotorch_flame;
     
 //Otherwise, if ending blow
-else if (image_speed == -0.3) {
+else if (image_speed == -1) {
 
     //Make the parent move
     if (!instance_exists(parent))
@@ -21,4 +21,3 @@ else if (image_speed == -0.3) {
         instance_destroy();
     }
 }
-

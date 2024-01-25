@@ -1,10 +1,8 @@
-/// @description Spin Smoke
+/// @description Another nice smoke effect
 
-//Play 'Spinstomp' sound
-audio_stop_play_sound(snd_spinstomp, 0, false);
-
-//Animate
-image_speed = 0.15;
+//Is this silent? If it's not, play the sound
+silent = false;
+alarm[0] = 1;
 
 //Star position
 starx = 0
@@ -12,8 +10,7 @@ stary = 0
 starstop = 0;
 
 //Set star position
-alarm[0] = 1;
+alarm[1] = 1;
 
 //Do not show stars
-alarm[1] = 16;
-
+alarm[2] = 16;

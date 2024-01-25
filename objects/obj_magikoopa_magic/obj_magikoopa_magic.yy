@@ -36,10 +36,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_mask_magikoopa_spell",
-    "path": "sprites/spr_mask_magikoopa_spell/spr_mask_magikoopa_spell.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

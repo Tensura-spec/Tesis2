@@ -1,10 +1,10 @@
-/// @description Cape
+/// @description Mario's Cape
 
-//Do not animate
+// Do not animate
 image_speed = 0;
 image_index = 0;
 
-//Cape state
+// Cape state
 enum capestate {
 
     cape_idle,
@@ -17,6 +17,8 @@ enum capestate {
 }
 state = capestate.cape_idle;
 
-//Cape position
-yy = 0;
+//Flashing variable
+isflashing = 0;
 
+// Owner of the cape
+owner = noone;

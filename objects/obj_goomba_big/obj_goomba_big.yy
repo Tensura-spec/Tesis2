@@ -31,13 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_goomba_big",
-    "path": "sprites/spr_goomba_big/spr_goomba_big.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_mask_goomba_big",
-    "path": "sprites/spr_mask_goomba_big/spr_mask_goomba_big.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

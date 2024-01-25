@@ -33,10 +33,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_ripvanfish",
-    "path": "sprites/spr_ripvanfish/spr_ripvanfish.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

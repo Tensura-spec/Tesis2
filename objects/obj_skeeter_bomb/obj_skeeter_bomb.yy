@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_skeeter_bomb",
-    "path": "sprites/spr_skeeter_bomb/spr_skeeter_bomb.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

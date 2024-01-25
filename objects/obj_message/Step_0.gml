@@ -1,78 +1,69 @@
-/// @description Message box logic
+/// @description Handle message display
 
-//If scaling up
-if (ready == 0) {
+//If the message is not showing, make the box grow
+if ((showing == 0) && (ready == true)) {
 
-    scale += 0.05;
-    if (scale > 1) {
-    
-        //Force set max scale
-        scale = 1;
-        
-        //Display message
-        ready = 1;
-        
-        //Open INI
-        ini_open("MWDMessage.ini");
-        
-        //Obtain the message from the given INI section
-        message = ini_read_string(inisection, "text", 0);
-        
-        //Close INI
-        ini_close();
-    }
+	//Scale up
+	scale += 0.1;
+	
+	//If the scale is greater than 1
+	if (scale > 1) {
+	
+		//Set full scale
+		scale = 1;
+	
+		//Prepare the text to be displayed
+		alarm[1] = 1;
+	}
 }
 
-//Otherwise, if the message is being displayed
-else if (ready == 1) {
+//If the text is being printed on screen
+else if (showing == 1) {
+	
+	//If the player pressed the 'Action 0' button
+	if (input_check_pressed(input2.action_0)) {
 
-    //If this is a regular message block, allow it to be closed with 'Action 0'
-    if (switchmsg == 0)
-    && ((input_check_pressed(input.action0))
-    || (input_check_pressed(input.action2)))
-        ready = 2;
-        
-    //Otherwise, if this is a switch palace message block
-    else if (switchmsg == 1) {
-    
-        //If the course clear theme is not playing
-        if (!audio_is_playing(snd_palaceclear)) {
-        
-            ready = 3;
-            alarm[0] = 120;
-        }
-    }else if (switchmsg == 2) {
-    
-        //If the course clear theme is not playing
-        if (!audio_is_playing(snd_worldclear)) {
-        
-            ready = 3;
-            alarm[0] = 120;
-        }
-    }
-    
+		//If the text is not fully displayed
+		if (a <= string_length(text))	
+			a = string_length(text)+1;
+	
+		//Otherwise, cycle through all text
+		else {
+		
+			//If there's not new text to display
+			if (new_text != "") {
+			
+				//Display more text
+				text = new_text;
+				new_text = "";
+				
+				//Check if the message is too long
+				event_user(0);
+			}
+			
+			//Otherwise, close message
+			else
+				showing = 2;
+		}
+	}
 }
 
-//Otherwise, if scaling down
-else if (ready == 2) {
+//If the message is closing
+else if (showing == 2) {
 
-    scale -= 0.05;
-    if (scale < 0) {
-    
-        //Delete the screenshot
-        background_delete(back);
-    
-        //Activate everything
-        instance_activate_all();
-        
-        //Reset the state of the shift key
-        keyboard_clear(input.action0);
-        keyboard_clear(input.action2);
-        
-        //Destroy the message box
-        instance_destroy();            
-    }    
+	//Scale down
+	scale -= 0.1;
+	
+	//If the scale is lower than 0.1, destroy
+	if (scale < 0.1) {
+	
+		//Delete sprite
+		sprite_delete(snapshot);
+		
+		//Activate all instances
+		instance_activate_all();
+		
+		//Destroy
+		instance_destroy();
+	}
 }
-
-
-

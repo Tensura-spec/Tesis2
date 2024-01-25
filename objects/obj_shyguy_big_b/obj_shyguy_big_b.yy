@@ -31,13 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_shyguy_big_b",
-    "path": "sprites/spr_shyguy_big_b/spr_shyguy_big_b.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_32x32",
-    "path": "sprites/spr_mask_npc_common_32x32/spr_mask_npc_common_32x32.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

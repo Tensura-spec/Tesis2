@@ -11,10 +11,7 @@
     "name": "Boo",
     "path": "folders/Objects/Enemies/Ghost/Boo.yy",
   },
-  "parentObjectId": {
-    "name": "obj_solid",
-    "path": "objects/obj_solid/obj_solid.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -30,10 +27,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_boo_stretch_floor",
-    "path": "sprites/spr_boo_stretch_floor/spr_boo_stretch_floor.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

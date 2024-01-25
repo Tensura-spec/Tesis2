@@ -34,10 +34,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_ninji_kunai",
-    "path": "sprites/spr_ninji_kunai/spr_ninji_kunai.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

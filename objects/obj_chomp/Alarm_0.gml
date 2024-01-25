@@ -12,10 +12,18 @@ idle = 0
 //Find start position
 start = instance_position(originx, originy, obj_chainchomp)
 with (start) {
-
+	
     taunt = false;
 }
 
 //Set the turning positions
-event_user(8);
+if (originx <= x) {
 
+    xspeed = -1;
+    stopleft = originx-20;
+}
+else if (originx >= x) {
+
+    xspeed = 1;
+    stopright = originx+20;
+}

@@ -44,9 +44,6 @@
     "name": "spr_beachkoopa_blue_walk",
     "path": "sprites/spr_beachkoopa_blue_walk/spr_beachkoopa_blue_walk.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

@@ -1,7 +1,13 @@
 /// @description Explosion
 
-//Play 'Explosion' sound
-audio_stop_play_sound(snd_explosion, 0, false);
+//Play 'Thud' sound
+audio_play_sound(snd_thud, 0, false);
+
+//Shake the screen
+shake_camera(6, ceil(audio_sound_length(snd_thud) * room_speed), true);
+
+//Depth
+depth = 450;
 
 //Combo
 hitcombo = 0;
@@ -20,3 +26,8 @@ alarm[1] = 1;
 //Disallow player hurt
 alarm[3] = 4;
 
+//Blink view
+blink = 0;
+blink_on = 1;
+alarm[10] = 1;
+alarm[11] = 24;

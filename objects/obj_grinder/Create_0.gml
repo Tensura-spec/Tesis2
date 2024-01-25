@@ -1,26 +1,49 @@
 /// @description Grinder
 
-//Inherit event from parent
-event_inherited();
+//Current angle
+angle = 0;
 
-//How vulnerable is this enemy to items
-vulnerable = 3;
+//State
+state = "IDLE";
 
-//How vulnerable is this enemy to the player
-stomp = 2;
+//Speed
+spd = 1;
+st_spd = spd;
 
-//How vulnerable is this enemy to Yoshi
-edible = 2;
+//Origin
+xorig = 0;
+yorig = 0;
 
-//Animate
-image_speed = 0.8;
+//Steps to take per steps
+step = 0;
 
-//Death Sprite
-deathsprite = spr_grinder;
+//Whether the grinder jumped from a track
+ready = 0;
+
+//Direction
+direct = 270;
 
 //Play 'Engine' sound
-alarm[0] = 7;
+alarm[1] = 15;
 
-//Start moving
-alarm[10] = 2;
+//Set up direction based on modifier
+if (place_meeting(x, y, obj_up)) {
 
+    direct = 90;
+    state = "IN_LINE";
+}
+else if (place_meeting(x, y, obj_down)) {
+
+    direct = 270;
+    state = "IN_LINE";
+}
+else if (place_meeting(x, y, obj_left)) {
+
+    direct = 180;
+    state = "IN_LINE";
+}
+else if (place_meeting(x, y, obj_right)) {
+
+    direct = 0;
+    state = "IN_LINE";
+}

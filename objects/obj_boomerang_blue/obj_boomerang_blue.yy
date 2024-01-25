@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_boomerang_blue",
-    "path": "sprites/spr_boomerang_blue/spr_boomerang_blue.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

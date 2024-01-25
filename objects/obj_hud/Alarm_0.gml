@@ -1,14 +1,24 @@
-/// @description Shake 'Time Left' marker
+/// @description Change P-Meter frame
 
-alarm[0] = 2;
-if (audio_is_playing(snd_hurry)) {
-
-    shakex = random_range(-1,1);
-    shakey = random_range(-1,1);
+//If the P-Wing is active
+if (global.pwing == 1) {
+	
+	flash = !flash;
+	alarm[0] = 7;
 }
+
+//Otherwise
 else {
 
-    shakex = 0;
-    shakey = 0;
+	if (instance_exists(obj_mario))
+	&& (obj_mario.pmeter < global.pmeter_limit) {
+	
+		flash = 0;
+		alarm[0] = 1;
+	}
+	else {
+	
+		flash = !flash;
+		alarm[0] = 7;
+	}
 }
-

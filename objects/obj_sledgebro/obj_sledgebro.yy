@@ -36,13 +36,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_sledgebro",
-    "path": "sprites/spr_sledgebro/spr_sledgebro.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_32x32",
-    "path": "sprites/spr_mask_npc_common_32x32/spr_mask_npc_common_32x32.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

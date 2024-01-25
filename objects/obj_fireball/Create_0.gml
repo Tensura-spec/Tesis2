@@ -1,26 +1,35 @@
-/// @description Fireball
+/// @description A fireball shot by Mario
 
 //Inherit event from parent
 event_inherited();
 
-//Play 'Fireball' sound
-audio_stop_play_sound(snd_fireball, 0, false);
+//Set vertical speed
+yspeed = (global.fireballtype == 1 && global.player == 1) ? 0 : 3;
 
-//Animate
-image_speed = 0.2;
+//No bounces
+bounces = -1;
 
-//Create light if required
+//Do not swim
+noswim = true;
+
+//Do not turn toward walls
+turn_toward = false;
+
+//Leave a trail
+alarm[0] = 1;
+
+//Create a light
 if (instance_exists(obj_lightcontrol)) {
 
-    mylight = instance_create(0, 0, obj_light_npc);
-    with (mylight) {
-    
-        target = other.id;
-        radius = 16;
-        yoffset = 0;
-        image_blend = make_colour_rgb(248, 144, 32);
-    }
+	with (instance_create_layer(0, 0, "Main", obj_light_npc)) {
+		
+		parent = other.id;
+		radius = 8;
+		new_radius = 8;
+	}
 }
-else
-    mylight = noone;
 
+//Set green fireball
+if (global.player == 1)
+&& (object_index != obj_iceball)
+	sprite_index = spr_fireball_luigi;

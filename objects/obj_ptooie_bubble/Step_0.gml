@@ -20,7 +20,7 @@ rise -= a;
 inc = clamp(inc, 0, 6);
 
 //Set Y position
-y = parent.y + rise;
+y = parent.bbox_top + rise;
 
 //Set circle x movement
 if (instance_exists(parent))
@@ -29,4 +29,3 @@ if (instance_exists(parent))
 //Destroy
 if (y < parent.myball.y+16)
     instance_destroy();
-

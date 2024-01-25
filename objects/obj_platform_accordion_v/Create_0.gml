@@ -1,4 +1,10 @@
-/// @description Vertical Accordion Platform
+/// @description Horizontal Accordion Block
+
+//Inherit the parent event
+event_inherited();
+
+//Makes the object fully solid
+issolid = true;
 
 //Do not animate
 image_speed = 0;
@@ -8,10 +14,7 @@ image_index = 0;
 alarm[0] = 90;
 
 //Create blocks
-llb = instance_create(x, y, obj_accordion_block);
-lrb = instance_create(x, y, obj_accordion_block);
-rlb = instance_create(x, y, obj_accordion_block);
-rrb = instance_create(x, y, obj_accordion_block);
-with (rrb)
-    image_index = 1;
-
+llb = instance_create_depth(x, y, -2, obj_accordion_block);
+lrb = instance_create_depth(x, y, -1, obj_accordion_block);
+rlb = instance_create_depth(x, y, -1, obj_accordion_block);
+rrb = instance_create_depth(x, y, -2, obj_accordion_block);

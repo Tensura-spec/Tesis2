@@ -1,16 +1,15 @@
-/// @description Shake if the player is on this donut
+/// @description Shake if Mario is on this platform
 
-//Repeat the process.
-alarm[1] = 2;
+//Repeat the process
+alarm[1] = 1;
 
-//Change the offset if this donut is shaking.
-if (shake == 1) {
+//Change offset if this donut is shaking
+if (ready == 1) {
 
-    if (offset = 1)
-        offset = -1
-    else
-        offset = 1
+	if (offset != 1)
+		offset = 1;
+	else
+		offset = -1;
 }
 else
-    offset = 0
-
+	offset = 0;

@@ -1,22 +1,16 @@
 /// @description Chain Chomp
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
 //How vulnerable is this enemy to various items?
-vulnerable = 3;
+vulnerable = 2;
 
 //How vulnerable is this enemy to the player?
 stomp = 2;
 
 //How vulnerable is this enemy to yoshi?
 edible = 2;
-
-//Facing direction
-xscale = 1;
-
-//Whether the object is swimming
-swimming = false;
 
 //Find Mario
 ready = 0;
@@ -31,5 +25,7 @@ lunge = 0;
 retreat = 0;
 
 //Set horizontal speed
-hspeed = -1;
+xspeed = -1;
 
+//Depth
+depth = -2;

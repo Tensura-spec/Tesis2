@@ -1,5 +1,10 @@
-/// @description Accordion Platform Block
+/// @description Accordion Block
 
-//Do not animate
-image_speed = 0;
+//Inherit the parent event
+event_inherited();
 
+//Make it solid
+issolid = true;
+
+//Make it not able to transport Mario or NPCs
+no_horiz = true;

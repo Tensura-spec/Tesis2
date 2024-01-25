@@ -30,10 +30,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_cannon_red",
-    "path": "sprites/spr_cannon_red/spr_cannon_red.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": {
     "name": "spr_square",
     "path": "sprites/spr_square/spr_square.yy",

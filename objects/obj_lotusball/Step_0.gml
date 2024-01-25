@@ -1,17 +1,22 @@
-/// @description Lotus fireball logic
+/// @description Volcano Lotus fireball logic
+
+//Handle psuedo movement
+if (freeze == false) {
+	
+	x += xspeed;
+	y += yspeed;
+	yspeed += yadd;
+}
 
 //Cap vertical speed or apply gravity
 if (ready == 1) {
 
-    if (vspeed > 3)
-        vspeed = 3;
+    if (yspeed > 3)
+        yspeed = 3;
     else
-        gravity = 0.025;
+        yadd = 0.025;
 }
 
-//Destroy if outside the view
-if (x < __view_get( e__VW.XView, 0 )-32)
-|| (x > __view_get( e__VW.XView, 0 )+__view_get( e__VW.WView, 0 )+32)
-|| (y > __view_get( e__VW.YView, 0 )+__view_get( e__VW.HView, 0 )+32)
-    instance_destroy();
-
+//Set rinka ring if this is a rinka projectile
+if (rinka == true)
+	sprite_index = spr_lotusball_rinka;

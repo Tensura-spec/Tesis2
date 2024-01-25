@@ -1,5 +1,8 @@
 /// @description Draw the laser
 
+//Laser Animation
+anim += 0.25;
+
 //If the parent does exist
 if (instance_exists(parent)) {
     
@@ -7,7 +10,7 @@ if (instance_exists(parent)) {
     if (parent.xscale == 1) {
     
         //Draw lightning
-        draw_sprite_tiled_area_ext(spr_zappakoopa_lightning, image_index, xstart, ystart-8, xstart, ystart-8, xstart+length, ystart+8, c_white, 1);
+        draw_sprite_tiled_area_ext(spr_zappakoopa_lightning, anim, xstart, ystart-8, xstart, ystart-8, xstart+length, ystart+8, c_white, 1);
     
         //Draw lightning end points
         draw_sprite_ext(spr_zappakoopa_lightning_end, image_index, xstart, parent.y+8, 1, 1, 0, c_white, 1);
@@ -18,11 +21,10 @@ if (instance_exists(parent)) {
     else if (parent.xscale == -1) {
     
         //Draw lightning 
-        draw_sprite_tiled_area_ext(spr_zappakoopa_lightning, image_index, xstart, ystart-8, x, ystart-8, xstart, ystart+8, c_white, 1);
+        draw_sprite_tiled_area_ext(spr_zappakoopa_lightning, anim, xstart, ystart-8, x, ystart-8, xstart, ystart+8, c_white, 1);
     
         //Draw lightning end points
         draw_sprite_ext(spr_zappakoopa_lightning_end, image_index, xstart, parent.y+8, 1, 1, 0, c_white, 1);
         draw_sprite_ext(spr_zappakoopa_lightning_end, image_index, x, parent.y+8, 1, 1, 0, c_white, 1);
     }
 }
-

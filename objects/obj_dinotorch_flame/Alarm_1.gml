@@ -13,4 +13,3 @@ if (instance_exists(parent)) {
 //Otherwise, wait
 else
     alarm[1] = 1
-

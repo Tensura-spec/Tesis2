@@ -1,12 +1,21 @@
 /// @description Beanstalk
 
-//Animate
-image_speed = 0.15;
+//Play 'Beanstalk' sound
+audio_play_sound(snd_beanstalk, 0, false);
 
-//Create a climbable surface
-ready = 0;
-alarm[0] = 2;
+//Vine type
+//0: SMB3 / SMW
+//1: SMB1
+vinetype = 0;
 
-//Set the vertical speed
+//Create a vine
+alarm[0] = 16;
+
+//Move upwards
 vspeed = -1;
 
+//Depth
+depth = 10;
+
+//Destination room
+myroom = room_next(room);

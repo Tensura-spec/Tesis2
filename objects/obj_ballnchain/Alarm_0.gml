@@ -1,22 +1,16 @@
-/// @description Create chains and maze
+/// @description Create the balls
 
-for (var i=0; i<length; i++) {
+//Increment ball distance
+distance += 8;
 
-    with (instance_create(x, y, obj_ballnchain_chain)) {
-    
-        mom = other.id;
-        length = other.dist;
-    }
-    dist += 16;
+//Create a fixed amount of balls and chains
+for (i=0; i<amount; i++) {
+	
+	//Platforms
+	ball[i] = instance_create_depth(x, y, -1, obj_ballnchain_ball);
+	ball[i].image_xscale = image_xscale;
+	ball[i].parent = id;
 }
 
-//Increment length
-dist += 8;
-
-//Create maze
-with (instance_create(x, y, obj_ballnchain_ball)) {
-
-    mom = other.id;
-    length = other.dist;
-}
-
+//Start moving.
+active = true;

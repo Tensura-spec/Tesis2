@@ -21,10 +21,7 @@
     "name": "Decoration",
     "path": "folders/Objects/Special/Do Not Use!/Decoration.yy",
   },
-  "parentObjectId": {
-    "name": "obj_swim",
-    "path": "objects/obj_swim/obj_swim.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

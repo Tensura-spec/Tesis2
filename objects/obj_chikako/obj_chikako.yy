@@ -32,10 +32,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_chikako",
-    "path": "sprites/spr_chikako/spr_chikako.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

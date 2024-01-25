@@ -36,10 +36,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_pidgit",
-    "path": "sprites/spr_pidgit/spr_pidgit.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

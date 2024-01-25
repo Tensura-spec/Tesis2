@@ -7,3 +7,5 @@ if (vspeed > 4) {
     gravity = 0;
 }
 
+//Depth
+depth = -1;

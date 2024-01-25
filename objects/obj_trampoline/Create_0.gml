@@ -1,9 +1,12 @@
 /// @description Trampoline
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//Whether the player is on this trampoline
-ready = 0;
-s_ready = 0;
+//Do not animate
+image_speed = 0;
+image_index = 0;
 
+//Whether the player is using the trampoline
+ready = 0;
+ready2 = 0;

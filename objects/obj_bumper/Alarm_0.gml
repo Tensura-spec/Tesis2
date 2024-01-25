@@ -10,4 +10,3 @@ else {
     image_index = 0;
     alarm[0] = 120+random(round(120));
 }
-

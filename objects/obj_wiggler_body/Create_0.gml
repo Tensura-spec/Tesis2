@@ -1,23 +1,19 @@
 /// @description Wiggler's Body
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
 //How vulnerable is this enemy to various items?
-vulnerable = 3;
+vulnerable = 2;
 
-//How vulnerable is this enemy to the player?
+//How vulnerable is this enemy to Mario?
 stomp = 4;
 
-//How vulnerable is this enemy to yoshi?
+//How vulnerable is this enemy to Yoshi?
 edible = 2;
 
-//Facing direction
-xscale = 1;
+//Turn into silver coins?
+turn_silver = 0;
 
-//Whether the object is swimming
-swimming = false;
-
-//Animate
-image_speed = 0.125;
-
+//Parent
+parent = noone;

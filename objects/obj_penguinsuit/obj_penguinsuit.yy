@@ -32,10 +32,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_penguinsuit",
-    "path": "sprites/spr_penguinsuit/spr_penguinsuit.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

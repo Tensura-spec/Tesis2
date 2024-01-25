@@ -11,9 +11,8 @@ if ((radius < 0.16) && (beam == 0)) {
     beam = 1;
 
     //Make parent unleash the laser
-    with (parent) alarm[4] = 1;
+    with (parent) alarm[3] = 1;
     
     //Destroy
     instance_destroy();
 }
-

@@ -13,10 +13,7 @@
     "name": "Bullet Bill",
     "path": "folders/Objects/Enemies/Airship/Bullet Bill.yy",
   },
-  "parentObjectId": {
-    "name": "obj_solid",
-    "path": "objects/obj_solid/obj_solid.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -32,10 +29,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_blaster",
-    "path": "sprites/spr_blaster/spr_blaster.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

@@ -14,4 +14,3 @@ if ((y < other.y+1) && (vspeed > 0)) {
     vspeed = 0;
     gravity = 0;
 }
-

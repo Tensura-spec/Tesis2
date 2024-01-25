@@ -25,10 +25,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_goomba",
-    "path": "sprites/spr_goomba/spr_goomba.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

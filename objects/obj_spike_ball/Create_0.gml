@@ -3,6 +3,10 @@
 //Inherit event from parent
 event_inherited();
 
+//Bounces
+bounces = 0;
+bounces_max = 3;
+
 //How vulnerable is this enemy to items
 vulnerable = 3;
 
@@ -12,9 +16,6 @@ stomp = 2;
 //How vulnerable is this enemy to Yoshi
 edible = 2;
 
-//Death Sprite
-deathsprite = spr_spike_ball_ang;
-
 //Owner of the ball
 parent = noone;
 
@@ -23,4 +24,3 @@ ready = 0;
 
 //Angle
 angle = 0;
-

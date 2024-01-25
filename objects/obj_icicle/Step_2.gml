@@ -1,98 +1,153 @@
 /// @description Icicle logic
 
-//If not falling
+//Perform event from parent
+event_perform_object(obj_platformparent, ev_step, ev_step_end);
+
+//Check for Mario
+var mario = collision_rectangle(bbox_left, bbox_top-5, bbox_right, bbox_top+4, obj_mario, 0, 0);
+
+//If not moving vertically
 if (vspeed == 0) {
-
-    //If the player does exist
-    if (instance_exists(obj_playerparent)) {
-    
-        //If the player is above and it's not overlapping a semisolid, resume timer
-        if (collision_rectangle(bbox_left, bbox_top-1, bbox_right, bbox_top, obj_playerparent, 0, 0))
-        && (obj_playerparent.state != statetype.jump)    
-            shake = 1;
-    
-        //Otherwise, wait to shake.
-        else {
-        
-            //If the player is nearby and below
-            if (obj_playerparent.y > bbox_top) {
-            
-                //If the player is at 8 pixels from this icicle, make it shake and fall
-                if (obj_playerparent.x > bbox_left-8) 
-                && (obj_playerparent.x < bbox_right+8)
-                    shake = 1;
-                    
-                //Otherwise, remain there
-                else {
-                
-                    shake = 0;
-                    alarm[0] = 28;
-                }         
-            }
-            
-            //If the player is not below...
-            else {
-            
-                shake = 0;
-                alarm[0] = 28;
-            }
-        }
-    }
-    
-    //Otherwise, stop
-    else {
-    
-        shake = 0;
-        alarm[0] = 28;
-    }
+	
+	//If Mario is on this icicle
+	if (mario) 
+	&& (mario.state < playerstate.jump) 
+	&& (mario.bbox_bottom < yprevious+5)
+		ready = 1;
+		
+	//Otherwise
+	else {
+		
+		//If Mario does exist
+		if (instance_exists(obj_mario)) {
+		
+			//If Mario is below this icicle
+			if (obj_mario.y > bbox_top) {
+			
+				//If Mario is nearby this icicle
+				if (obj_mario.x > bbox_left-32) 
+				&& (obj_mario.x < bbox_right+32)
+					ready = 1;
+					
+				//Otherwise
+				else {
+				
+					ready = 0;
+					alarm[0] = 28;
+					alarm[1] = 1;
+				}
+			}
+			
+			//Otherwise
+			else {
+				
+				ready = 0;
+				alarm[0] = 28;
+				alarm[1] = 1;	
+			}
+		}
+		
+		//Otherwise
+		else {
+		
+			ready = 0;
+			alarm[0] = 28;
+			alarm[1] = 1;			
+		}
+	}
 }
 
-//Otherwise
-else {
+//Otherwise, if falling down
+else if (vspeed > 0) {
 
-    //Do not shake
-    shake = 2;
-    
-    //If moving down
-    if (vspeed > 0) {
-        
-        //Check for floor
-        var semisolid = collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom+1+vspeed, obj_semisolid, 0, 1);
-        var slopes = collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom+1+vspeed, obj_slopeparent, 1, 1);
-        
-        //If there's a slope or ground in the way
-        if (slopes) || (semisolid) {
-        
-            //Regenerate
-            event_user(0);
-            
-            //Shatter
-            event_user(1);
-        }
-    }    
-    
-    //If the player is on this donut
-    if (collision_rectangle(bbox_left, bbox_top-5, bbox_right, bbox_top+4, obj_playerparent, 0, 0))
-    && (obj_playerparent.bbox_bottom < yprevious+5)
-    && (obj_playerparent.state != statetype.jump) {
-
-        //Check if falling through a semisolid
-        var check = collision_rectangle(obj_playerparent.bbox_left, bbox_top-5, obj_playerparent.bbox_right, bbox_top+1, obj_semisolid, 0, 1);
-        var check2 = collision_rectangle(obj_playerparent.bbox_left, bbox_top-5, obj_playerparent.bbox_right, bbox_top+1, obj_semisolid_moving, 0, 1);
-        
-        //If not falling through, or falling througn a lower donut, snap the player vertically
-        if (!check) 
-        && ((!check2) 
-        || (((check2.object_index = obj_donut) || (check2.object_index = obj_donut_red) || (check2.object_index = obj_icicle)) && ((check2.y > y) || ((check2.y = y) && (check2 > id)))))
-            obj_playerparent.y = ceil(bbox_top-16);
-    }
+	//Set falling state
+	ready = 2;
+	
+	//If Mario does exist
+	if (mario)
+	&& (mario.state < playerstate.jump)
+	&& (mario.bbox_bottom < yprevious+5) {
+	
+		//Check for a donut
+		var check = collision_rectangle(mario.bbox_left, bbox_top-5, mario.bbox_right, bbox_top+1, obj_semisolid, 0, 1);
+		var check2 = collision_rectangle(mario.bbox_left, bbox_top-5, mario.bbox_right, bbox_top+1, obj_semisolid, 0, 1);
+	
+		//If there's a donut in position
+		if (check)
+		&& ((!check2)
+		|| (((check2.object_index = obj_donut) || (check2.object_index == obj_donut_red) || (check2.object_index == obj_donut_triple) || (check2.object_index == obj_donut_triple_red)) && ((check2.y > y) || ((check2.y = y) && (check2 > id))))) 
+			mario.y = ceil(bbox_top-16);
+	}
 }
 
-//Destroy
-if (shake == 2)
-&& (bbox_top > __view_get( e__VW.YView, 0 ) + __view_get( e__VW.HView, 0 )) {
+//Destroy if below the view or when it makes contact with a solid
+if (ready == 2) {
+	
+	#region FLOOR COLLISION
+	
+		//If the icicle collides with the floor, move it to the bottom boundary
+		if (collision_point(x+8, bbox_bottom, obj_semisolid, 0, 1))
+		|| (collision_point(x+8, bbox_bottom, obj_slopeparent, 1, 1)) {
+			
+			//If this icicle did not reached the ground
+			if (ground_check == 0) {
+		
+				//Play 'Icicle' sound
+				audio_play_sound(snd_icicle, 0, false);
+				
+				//Create sparks
+				repeat(32) {
 
-    event_user(1);
-    instance_destroy();
+				    with (instance_create_depth(x + 8, y + 16, -4, obj_sparkle)) {
+				
+				        motion_set(random(360), random(1));
+						gravity = 0.1;
+					}
+				}
+				
+				//Prevent collision
+				ground_check = 1;
+		
+				//Move to the bottom boundary
+				y = room_height;		
+			}
+		}
+	#endregion
+	
+	//If the icicle collides is below the boundary
+	if (bbox_top > (camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]))) {
+		
+		//Decrement respawn rate
+		respawn--;
+		
+		//If the respawn rate is lower than 0
+		if (respawn < 1) {
+		
+			//Increment scale
+			scale += 0.05;
+			if (scale > 1) {
+				
+				//Restart ground check
+				ground_check = 0;
+			
+				//Restart scale
+				scale = 0;
+				
+				//Restart movement and position
+				vspeed = 0;
+				y = ystart;
+				
+				//Restart state
+				ready = 0;
+				
+				//Restart timer
+				respawn = 180;
+			}
+		}
+	}
 }
 
+//If this donut is slippery
+if (ice)
+&& (myslip != -1)
+	myslip.y = y-16;

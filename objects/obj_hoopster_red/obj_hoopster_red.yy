@@ -34,10 +34,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_hoopster_red",
-    "path": "sprites/spr_hoopster_red/spr_hoopster_red.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

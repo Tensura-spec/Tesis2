@@ -1,14 +1,50 @@
-/// @description Draw shard
+/// @description Render shard
 
-//Set the shader
-if (isflashing > 0) {
+//If this shard is from a brick
+if (sprite_index == spr_shard_brick) 
+|| (sprite_index == spr_shard_big_brick) {
 
-    pal_swap_set(spr_palette_brick_blue, isflashing);
+	//Set palette
+	pal_swap_set(spr_palette_brick, obj_levelcontrol.level_palette);
+
+	//Draw the block
+	draw_sprite_ext(sprite_index, -1, screen_round(x), screen_round(y), 1, 1, 0, c_white, 1);
+
+	//Reset palette
+	pal_swap_reset();	
 }
 
-//Draw it
-draw_sprite_ext(sprite_index, image_index, round(x), round(y), 1, 1, 0, c_white, 1);
+//Otherwise, if this shard is from a empty block
+else if (sprite_index == spr_shard_empty) 
+|| (sprite_index == spr_shard_big_empty) {
 
-//Reset shader
-pal_swap_reset();
+	//Set palette
+	pal_swap_set(spr_palette_block_empty, obj_levelcontrol.level_palette);
 
+	//Draw the block
+	draw_sprite_ext(sprite_index, -1, screen_round(x), screen_round(y), 1, 1, 0, c_white, 1);
+
+	//Reset palette
+	pal_swap_reset();	
+}
+
+//Otherwise
+else {
+
+	//If this shard is a yellow area one
+	if (sprite_index == spr_shard_area_y)
+		draw_sprite_ext(sprite_index, -1, screen_round(x), screen_round(y), 1, 1, 0, c_white, 1);
+	
+	//Otherwise
+	else {
+
+		//Set palette
+		pal_swap_set(spr_palette_block, obj_levelcontrol.level_palette);
+
+		//Draw the block
+		draw_sprite_ext(sprite_index, -1, screen_round(x), screen_round(y), 1, 1, 0, c_white, 1);
+
+		//Reset palette
+		pal_swap_reset();	
+	}
+}

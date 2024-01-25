@@ -1,30 +1,30 @@
-/// @description Blastakoopa Bullet
+/// @description Blasta Koopa bullet
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 1;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 0;
 
-//How vulnerable is this enemy to Yoshi
+//How vulnerable is this enemy to Yoshi?
 edible = 0;
 
-//Death Sprite
-deathsprite = sprite_index;
+//Ignore platforms
+ignore_platforms = 1;
 
-//Stomp sprite
-stompsprite = sprite_index;
+//Last Direction
+lastdir = direction;
+new_dir = 0;
+diff = 0;
+yy = 1;
 
-//Animate
+//Do not animate
 image_speed = 0;
 
-//Previous direction
-lastdir = direction;
-
-//Follow the player
+//Home at Mario
 homing = false;
 alarm[0] = 30;
 
@@ -36,4 +36,3 @@ alarm[2] = 360;
 
 //Blow up
 alarm[3] = 420;
-

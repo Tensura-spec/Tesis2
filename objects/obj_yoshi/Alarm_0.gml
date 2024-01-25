@@ -1,13 +1,7 @@
-/// @description Perform action based on state
+/// @description Start licking
 
-//If yoshi is idle or running away, allow ride
-if (state != yoshistate.ridden)
-    rideme = 1;
-    
-//Otherwise, if yoshi is being ridden
-else if (state == yoshistate.ridden) {
+//Set animation
+anim = 1;
 
-    anim = 1;
-    instance_create(x, y, obj_tongue);
-}
-
+//Create tongue
+instance_create_depth(x, y, -4, obj_yoshi_tongue);

@@ -1,27 +1,28 @@
-/// @description Return to start position and allow block hit
+/// @description Finish block bump
 
-//Return to start position
+//Stop moving
+speed = 0;
+
+//Snap in start position
 x = xstart;
 y = ystart;
 
-//Stop movement
-speed = 0;
-
-//Allow hit again
-ready = 0;
-
-//If the item inside is not a coin
-if (sprout != itemtype.coin) 
-&& (sprout != itemtype.coin_star)
-&& (sprout != itemtype.coin_multi) {
-
-    //If the player is small
-    with (instance_create(x+8, y, obj_powerup_sprout)) {
-    
-        sprite_index = enum_get_sprite(other.sprout);
-    }
-    
-    //End item sprout
-    sprout = itemtype.coin;
+//Sprout out an item if there's any
+if (sprout != cs_coin) {
+	
+	//Otherwise, if there's a powerup inside
+	if (sprout >= cs_big)
+	&& ((global.powerup == cs_tiny) || (global.powerup == cs_small))
+		sprout = cs_big;
+        
+    //Create the item
+    if (sprout != cs_coin)
+        with (instance_create_depth(x+8, y, 10, obj_powerup_sprout))       
+            sprite_index = macro_get_sprite(other.sprout);
 }
 
+//Do not sprout more items
+sprout = cs_coin;
+
+//Allow block to be bumped again
+ready = 0;

@@ -18,7 +18,10 @@
     "name": "Castle",
     "path": "folders/Objects/Enemies/Castle.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_enemyparent",
+    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -34,10 +37,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_podoboo",
-    "path": "sprites/spr_podoboo/spr_podoboo.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

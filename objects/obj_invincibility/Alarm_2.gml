@@ -4,7 +4,6 @@
 obj_levelcontrol.alarm[1] = 1;
 
 //Play 'Starman' theme
-if (!audio_is_playing(bgm_pswitch))
-&& (!audio_is_playing(bgm_starman))
-    audio_stop_play_sound(bgm_starman, 0, true);
-
+if (!audio_is_playing(snd_pswitch))
+&& (!audio_is_playing(snd_starman))
+    audio_play_sound(snd_starman, 0, true);

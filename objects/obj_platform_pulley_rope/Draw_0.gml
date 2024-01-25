@@ -1,4 +1,3 @@
-/// @description Draw rope
+/// @description Render me
 
-draw_sprite_ext(sprite_index, image_index, round(x), round(y), 1, scale, 0, c_white, 1);
-
+draw_sprite_ext(sprite_index, -1, screen_round(x), screen_round(y), 1, scale, 0, c_white, 1);

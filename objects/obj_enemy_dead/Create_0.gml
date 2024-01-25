@@ -2,24 +2,16 @@
 
 //Do not animate
 image_speed = 0;
-image_index = 0;
-
-//Set gravity
-gravity = 0.2;
-
-//Is swimming
-swimming = 0;
 
 //Angle
 angle = 0;
 
-//If underwater
-if (place_meeting(x, y, obj_swim)) {
+//Check if swimming
+swimming = 0;
 
-    //Set swimming gravity
-    gravity = 0.1;
-    
-    //Set swimming state
-    swimming = 1;
-}
+//Check sprite
+alarm[0] = 1;
 
+//Set the vertical speed if the enemy does not have any
+if (vspeed == 0)
+	vspeed = (position_meeting(x, bbox_top, obj_swim)) ? -1 : -4;

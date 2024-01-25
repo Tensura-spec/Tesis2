@@ -1,10 +1,52 @@
-/// @description Break it
+/// @description Shatter egg
 
-///Create egg bits
-shard_create(x, y+8, spr_egg_shard, 3, 6, 45);
-shard_create(x, y+8, spr_egg_shard, 1, 6, 60);
-shard_create(x, y+8, spr_egg_shard, 0, 6, 120);
-shard_create(x, y+8, spr_egg_shard, 2, 6, 135);
+shard = instance_create_depth(x, y + 8, -2, obj_shard);
+with (shard) {
+
+	//Set sprite
+	sprite_index = spr_egg_bits;
+	image_speed = 0;
+	image_index = 3;
+	
+	//Set motion
+	motion_set(45, 6);
+}
+
+shard = instance_create_depth(x, y + 8, -2, obj_shard);
+with (shard) {
+
+	//Set sprite
+	sprite_index = spr_egg_bits;
+	image_speed = 0;
+	image_index = 1;
+	
+	//Set motion
+	motion_set(60, 6);
+}
+
+shard = instance_create_depth(x, y + 8, -2, obj_shard);
+with (shard) {
+
+	//Set sprite
+	sprite_index = spr_egg_bits;
+	image_speed = 0;
+	image_index = 0;
+	
+	//Set motion
+	motion_set(120, 6);
+}
+
+shard = instance_create_depth(x, y + 8, -2, obj_shard);
+with (shard) {
+
+	//Set sprite
+	sprite_index = spr_egg_bits;
+	image_speed = 0;
+	image_index = 2;
+	
+	//Set motion
+	motion_set(135, 6);
+}
 
 //Make it invisible
 visible = 0;
@@ -13,6 +55,4 @@ visible = 0;
 alarm[2] = 16;
 
 //Create some smoke
-with (instance_create(x, y+8, obj_smoke)) 
-    sprite_index = spr_smoke_16;
-
+instance_create_depth(x, y + 8, -6, obj_smoke);

@@ -1,9 +1,4 @@
-/// @description Brick block shard
+/// @description Broken Brick Shard
 
-//Animate
-image_speed = 0;
-
-//Check shard sprite
+//Does this shard flash?
 isflashing = 0;
-alarm[0] = 1;
-

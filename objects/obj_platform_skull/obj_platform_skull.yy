@@ -35,10 +35,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_platform_skull",
-    "path": "sprites/spr_platform_skull/spr_platform_skull.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": {
     "name": "spr_square",
     "path": "sprites/spr_square/spr_square.yy",

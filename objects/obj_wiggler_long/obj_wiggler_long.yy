@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_wiggler",
-    "path": "sprites/spr_wiggler/spr_wiggler.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

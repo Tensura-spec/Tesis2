@@ -1,9 +1,4 @@
-/// @description Begin finishing the licking process / Animate idle
+/// @description Begin finishing the licking process
 
-//If yoshi is being ridden
-if (state == yoshistate.ridden) {
-
-    anim = 0;
-    alarm[2] = 5;
-}
-
+anim = 0;
+alarm[2] = 5;

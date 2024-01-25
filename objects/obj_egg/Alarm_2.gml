@@ -2,10 +2,11 @@
 
 //If there's not a yoshi in the room
 if (instance_number(obj_yoshi) == 0) 
-&& (instance_number(obj_egg_hatch) == 0){
+&& (instance_number(obj_yoshi_abandon) == 0) 
+&& (instance_number(obj_yoshi_runaway) == 0) {
 
     //Hatch the egg
-    with (instance_create(x, y, obj_egg_hatch)) {
+    with (instance_create_depth(x, y, -2, obj_egg_hatch)) {
     
         //Green Yoshi
         if (other.sprite_index == spr_egg)
@@ -22,25 +23,24 @@ if (instance_number(obj_yoshi) == 0)
         //Blue Yoshi
         else if (other.sprite_index == spr_egg_b)
             colour = 3;
+            
+        //Teal Yoshi
+        else if (other.sprite_index == spr_egg_t)
+            colour = 4;
+            
+        //Pink Yoshi
+        else if (other.sprite_index == spr_egg_p)
+            colour = 5;
     }
-    
-    //Destroy
-    instance_destroy();
 }
 
 //Otherwise
 else {
 
-    //Create a 1-UP
-    with (sprite_create_object(x, y-2, spr_1up)) {
-    
-        hspeed = 1;
-    }
-
-    //Destroy
-    instance_destroy();
+    //Create a 1-UP and destroy the egg
+    with (instance_create_depth(x, y, -2, obj_1up))
+		move_after_landing = 1;
 }
 
-//Let's just destroy this before I do a yoshi
+//Destroy the object
 instance_destroy();
-

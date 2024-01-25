@@ -35,9 +35,6 @@
     "name": "spr_tweeter_big",
     "path": "sprites/spr_tweeter_big/spr_tweeter_big.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_32x32",
-    "path": "sprites/spr_mask_npc_common_32x32/spr_mask_npc_common_32x32.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

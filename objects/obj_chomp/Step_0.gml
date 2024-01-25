@@ -1,32 +1,42 @@
 /// @description Chain Chomp logic
 
+//Handle pseudo movement variables
+if (freeze == false) {
+
+	x += xspeed;
+	y += yspeed;
+	yspeed += yadd;
+}
+
 //If the chain chomp is not lunging
 if (lunge == false) {
 
     //Gravity
-    gravity = 0.25;
+    yadd = 0.25;
     
     //Cap vertical speed
-    if (vspeed > 4)
-        vspeed = 4
+    if (yspeed > 4)
+        yspeed = 4
 }
-else
-gravity = 0;
+else {
+
+    yadd = 0;
+}
 
 //If the chain chomp is idle
 if (idle) {
 
     //Reverse horizontal speed.
     if (x < stop_l)
-        hspeed = 1
+        xspeed = 1
     if (x > stop_r)
-        hspeed = -1
+        xspeed = -1
     
     //If Mario does exist
-    if (instance_exists(obj_playerparent)) {
+    if (instance_exists(obj_mario)) {
     
         //If Mario is on sight
-        if ((point_distance(obj_playerparent.x, obj_playerparent.y, x, y) < 1.5*maxdist) && (!ready)) {
+        if ((point_distance(obj_mario.x, obj_mario.y, x, y) < 1.5*maxdist) && (!ready)) {
         
             //Do not retreat
             retreat = 0
@@ -41,10 +51,28 @@ if (idle) {
             ready = 1;
             
             //Set the motion
-            if (obj_playerparent.x < originx)
-                motion_set(random(85)+90,4);
-            else
+            if (obj_mario.x < originx) {
+			
+				//Set motion
+                motion_set(random(85)+90, 4);
+				
+				//Obtain motion
+				xspeed = hspeed;
+				yspeed = vspeed;
+				hspeed = 0;
+				vspeed = 0;
+			}
+            else {
+				
+				//Set motion
                 motion_set(90-random(85),4);
+				
+				//Obtain motion
+				xspeed = hspeed;
+				yspeed = vspeed;
+				hspeed = 0;
+				vspeed = 0;
+			}
         }
     }
 }
@@ -59,8 +87,9 @@ if (lunge) {
     if (x-originx > maxdist) {
     
         x = originx+maxdist
-        alarm[0] = 60
-        speed = 0
+        alarm[0] = 60;
+        xspeed = 0;
+		yspeed = 0;
         with (start) {
         
             taunt = true;
@@ -68,9 +97,10 @@ if (lunge) {
     }
     else if (originx-x > maxdist) {
     
-        x = originx-maxdist
-        alarm[0] = 60
-        speed = 0
+        x = originx-maxdist;
+        alarm[0] = 60;
+        xspeed = 0;
+		yspeed = 0;
         with (start) {
         
             taunt = true;
@@ -80,9 +110,10 @@ if (lunge) {
     //If the chomp is higher than the origin position.
     if (originy-y > maxdist) {
     
-        y = originy-maxdist
-        alarm[0] = 60
-        speed = 0
+        y = originy-maxdist;
+        alarm[0] = 60;
+        xspeed = 0;
+		yspeed = 0;
         with (start) {
         
             taunt = true;
@@ -93,8 +124,8 @@ if (lunge) {
 //If the chomp is retreating.
 if (retreat) {
     
-    if ((x < stop_l) && (hspeed < 0))
-    || ((x > stop_r) && (hspeed > 0)) {
+    if ((x < stop_l) && (xspeed < 0))
+    || ((x > stop_r) && (xspeed > 0)) {
     
         //Do not lunge
         lunge = 0;
@@ -107,3 +138,19 @@ if (retreat) {
     }
 }
 
+if ((idle) || (retreat)) {
+
+    if ((x < originx) && (xprevious > originx))
+        stop_l = originx-4-ceil(random(16));
+    else if ((x > originx) && (xprevious < originx))
+        stop_r = originx+4+ceil(random(16));
+}
+
+//Animate
+image_speed = 1 + (1*lunge);
+
+//Set the facing direction
+if (xspeed > 0)
+    xscale = 1;
+else if (xspeed < 0)
+    xscale = -1;

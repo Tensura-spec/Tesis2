@@ -1,4 +1,5 @@
-/// @description Break the block if hit with an item
+/// @description Turn into a coin
 
-alarm[3] = 4;
-
+instance_create_layer(x, y, "Main", obj_coin);
+instance_destroy();
+exit;

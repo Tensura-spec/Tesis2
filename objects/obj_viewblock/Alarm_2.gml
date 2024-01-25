@@ -1,28 +1,16 @@
-/// @description Replace item
+/// @description Cycle between powerups
 
-//If not hit
+//Continue the cycle.
 if (ready == 0) {
 
-    //Check item displayed and replace it
-    switch (swap) {
+    //Repeat this process
+    alarm[2] = 15;
     
-        //Mushroom -> Fireflower
-        case (spr_mushroom): swap = spr_fireflower; break;
-        
-        //Fireflower -> Feather
-        case (spr_fireflower): swap = spr_feather; break;
-        
-        //Feather -> Iceflower
-        case (spr_feather): swap = spr_iceflower; break;
-        
-        //Iceflower -> Starman
-        case (spr_iceflower): swap = spr_star; break;
-        
-        //Starman -> Mushroom
-        case (spr_star): swap = spr_mushroom; break;
-    }
-    
-    //Repeat the process
-    alarm[2] = 90;
+    //Increment cycle
+    numb++;
 }
 
+//Reset sequence
+if (sprout[numb] == noone)
+|| (numb == array_length(sprout)) 
+    numb = 0;

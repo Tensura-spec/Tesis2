@@ -39,9 +39,6 @@
     "name": "spr_sumobro",
     "path": "sprites/spr_sumobro/spr_sumobro.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

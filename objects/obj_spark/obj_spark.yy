@@ -36,10 +36,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"spd","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":true,"rangeMax":3.0,"rangeMin":0.5,"value":"1","varType":0,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_spark",
-    "path": "sprites/spr_spark/spr_spark.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

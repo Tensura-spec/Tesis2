@@ -29,10 +29,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_drypiranhaplant_debris",
-    "path": "sprites/spr_drypiranhaplant_debris/spr_drypiranhaplant_debris.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

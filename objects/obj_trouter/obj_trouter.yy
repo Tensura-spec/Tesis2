@@ -34,10 +34,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_trouter",
-    "path": "sprites/spr_trouter/spr_trouter.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

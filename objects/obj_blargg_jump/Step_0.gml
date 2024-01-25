@@ -1,16 +1,27 @@
 /// @description Blargg logic
 
-//Set facing direction
-xscale = 1*sign(hspeed);
+//Manage pseudo movement variables
+if (freeze == false) {
+
+	x += xspeed;
+	y += yspeed;
+	yspeed += yadd;
+}
 
 //Cap vertical speed
-if (vspeed > 4) {
+if (yspeed > 4) {
 
-    vspeed = 4;
-    gravity = 0;
+    yspeed = 4;
+    yadd = 0;
 }
-    
+
+//Set facing direction
+if (xspeed > 0)
+	xscale = 1;
+else if (xspeed < 0)
+	xscale = -1;
+
 //Destroy if below the view
-if (y > __view_get( e__VW.YView, 0 )+__view_get( e__VW.HView, 0 )+32)
+if (y > camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) + 32)
     instance_destroy();
 

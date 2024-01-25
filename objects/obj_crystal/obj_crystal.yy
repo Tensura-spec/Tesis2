@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_crystal",
-    "path": "sprites/spr_crystal/spr_crystal.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

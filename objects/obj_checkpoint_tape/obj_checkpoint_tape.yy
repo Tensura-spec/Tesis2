@@ -29,10 +29,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_checkpoint",
-    "path": "sprites/spr_checkpoint/spr_checkpoint.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

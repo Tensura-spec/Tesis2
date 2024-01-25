@@ -1,5 +1,11 @@
-/// @description Mario Start! animation
+/// @description Display "Mario Start!" at the beginning of the level
 
-//Wait for the game to fade out
-alarm[0] = 30;
+//Do not animate
+image_speed = 0;
+image_index = 1 + global.player;
 
+//Set depth
+depth = -100;
+
+//Deactivate
+alarm[0] = 1;

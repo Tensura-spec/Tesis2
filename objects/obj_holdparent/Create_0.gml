@@ -1,10 +1,10 @@
-/// @description The parent object for all held items
+/// @description SMB3 / SMW Holdable Item parent
 
-//Inherit event from physics parent
+//Inherit the parent event
 event_inherited();
 
-//Do not animate
-image_speed = 0;
+//Make it bounce
+bounces = 3;
 
 //Direction of item
 dir = 1;
@@ -20,4 +20,3 @@ follow = noone;
 
 //Do not slowdown when kicked (Applies only to blue bricks)
 ready = 0;
-

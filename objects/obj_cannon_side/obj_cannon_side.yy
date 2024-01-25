@@ -39,10 +39,7 @@
       ],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"45","varType":6,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_cannon_side",
-    "path": "sprites/spr_cannon_side/spr_cannon_side.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

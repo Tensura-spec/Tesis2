@@ -1,8 +1,5 @@
 /// @description Destroy
 
-//Create smoke
-with (instance_create(x, y+8, obj_smoke)) sprite_index = spr_smoke_16;
-
-//Destroy
+instance_create_depth(x, y+8, -6, obj_smoke);
 instance_destroy();
-
+exit;

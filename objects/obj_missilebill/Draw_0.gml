@@ -1,4 +1,6 @@
-/// @description Draw bullet bill
+/// @description Render me
 
-draw_sprite_ext(spr_missilebill, image_index, round(x), round(y)+8, 1, 1, direction, c_white, 1);
-
+if (freeze == false)
+	draw_sprite_custom_origin(sprite_index, -1, screen_round(x), screen_round(y), 8, 8, xscale, 1, direction, c_white, 1);
+else
+	draw_sprite_custom_origin(sprite_index, -1, screen_round(x), screen_round(y), 8, 8, xscale, 1, new_dir, c_white, 1);

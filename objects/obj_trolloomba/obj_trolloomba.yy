@@ -32,10 +32,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_trolloomba",
-    "path": "sprites/spr_trolloomba/spr_trolloomba.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

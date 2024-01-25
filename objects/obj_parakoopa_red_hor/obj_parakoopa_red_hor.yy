@@ -35,10 +35,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_koopa_red",
-    "path": "sprites/spr_koopa_red/spr_koopa_red.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

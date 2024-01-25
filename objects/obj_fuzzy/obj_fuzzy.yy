@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_fuzzy",
-    "path": "sprites/spr_fuzzy/spr_fuzzy.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

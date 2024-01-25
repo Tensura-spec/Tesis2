@@ -10,4 +10,3 @@ else if (vspeed = 0.025) {
     vspeed = 0;
     with (parent) vspeed = 0;
 }
-

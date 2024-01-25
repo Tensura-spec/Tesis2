@@ -1,5 +1,10 @@
-/// @description Destroy if outside the view
+/// @description Bowser Statue fire logic
 
-if (outside_view(16))
-    instance_destroy();
+//Handle psuedo movement
+if (freeze == false) {
+	
+	x += xspeed;
+}
 
+//No gravity
+yadd = 0;

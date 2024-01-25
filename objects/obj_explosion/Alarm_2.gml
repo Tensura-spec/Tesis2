@@ -2,15 +2,14 @@
 
 //Generate effect
 var b;
-b = 270;
-repeat (5) {
+b = 30;
+repeat (6) {
 
-    eff = instance_create(x, y+8, obj_explosion_stars);
+    eff = instance_create_depth(x, y+8, -2, obj_explosion_stars);
     with (eff) {
     
         dir = b;
     }
-    b += 72;
+    b += 60;
 }
 alarm[1] = 8;
-

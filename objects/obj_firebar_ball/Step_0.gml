@@ -1,6 +1,4 @@
-/// @description Firebar fireball logic
+/// @description Set up fireball position
 
-//Set the position of the fire.
-x = mom.x+8+lengthdir_x(length, mom.angle);
-y = mom.y+8+lengthdir_y(length, mom.angle);
-
+x = mom.x + 8 + lengthdir_x(length, mom.angle);
+y = mom.y + 4 + lengthdir_y(length, mom.angle);

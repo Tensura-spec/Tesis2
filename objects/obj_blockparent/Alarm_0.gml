@@ -1,9 +1,5 @@
-/// @description Reverse direction
+/// @description Reverse movement
 
-//Reverse direction
 hspeed = -hspeed;
 vspeed = -vspeed;
-
-//End bump
 alarm[1] = 4;
-

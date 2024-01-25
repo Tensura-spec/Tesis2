@@ -1,4 +1,3 @@
-/// @description Draw spike ball
+/// @description Render me
 
-draw_sprite_ext(spr_spike_ball_ang, 0, round(x), round(y)+9, 1, 1, angle, c_white, 1);
-
+draw_sprite_custom_origin(sprite_index, image_index, screen_round(x), screen_round(y + 1), 8, 8, xscale, yscale, angle, image_blend, image_alpha);

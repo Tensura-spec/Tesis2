@@ -1,12 +1,4 @@
-/// @description Chain from a giant maze
+/// @description Ball 'n' Chain (Ball)
 
-//Do not animate.
-image_speed = 0;
-image_index = 0;
-
-//Does mom exist?
-mom = -1;
-
-//Set the distance from the center.
-length = 0;
-
+//Parent of the object
+parent = noone;

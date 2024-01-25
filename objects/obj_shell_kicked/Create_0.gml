@@ -1,31 +1,19 @@
 /// @description Kicked Koopa Shell
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
-vulnerable = 0;
-
-//How vulnerable is this enemy to the player
-stomp = 0;
-
-//How vulnerable is this enemy to Yoshi
+//How edible is this enemy to yoshi?
 edible = 1;
-
-//Death Sprite
-deathsprite = spr_koopa_dead;
 
 //Combo
 hitcombo = 0;
 
-//Whether this shell is flipped
+//Check
+check = 0;
+
+//Whether the shell is flipped
 flip = 0;
-
-//Default hspeed
-myhsp = abs(hspeed);
-
-//Remember horizontal speed
-memhspeed = 0;
 
 //Whether there's a koopa inside this shell
 koopainside = 0;
@@ -35,14 +23,7 @@ harmplayer = 0;
 alarm[0] = 16;
 
 //Whether this shell is falling through one tile gaps
-fall = 0;
+check = 0;
 
-//Unused
-held = 0;
-
-//Animate
-image_speed = 0.3;
-
-//Check sprite and set vulnerabilities
-event_user(14);
-
+//If big, create mask
+masher = -1;

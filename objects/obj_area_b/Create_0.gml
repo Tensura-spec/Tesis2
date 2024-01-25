@@ -1,11 +1,12 @@
-/// @description Blue Switch Block
+/// @description Blue Area Block
+
+//If the blue switch has been pressed, turn into a real block
+if (global.palace_b == 1) {
+	
+	alarm[0] = 1;
+	exit;
+}
 
 //Do not animate
 image_speed = 0;
-
-//If the blue switch has been pressed, become solid
-if (global.palaceswitch_b = true)
-    instance_create(x, y, obj_solid);
-else
-    image_index = 1;
-
+image_index = 1;

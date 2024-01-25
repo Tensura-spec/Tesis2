@@ -1,9 +1,7 @@
-/// @description Arrow Platform
+/// @description Arrow Platform Generator
 
 //Do not animate
 image_speed = 0;
-image_index = 0;
 
-//Make this block solid
-mysolid = instance_create(x, y, obj_solid);
-
+//Whether the player is on this platform.
+ready = 0;

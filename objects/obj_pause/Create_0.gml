@@ -1,29 +1,48 @@
-/// @description Pause
+/// @description Pause menu
 
-//Pause all sounds
-audio_pause_all();
+//Play 'Pause' menu
+audio_play_sound(snd_pause, 0, false);
 
-//Play 'Pause' sound
-audio_stop_play_sound(snd_pause, 0, false);
+//Snapshot freeze
+snapshot = -1;
 
-//Set up the pause text
-i = floor(random_range(0, 100))
+//Menu variables
+menu[0] = "Continue";
+menu[1] = (global.beaten == 1) ? "Return to Map" : "Cannot Quit Level";
+menu[2] = "Quit Game";
 
-//If i is lower than 98
-if (i > 98)
-    pause_text = "SPACE FOR RENT!";
-else
-    pause_text = "GAME PAUSED";
+//Delay
+delay = 0;
 
-//Create a screenshot
-back = background_create_from_surface(application_surface, 0, 0, global.gw, global.gh, 0, 0);
+//Index
+index = 0;
 
-//Deactivate all instances.
-instance_deactivate_all(true);
+//Scale
+alpha = 0;
+scale = 0;
+scale_type = 0;
 
-//Activate controller
-instance_activate_object(obj_controller);
+//Pause timelines
+timeline_running = 0;
 
-//Activate the HUD
-instance_activate_object(obj_hud);
+#region PAUSE SOUNDS
 
+	//Stop 'Spin' sound
+	audio_pause_sound(snd_spin);
+
+	//Stop 'Skid' sound
+	audio_pause_sound(snd_skid);
+
+	//Stop 'Climb' sound
+	audio_pause_sound(snd_climb);
+
+	//Stop 'P-Meter' sound
+	audio_pause_sound(snd_pmeter);
+	
+	//Stop 'Rain' sound
+	audio_pause_sound(snd_rain);
+	
+#endregion
+
+//Delay snapshot creation
+alarm[0] = 2;

@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_bubbleflower",
-    "path": "sprites/spr_bubbleflower/spr_bubbleflower.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

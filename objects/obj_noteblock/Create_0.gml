@@ -1,11 +1,10 @@
-/// @description Note block
+/// @description Note Block
 
-//Item held on block
-sprout = itemtype.coin;
-
-//Inherit event from parent object
+//Inherit event from parent
 event_inherited();
 
-//Animate
-image_speed = 0.1;
-
+//If there's a note block in the room, retrieve frame from them
+if (instance_exists(obj_noteblock))
+	image_index = obj_noteblock.image_index;
+else
+	image_index = 0;

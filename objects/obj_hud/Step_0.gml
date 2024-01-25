@@ -1,59 +1,47 @@
-/// @description Set up special effect for the timer text
+/// @description Display cards and fake up P-Meter depletion
 
-//Do this only is levelcontrol is active
-if (instance_exists(obj_levelcontrol)) {
-    
-    //Fade timer to red if less than 100 seconds
-    if (global.time > -1)
-    && (obj_levelcontrol.leveltime != 0) {
-    
-        //If there's less than 100 seconds left
-        if (global.time <= 100) {
-        
-            //Fade out
-            if (fadetype == -1) {
-            
-                fade -= 0.05;
-                if (fade < 0.05) {
-                
-                    fade = 0;
-                    fadetype = 1;
-                }
-            }
-            
-            //Otherwise, fade in
-            else {
-            
-                fade += 0.05;
-                if (fade > 1.1) {
-                
-                    fade = 1;
-                    fadetype = -1;
-                }            
-            }        
-        }
-    }
-    
-//    //This only applies to the SMA4 and Hello engine hud
-//    if ((obj_controller.hud_type == 2)
-//    || (obj_controller.hud_type == 5))
-//    && (instance_number(obj_goal_gate) > 0) {
-        
-//        if (obj_levelcontrol.x > obj_goal_gate.x-256) 
-//        || (obj_levelcontrol.x > obj_goal_gate.x)
-//            display = 2;
-//        else
-//            display -= 0.025;
-//    }
-//    else
-//        display -= 0.025;
+//Set P-Meter position
+if (global.collect_mode > 0)
+|| ((instance_exists(obj_coinblock)) && (obj_coinblock.ready == 1))
+	pmeterx = 48;
+
+//Handle out prizes if coin collection mode is active
+if (global.collect_mode == 1) {
+	
+	//If there's no more coins to collect
+	if (global.coins_left <= 0) {
+		
+		//Set collection mode to 2
+		global.collect_mode = 2;
+		
+		//Create a poof of smoke
+		instance_create_depth(camera_get_view_x(view_camera[0]) + 20, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) - 16, -32, obj_smoke);
+		
+		//Enable the star house from the respective world
+		global.star_house[global.world] = 1;
+	}
 }
 
-///Keep track of the time
+//If the goal card exists, show HUD cards
+if (instance_exists(obj_goalcard)) {
 
-if (instance_exists(obj_levelcontrol)) {
-
-    displaytime = global.time;
-    displaydragoncoins = global.dcoins;    
+	if (obj_levelcontrol.x > obj_goalcard.x-global.gw) 
+	|| (obj_levelcontrol.x > obj_goalcard.x)
+	    show_cards = 240;
+	else
+	    show_cards--;
 }
 
+//Otherwise, hide HUD cards
+else
+show_cards = 0;
+
+//Fake P-Meter if Mario exists and the pmeter is greater than 0
+if (fake_pm == 0) {
+	
+	if (instance_exists(obj_mario))
+	&& (obj_mario.pmeter > 0)
+		fake_pm = obj_mario.pmeter;
+}
+else
+	fake_pm--;

@@ -37,9 +37,6 @@
     "name": "spr_bossbass",
     "path": "sprites/spr_bossbass/spr_bossbass.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_32x32",
-    "path": "sprites/spr_mask_npc_common_32x32/spr_mask_npc_common_32x32.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

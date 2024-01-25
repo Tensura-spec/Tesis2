@@ -1,5 +1,10 @@
-/// @description Start displaying Mario Start!
+/// @description Deactivate all instances
 
-visible = 1;
-alarm[1] = 60;
+//Deactivate all instances.
+instance_deactivate_all(1);
 
+//Activate persistent object.
+instance_activate_object(obj_coordinator);
+
+//Display for half a second
+alarm[1] = 30;

@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_hoppycat",
-    "path": "sprites/spr_hoppycat/spr_hoppycat.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

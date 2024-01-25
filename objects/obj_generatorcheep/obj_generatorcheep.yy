@@ -13,7 +13,10 @@
     "name": "Water",
     "path": "folders/Objects/Special/Do Not Use!/Enemies/Water.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_enemyparent",
+    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -29,10 +32,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_cheepcheep",
-    "path": "sprites/spr_cheepcheep/spr_cheepcheep.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

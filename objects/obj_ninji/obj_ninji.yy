@@ -34,13 +34,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"kunai","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"0","varType":3,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_ninji",
-    "path": "sprites/spr_ninji/spr_ninji.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

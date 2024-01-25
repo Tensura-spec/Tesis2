@@ -1,4 +1,4 @@
-/// @description Rope logic
+/// @description Balance Platform Rope logic
 
 var platform = collision_rectangle(x, y+1, x, y+room_height, obj_platform_pulley, 0, 0);
 
@@ -21,4 +21,3 @@ if (ready = 0) {
     else
         exit;
 }
-

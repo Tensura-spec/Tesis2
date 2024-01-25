@@ -39,9 +39,6 @@
     "name": "spr_galoomba_red_sleep",
     "path": "sprites/spr_galoomba_red_sleep/spr_galoomba_red_sleep.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

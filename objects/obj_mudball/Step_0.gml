@@ -4,19 +4,18 @@
 event_inherited();
 
 //If not jumping
-if (gravity == 0) {
+if (yadd == 0) {
     
     //Boost jump
     y--;
     
     //If swimming
     if (swimming)
-        vspeed = -1;
+        yspeed = -1;
     else
-        vspeed = -2;
+        yspeed = -2;
 }
 
-//Destroy when outside
-if (outside_view(16))
-    instance_destroy();
-
+//Destroy when outside the view
+if (outside_view() == true)
+	instance_destroy();

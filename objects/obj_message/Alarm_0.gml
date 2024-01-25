@@ -1,11 +1,4 @@
-/// @description Return to the map
+/// @description Create Snapshot
 
-wmap_return();
-
-//Disable pixelation
-with (obj_controller) {
-
-    pixelate = 60;
-    
-}
-
+freeze_create();
+ready = 1;

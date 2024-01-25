@@ -1,17 +1,10 @@
-/// @description Big Item Block
+/// @description Large Question Mark Block
 
-//Item held on block
-sprout = itemtype.coin;
-
-//Timer
-timer = 0;
-
-//Coins collected
-coins = 0;
-
-//Inherit event from parent object
+//Inherit event from parent
 event_inherited();
 
 //Shard sprite
-shardsprite = spr_qblock;
+shard_sprite = spr_shard_big;
 
+//Question Mark position
+xx = xstart;

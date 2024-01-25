@@ -1,21 +1,10 @@
-/// @description Winged Item Block
+/// @description Winged Question Mark Block
 
-/*
-**  This item uses creation code!
-**
-**  backnforth = Whether if the block moves back and forth
-**      true = Enable
-**      false = Disable
-*/
+//Makes the object fully solid
+issolid = true;
 
-//Default variables
-backnforth = false;
-
-//Item held on block
-sprout = itemtype.coin;
-
-//Animate
-image_speed = 0.15;
+//Makes the object not carry Mario or NPCs horizontally
+no_horiz = false;
 
 //Whether the block is ready
 ready = 0;
@@ -23,8 +12,21 @@ ready = 0;
 //Direction
 dir = -1;
 
-//Start moving
-alarm[0] = 2;
+//Anim
+anim = 0;
 
-/* */
-/*  */
+//Question Mark position
+xx = xstart;
+
+//Freeze variables
+save_ims = 0;
+save_hsp = 0;
+save_vsp = 0;
+save_grav = 0;
+for (var i=0; i<12; i++) {
+
+	save_alm[i] = -1;
+}
+
+//Is the object frozen?
+freeze = false;

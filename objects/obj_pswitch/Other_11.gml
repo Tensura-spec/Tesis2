@@ -1,25 +1,30 @@
-/// @description Press the P-Switch
+/// @description Press the switch
 
+//Check if this switch is not pressed
 if (sprite_index == spr_pswitch) {
 
-    //Play 'Switch' sound
-    audio_stop_play_sound(snd_switch, 0, false);
+    //Play 'Switch' song
+    audio_play_sound(snd_switch, 0, false);
     
-    //Make the camera shake
-    init_shake(snd_switch);
+    //Change sprite
+	sprite_index = spr_pswitch_press;
     
-    //Set the sprite
-    sprite_index = spr_pswitch_press;
+    //Destroy it
     alarm[0] = 60;
+	
+	//Stop Mario vertical speed
+	obj_mario.yspeed = 0;
     
-    //Activate P-Switch events
+    //Activate switch events
     with (obj_levelcontrol) {
     
-        alarm[6] = 700;
-        event_user(2);
+        //Reset warning
+        pswitch_warn = 0;
+        
+        //Restart timer
+        alarm[5] = 840;
+        
+        //Activate p-switch effect
+        event_user(5);
     }
-    
-    //Stop vertical movement
-    with (obj_playerparent) vspeed = 0;
 }
-

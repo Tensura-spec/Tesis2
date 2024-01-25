@@ -1,8 +1,8 @@
-/// @description Generate a 1-UP
+/// @description Generate a 1-UP mushroom
 
-with (instance_create(x+16, y, obj_powerup_sprout)) {
-
-    sprite_index = spr_1up;
-    big = 1;
+alarm[1] = 60;
+with (instance_create_depth(x + 16, ystart, 10, obj_powerup_sprout)) {
+	
+	big = 2;
+	sprite_index = spr_1up;
 }
-

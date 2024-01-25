@@ -23,12 +23,12 @@ if (mebelow == noone) {
         #region LOGIC
 		
 			//Handle pseudo variables
-			//if (freeze == false) {
+			if (freeze == false) {
 			
-			//	x += xspeed;
-			//	y += yspeed;
-			//	yspeed += yadd;
-			//}
+				x += xspeed;
+				y += yspeed;
+				yspeed += yadd;
+			}
 			
 			#region WALL COLLISION
 

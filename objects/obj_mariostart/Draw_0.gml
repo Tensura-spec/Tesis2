@@ -1,11 +1,7 @@
-/// @description Draw the Mario Start! screen
+/// @description Draw "Mario Start!" text
 
-//Draw black in the back
-draw_clear(c_black);
+//Draw rectangle
+draw_rectangle_colour(camera_get_view_x(view_camera[0]), camera_get_view_y(view_camera[0]), 5000, 5000, c_black, c_black, c_black, c_black, 0);
 
-//Draw the text
-if (global.bonusgame == 0)
-    draw_sprite(spr_mariostart, global.player, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 ) / 2, __view_get( e__VW.YView, 0 )+112);
-else
-    draw_sprite(spr_mariostart, 4, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 ) / 2, __view_get( e__VW.YView, 0 )+112);
-
+//Draw "Mario Start"
+draw_sprite_ext(sprite_index, image_index, camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) / 2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) / 2, 1, 1, 0, c_white, 1);

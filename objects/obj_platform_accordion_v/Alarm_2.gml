@@ -10,4 +10,3 @@ with (lrb) vspeed = 0.5;
 //Expand rightmost blocks
 with (rlb) vspeed = -0.5;
 with (rrb) vspeed = -1;
-

@@ -43,10 +43,7 @@
       ],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"0","varType":6,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_cannon",
-    "path": "sprites/spr_cannon/spr_cannon.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": {
     "name": "spr_square",
     "path": "sprites/spr_square/spr_square.yy",

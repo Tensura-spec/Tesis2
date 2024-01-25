@@ -33,10 +33,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_piranhaplant_side_left",
-    "path": "sprites/spr_piranhaplant_side_left/spr_piranhaplant_side_left.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

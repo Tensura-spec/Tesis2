@@ -1,20 +1,22 @@
-/// @description The power of invincibility.
+/// @description The power of invincibility!
 
 //Prepare to end invincibility
-alarm[0] = 960;
+alarm[0] = 720;
 
-//Play the starman theme if it's not playing.
+//Play the invincibility theme if it is not playing
 alarm[2] = 1;
 
-//Create sparkles
+//Generate sparkles
 alarm[3] = 1;
 
 //Combo
 hitcombo = 0;
 
-//Warn the player
+//Warn player
 warning = 0;
 
-//Object to follow
+//Object to follow up
 follow = noone;
 
+//Horizontal speed check
+xspeed = 0;

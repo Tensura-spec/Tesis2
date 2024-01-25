@@ -1,41 +1,56 @@
-/// @description Draw the background and text
+/// @description Render snapshot and draw the text
 
-//Set the font
-draw_set_font(global.font);
+//Render snapshot
+freeze_render();
 
-//Set the colour
-draw_set_colour(c_white);
-
-//Draw the background
-if (background_exists(back)) {
-    
-    //Disable alpha blending.
-    draw_enable_alphablend(0);
-    
-    //Draw the screenshot
-    draw_background(back, __view_get( e__VW.XView, 0 ), __view_get( e__VW.YView, 0 ));
-    
-    //Enable alpha blending.
-    draw_enable_alphablend(1);
-}
-
-//Align the text
-draw_set_valign(fa_center);
-draw_set_halign(fa_center);
-
-//Set alpha
-draw_set_alpha(0.5);
+//Draw alpha
+draw_set_alpha(alpha);
 
 //Draw rectangle
-draw_rectangle_colour(__view_get( e__VW.XView, view_current ), __view_get( e__VW.YView, view_current ) + __view_get( e__VW.HView, view_current ) / 2 - 8, __view_get( e__VW.XView, view_current ) + __view_get( e__VW.WView, view_current ), __view_get( e__VW.YView, view_current ) + __view_get( e__VW.HView, view_current ) / 2 + 8, c_black, c_black, c_black, c_black, false);
+draw_rectangle_colour(camera_get_view_x(view_camera[0]), camera_get_view_y(view_camera[0]), camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]), camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]), c_black, c_black, c_black, c_black, false);
 
-//Set alpha
+//Reset alpha
 draw_set_alpha(1);
 
-//Draw 'Game Paused' text
-draw_text_colour_shadowed(__view_get( e__VW.XView, view_current ) + __view_get( e__VW.WView, view_current ) / 2, __view_get( e__VW.YView, view_current ) + __view_get( e__VW.HView, view_current ) / 2, string(pause_text), c_black, c_white, 1, 1, 0.5, 1);
+//Draw menu background
+draw_sprite_ext(spr_gui_global_pause, 0, camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) / 2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) / 2, scale, scale, 0, c_white, 1);
 
-//Reset text alignment
-draw_set_valign(fa_top);
-draw_set_halign(fa_left);
+//Set up font
+draw_set_font(global.gui_font);
 
+//If the menu background is fully scaled
+if (scale_type == 1) {
+
+	//Set alignment
+	draw_set_valign(fa_center);
+	draw_set_halign(fa_center);
+
+	//Draw menu items
+	for (var i=0; i<array_length_1d(menu); ++i) { 
+	
+		//Sets the colour of the highlighted option
+		var _colour = (i == index) ? c_white : c_gray;
+		
+		//Set colour
+		draw_set_colour(_colour);
+		
+		#region TEXT
+		
+			//Draw arrow
+			if (i == index) {
+
+				draw_text_colour(camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) / 2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) / 2 - 12 + (12 * i), "{                   }", c_white, c_white, c_white, c_white, 1);
+			}
+			
+			//Draw option
+			draw_text_colour(camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) / 2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) / 2 - 12 + (12 * i), string(menu[i]), _colour, _colour, _colour, _colour, 1);
+		#endregion
+		
+		//Reset colour
+		draw_set_colour(c_white);
+	}
+
+	//Set alignment
+	draw_set_valign(fa_top);
+	draw_set_halign(fa_left);
+}

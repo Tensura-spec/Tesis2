@@ -44,10 +44,7 @@
       ],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"spr_coin","varType":6,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_enemy_bubble",
-    "path": "sprites/spr_enemy_bubble/spr_enemy_bubble.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

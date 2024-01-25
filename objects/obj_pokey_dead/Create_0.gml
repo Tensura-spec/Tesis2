@@ -9,4 +9,3 @@ image_index = 1;
 
 //Set horizontal speed
 hspeed = random_range(-2, 2);
-

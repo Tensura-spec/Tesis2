@@ -30,10 +30,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_platform_solid",
-    "path": "sprites/spr_platform_solid/spr_platform_solid.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

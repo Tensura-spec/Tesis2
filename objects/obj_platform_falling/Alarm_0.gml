@@ -1,4 +1,3 @@
-/// @description Apply gravity
+/// @description Set vertical speed
 
-vspeed = 3;
-
+gravity = 0.15;

@@ -1,19 +1,19 @@
-/// @description Bullet bill logic
+/// @description Bullet Bill logic
 
-//Set default depth when not overlapping a solid
-if (!place_meeting(x, y, obj_solid)) {
+//Manage pseudo movement variables
+if (freeze == false) {
 
-    //If depth is set to 10, set it to -2
-    if (depth = 10)
-        depth = -2;
+	x += xspeed;
+	y += yspeed;
 }
 
-//Set xscale
-if (hspeed > 0) then xscale = 1;
-else if (hspeed < 0) then xscale = -1;
+//Set depth
+if (depth != -3) {
 
-//Destroy when outside view
-if (outside_view(32))
-&& (depth != 10)
-    instance_destroy();
+	if (!place_meeting(x, y, obj_blaster_banzai))
+		depth = -3;
+}
 
+//Destroy when outside
+if (outside_view() == true)
+	instance_destroy();

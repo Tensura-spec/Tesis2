@@ -1,78 +1,69 @@
 /// @description Fireball logic
 
-//Ignore swimming
+//Check previous horizontal speed
+prevxspeed = xspeed;
+
+//No swimming
 swimming = false;
 
-//Previous horizontal speed
-prevhspeed = hspeed;
+//Inherit the parent event
+event_inherited();
 
-//Default wall collision
-event_user(3);
+#region GRAVITY
 
-//Default floor collision
-event_user(4);
+	if (global.fireballtype == 0) {
 
-//Check for lava
-var lava = collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, obj_lava, 0, 0);
+		//If there's no gravity
+		if (yadd == 0) {
 
-//If there's lava
-if (lava) {
+			yadd = 0;
+			if (global.player == 0)
+				yspeed = -2.5;
+			else
+				yspeed = -3.5;
+		}
+		else
+			yadd = 0.25;
+	}
 
-    //Play 'Burn' sound
-    audio_stop_play_sound(snd_burn, 0, false);
+	//Otherwise
+	else {
 
-    //Create smoke
-    with (instance_create((bbox_left+bbox_right)/2, (bbox_top+bbox_bottom)/2, obj_smoke)) sprite_index = spr_smoke_16;
-    
-    //Create splash effect
-    with (instance_create((bbox_left+bbox_right)/2, (bbox_top+bbox_bottom)/2-8, obj_smoke)) {
-            
-        if (lava.sprite_index == spr_lava_choco)
-            sprite_index = spr_splash_choco;
-        else if (lava.sprite_index == spr_lava_poison)
-            sprite_index = spr_splash_poison;
-        else
-            sprite_index = spr_splash_lava;       
-    }
-    
-    //Destroy
-    instance_destroy();
-}
+		//If Mario is being controlled
+		if (global.player == 0) {
+		
+			//If there's no gravity
+			if (yadd == 0) {
 
-//If the direction changed, destroy
-if (hspeed != prevhspeed) then event_user(0);
-    
-//Bounce when in ground
-if (gravity == 0) {
+				yadd = 0;
+				if (global.player == 0)
+					yspeed = -2.5;
+				else
+					yspeed = -3.5;
+			}
+			else
+				yadd = 0.25;
+		}
+		
+		//Otherwise, if Luigi is being controlled
+		else {
+			
+			//If the fireball collides with a slope
+			if (collision_rectangle(bbox_left-1, bbox_top-1, bbox_right+1, bbox_bottom+1, [obj_slopeparent, obj_slopeparent_ceiling], 1, 0)) {
+			
+				event_user(0);
+				exit;
+			}
+		
+			//Stop vertical movement
+			yadd = 0;
+			if (yspeed != 0)
+				yspeed = 0;
+		}
+	}
+#endregion
 
-    //Prevent from getting embed on ground
-    y--;
-    
-    //If Mario or Peach is being controlled
-    if (global.player == 0)
-    || (global.player == 3)
-        vspeed = -4.5;
-        
-    //Otherwise, if Luigi is being controlled
-    else if (global.player == 1)
-        vspeed = -5.5;
-        
-    //Otherwise, if Toad is being controlled
-    else if (global.player == 2)
-        vspeed = -3.5;
-}
-else {
-
-    if (vspeed > 3)
-        vspeed = 3;
-}
-
-//Gravity
-gravity = 0.4;
-
-//Destroy if outside the view
-if (x < __view_get( e__VW.XView, 0 )-16)
-|| (x > __view_get( e__VW.XView, 0 )+__view_get( e__VW.WView, 0 )+16)
-|| (y > __view_get( e__VW.YView, 0 )+__view_get( e__VW.HView, 0 )+16)
-    instance_destroy();
-
+//Destroy if horizontal speed is not the same as prevxspeed
+if (freeze == false)
+&& (sign(xspeed) != sign(prevxspeed))
+	event_user(0);

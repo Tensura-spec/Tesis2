@@ -1,20 +1,13 @@
-/// @description 10-Coins
+/// @description Big Coin
 
 //Inherit event from parent
 event_inherited();
 
-//Do not animate
-image_speed = 0.15;
-
-//Apply physics if ready
+//Whether this coin has been collected
 ready = 0;
 
-//Previous y position
-yprev = 0;
+//Last y position
+yy = 0;
 
-//Move 2 pixels down
-y += 2;
-
-//Bounce in ground, there's no need to modify this variable
-bouncy = 0;
-
+//Bounces
+bounces = 3;

@@ -1,19 +1,42 @@
-/// @description Throw a hammer
+/// @description Change facing direction and toss hammers
 
-//If not outside the view
-if (!outside_view(16)) {
+//If the object is outside the view
+if (outside_view() == true) {
 
-    //Play 'Hammer' sound
-    audio_play_sound(snd_hammer, 0, false);
-    
-    //Reverse facing direction
-    xscale = -xscale;
-    
-    //Create a hammer
-    with (instance_create(x+8*sign(xscale), y, obj_hammerbro_hammer))
-        hspeed = 1*other.xscale;
+	alarm[0] = 1;
+	exit;
 }
 
-//Throw another hammer.
-alarm[0] = time;
+//Play 'Hammer' sound
+audio_play_sound(snd_hammer, 0, false);
 
+//If facing right
+if (xscale == 1) {
+
+	//Face to the left
+	xscale = -1;
+	
+	//Throw a hammer to the left
+	with (instance_create_depth(x-16, y, -2, obj_hammerbro_hammer)) {
+	
+		xspeed = -1;
+		image_xscale = -1;
+	}
+}
+
+//Otherwise, if facing left
+else if (xscale == -1) {
+	
+	//Face to the right
+	xscale = 1;
+	
+	//Throw a hammer to the right
+	with (instance_create_depth(x+16, y, -2, obj_hammerbro_hammer)) {
+	
+		xspeed = 1;
+		image_xscale = 1;
+	}	
+}
+
+//Repeat the process
+alarm[0] = time;

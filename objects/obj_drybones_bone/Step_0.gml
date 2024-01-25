@@ -1,6 +1,14 @@
-/// @description Bone logic
+/// @description Dry Bones bone logic
 
-//Destroy outside room
-if (outside_view(32))
-    instance_destroy();
+//Handle psuedo movement
+if (freeze == false) {
+	
+	x += xspeed;
+}
 
+//No gravity
+yadd = 0;
+
+//Destroy when outside the view
+if (outside_view() == true)
+	instance_destroy();

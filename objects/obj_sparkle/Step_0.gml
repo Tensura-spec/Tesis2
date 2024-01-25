@@ -1,4 +1,8 @@
-/// @description Apply friction
+/// @description Shrink down and destroy
 
-friction = 0.05;
-
+scale -= shrink_rate;
+if (scale < 0)
+	instance_destroy();
+	
+if (vspeed > 2)
+	vspeed = 2;

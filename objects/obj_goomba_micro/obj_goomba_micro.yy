@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_goomba_micro",
-    "path": "sprites/spr_goomba_micro/spr_goomba_micro.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

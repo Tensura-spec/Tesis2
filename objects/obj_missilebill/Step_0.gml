@@ -1,41 +1,50 @@
-/// @description Missile bill logic
+/// @description Missile Bill logic
 
-//If the bullet can follow mario
-if (homing) {
+//Last direction
+lastdir = direction;
 
-    //If the player does exist
-    if (instance_exists(obj_playerparent)) {
-    
-        //Declare a new variable that hold the direction between your own position and the position of obj_playerparent
-        var new_dir = point_direction(x, y, obj_playerparent.x, obj_playerparent.y);
-        
-        //Declare diff, diff is the difference in angle between where this object is going.
-        var diff = angle_difference(direction, new_dir);
-        
-        //Turn it
-        direction -= min(2 * sign(diff), abs(diff));
-        lastdir = direction;
-    }
-    
-    //Otherwise
-    else
-        direction = lastdir
+//If not frozen
+if (freeze == false) {
+	
+	//If the bullet is homing
+	if (homing == true) {
+
+		//Declare a new variable that hold the direction between your own position and the position of obj_mario
+		if (instance_exists(obj_mario)) {
+			
+			//Followe either Mario or the camera
+			new_dir = (instance_exists(obj_mario_transform)) ? point_direction(x, y, obj_levelcontrol.x, obj_levelcontrol.y) : point_direction(x, y, obj_mario.x, obj_mario.y);
+			
+			//Declare diff, diff is the difference in angle between where this object is going.
+			diff = angle_difference(direction, new_dir);
+		}
+		else {
+		
+			//Follow the camera
+			new_dir = point_direction(x, y, obj_levelcontrol.x, obj_levelcontrol.y);
+			
+			//Declare diff, diff is the difference in angle between where this object is going.
+			diff = angle_difference(direction, new_dir);
+		}
+	}
+	
+	//Turn it
+	direction -= min(2 * sign(diff), abs(diff));
 }
 
-//Set the scale.
-if (hspeed > 0) then image_index = 0;
-else if (hspeed < 0) then image_index = 1;
+#region SCALE
 
-//Set default depth when not overlapping a solid
-if (!place_meeting(x, y, obj_solid)) {
+	if (hspeed > 0)
+		image_index = 0;
+	else if (hspeed < 0)
+		image_index = 1;
+#endregion
 
-    //If depth is set to 10, set it to -2
-    if (depth = 10)
-        depth = -2;
-}
+//Set depth
+depth = (homing == 1) ? -3 : -2;
 
-//Destroy when outside view
-if (outside_view(16))
-&& (depth != 10)
+//Destroy if outside the view
+if (x < camera_get_view_x(view_camera[0]) - 16)
+|| (x > camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) + 16)
+|| (y > camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) + 16)
     instance_destroy();
-

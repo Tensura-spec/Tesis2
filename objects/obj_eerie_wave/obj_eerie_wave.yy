@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_eerie",
-    "path": "sprites/spr_eerie/spr_eerie.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

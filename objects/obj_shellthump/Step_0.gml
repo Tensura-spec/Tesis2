@@ -1,6 +1,5 @@
-/// @description Change position of stars
+/// @description Increment star variable
 
 star++;
 if (star > 12)
-    instance_destroy();
-
+	instance_destroy();

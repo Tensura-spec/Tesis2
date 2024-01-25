@@ -1,27 +1,15 @@
 /// @description Leave a trail
 
-//Repeat
-alarm[0] = 7;
+//Temporary variable
+var xx = (xscale = 1) ? -16 : 16;
 
-//If facing right...
-if (xscale > 0) {
+//Repeat the process
+alarm[0] = 2;
 
-    with (instance_create(x-16, y+8, obj_smoke)) {
-    
-        sprite_index = spr_smoke_16
-        image_speed = 0.3;
-        image_index = 1;
-    }
+//Generate a bubble
+with (instance_create_depth(x + xx, y + random_range(4, 12), -4, obj_smoke)) {
+
+	sprite_index = spr_bubble;
+	vspeed = -0.135;
+	image_alpha = random_range(0.25, 0.5);
 }
-
-//Otherwise, if facing left...
-else if (xscale < 0) {
-
-    with (instance_create(x+16, y+8, obj_smoke)) {
-    
-        sprite_index = spr_smoke_16
-        image_speed = 0.3;
-        image_index = 1;
-    }
-}
-

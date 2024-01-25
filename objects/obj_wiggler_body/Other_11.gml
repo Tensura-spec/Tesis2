@@ -1,4 +1,4 @@
 /// @description Stomp parent wiggler
 
-with (parent) event_user(1);
-
+if (instance_exists(parent))
+	with (parent) event_user(1)

@@ -1,9 +1,13 @@
 /// @description Icicle
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//Do not animate
-image_speed = 0;
-image_index = 0;
+//This is slippery by default
+ice = 1;
 
+//Ground check
+ground_check = 0;
+
+//Generate effect
+alarm[3] = 60 + random(round(120));

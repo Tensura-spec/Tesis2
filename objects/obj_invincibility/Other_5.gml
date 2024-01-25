@@ -1,4 +1,12 @@
-/// @description Stop Starman BGM
+/// @description Remember the star for the next room
 
-audio_stop_sound(bgm_starman);
+//Remember combo
+global.hitcombo = hitcombo;
 
+//If the starman is still running.
+if (alarm[0] > 5)
+    global.starman = alarm[0];
+        
+//Otherwise
+else
+    audio_stop_sound(snd_starman); 

@@ -13,10 +13,7 @@
     "name": "Subcon",
     "path": "folders/Objects/Items/Subcon.yy",
   },
-  "parentObjectId": {
-    "name": "obj_semisolid",
-    "path": "objects/obj_semisolid/obj_semisolid.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -32,10 +29,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_pullkey",
-    "path": "sprites/spr_pullkey/spr_pullkey.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": {
     "name": "spr_square_b",
     "path": "sprites/spr_square_b/spr_square_b.yy",

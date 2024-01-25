@@ -1,24 +1,17 @@
-/// @description Ace Coins
-
-//Destroy if collected
-if (ds_map_exists(global.dcoins, id)) {
-
-    instance_destroy();
-    exit;
-}
+/// @description Ace Coin
 
 //Inherit event from parent
 event_inherited();
 
-//Do not animate
-image_speed = 0.15;
-
-//Apply physics if ready
+//Whether this coin was hit with a pow block
 ready = 0;
 
-//Bounce in ground, there's no need to modify this variable
-bouncy = 0;
+//Bounces
+bounces = 3;
 
-//Correct position
-y -= 4;
+//If this coin has been collected before, destroy
+if (ds_map_find_value(global.acecoins, id)) {
 
+	instance_destroy();
+	exit;
+}

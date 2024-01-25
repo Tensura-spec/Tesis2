@@ -1,20 +1,44 @@
-//Draw the save box
-draw_sprite_ext(sprite_index, obj_controller.hud_type, __view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 )/2, __view_get( e__VW.YView, 0 ) + __view_get( e__VW.WView, 0 ) / 2, scale, scale, 0, c_white, 1);
+/// @description Render background and draw the text
 
-draw_set_font(global.font);
+//Draw menu background
+draw_sprite_ext(spr_gui_global_pause, 0, camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) / 2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) / 2, scale, scale, 0, c_white, 1);
 
-//Set up the colour
-draw_set_colour(c_white);
+//Set up font
+draw_set_font(global.gui_font);
 
-//If the text should be displayed
-if (scale == 1) {
+//If the menu background is fully scaled
+if (scale_type == 1) {
 
-    if (display)
-    
-        draw_sprite_ext(spr_cursor_title, image_index, (__view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 ) / 2) - 96, __view_get( e__VW.YView, 0 )+(__view_get( e__VW.HView, 0 )/2)+(selection*16)+4, 1, 1, 0, c_white, 1);
+	//Set alignment
+	draw_set_valign(fa_center);
+	draw_set_halign(fa_center);
 
-    //Draw the text
-    draw_text_colour_shadowed((__view_get( e__VW.XView, 0 ) + __view_get( e__VW.WView, 0 ) / 2) - 80, __view_get( e__VW.YView, 0 )+(__view_get( e__VW.HView, 0 )/2)+4, "CONTINUE AND SAVE##CONTINUE WITHOUT SAVE", c_black, c_white, 1, 1, 1, 1);
-    
+	//Draw menu items
+	for (var i=0; i<array_length_1d(menu); ++i) { 
+	
+		//Sets the colour of the highlighted option
+		var _colour = (i == index) ? c_white : c_gray;
+		
+		//Set colour
+		draw_set_colour(_colour);
+		
+		#region TEXT
+		
+			//Draw arrow
+			if (i == index) {
+
+				draw_text_colour(camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) / 2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) / 2 - 12 + (12 * i), "{                   }", c_white, c_white, c_white, c_white, 1);
+			}
+			
+			//Draw option
+			draw_text_colour(camera_get_view_x(view_camera[0]) + camera_get_view_width(view_camera[0]) / 2, camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]) / 2 - 12 + (12 * i), string(menu[i]), _colour, _colour, _colour, _colour, 1);
+		#endregion
+		
+		//Reset colour
+		draw_set_colour(c_white);
+	}
+
+	//Set alignment
+	draw_set_valign(fa_top);
+	draw_set_halign(fa_left);
 }
-

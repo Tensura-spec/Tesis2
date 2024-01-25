@@ -32,10 +32,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_dolphin_jump",
-    "path": "sprites/spr_dolphin_jump/spr_dolphin_jump.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

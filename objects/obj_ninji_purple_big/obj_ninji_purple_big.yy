@@ -37,9 +37,6 @@
     "name": "spr_ninji_purple_big",
     "path": "sprites/spr_ninji_purple_big/spr_ninji_purple_big.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_32x32",
-    "path": "sprites/spr_mask_npc_common_32x32/spr_mask_npc_common_32x32.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

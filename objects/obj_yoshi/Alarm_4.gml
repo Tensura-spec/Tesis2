@@ -1,14 +1,5 @@
-/// @description Make flying noises for Yoshi when flying
+/// @description Allow flutter
 
-if (flying > 0) {
-
-    //Play 'Fly' sound
-    audio_stop_play_sound(snd_fly, 0, false)
-    
-    //Repeat the process
-    if (flying == 1)
-        alarm[4] = 8;
-    else
-        alarm[4] = 24;
-}
-
+flutter = 0;
+if (fluttertime > 0)
+    fluttertime = 0;

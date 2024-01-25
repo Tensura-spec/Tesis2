@@ -1,5 +1,11 @@
-/// @description Draw text
+/// @description Render me
 
-draw_sprite_part(sprite_index, -1, sprite_width/2, 0, sprite_width/2, sprite_height, x+text_x, y)
-draw_sprite_part(sprite_index, -1, 0, 0, sprite_width/2, sprite_height, x-text_x-sprite_width/2, y)
+//Reduce xx
+if (xx > 0) xx -= 4;
 
+//Mario
+draw_sprite_ext(sprite_index, global.player, screen_round(x), screen_round(y) - 1, 1, 1, 0, c_white, 1);
+
+//Game + Over text
+draw_sprite_ext(sprite_index, 2, screen_round(x) - (xx + 2), screen_round(global.gh / 2) - 8, 1, 1, 0, c_white, 1);
+draw_sprite_ext(sprite_index, 3, screen_round(x) + xx, screen_round(global.gh / 2) - 8, 1, 1, 0, c_white, 1);

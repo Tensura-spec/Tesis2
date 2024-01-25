@@ -34,10 +34,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_cannonball_spike",
-    "path": "sprites/spr_cannonball_spike/spr_cannonball_spike.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

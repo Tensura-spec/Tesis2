@@ -1,3 +1,3 @@
 /// @description Center window
 
-window_center();
+//window_center();

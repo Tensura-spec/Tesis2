@@ -20,7 +20,10 @@
     "name": "Subcon",
     "path": "folders/Objects/Enemies/Subcon.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_enemyparent",
+    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -36,10 +39,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_phanto",
-    "path": "sprites/spr_phanto/spr_phanto.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

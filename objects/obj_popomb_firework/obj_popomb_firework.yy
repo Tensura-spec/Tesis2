@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_popomb_firework",
-    "path": "sprites/spr_popomb_firework/spr_popomb_firework.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

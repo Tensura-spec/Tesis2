@@ -2,31 +2,33 @@
 
 if (sprite_index == spr_trampoline) {
 
-    //If the spring is about to launch the player upwards.
-    if (s_ready == 1) {
+    //If the trampoline is about to launch the player upwards.
+    if (ready2 == 1) {
     
         //If the player does exist.
-        if (instance_exists(obj_playerparent)) {
+        if (instance_exists(obj_mario)) {
         
-            //Play 'Trampoline' sound
-            audio_stop_play_sound(snd_trampoline, 0, false);
+            //Play 'Trampoline' sound.
+            audio_play_sound(snd_trampoline, 0, false);
+			
+			//If Yoshi exists, force end flutter
+			if (instance_exists(obj_yoshi)) {
+
+				if (obj_yoshi.flutter > 0)
+					obj_yoshi.flutter = 0;
+			}
             
-            //With the player
-            with (obj_playerparent) {
+            //Set the player vertical speed
+            obj_mario.yspeed = -5.425;
             
-                //Set vertical speed
-                vspeed = -trampoline_boost;
-                    
-                //Boost jump
-                y -= 8;
-                
-                //Allow variable jumping if 'Shift' or 'Space' is pressed
-                if (input_check(input.action0))
-                || (input_check(input.action2))
-                    jumping = 1;
-                else
-                    jumping = 2;
-            }
+            //Boost Jump
+            obj_mario.y--;
+            
+            //Check if 'Shift' is pressed.
+            if (input_check(input2.action_0))
+                obj_mario.jumping = 1;
+            else
+                obj_mario.jumping = 2;
         }
     }
     
@@ -50,4 +52,3 @@ else if (sprite_index == spr_trampoline_end) {
     //Set the sprite
     sprite_index = spr_trampoline;
 }
-

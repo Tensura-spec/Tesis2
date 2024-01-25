@@ -36,10 +36,7 @@
       ],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"1","varType":6,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_cannonball_large",
-    "path": "sprites/spr_cannonball_large/spr_cannonball_large.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": {
     "name": "spr_square",
     "path": "sprites/spr_square/spr_square.yy",

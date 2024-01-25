@@ -1,33 +1,32 @@
-/// @description The In-Level HUD
+/// @description Displays the In-Level HUD
 
-//Is the level cleared
-clear = 0;
+//Stay always at the front
+depth = -98;
 
-//Time
+//Show SMB3 Cards
+show_cards = 240;
+
+//Fake P-Meter
+fake_pm = 0;
+
+//Flash
+flash = 0;
+alarm[0] = 7;
+
+//P-Meter X
+pmeterx = 0;
+
+//Bonus time
 time = 0;
+dtime = 0;
+dtime2 = 0;
 
-//Multiplier
+//Bonus time multiplier
 multiplier = 50;
 
-//Shake
-shakex = 0;
-shakey = 0;
+//Displays 'Course Clear'
+clear = 0;
 
-//Fade
-fade = 0;
-fadetype = 1;
-
-//Display 'Bonus Stars'
-display = 2;
-
-//Shake the counter
-alarm[0] = 1;
-
-//Make P-Meter flash
-flash = 0;
-alarm[1] = 7;
-
-//Display time (since time resets at the end of a level)
-displaytime = 0;
-displaydragoncoins = 0;
-
+//Health Meter scale
+scale = 1;
+scale_t = 0;

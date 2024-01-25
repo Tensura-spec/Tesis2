@@ -1,4 +1,3 @@
-/// @description Do not show thump
+/// @description Do not display main effect
 
-ready = 1;
-
+alpha = 0;

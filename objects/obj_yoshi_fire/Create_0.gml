@@ -1,14 +1,10 @@
 /// @description Fire spitten by Yoshi
 
-//Animate
-image_speed = 0.3;
-
-//Combo
-hitcombo = 0;
+//Inherit the parent event
+event_inherited();
 
 //Set the horizontal speed
-hspeed = 3*sign(obj_playerparent.xscale);
+xspeed = 3*sign(obj_mario.xscale);
 
 //Set parameters
 alarm[0] = 2;
-

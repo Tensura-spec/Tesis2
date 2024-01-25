@@ -33,10 +33,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_boo_big",
-    "path": "sprites/spr_boo_big/spr_boo_big.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

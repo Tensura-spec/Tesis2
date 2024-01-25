@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_conveyor_red",
-    "path": "sprites/spr_conveyor_red/spr_conveyor_red.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

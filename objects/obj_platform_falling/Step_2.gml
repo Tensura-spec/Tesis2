@@ -1,40 +1,39 @@
-/// @description Moving platform logic
+/// @description Platform logic
 
-//If the player is on this platform
-if (ready == 0)
-&& (collision_rectangle(bbox_left, bbox_top-1, bbox_right, bbox_top, obj_playerparent, 0, 0)) 
-&& (obj_playerparent.state != statetype.jump) {
+//Inherit the parent event
+event_inherited();
 
-    //Set the vertical speed
-    vspeed = 0.5;
-    
-    //Platform is falling
-    ready = 1;
-    
-    //Apply gravity
-    alarm[0] = 15;
+//Make the platform fall if Mario steps on it
+if (ready == 0) {
+
+	//Check for the player
+	var mario = collision_rectangle(bbox_left, bbox_top-5, bbox_right, bbox_top+4, obj_mario, 0, 0);
+
+	//If the player exists
+	if (mario)
+	&& (mario.state != playerstate.jump)
+	&& (mario.bbox_bottom < yprevious+5) {
+	
+		//Make the platform fall
+		ready = 1;
+		
+		//Set vertical speed
+		vspeed = 0.5;
+		alarm[0] = 15;
+	}
 }
 
-//If the platform is falling
+//Otherwise, if the platform is falling
 else if (ready == 1) {
-    
-    //Destroy
-    if (bbox_top > __view_get( e__VW.YView, 0 ) + __view_get( e__VW.HView, 0 )) {
-    
-        ready = 2;
-        alarm[1] = 1;
-    }
-    
-    //Cap vertical speed.
-    if (vspeed > 2)    
-        vspeed = 2;      
+
+	//Destroy if below the view
+	if (bbox_top > (camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0]))) {
+	
+		ready = 2;
+		alarm[1] = 1;
+	}
+	
+	//Cap vertical speed
+	if (vspeed > 3)
+		vspeed = 3;
 }
-
-//If the player is on this falling platform, snap it vertically.
-if (collision_rectangle(bbox_left, bbox_top-5, bbox_right, bbox_top+4, obj_playerparent, 0, 0))
-&& (!collision_rectangle(obj_playerparent.bbox_left, bbox_top-5, obj_playerparent.bbox_right, bbox_top+1, obj_semisolid, 0, 1))
-&& (!collision_rectangle(obj_playerparent.bbox_left, bbox_top-5, obj_playerparent.bbox_right, bbox_top+1, obj_semisolid_moving, 0, 1))
-&& (obj_playerparent.bbox_bottom < yprevious+5)
-&& (obj_playerparent.state != statetype.jump)
-    obj_playerparent.y = ceil(bbox_top-16);
-

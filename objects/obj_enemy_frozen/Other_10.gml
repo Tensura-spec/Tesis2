@@ -1,30 +1,32 @@
-/// @description Shatter
-    
-//Play 'Icicle Break' sound
-audio_stop_play_sound(snd_icicle_break, 0, false);
+/// @description Shatter block
 
-//Create shards    
-shard_create(x+sprite_width/2, y+sprite_width/2, spr_shard_ice, 3, 6, 45);
-shard_create(x+sprite_width/2, y+sprite_width/2, spr_shard_ice, 1, 6, 60);
-shard_create(x+sprite_width/2, y+sprite_width/2, spr_shard_ice, 0, 6, 120);
-shard_create(x+sprite_width/2, y+sprite_width/2, spr_shard_ice, 2, 6, 135);
+//Play 'Icicle' sound
+audio_play_sound(snd_icicle, 0, false);
 
 //Create sparks
 repeat(32) {
 
-    with (instance_create(bbox_left+sprite_width/2-4, bbox_top+sprite_height/2-4, obj_smoke)) {
-    
-        //Sprite
-        sprite_index = spr_sparkle_small_blue;
-        
-        //Animate
-        image_speed = 0.1;
-        
-        //Motion
+    with (instance_create_depth(round(bbox_left + bbox_right) / 2, round(bbox_top + bbox_bottom) / 2, -4, obj_sparkle))
         motion_set(random(360), random(1));
-    }
 }
-    
+
+#region CREATE DEFUNCT ENEMY
+
+	//Create dead object
+	imdead = instance_create_depth(x, y, -6, obj_enemy_dead);
+
+	//Hereby sprite
+	imdead.sprite_index = sprite_index;
+
+	//Hereby frame
+	imdead.image_index = image_index;
+
+	//Hereby facing direction
+	imdead.image_xscale = xscale;
+	
+	//Hereby horizontal speed
+	imdead.hspeed = xspeed;
+#endregion
+
 //Destroy
 instance_destroy();
-

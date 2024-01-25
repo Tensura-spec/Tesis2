@@ -35,9 +35,6 @@
     "name": "spr_goombrat_hefty",
     "path": "sprites/spr_goombrat_hefty/spr_goombrat_hefty.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_32x32",
-    "path": "sprites/spr_mask_npc_common_32x32/spr_mask_npc_common_32x32.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

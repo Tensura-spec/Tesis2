@@ -14,7 +14,10 @@
     "name": "Ghost",
     "path": "folders/Objects/Special/Do Not Use!/Enemies/Ghost.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_enemyparent",
+    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -30,10 +33,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_boo_buddy",
-    "path": "sprites/spr_boo_buddy/spr_boo_buddy.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

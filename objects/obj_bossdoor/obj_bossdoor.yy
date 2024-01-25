@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_bossdoor",
-    "path": "sprites/spr_bossdoor/spr_bossdoor.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": false,
 }

@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_porcupo_r",
-    "path": "sprites/spr_porcupo_r/spr_porcupo_r.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

@@ -1,5 +1,6 @@
-/// @description Set facing direction
+/// @description Wiggler body logic
 
+//Manage facing direction of the body parts
 if (instance_exists(prevsegment) ) {
 
     if ((xscale = 1) && (x > prevsegment.x))
@@ -7,4 +8,3 @@ if (instance_exists(prevsegment) ) {
     else if ((xscale = -1) && (x < prevsegment.x)) 
         xscale = 1;
 }
-

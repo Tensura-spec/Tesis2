@@ -37,9 +37,6 @@
     "name": "spr_flurry",
     "path": "sprites/spr_flurry/spr_flurry.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

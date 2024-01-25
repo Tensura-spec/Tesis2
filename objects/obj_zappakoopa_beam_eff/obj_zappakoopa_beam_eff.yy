@@ -29,10 +29,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_zappakoopa_beam",
-    "path": "sprites/spr_zappakoopa_beam/spr_zappakoopa_beam.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

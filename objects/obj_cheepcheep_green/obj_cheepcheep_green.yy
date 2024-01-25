@@ -32,10 +32,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_cheepcheep_green",
-    "path": "sprites/spr_cheepcheep_green/spr_cheepcheep_green.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

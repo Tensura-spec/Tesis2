@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_pricklypiranhaplant",
-    "path": "sprites/spr_pricklypiranhaplant/spr_pricklypiranhaplant.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

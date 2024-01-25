@@ -1,6 +1,5 @@
-/// @description If there's a solid or there's no water, destroy
+/// @description Destroy when in contact with a solid or when there's no water above
 
-if (place_meeting(x, bbox_top-1, obj_solid))
-|| (!place_meeting(x, bbox_top-1, obj_swim))
+if (!place_meeting(x, y, obj_swim))
+|| (place_meeting(x, y-1, obj_solid))
     instance_destroy();
-

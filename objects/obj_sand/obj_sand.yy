@@ -13,10 +13,7 @@
     "name": "Subcon",
     "path": "folders/Objects/Items/Subcon.yy",
   },
-  "parentObjectId": {
-    "name": "obj_semisolid",
-    "path": "objects/obj_semisolid/obj_semisolid.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

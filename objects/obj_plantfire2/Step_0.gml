@@ -1,15 +1,24 @@
-/// @description Fireball logic
+/// @description Jumping Piranha Plant fireball logic
 
-//Cap vertical speed
-if (vspeed > 4) {
-
-    vspeed = 4;
-    gravity = 0;
+//Handle psuedo movement
+if (freeze == false) {
+	
+	x += xspeed;
+	y += yspeed;
+	yspeed += yadd;
 }
 
-//Destroy if outside the view
-if (x < __view_get( e__VW.XView, 0 )-16)
-|| (x > __view_get( e__VW.XView, 0 )+__view_get( e__VW.WView, 0 )+16)
-|| (y > __view_get( e__VW.YView, 0 )+__view_get( e__VW.HView, 0 )+16)
-    instance_destroy();
+//Gravity
+yadd = (sprite_index == spr_rockywrench_wrench) ? 0.02 : 0.2;
+if (yspeed > 4) {
 
+	yspeed = 4;
+}
+
+//Generate effect
+numb++;
+if ((numb mod 2) && (sprite_index == spr_fireball)) {
+	
+	with (instance_create_depth(x, y+4, -1, obj_smoke))
+	    sprite_index = spr_cinder;
+}

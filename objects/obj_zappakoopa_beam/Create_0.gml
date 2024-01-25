@@ -12,4 +12,3 @@ length = 0;
 
 //Create balls
 alarm[0] = 2;
-

@@ -1,11 +1,10 @@
-/// @description Bump with block but only when not held
+/// @description Collision with bumped blocks
 
-//If not held
-if (held == false) {
-    
-    if (other.vspeed < 0)
-    && (vspeed >= 0)
-    && (bbox_bottom < other.yprevious+5)
-        vspeed = -3;
+if (other.vspeed < 0)
+&& (held == 0)
+&& (bbox_bottom < other.yprevious+5) {
+
+	//Set the vertical speed
+	yspeed = -3 + (swimming * 1.5);
+	y--;
 }
-

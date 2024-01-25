@@ -20,7 +20,10 @@
     "name": "Hazards",
     "path": "folders/Objects/Items/Hazards.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_enemyparent",
+    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -38,10 +41,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"spd","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":true,"rangeMax":4.0,"rangeMin":1.0,"value":"1","varType":1,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_grinder_small",
-    "path": "sprites/spr_grinder_small/spr_grinder_small.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

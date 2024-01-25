@@ -1,8 +1,7 @@
-/// @description Brick block
+/// @description Large Breakable Block
 
 //Inherit event from parent
 event_inherited();
 
 //Shard sprite
-shardsprite = spr_brick;
-
+shard_sprite = spr_shard_big_brick;

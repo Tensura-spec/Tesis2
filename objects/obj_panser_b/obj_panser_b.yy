@@ -40,9 +40,6 @@
     "name": "spr_panser_b",
     "path": "sprites/spr_panser_b/spr_panser_b.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

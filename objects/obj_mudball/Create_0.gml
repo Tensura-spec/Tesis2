@@ -1,32 +1,16 @@
-/// @description Mudball
+/// @description Diggin' Chuck mud ball
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
-//How vulnerable is this enemy to items
+//How vulnerable is this enemy to various items?
 vulnerable = 1;
 
-//How vulnerable is this enemy to the player
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to Yoshi
-edible = 1;
-
-//Jumps
-jumping = 0;
-
-//Death Sprite
-deathsprite = sprite_index;
-
-//Stomp sprite
-stompsprite = sprite_index;
-
-//Do not turn around on enemies
-enemyturn = false;
-
-//Animate
-image_speed = 0.2;
-
-//Start moving
-alarm[10] = -1;
-
+//How edible is this enemy to Yoshi?
+//0:	Edible
+//1:	Edible, but create a item
+//2:	Non-Edible
+edible = 0;

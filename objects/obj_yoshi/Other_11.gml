@@ -1,41 +1,33 @@
-/// @description Dismount from Yoshi
+/// @description Abandon Yoshi
 
-//If Yoshi is being ridden
-if (state == yoshistate.ridden) {
+with (instance_create_depth(x, y, -2, obj_yoshi_abandon)) {
 
-    //Set up the state
-    state = yoshistate.idle;
+    //Hereby the same colour
+    colour = other.colour;
+
+    //If Yoshi was holding an item on his mouth
+    if (other.mouthholder != noone) {
     
-    //Stop licking
-    licking = 0;
-    anim = 0;
-    
-    //With the player
-    if (instance_exists(obj_playerparent)) {
-    
-        //Hereby horizontal speed from the player
-        hspeed = obj_playerparent.hspeed/2;
-        
-        //Hereby facing direction from the player
-        xscale = obj_playerparent.xscale;
-                
-        //Make the player visible and able to hold stuff
-        with (obj_playerparent) {
-        
-            visible = true;
-            holding = 0;
-        }
+        image_index = 1;
+        alarm[1] = 16;
     }
     
-    //Set animation
-    image_index = 1;
-    alarm[6] = 16;
+    //Vertical speed
+    yspeed = 1;
     
-    //Allow ride
-    rideme = 0;
-    alarm[0] = 16;
+    //Move the player up
+    obj_mario.y -= 16;
+
+    //Set the frame
+    if (instance_exists(obj_mario)) {
     
-    //Stop mounting
-    global.mount = 0;
+        //Hereby horizontal speed
+        xspeed = obj_mario.xspeed/2;
+    
+        //Hereby facing direction
+        xscale = obj_mario.xscale;
+    }
 }
 
+//Destroy
+instance_destroy();

@@ -35,10 +35,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_firespike_fireball",
-    "path": "sprites/spr_firespike_fireball/spr_firespike_fireball.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

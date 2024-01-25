@@ -31,13 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_pricklyvenusfiretrap",
-    "path": "sprites/spr_pricklyvenusfiretrap/spr_pricklyvenusfiretrap.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_pricklyvenusfiretrap",
-    "path": "sprites/spr_pricklyvenusfiretrap/spr_pricklyvenusfiretrap.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

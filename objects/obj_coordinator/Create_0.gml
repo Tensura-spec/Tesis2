@@ -7,7 +7,7 @@ window_set_caption("Gatete Mario Engine 9");
 //pal_swap_init_system();
 size = 2;
 //Initialize global variables
-init_globals();
+
 init_globals2();
 
 
@@ -290,10 +290,10 @@ last_room = noone;
 global.file = 0;
 
 //Game Width
-global.gw = room_width;
+global.gw = 640;
 
 //Game Height
-global.gh = room_height;
+global.gh = 360;
 
 //Checks if the game was restarted
 global.restart = false;

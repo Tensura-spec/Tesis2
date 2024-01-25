@@ -1,4 +1,3 @@
-/// @description Allow shell to hurt the player
+/// @description Allow shell to harm Mario
 
 harmplayer = 1;
-

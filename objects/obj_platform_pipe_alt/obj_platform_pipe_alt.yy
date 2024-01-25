@@ -34,10 +34,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"palette","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":true,"rangeMax":7.0,"rangeMin":0.0,"value":"0","varType":1,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_platform_pipe",
-    "path": "sprites/spr_platform_pipe/spr_platform_pipe.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

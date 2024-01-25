@@ -28,10 +28,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_platform_log",
-    "path": "sprites/spr_platform_log/spr_platform_log.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": false,
 }

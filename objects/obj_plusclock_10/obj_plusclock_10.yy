@@ -27,10 +27,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_plusclock_10",
-    "path": "sprites/spr_plusclock_10/spr_plusclock_10.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

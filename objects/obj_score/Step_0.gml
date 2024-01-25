@@ -1,6 +1,9 @@
 /// @description Score logic
 
-//If there's no vertical speed, destroy
-if (vspeed == 0)
-    instance_destroy();
-
+if (vspeed == 0) {
+	
+	if ((sprite_index != -1) && (alpha > 2))
+		instance_destroy();
+	else
+		instance_destroy();
+}

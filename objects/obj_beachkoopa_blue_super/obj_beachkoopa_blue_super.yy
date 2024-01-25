@@ -39,13 +39,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"feather","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"0","varType":3,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_beachkoopa_blue_super",
-    "path": "sprites/spr_beachkoopa_blue_super/spr_beachkoopa_blue_super.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

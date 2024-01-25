@@ -1,26 +1,22 @@
 /// @description Torpedo Ted
 
-//Inherit event from parent
+//Inherit the parent event
 event_inherited();
 
 //How vulnerable is this enemy to various items?
-vulnerable = 3;
+vulnerable = 99;
 
-//How vulnerable is this enemy to the player?
+//How vulnerable is this enemy to Mario?
 stomp = 2;
 
-//How vulnerable is this enemy to yoshi?
+//How vulnerable is this enemy to Yoshi?
 edible = 2;
 
-//Facing direction
-xscale = 1;
+//No swimming
+noswim = 0;
 
-//Death sprite
-deathsprite = spr_torpedoted;
-
-//Animate
-image_speed = 0.5;
+//Turn into a silver coin?
+turn_silver = 0;
 
 //Leave a trail
 alarm[0] = 7;
-

@@ -1,8 +1,4 @@
 /// @description Outline Coin
 
-//Animate
-image_speed = 0.15;
-
-//Whether it has been touched
+//Whether this coin has been activated
 ready = 0;
-

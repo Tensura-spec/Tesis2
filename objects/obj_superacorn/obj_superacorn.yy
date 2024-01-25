@@ -33,10 +33,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_superacorn",
-    "path": "sprites/spr_superacorn/spr_superacorn.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

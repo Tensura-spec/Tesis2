@@ -1,8 +1,10 @@
 /// @description Sumo Bro lightning
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
 //Set the vertical speed
-vspeed = 3;
+yspeed = 3;
 
+//Explode?
+explode = 0;

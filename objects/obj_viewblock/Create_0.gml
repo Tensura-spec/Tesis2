@@ -1,17 +1,11 @@
 /// @description Roulette Block
 
-//Item to display
-swap = spr_mushroom;
-
-//Animation
-anim = 0;
-
-//Show item?
-ready2 = 0;
-
-//Replace item
-alarm[2] = 90;
+//Cycle between powerups
+alarm[2] = 7;
+numb = 0;
 
 //Inherit event from parent
 event_inherited();
 
+//This block is unbreakable
+shard_sprite = -1;

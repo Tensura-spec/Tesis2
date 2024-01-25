@@ -1,29 +1,40 @@
 /// @description Sumo Bro lightning logic
 
-//Inherit event
+//Inherit the parent event
 event_inherited();
 
 //Blow if no gravity
-if (gravity == 0) {
+if (yadd == 0) {
 
     //If visible, turn invisible and blow
     if (visible) {
+		
+		//If this bolt has been thrown by a cloudrus
+		if (explode == 1) {
+			
+			instance_create_layer(x + 8, y, "Main", obj_explosion_lite);
+			instance_destroy();
+			exit;
+		}
+		
+		//Otherwise
+		else {
     
-        //Play 'Flames' sound
-        audio_play_sound(snd_flames, 0, false);
+	        //Play 'Flames' sound
+	        audio_play_sound(snd_flames, 0, false);
         
-        //Create 2 adyacent flames
-        alarm[0] = 20;
-        alarm[1] = 40;
+			//Create adyacent flames
+	        alarm[0] = 20;
+	        alarm[1] = 40;
         
-        //Turn invisible
-        visible = 0;
+	        //Turn invisible
+	        visible = 0;
         
-        //Create smoke
-        with (instance_create(x+8, y+8, obj_smoke)) sprite_index = spr_smoke_16;
+	        //Create smoke
+	        instance_create_depth(x+8, y+8, -4, obj_smoke);
         
-        //Create flame in position
-        instance_create(x, y+1, obj_sumobro_flame);
+	        //Create flame in position
+	        instance_create_depth(x, y+1, -2, obj_sumobro_flame);
+		}
     }
 }
-

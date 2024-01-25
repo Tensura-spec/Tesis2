@@ -11,7 +11,7 @@ var pstar_amount = STARS_AMOUNT;
 //global.gameclear = floor(got/total*100);
 
 //Update shaders
-update_shockwave();
+//update_shockwave();
 
 //Update timers
 timer_system_update();

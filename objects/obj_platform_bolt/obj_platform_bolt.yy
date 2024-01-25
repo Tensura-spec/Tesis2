@@ -33,10 +33,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_platform_bolt",
-    "path": "sprites/spr_platform_bolt/spr_platform_bolt.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

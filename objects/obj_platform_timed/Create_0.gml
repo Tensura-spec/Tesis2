@@ -1,19 +1,13 @@
 /// @description Timed Platform
 
-/*
-//  This item uses creation code.
-//
-//  time = Time the platform will move before falling. (In seconds)
-*/
+//Inherit the parent event
+event_inherited();
 
-//Default values
-time = 4;
+//Depth
+depth = -2;
 
-//Remember the given time
-prevtime = -1;
+//Time restart
+time_rst = 0;
 
-//Whether the platform is moving
+//Whether this platform is moving
 ready = 0;
-
-/* */
-/*  */

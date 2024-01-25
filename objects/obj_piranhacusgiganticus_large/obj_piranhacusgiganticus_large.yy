@@ -28,10 +28,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_piranhacusgiganticus_large",
-    "path": "sprites/spr_piranhacusgiganticus_large/spr_piranhacusgiganticus_large.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

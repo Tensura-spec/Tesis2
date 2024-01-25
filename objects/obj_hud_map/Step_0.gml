@@ -1,25 +1,45 @@
-/// @description Update player animation
+/// @description Manage inventory offset
 
-if (obj_controller.fade == 1) || (obj_controller.mode == 0)
+//Decrement show saved
+show_saved -= 0.025;
 
-    anim += 0.15;
-    
-if (fade_save < 1) {
+//Update x offset
+offset_x += 0.5;
 
-    if (fade_save == 0.99) {
-    
-        fade_save = 1;
-        
-    }
-    
-    fade_save -= 0.025;
-    
-    if (fade_save <= 0) {
-    
-        show_saved = false;
-        fade_save = 1;
-        
-    }
-    
+//Update anim
+anim += 0.15;
+
+//If Mario exists
+if (instance_exists(obj_mapmario)) {
+
+	//If the inventory is not opened
+	if (obj_mapmario.inventory == 0) {
+		
+		//Set inventory offset
+		inv_offset_y = lerp(inv_offset_y, 0, 0.2);
+		
+		//Set y offset
+		offset_y = lerp(offset_y, 0, 0.2);
+	}
+	
+	//Otherwise, if the inventory is opened
+	else if (obj_mapmario.inventory == 1) {
+		
+		//Set inventory offset
+		inv_offset_y = lerp(inv_offset_y, global.gh / 2 - 51, 0.2);
+		
+		//Set y offset
+		offset_y = lerp(offset_y, 32, 0.2);
+	}
 }
 
+//Update flashing
+if (global.mapstar == 1) {
+
+	//Set up palette
+	isflashing += 0.05;
+	if (isflashing > 6.99)
+		isflashing = 1;
+}
+else
+	isflashing = 0;

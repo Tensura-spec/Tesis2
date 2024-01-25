@@ -12,10 +12,7 @@
     "name": "Green",
     "path": "folders/Objects/Special/Do Not Use!/Enemies/Land/Koopas/Green.yy",
   },
-  "parentObjectId": {
-    "name": "obj_beachkoopa_red_super",
-    "path": "objects/obj_beachkoopa_red_super/obj_beachkoopa_red_super.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -31,13 +28,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_beachkoopa_super",
-    "path": "sprites/spr_beachkoopa_super/spr_beachkoopa_super.yy",
-  },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_16x16",
-    "path": "sprites/spr_mask_npc_common_16x16/spr_mask_npc_common_16x16.yy",
-  },
+  "spriteId": null,
+  "spriteMaskId": null,
   "visible": true,
 }

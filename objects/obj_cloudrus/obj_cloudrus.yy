@@ -17,7 +17,10 @@
     "name": "Enemies",
     "path": "folders/Objects/Enemies.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_enemyparent",
+    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -36,10 +39,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"xmax","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"room_width","varType":4,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_cloudrus",
-    "path": "sprites/spr_cloudrus/spr_cloudrus.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": false,
 }

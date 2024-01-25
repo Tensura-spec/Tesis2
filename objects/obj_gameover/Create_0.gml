@@ -1,15 +1,19 @@
-/// @description Your game is over, press 'Any' key to continue!
+/// @description Game is over for you!
 
-//Play 'Game Over' track
-audio_stop_play_sound(bgm_gameover, 0, false);
+//Play 'Game Over' sound
+audio_play_sound(snd_gameover, 0, false);
 
 //Do not animate
 image_speed = 0;
-image_index = 0;
 
-//Restart
-alarm[0] = 360;
+//Restart the game
+alarm[0] = 300;
 
-//Text X
-text_x = 192;
+//Set gravity
+gravity = 0.15;
 
+//Set Mario's position
+x = global.gw / 2;
+
+//Text position
+xx = (global.gw / 2) + 50;

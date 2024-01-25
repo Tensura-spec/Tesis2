@@ -37,9 +37,6 @@
     "name": "spr_koopa_big",
     "path": "sprites/spr_koopa_big/spr_koopa_big.yy",
   },
-  "spriteMaskId": {
-    "name": "spr_mask_npc_common_32x32",
-    "path": "sprites/spr_mask_npc_common_32x32/spr_mask_npc_common_32x32.yy",
-  },
+  "spriteMaskId": null,
   "visible": true,
 }

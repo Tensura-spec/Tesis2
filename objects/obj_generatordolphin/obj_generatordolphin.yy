@@ -31,10 +31,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_dolphin",
-    "path": "sprites/spr_dolphin/spr_dolphin.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

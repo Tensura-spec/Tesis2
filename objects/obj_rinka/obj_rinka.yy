@@ -14,7 +14,10 @@
     "name": "Hazards",
     "path": "folders/Objects/Special/Do Not Use!/Items/Hazards.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_enemyparent",
+    "path": "objects/obj_enemyparent/obj_enemyparent.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

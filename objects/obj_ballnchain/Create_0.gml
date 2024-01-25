@@ -1,33 +1,13 @@
-/// @description Ball and Chain
+/// @description Ball 'n' Chain
 
-/*
-**  This item uses creation code!
-**
-**  clockwise   = Direction of the discs
-**      1: Right
-**      -1: Left
-**
-**  length      = Length of the chain
-**  myspeed     = Speed of the giant maze
-*/
+//Depth
+depth = 10;
 
-//Default variables
-clockwise = 1;
-length = 2;
-myspeed = 1.5;
+//Ball angle
+angle = 45;
 
-//Move
-x -= 8;
-y -= 8;
-
-//Distance
-dist = 16;
-
-//Angle
-angle = 0;
-
-//Create chain and ball
+//Create balls
 alarm[0] = 2;
 
-/* */
-/*  */
+//Activate balls
+active = false;

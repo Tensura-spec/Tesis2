@@ -1,8 +1,9 @@
-/// @description Render seesaw
+/// @description Render me
 
-draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, c_white, 1);
+draw_sprite_ext(sprite_index, 0, screen_round(x) + 1, screen_round(y) + 1, image_xscale, 1, angle, c_white, 1);
 
-//Render gear 
-if (!place_meeting(x,y,obj_movingseesaw))
-    draw_sprite_ext(sprite_index, 1, x, y+4, 1, 1, 0, c_white, 1);
-
+//If this platform is not attached to a engine, draw the joint
+if (parent == noone) {
+	
+	draw_sprite_ext(spr_platform_seesaw_joint, 0, screen_round(x) + 1, screen_round(y) + 1, 1, 1, angle, c_white, 1);
+}

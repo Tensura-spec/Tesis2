@@ -1,34 +1,17 @@
-/// @description Track platform logic
+/// @description Platform logic (Player contact)
 
-//Inherit event
+//Inherit event from parent
 event_inherited();
 
-//If active
-if (global.onoff_block == 0) {
+//Check for the player
+var mario = collision_rectangle(bbox_left, bbox_top-5, bbox_right, bbox_top+4, obj_mario, 0, 0);
 
-    //Resume movement
-    if (prevspd != 0) then { speed = prevspd; prevspd = 0; }
-
-    //If not moving
-    if (speed == 0) {
-    
-        image_speed = 0;
-        image_index = 0;
-    }
-    
-    //Otherwise, animate
-    else    
-        image_speed = 0.2;
+//If the player exists
+if (mario)
+&& (mario.state != playerstate.jump)
+&& (mario.bbox_bottom < yprevious+5) {
+		    
+    //Set the platform state to "IN_LINE"
+    if (state == "IDLE")
+        state = "IN_LINE";
 }
-
-//Otherwise, if not active
-else {
-
-    //Remember previous speed
-    if (prevspd == 0) then { prevspd = speed; speed = 0; }    
-    
-    //Do not animate
-    image_speed = 0;
-    image_index = 0;
-}
-

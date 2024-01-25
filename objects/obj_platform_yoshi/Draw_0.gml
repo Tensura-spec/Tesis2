@@ -1,15 +1,10 @@
-/// @description Draw the platform
+/// @description Render platform
 
-//If the player is riding a yoshi, set the palette
-if (global.mount == 1) 
-&& (instance_number(obj_yoshi) > 0) {
+//Set palette
+pal_swap_set(spr_palette_yoshi, colour);
 
-    pal_swap_set(spr_palette_platform_yoshi, obj_yoshi.colour);
-}
+//Draw outline
+draw_sprite_stretched_ext(sprite_index, -1, xstart, ystart, sprite_width, sprite_height, c_white, (global.mount == 1) ? 1 : 0.5);
 
-//Draw it
-draw_sprite(sprite_index, image_index, round(x), round(y));
-
-//Reset shader
+//Reset palette
 pal_swap_reset();
-

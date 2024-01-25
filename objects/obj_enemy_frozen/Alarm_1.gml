@@ -1,14 +1,26 @@
-/// @description Destroy
+/// @description Free the enemy
 
-//Play 'Bump' sound
-audio_stop_play_sound(snd_bump, 0, false);
+//If the enemy cannot be unfrozen
+if (ret == -2)
+exit;
 
-//Create smoke effect
-with (instance_create(bbox_left+bbox_right/2-8, bbox_top+bbox_bottom/2-8, obj_smoke)) {
+//Play 'Icicle' sound
+audio_play_sound(snd_icicle, 0, false);
 
-    sprite_index = spr_smoke_16;
+//Create sparks
+repeat (32) {
+
+    with (instance_create_depth(round(bbox_left + bbox_right) / 2, round(bbox_top + bbox_bottom) / 2, -4, obj_sparkle))
+        motion_set(random(360), random(1));
+}
+
+//Create enemy
+if (ret != -1) {
+	
+	unfreeze = instance_create_layer(x, y, "Main", ret);
+	if (ret_spr != -1)
+		with (unfreeze) sprite_index = other.ret_spr;
 }
 
 //Destroy
 instance_destroy();
-

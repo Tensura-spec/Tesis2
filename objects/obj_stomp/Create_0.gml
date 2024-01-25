@@ -1,12 +1,15 @@
-/// @description Stuns or defeats enemies
+/// @description Yellow Yoshi / Dossun Shoe stomp mask
 
-//Create smoke
-with (instance_create(x, y-8, obj_smoke)) {sprite_index = spr_smoke_16; hspeed = 2;}
-with (instance_create(x, y-8, obj_smoke)) {sprite_index = spr_smoke_16; hspeed = -2;}
+//Inherit the parent event
+event_inherited();
 
-//Combo
-hitcombo = 0;
-
-//Destroy
-alarm[0] = 2;
-
+//Play 'Thud' sound
+audio_play_sound(snd_stomp2, 0, false);
+	
+//Create smoke effect
+with (instance_create_depth(x, y, -6, obj_smoke)) sprite_index = spr_supersmash;
+with (instance_create_depth(x, y, -6, obj_smoke)) {
+	
+	sprite_index = spr_supersmash;
+	image_xscale = -1;
+}

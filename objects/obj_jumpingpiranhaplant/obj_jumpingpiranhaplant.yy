@@ -36,10 +36,7 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"type","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":true,"rangeMax":1.0,"rangeMin":0.0,"value":"0","varType":1,},
   ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_jumpingpiranhaplant",
-    "path": "sprites/spr_jumpingpiranhaplant/spr_jumpingpiranhaplant.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

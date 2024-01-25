@@ -36,10 +36,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_rockywrench",
-    "path": "sprites/spr_rockywrench/spr_rockywrench.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

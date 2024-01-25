@@ -1,5 +1,3 @@
-/// @description Track limit
+/// @description Platform limit
 
-//Animate
-image_speed = 0.15;
-
+depth = 151;
