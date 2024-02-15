@@ -14,7 +14,13 @@ global.load_state = false;
 //(Otherwise, saves after castles & Switch Palaces)
 global.alt_save = false;
 
-
+medalla1 = 0;
+medalla2 = 0;
+medalla3 = 0;
+medalla4 = 0;
+medalla5 = 0;
+medalla6 = 0;
+medalla7 = 0;
 
 
 //Initialize Global Variables

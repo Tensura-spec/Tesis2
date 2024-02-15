@@ -48,35 +48,39 @@ while (step >= 1) {
         //If the player is at the center of the node
         if (x+xorig == node.x+7)
         && (y+yorig == node.y+7) {
-			
-			//If this node opens multiple paths
-			if (node.object_index == obj_node_multi) {
-				
-				//Make that node open adyacent paths
-				with (node) {
-					
-					event_user(15);
-				}
-				
-				//Destroy opener
-				instance_destroy();
-			}
-			
-			//Otherwise
-			else {
-			
-				//Stop 'Path Reveal' sound
-				audio_stop_sound(snd_pathreveal);
-			
-				//Play 'Path Reveal End' sound
-				audio_play_sound(snd_pathreveal_end, 0, false);
         
-	            //Destroy
-	            instance_destroy();
-			}
+            //Stop 'Path Reveal' sound
+            audio_stop_sound(snd_pathreveal);
+        
+            //Play 'Path Reveal End' sound
+            audio_stop_play_sound(snd_pathreveal_end, 0, false);
+            
+            //Check for a panel
+            panel = collision_point(x+xorig, y+yorig, obj_levelpanel, 0, 0);
+            
+            //If there's a panel
+            if (panel) {
+            
+                //Make it visible...
+                panel.image_alpha = 1;
+                
+                //...and remember it
+                ds_map_replace(global.worldmap, panel, 1);
+                
+            }
+            
+            with (obj_mapplayer) {
+            
+                alarm[1] = 2;
+                
+            }
+        
+            //Destroy
+            instance_destroy();
         }
     }
     
     //Update step
     step--;
 }
+

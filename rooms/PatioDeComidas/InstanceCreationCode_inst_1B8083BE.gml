@@ -1,0 +1,1 @@
+irA = rm_initialize;

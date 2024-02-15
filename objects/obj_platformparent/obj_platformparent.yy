@@ -14,7 +14,10 @@
     "name": "Collision",
     "path": "folders/Objects/Special/Parents/Collision.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_semisolid",
+    "path": "objects/obj_semisolid/obj_semisolid.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,

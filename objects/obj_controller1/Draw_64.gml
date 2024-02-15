@@ -1,6 +1,6 @@
 ///@description Deals with the application surface, window size, and fading.
 
-//display_set_gui_size(global.gw, global.gh);
+
 
 
 //Fades the screen to and from black

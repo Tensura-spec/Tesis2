@@ -1,2 +1,2 @@
-targetPlayerPosition = [135, 130, "D"];
+targetPlayerPosition = [135, 130, "U"];
 irA = Aula2A;

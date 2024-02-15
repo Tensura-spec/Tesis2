@@ -44,9 +44,7 @@ if (yspeed >= 0) {
 slope_collision();
 
 //Check if there's a semisolid
-if ((collision_rectangle(bbox_left, bbox_bottom+1, bbox_right, bbox_bottom+1, obj_semisolid, 0, 0)) 
-&& (!collision_rectangle(bbox_left, bbox_bottom-4, bbox_right, bbox_bottom-4, obj_semisolid, 0, 0)))
-|| (collision_rectangle(bbox_left, bbox_bottom+1, bbox_right, bbox_bottom+1, obj_slopeparent, 1, 0)) {
+if true {
 	
 	//If moving down
 	if (yspeed > 0) {

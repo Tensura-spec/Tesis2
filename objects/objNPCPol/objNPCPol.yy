@@ -10,7 +10,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "PoliDeportivo",
-    "path": "folders/Objects/PoliDeportivo.yy",
+    "path": "folders/Objects/MMPL/PoliDeportivo.yy",
   },
   "parentObjectId": {
     "name": "objInteractive",

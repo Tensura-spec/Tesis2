@@ -7,7 +7,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "PoliDeportivo_Pong",
-    "path": "folders/Objects/PoliDeportivo/PoliDeportivo_Pong.yy",
+    "path": "folders/Objects/MMPL/PoliDeportivo/PoliDeportivo_Pong.yy",
   },
   "parentObjectId": null,
   "persistent": false,

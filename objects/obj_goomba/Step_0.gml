@@ -95,7 +95,7 @@ if (mebelow == noone) {
 	
 				//If there's ground below and Mario is not moving upwards
 				if (semisolid)
-				&& (bbox_bottom < semisolid.yprevious + 5)
+				&& (true)
 					y = semisolid.bbox_top - floor(sprite_height-(sprite_get_yoffset(sprite_index)));
 			}
 

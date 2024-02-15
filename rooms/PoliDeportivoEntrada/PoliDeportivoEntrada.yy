@@ -48,6 +48,7 @@
     {"name":"inst_1B697ADA","path":"rooms/PoliDeportivoEntrada/PoliDeportivoEntrada.yy",},
     {"name":"inst_7ABDD7FE","path":"rooms/PoliDeportivoEntrada/PoliDeportivoEntrada.yy",},
     {"name":"inst_12E4F8CB","path":"rooms/PoliDeportivoEntrada/PoliDeportivoEntrada.yy",},
+    {"name":"inst_3E10EAFA","path":"rooms/PoliDeportivoEntrada/PoliDeportivoEntrada.yy",},
   ],
   "isDnd": false,
   "layers": [
@@ -93,6 +94,7 @@
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_7ABDD7FE","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"objValla","path":"objects/objValla/objValla.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":238.0,"y":44.0,},
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_12E4F8CB","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":true,"objectId":{"name":"objNPCPol","path":"objects/objNPCPol/objNPCPol.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":434.0,"y":200.0,},
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_769D7C8A","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"objSystemP","path":"objects/objSystemP/objSystemP.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-18.0,"y":-22.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_3E10EAFA","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"objNPCMa","path":"objects/objNPCMa/objNPCMa.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":358.0,"y":178.0,},
       ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
     {"resourceType":"GMRBackgroundLayer","resourceVersion":"1.0","name":"Background","animationFPS":30.0,"animationSpeedType":0,"colour":4294967295,"depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"properties":[],"spriteId":{"name":"sprPoliDeportivoEntrada","path":"sprites/sprPoliDeportivoEntrada/sprPoliDeportivoEntrada.yy",},"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],

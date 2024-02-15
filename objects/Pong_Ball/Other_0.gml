@@ -26,8 +26,8 @@ else
 	/// @DnDParent : 4094EAC5
 	/// @DnDArgument : "expr" "1"
 	/// @DnDArgument : "expr_relative" "1"
-	/// @DnDArgument : "var" "Player_Score"
-	Player_Score += 1;
+	/// @DnDArgument : "var" "objSystemP.Player_Score"
+	objSystemP.Player_Score += 1;
 }
 
 /// @DnDAction : YoYo Games.Movement.Jump_To_Start

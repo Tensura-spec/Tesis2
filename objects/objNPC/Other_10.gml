@@ -23,11 +23,11 @@ else
 
 if (!Timer.timer_active && objSystem.puntaje = 4)
 {
-	scrOpenTexbox("¡Lo has logrado! Gracias a tu dedicación, estos jóvenes están recuperando la esperanza y el rumbo en sus vidas. Tu ayuda ha sido crucial para darles un nuevo comienzo. Ten tu rrecompensa.");
+	scrOpenTexbox("¡Lo has logrado! Gracias a tu dedicación, estos jóvenes están recuperando la esperanza y el rumbo en sus vidas. Tu ayuda ha sido crucial para darles un nuevo comienzo. Ten tu recompensa. Puedes Salir por la puerta de la iizquierda.");
 	
 	objPlayer.state = STATE_READING;
 
-	objTextbox.callback = [scrFinishCharacterReading, [objPlayer, id]];
+	objTextbox.callback = [scrFinishCharacterReadingMedalla1, [objPlayer, id]];
 }
 
 

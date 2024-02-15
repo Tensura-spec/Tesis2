@@ -22,6 +22,8 @@
     {"name":"inst_3619710","path":"rooms/MiguelRuaCen/MiguelRuaCen.yy",},
     {"name":"inst_10ECA376","path":"rooms/MiguelRuaCen/MiguelRuaCen.yy",},
     {"name":"inst_FBEEC85","path":"rooms/MiguelRuaCen/MiguelRuaCen.yy",},
+    {"name":"inst_30EF4EA6","path":"rooms/MiguelRuaCen/MiguelRuaCen.yy",},
+    {"name":"inst_37CC8610","path":"rooms/MiguelRuaCen/MiguelRuaCen.yy",},
   ],
   "isDnd": true,
   "layers": [
@@ -40,6 +42,8 @@
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_10ECA376","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"objDoor","path":"objects/objDoor/objDoor.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":18.0,"x":939.0,"y":98.0,},
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_670F3CB","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":true,"objectId":{"name":"Timer","path":"objects/Timer/Timer.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-54.0,"y":-31.0,},
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_4AD8DFA9","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"MiguelRua_Musica","path":"objects/MiguelRua_Musica/MiguelRua_Musica.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":-51.0,"y":-29.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_30EF4EA6","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"objInventoryBox","path":"objects/objInventoryBox/objInventoryBox.yy",},"properties":[],"rotation":0.0,"scaleX":1.3267027,"scaleY":1.750345,"x":261.0,"y":119.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_37CC8610","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_prizes","path":"objects/obj_prizes/obj_prizes.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":599.0,"y":192.0,},
       ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
     {"resourceType":"GMRInstanceLayer","resourceVersion":"1.0","name":"Instances_1","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_FBEEC85","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"objNPC","path":"objects/objNPC/objNPC.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":480.0,"y":384.0,},

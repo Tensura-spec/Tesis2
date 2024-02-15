@@ -9,7 +9,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Recuerdo",
-    "path": "folders/Objects/PoliDeportivo/Recuerdo.yy",
+    "path": "folders/Objects/MMPL/PoliDeportivo/Recuerdo.yy",
   },
   "parentObjectId": null,
   "persistent": false,

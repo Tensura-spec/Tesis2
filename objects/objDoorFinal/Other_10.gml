@@ -1,7 +1,5 @@
-if (objSystem.puntaje == 0)
+if (obj_controller1.medalla1 == 0)
 {
-	
-	obj_Position.levelcomplete = 1;
 	room_goto(MiguelRuaRecuerdo);
 
 }

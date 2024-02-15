@@ -1,7 +1,7 @@
 /// @description Opens paths on the world map
 
 //Speed
-spd = 2;
+spd = 1;
 
 //Origin
 xorig = 7;
@@ -15,3 +15,4 @@ direct = 270;
 
 //Play 'Path Reveal' sound
 alarm[0] = 1;
+

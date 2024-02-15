@@ -1,6 +1,5 @@
-if(Player_Score >= 3)
+if(objSystemP.Player_Score >= 3 && obj_controller1.medalla2 == 0)
 {
-	//obj_Position.levelcomplete = 1;
 	
 	room_goto(GavichoRecuerdo);
 }
