@@ -38,7 +38,10 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_shell",
+    "path": "sprites/spr_shell/spr_shell.yy",
+  },
   "spriteMaskId": null,
   "visible": true,
 }

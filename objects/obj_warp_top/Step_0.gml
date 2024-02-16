@@ -1,9 +1,9 @@
 /// @description Check if 'Down' is pressed and the player is above the pipe
 
 //Do not warp if mini is enabled and Mario does not have the tiny powerup
-if (mini == true)
-&& (global.powerup != cs_tiny)
-	exit;
+//if (mini == true)
+//&& (global.powerup != cs_tiny)
+//	exit;
 
 //If Mario does not have the 'Mega' powerup
 if (global.powerup != cs_mega) {
@@ -18,7 +18,7 @@ if (global.powerup != cs_mega) {
 		&& (obj_mario.state != playerstate.jump) {
     
 	        //Check for it
-	        player = collision_rectangle(x+16, y-2, x+16, y-2, obj_mario, 0, 0);
+	        var player = collision_rectangle(x+16, y-2, x+16, y-2, obj_mario, 0, 0);
         
 	        //If the player exists
 	        if (player) {

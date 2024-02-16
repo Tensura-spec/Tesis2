@@ -33,7 +33,10 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_trampoline",
+    "path": "sprites/spr_trampoline/spr_trampoline.yy",
+  },
   "spriteMaskId": null,
   "visible": true,
 }

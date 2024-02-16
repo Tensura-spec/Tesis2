@@ -31,7 +31,10 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_mushroom_trampoline",
+    "path": "sprites/spr_mushroom_trampoline/spr_mushroom_trampoline.yy",
+  },
   "spriteMaskId": null,
   "visible": true,
 }
